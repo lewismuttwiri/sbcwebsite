@@ -129,7 +129,7 @@ def checkout_success(request):
     return render(request, 'sbcapp1/checkout_success.html')
 
 def order_placed(request):
-    if request.user.is_authenticated and request.user.email == 'mt.orders@sbckenya.com':
+    if request.user.is_authenticated and request.user.email == 'sbcadmin@gmail.com':
         orders = Order.objects.all()
         total_price = orders.aggregate(total_price=Sum('total_price'))['total_price']
         return render(request, 'sbcapp1/order_placed.html', {'orders': orders, 'total_price': total_price})
@@ -184,7 +184,7 @@ def job_success(request):
     return render(request, 'sbcapp1/job_success.html')
 
 def job_applied(request):
-    if request.user.is_authenticated and request.user.email == 'hro@sbckenya.com':
+    if request.user.is_authenticated and request.user.email == 'sbcadmin@gmail.com':
         job_applications = JobApplication.objects.all()
         return render(request, 'sbcapp1/job_applied.html', {'job_applications': job_applications})
     else:

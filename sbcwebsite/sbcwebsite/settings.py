@@ -28,15 +28,16 @@ MEDIA_DIR = Path(BASE_DIR) / "media"
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+IN_PROD = os.getenv('IN_PROD', 'False').lower() == 'true'
 
-# ALLOWED_HOSTS = ['localhost'] Use  this if in the local vscode.
-ALLOWED_HOSTS = ['lewismutwiri.pythonanywhere.com', 'www.lewismutwiri.pythonanywhere.com','sbckenya.com','sbckenya.pythonanywhere.com']
+# ALLOWED_HOSTS configuration
+ALLOWED_HOSTS = ['lewismutwiri.pythonanywhere.com', 'www.lewismutwiri.pythonanywhere.com',
+                'sbckenya.com', 'sbckenya.pythonanywhere.com', 'localhost', '127.0.0.1', '*']
 # for custom user
 
 
-# Application definition
-
+#Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,9 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "sbcapp1",
     "SSO",
-    "django.contrib.humanize",# change time to read 3day s
-
-     # FOR SSO
+    'contact',
+    'gallery',
+    'recruitment',
+    'social',
+    'procurement',
+    'store',
+    'django_extensions',  # Added for HTTPS in development
+    "django.contrib.humanize",  # change time to read 3day s
+    
+    # FOR SSO
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -57,8 +65,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap3",
     'bootstrap_datepicker_plus',
-     'bootstrap4',
-     'widget_tweaks',
+    'bootstrap4',
+    'widget_tweaks',
 ]
 
 
@@ -67,13 +75,12 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-     'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'sbcapp1.middleware.CustomRedirectMiddleware',
-
 ]
 
 ROOT_URLCONF = 'sbcwebsite.urls'
@@ -238,16 +245,38 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
-# Security settings for production
+# Security settings based on environment
+if IN_PROD:
+    # Production settings
+    SECURE_SSL_REDIRECT = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+else:
+    # Development settings - still using HTTPS but with relaxed security
+    SECURE_SSL_REDIRECT = False  # Don't force redirect as we'll handle HTTPS manually
+    CSRF_COOKIE_SECURE = True    # Keep secure cookies for HTTPS
+    SESSION_COOKIE_SECURE = True # Keep secure cookies for HTTPS
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
+
+# Common security settings
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
-SECURE_SSL_REDIRECT = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
 
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+# Session settings
+SESSION_COOKIE_AGE = 3600  # 1 hour
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
+
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+
+
 
 SESSION_COOKIE_AGE = 600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

@@ -23,7 +23,7 @@ urlpatterns = [
     path('download_word/', views.download_word, name='download_word'),
     path('orders_placed/',views.order_placed, name='orders_placed'),
     path('export/orders/',views.export_orders_to_excel, name='export_orders_to_excel'),
-    path('contact/', views.contact, name='contact'),
+    
     path('media_list/', views.media_list, name='media_list'),
     path('social/', views.social, name='social'),
     path("media_detail/<int:pk>/", views.media_detail, name='media_detail'),

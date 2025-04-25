@@ -1,0 +1,32 @@
+{% extends "sbcapp1/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-16">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 max-w-2xl mx-auto">
+        <div class="p-8 text-center">
+            <div class="text-green-500 mb-6">
+                <svg class="w-24 h-24 mx-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            
+            <h1 class="text-3xl font-bold mb-4">Order Placed Successfully!</h1>
+            
+            <p class="text-gray-700 text-xl mb-8">
+                Thank you for your order. We have received your order details and will process it shortly.
+            </p>
+            
+            <p class="text-gray-700 mb-8">
+                Our team will contact you soon to confirm your order and arrange delivery.
+            </p>
+            
+            <div class="flex justify-center">
+                <a href="{% url 'store:product_list' %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl">
+                    Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "sbcapp1/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="mt-20 p-6 lg:p-10 bg-white shadow-lg rounded-lg border border-gray-400 mb-20">
+            <h2 class="text-2xl lg:text-3xl font-semibold text-black mt-10">Talk To Us!</h2>
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    Submit
+                </button>
+            </form>
+        </div>
+        <div class="mt-20 p-6 lg:p-10 bg-white shadow-lg rounded-lg border border-gray-300 text-3xl mb-20">
+            <h2 class="text-xl lg:text-2.5 xl font-semibold text-black mb-6">SBC KENYA LTD</h2>
+            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-map-marker"></i> P.O Box 76748-00620 Nairobi</p>
+            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-map-marker"></i> Ruaraka off BabaDogo Road</p>
+            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-envelope"></i> info@sbckenya.com</p>
+            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-phone"></i> 0208635000</p>
+            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-globe"></i> www.sbckenya.com</p>
+            <iframe
+                class="w-full h-74 lg:h-96 mt-20"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8795905284487!2d36.87120887548512!3d-1.2429105987452373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f15d5864ff359%3A0x1c77a411313dc6f1!2sSBC%20Kenya%20Ltd!5e0!3m2!1sen!2ske!4v1717694158021!5m2!1sen!2ske"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
