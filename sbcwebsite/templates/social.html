@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+  .video-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+  }
+  #myVideo {
+      width: 100%;
+      height: 100%;
+  }
+  #myVideo.fade-in {
+      opacity: 1;
+  }
+  .social-links ul li a i {
+      font-size: 7rem;
+      margin-right: 10px;
+  }
+</style>
+
+<div class="video-container">
+    <video id="myVideo" autoplay muted loop playsinline preload="auto">
+        <source src="{% static 'videos/brand video.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+<div class="content-overlay">
+  <h2>Welcome to SBC Social App!</h2>
+  <p>We're passionate about creating refreshing beverages that bring people together.</p>
+  <a href="{% url 'about' %}" class="btn btn-danger">Learn More About Us</a>
+</div>
+<div class="quality-logos">
+  <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="eager">
+  <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="eager">
+  <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="eager">
+  <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="eager">
+</div>
+
+<div class="jumbotron">
+<section class="social-links">
+  <h2>Stay Connected in our Social Media</h2>
+  <ul>
+    <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+    <li><a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+    <li><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+    <li><a href="#" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+    <li><a href="#" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+  </ul>
+</section>
+</div>
+
+<div class="container-social">
+<div class="row">
+  <section class="call-to-action">
+    <h2>Get Involved</h2>
+    <a href="#" class="cta-btn">Sign up for our Newsletter</a>
+    <a href="#" class="cta-btn">Learn More About Our Products</a>
+  </section>
+</div>
+</div>
+
+{% endblock %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var video = document.getElementById('myVideo');
+      video.onloadeddata = function() {
+          video.classList.add('fade-in');
+      };
+  });
+</script>

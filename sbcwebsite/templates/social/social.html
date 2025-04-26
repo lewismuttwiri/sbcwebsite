@@ -1,21 +1,21 @@
-{% extends "sbcapp1/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-8 text-center">Connect With Us</h1>
-    
+
     <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 max-w-4xl mx-auto">
         <div class="p-8">
             <p class="text-xl text-gray-700 mb-8 text-center">
-                Stay connected with SBC Kenya through our social media channels for the latest updates, 
+                Stay connected with SBC Kenya through our social media channels for the latest updates,
                 product information, and company news.
             </p>
-            
+
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
                 {% for link in social_links %}
-                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" 
-                   class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition duration-300">
+                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+                    class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition duration-300">
                     <div class="text-4xl mb-3 
                         {% if 'facebook' in link.platform %}text-blue-600
                         {% elif 'twitter' in link.platform %}text-blue-400
@@ -37,11 +37,11 @@
             </div>
         </div>
     </div>
-    
+
     <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 max-w-4xl mx-auto">
         <div class="p-8">
             <h2 class="text-2xl font-bold mb-6 text-center">Why Follow Us?</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="p-4 border border-gray-200 rounded-lg">
                     <h3 class="text-xl font-semibold mb-3">Latest Products</h3>
@@ -49,21 +49,21 @@
                         Be the first to know about our new product launches and updates.
                     </p>
                 </div>
-                
+
                 <div class="p-4 border border-gray-200 rounded-lg">
                     <h3 class="text-xl font-semibold mb-3">Special Offers</h3>
                     <p class="text-gray-700">
                         Get exclusive deals and promotions available only to our social media followers.
                     </p>
                 </div>
-                
+
                 <div class="p-4 border border-gray-200 rounded-lg">
                     <h3 class="text-xl font-semibold mb-3">Industry Insights</h3>
                     <p class="text-gray-700">
                         Stay informed about the latest trends and developments in the industry.
                     </p>
                 </div>
-                
+
                 <div class="p-4 border border-gray-200 rounded-lg">
                     <h3 class="text-xl font-semibold mb-3">Community Engagement</h3>
                     <p class="text-gray-700">

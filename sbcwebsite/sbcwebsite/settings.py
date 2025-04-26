@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "sbcapp1",
+    
     "SSO",
     'contact',
     'gallery',
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'social',
     'procurement',
     'store',
+    'sbcapp',    
     'django_extensions',  # Added for HTTPS in development
     "django.contrib.humanize",  # change time to read 3day s
     
@@ -80,7 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'sbcapp1.middleware.CustomRedirectMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'sbcwebsite.urls'

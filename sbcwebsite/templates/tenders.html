@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="flex flex-col min-h-screen">
+    <div class="tender-info p-12">
+        <p>SBCKenya invites sealed tenders for both goods and services.</p>
+        <p>Tender documents can be downloaded from this page.</p>
+        <p>Submit tenders in sealed hardcopy to SBCKENYA LTD.</p>
+        <p>Ruaraka off Baba Dogo Road or email to procurement@sbckenya.com.</p>
+        <p><strong>Late or incomplete tenders will be rejected.</strong></p>
+        <p>For enquiries, SBC KENYA Contact no:  (020) 8635000</p>
+    </div>
+
+    <div class="table-container flex-grow p-4">
+        {% if tenders %}
+            <table class="w-full table-auto border-collapse border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 p-2">Tender Number</th>
+                        <th class="border border-gray-300 p-2">Tender Description</th>
+                        <th class="border border-gray-300 p-2">Tender Document</th>
+                        <th class="border border-gray-300 p-2">Additional Information</th>
+                        <th class="border border-gray-300 p-2">Tender Closing Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tender in tenders %}
+                    <tr>
+                        <td class="border border-gray-300 p-2">{{ tender.tender_number }}</td>
+                        <td class="border border-gray-300 p-2">{{ tender.tender_description }}</td>
+                        <td class="border border-gray-300 p-2"><a href="{{ tender.tender_document.url }}" target="_blank">View Tender Doc</a></td>
+                        <td class="border border-gray-300 p-2">
+                            {% if tender.additional_information %}
+                                <a href="{{ tender.additional_information.url }}" target="_blank">View more info</a>
+                            {% else %}
+                                No additional information
+                            {% endif %}
+                        </td>
+                        <td class="border border-gray-300 p-2">{{ tender.tender_closing_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+        <p class="text-center text-red-500 font-bold text-lg md:text-xl my-4">
+    There are currently no tenders available. Please check back later.
+</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

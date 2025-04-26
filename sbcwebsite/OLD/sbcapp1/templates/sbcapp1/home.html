@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+{% extends "sbcapp1/base.html"%}
+{% load static %}
+{% block content %}
+<br>
+<link rel="preload" href="{% static 'videos/intro.mp4' %}" as="video" type="video/mp4">
+<link rel="preload" href="{% static 'images/7up.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/mir.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/mtn.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/pep-logo.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/cover-pep.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/cover-pep.jpg' %}" as="image">
+    <link rel="preload" href="{% static 'images/Pepsi-home.jpg' %}" as="image">
+    <link rel="preload" href="{% static 'images/home.jpg' %}" as="image">
+    <link rel="preload" href="{% static 'images/sting3.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/pepsi1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/mirf300.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/aquaf1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/dew1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/mir-Gapple1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/mir-papple1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/Mir-org1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/stingred1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/stinggold1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/mir-lem1.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/log-cover.png' %}" as="image">
+    <link rel="preload" href="{% static 'images/quality.png' %}" as="image">
+       <link rel="preload" href="{% static 'images/pep.jpg' %}" as="image">
+    {% for media_item in media_items %}
+    <link rel="preload" href="{{ media_item.image.url }}" as="image">
+{% endfor %}
+<style>
+.row {
+  opacity: 0;
+  transform: translateY(25%);
+  transition: opacity 2s ease, transform 2s ease;
+}
+.row.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+.brand-about-row{
+    background: url('/static/images/home-back.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    margin-bottom:20px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .brand-about-row {
+      display: flex;
+      flex-direction: row;}
+  .brand-about-row .col-md-6 {
+            flex: 1;} }
+</style>
+<div class="home">
+    <div class="logo-column">
+      <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
+      <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
+      <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
+      <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
+    </div>
+  <img src="{% static 'images/home.jpg' %}" class="slideshow-image" alt="Image 0" onload="this.parentElement.querySelector('.spinner-circle').style.display = 'none';" loading="lazy">
+      <video class="slideshow-image"alt="Image 1"  autoplay muted loop playsinline onload="this.parentElement.querySelector('.spinner-circle').style.display = 'none';" loading="lazy">
+    <source src="{% static 'videos/intro.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+    <img src="{% static 'images/cover-pep.jpg' %}" class="slideshow-image" alt="Image 2" onload="this.parentElement.querySelector('.spinner-circle').style.display = 'none';" loading="lazy">
+    <img src="{% static 'images/cover-pep.png' %}" class="slideshow-image" alt="Image 3" onload="this.parentElement.querySelector('.spinner-circle').style.display = 'none';" loading="lazy">
+
+</div>
+  <div class="slider-dots">
+    <div class="dot" data-index="0"></div>
+    <div class="dot" data-index="1"></div>
+    <div class="dot" data-index="2"></div>
+    <div class="dot" data-index="3"></div>
+  </div>
+
+  <div id="brand-row" class="row">
+    <div class="col-md-6">
+        <a href="{% url 'brands' %}" id="brands-link">
+            <section id="brands">
+                <h2>Our Brands</h2>
+                <div id="brands-slideshow" class="slideshow-container">
+                    <img class="slides" src="{% static 'images/pepsi1.png' %}" alt="Brand 1" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/dew1.png' %}" alt="Brand 2" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/mirf300.png' %}" alt="Brand 3" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/mir-Gapple1.png' %}" alt="Brand 4" loading="lazy" preload>
+                     <img class="slides" src="{% static 'images/mir-papple1.png' %}" alt="Brand 5" loading="lazy" preload>
+                     <img class="slides" src="{% static 'images/Mir-org1.png' %}" alt="Brand 6" loading="lazy" preload>
+                     <img class="slides" src="{% static 'images/mir-lem1.png' %}" alt="Brand 7" loading="lazy" preload>
+                     <img class="slides" src="{% static 'images/aquaf1.png' %}" alt="Brand 8" loading="lazy" preload>
+                     <img class="slides" src="{% static 'images/stingred1.png' %}" alt="Brand 9" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/stinggold1.png' %}" alt="Brand 10" loading="lazy" preload>
+                </div>
+            </section>
+        </a>
+    </div>
+        <div class="col-md-6">
+            <a href="{% url 'about' %}" id="about-us-link">
+                <section id="about-us" class="about-section">
+                    <div class="about-us-container">
+                        <h2 class="z-10 text-white font-extrabold text-4xl" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; padding: -50px;">About-Us</h2>
+                        <div class="about-us-image">
+                            <img src="{% static 'images/about-home.png' %}" alt="About Image" loading="lazy">
+                        </div>
+                    </a>
+                        <div class="about-us-content">
+                            <h3>Thirsty For More!</h3>
+                            <h3>Learn more about Pepsi Kenya.</h3>
+                            <h3>Quenching Thirst, Inspiring Lives!</h3>
+                                <a href="{% url 'about' %}" class="read-more-link">Read More About Us</a>
+                        </div>
+                    </div>
+                </section>
+        </div>
+    </div>
+  </div>
+<div class="container-fluid bg-gradient-to-b from-white to-[#030e4d] py-8">
+    <a href="{% url 'media_list' %}" id="latest-media-heading" class="block text-center">
+        <h2 class="text-5xl font-bold text-black mb-16">Highlights and Updates</h2>
+    </a>
+    <div class="media-row grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+        {% for media_item in media_items %}
+        <div class="media-column flex flex-col bg-gray-100 border border-blue-700 rounded-lg shadow-lg overflow-hidden h-[42rem]">
+                  <a href="{% url 'media_list' %}" style="text-decoration: none;">
+                <section id="latest-media-{{ forloop.counter0 }}" class="flex flex-col h-full">
+                    <h3 class="home-media-title text-3xl font-semibold text-gray-900 p-4 flex-none">{{ media_item.title }}</h3>
+                    <img class="w-full h-72 object-contain flex-none" src="{{ media_item.image.url }}" alt="{{ media_item.title }}" loading="lazy">
+                    <h4 class="text-2xl text-blue-800 p-4 flex-grow">{{ media_item.description|truncatechars:120 }}</h4>  </a>
+               <a href="{% url 'media_list' %}" class="text-red-600 text-3xl py-3 px-6 rounded-lg m-4 text-center hover:text-blue-700 flex-none font-bold"> Read more</a></section>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="jumbotron">
+    <div class="flex flex-wrap" style="background-color: #030e4d;">
+        <div class="w-full md:w-1/2 p-4">
+     <a href="{% url 'about' %}" id="quality" class="text-white no-underline hover:no-underline hover:text-red 600"> <h2 class="text-5xl font-bold mt-24 mb-12">Our Quality and Assurance</h2></a>
+<div class="quality-statement">
+    <h3 class="text-3xl text-white leading-relaxed mb-12" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+        At SBC Kenya Ltd, we understand that every sip of your favorite soda should be a satisfying experience. That's why we hold ourselves to the highest standards throughout the entire production process.
+    </h3>
+    <h3 class="text-3xl text-white leading-relaxed mb-12" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+        Beyond technical excellence, we prioritize freshness.
+    </h3>
+    <h3 class="text-3xl text-white leading-relaxed mb-12" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+        Our efficient distribution network ensures that our beverages reach you at their peak of flavor, delivering consistent refreshment in every bottle.
+    </h3>
+     <h2 class="text-4xl font-bold text-red-600 mt-12">Quality is our Assurance!</h2>
+    <h2 class="text-4xl font-bold text-white mt-12">Thirsty For More!</h2> </div>
+    <button onclick="window.location.href='{% url 'about' %}'" class="text-2xl mt-12 font-bold text-red-600 bg-white hover:bg-gray-800 hover:text-black px-6 py-3 rounded-lg">Read More on Quality</button></div>
+        <div class="w-full md:w-1/2 p-4">
+            <section id="Quality" class="quality-section">
+                <div class="quality">
+                    <img src="{% static 'images/pep.jpg' %}" alt="quality" class="rounded-3xl shadow-md w-3/4 h-auto mx-auto transition duration-1000 ease-in-out opacity-75 hover:opacity-100" loading="lazy">
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class="contact-container">
+    <div class="section-wrapper">
+        <div class="section-left">
+            <a href="{% url 'advertisement_list' %}">
+                <h1>Careers</h1>
+            </a>
+            <section class="careers-section">
+                <div class="overlay-content">
+                    <h2>JOIN THE SBC KENYA TEAM.</h2>
+                    <h3>At SBC Kenya, we're building a diverse and talented team.</h3>
+                    <h3>We're committed to equal opportunity and welcome applications from all qualified individuals.</h3>
+                </div>
+            </section>
+        </div>
+        <div class="section-right">
+            <a href="{% url 'contact' %}">
+                <h1>Contact us</h1>
+            </a>
+            <section class="contact-section">
+                <div class="overlay-content">
+                    <h2>Get in touch with us</h2>
+                    <h3>We are glad to hear your feedback.</h3>
+                    <h3>Explore our Contact-us page.We value your feedback. Welcome to SBC Kenya Ltd</h3>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class="quality-logos">
+    <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
+    <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
+    <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
+    <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
+  </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function showSlides(slides, slideIndex) {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+            slides[slideIndex].style.display = "block";
+            return slideIndex;
+        }
+        function fetchLatestMedia(url) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const mediaContainer = document.querySelector('.media-grid');
+                    mediaContainer.innerHTML = '';
+                    data.forEach((mediaItem, index) => {
+                        mediaContainer.innerHTML += `
+                            <div class="media-item">
+                                <img src="${mediaItem.image}" alt="${mediaItem.title}" loading="lazy">
+                                <h3>${mediaItem.title}</h3>
+                                <p>${mediaItem.description}</p>
+                                <h5>Posted on: ${mediaItem.datetime_posted}</h5>
+                                <a href="${mediaItem.url}">Read more</a>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error fetching latest media:', error));
+        }
+        fetchLatestMedia('{% url "media_summary" %}');
+        let brandSlideIndex = 0;
+        const brandSlides = document.getElementsByClassName("slides");
+        setInterval(() => {
+            brandSlideIndex = showSlides(brandSlides, brandSlideIndex);
+        }, 3000);
+
+        function animateOnScroll() {
+            const containers = document.querySelectorAll('.row');
+            containers.forEach(container => {
+                const containerTop = container.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (containerTop < windowHeight * 0.95) {
+                    container.classList.add('animate');
+                }
+            });
+        }
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();
+    });
+</script>
+{% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" as="style">
+</body>
+</html>

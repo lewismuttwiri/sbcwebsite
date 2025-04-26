@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Applications</title>
+</head>
+<body>
+    <h1>Job Applications</h1>
+    <table border="1">
+        <tr>
+            <th>No.</th>
+            {% for job_application in job_applications %}
+            <th>{{ job_application.advertisement.title }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Full Names <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.full_names }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Email <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.email }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Phone Number <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.phone_number }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Gender <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.get_gender_display }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Current Address <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.current_address }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Date of Birth <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.date_of_birth }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Education Level <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.get_education_level_display }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Institution Name <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.institution_name }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Course of Study <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.course_of_study }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Education Start Date <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.education_start_date }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Education End Date <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.education_end_date }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Qualification Grade <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.qualification_grade }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Professional Institution Name <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.professional_institution_name }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Course Name <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.course_name }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Professional Start Date <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.professional_start_date }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Professional End Date <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.professional_end_date }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Professional Qualification Grade <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.professional_qualification_grade }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Previous Employer Name <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.previous_employer_name }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Previous Employer Address <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.previous_employer_address }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Previous Employer Phone <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.previous_employer_phone }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Job Title <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.job_title }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Employment Start Date <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.employment_start_date }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Employment End Date <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.employment_end_date }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Employment Duties <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.employment_duties|slice:":30" }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Cover Letter <span style="color:red;">*</span></td>
+            {% for job_application in job_applications %}
+            <td>{{ job_application.cover_letter|slice:":30" }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Download Resume</td>
+            {% for job_application in job_applications %}
+            <td><a href="{{ job_application.resume.url }}">Download</a></td>
+            {% endfor %}
+        </tr>
+    </table>
+    <a href="{% url 'download_word' %}">Export Info to Word</a>
+    <p>Signed in as: {{ user.email }}</p>
+    <a href="{% url 'account_logout' %}" class="logout-button">Logout</a>
+</body>
+</html>

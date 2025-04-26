@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Placed</title>
+</head>
+<body>
+    <h1>Orders Placed</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>Phone Number</th>
+                <th>Region</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.user.get_full_name }}</td>
+                <td>{{ order.user.email }}</td>
+                <td>{{ order.phone_number }}</td>
+                <td>{{ order.region }}</td>
+                <td>{{ order.product_name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>{{ order.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'export_orders_to_excel' %}" class="btn btn-primary">Export Orders to Excel</a>
+    <p>Signed in as: {{ user.email }}</p>
+    <a href="{% url 'account_logout' %}" class="logout-button">Logout</a>
+</body>
+</html>

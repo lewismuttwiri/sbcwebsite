@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+ <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<div class="shop w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#0E0E96] flex-col mt-12 md:mt-16">
+  <div class="title-container mb-4 mt-8 md:mt-12 font-semibold text-[33px] text-white">
+  </div>
+  <div class="product-list grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center mt-4 ">
+    {% for product in products %}
+      <div class="fridgeCol text-black rounded-lg shadow-lg h-[20rem] mt-2">
+        <div class="fridge-card flex flex-col h-full justify-center items-center p-4">
+          <div class="flex-grow text-center">
+            <h3 class="font-bold text-xl mb-2">{{ product.name }}</h3>
+            <h4 class="description text-base mb-2">{{ product.description }}</h4>
+          </div>
+          {% if product.image %}
+            <div class="image-container mb-4">
+              <img src="{{ product.image.url }}" alt="Product Image" class="w-full h-70 object-cover rounded-md"/>
+            </div>
+          {% endif %}
+          <div class="text-center">
+            <h4 class="font-bold text-lg text-white">Ksh.{{ product.price }}</h4>
+            <h5 class="font-bold text-green-500">Status: {{ product.status }}</h5>
+          </div>
+          <div class="text-center mt-4">
+            <input type="number" class="quantity-input border-2 border-gray-300 rounded-lg p-2 w-full text-black" id="quantityInput{{ product.id }}" value="1" min="1" step="1">
+          </div>
+          <div class="text-center mt-4">
+            <button class="add-to-cart-button bg-yellow-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full" onclick="addToCart('{{ product.id }}')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="cart-card bg-white p-4 rounded-lg shadow-lg mt-8 hidden" id="cartCard">
+    <h2 class="text-2xl font-bold mb-4">Cart</h2>
+    <div id="cartItems"></div>
+  </div>
+</div>
+<script>
+function addToCart(productId) {
+  const quantityInput = document.getElementById(`quantityInput${productId}`);
+  const quantity = quantityInput.value;
+  const isAuthenticated = '{{ request.user.is_authenticated }}';
+
+  if (isAuthenticated === 'True') {
+    fetch(`/add_to_cart/${productId}/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: JSON.stringify({ quantity: quantity })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to add item to cart');
+      } else {
+        fetch('/cart/count/')
+          .then(response => response.json())
+          .then(data => {
+            const cartItemCount = document.getElementById('cartItemCount');
+            cartItemCount.textContent = data.count;
+            cartItemCount.style.color = 'red';
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
+        const successMessage = document.getElementById('successMessage');
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Session Expired.Refresh and Login');
+    });
+  } else {
+    window.location.href = '{% url "account_login" %}';
+  }
+}
+</script>
+{% endblock %}

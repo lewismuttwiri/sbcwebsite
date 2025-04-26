@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+  .story {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 3s;
+    box-shadow: #000000;
+  }
+
+  .story img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 120%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    position: absolute;
+    margin-top: 40px;
+  }
+
+  .rotate {
+    animation: rotate 10s linear infinite;
+  }
+
+  @media (max-width: 320px) {
+    .story {
+      height: 40vh;
+    }
+  }
+
+  @media (min-width: 321px) and (max-width: 575px) {
+    .story {
+      height: 50vh;
+    }
+  }
+
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    .story {
+      height: 70vh;
+    }
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .story {
+      height: 80vh;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+<link rel="preload" href="{% static 'images/Pepsi-rotate.png' %}" as="image">
+<link rel="preload" href="{% static 'images/sbc.jpeg' %}" as="image">
+<link rel="preload" href="{% static 'images/History3.jpg' %}" as="image">
+<link rel="preload" href="{% static 'images/7up.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mir.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mtn.png' %}" as="image">
+<link rel="preload" href="{% static 'images/pep-logo.png' %}" as="image">
+</head>
+
+<body>
+  <div class="story" id="story">
+    <img src="{% static 'images/Pepsi-rotate.png' %}" alt="About Image" id="moving-image" loading="lazy">
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="row aboutus">
+      <div class="aboutus-text">
+        <h2 class="staggered-reveal">ABOUT SBC KENYA LTD</h2>
+        <p class="staggered-reveal">Quenching Thirst, Inspiring Lives!</p>
+        <p class="staggered-reveal">Under the warm Kenyan sun, laughter dances between bustling markets. Here, the clink
+          of ice against glass bottles echoes stories shared, moments celebrated, and thirsts quenched. This vibrant
+          tapestry is what inspires Beverage Company Kenya, a journey that began in 2013 with a simple dream: to bottle
+          happiness.</p>
+        <p class="staggered-reveal">We're more than just a beverage company; we're a passionate team dedicated to
+          crafting delicious experiences. From the electrifying bite of Mountain Dew to the refreshing lightness of
+          Seven Up, our diverse portfolio offers a taste for every occasion. Whether you're celebrating a special moment
+          with friends or seeking a simple afternoon pick-me-up, there's a Beverage Company Kenya drink waiting to
+          elevate your experience.</p>
+        <p class="staggered-reveal">But our story goes beyond fizzy refreshment. We are deeply committed to responsible
+          business practices and community engagement. We strive to minimize our environmental impact through
+          responsible sourcing and efficient production processes. We source ingredients sustainably whenever possible,
+          supporting Kenyan farmers and empowering local communities.</p>
+      </div>
+      <div class="aboutus-image">
+        <img src="{% static 'images/sbc.jpeg' %}" alt="About Us Image" loading="lazy" class="fade-image">
+      </div>
+    </div>
+  </div>
+
+  <div class="jumbotron history-jumbotron">
+    <div class="history">
+      <div class="history-image">
+        <img src="{% static 'images/History3.jpg' %}" alt="History Image" loading="lazy">
+      </div>
+      <div class="history-text">
+        <h2 class="staggered-reveal">OUR HISTORY</h2>
+        <p class="staggered-reveal">Our story began in 2013, amidst the bustling streets of Nairobi, Kenya. Back then,
+          it was just a seed of an idea – a dream to bring high-quality, flavorful beverages closer to Kenyan consumers.
+          We started small, bottling and distributing established international brands of Pepsi, Mirinda, Seven Up, and
+          Mountain Dew. These familiar fizzes quickly resonated with Kenyans, quenching thirsts and sparking smiles.</p>
+        <p class="staggered-reveal">The journey wasn't always smooth sailing. Challenges arose, from navigating complex
+          logistics to adapting to a rapidly changing market. Yet, we persevered, fueled by the unwavering support of
+          our team and the trust of our consumers. We focused on responsible production, minimizing our environmental
+          impact and leaving a positive footprint on our land. We are a company woven into the fabric of Kenyan life,
+          sharing its joys and challenges.</p>
+        <p class="staggered-reveal">Today, Beverage Company Kenya stands tall as a leading player in the market. We
+          continue to innovate, experiment, and explore new possibilities, always mindful of our core values: quality,
+          sustainability, and community. We haven't forgotten our humble beginnings, the dream that ignited this
+          journey. That dream lives on in every fizzing bottle, in every smile we evoke, in every positive impact we
+          create.</p>
+        <p class="staggered-reveal">This is not just our history; it's a testament to the power of collective passion,
+          unwavering commitment, and a deep-rooted love for Kenya. It's a story that continues to unfold, one refreshing
+          sip at a time, and we invite you to be a part of it.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-jumbotron">
+    <div class="mission-list">
+      <div class="mission-item">
+        <div class="rectangle"
+          data-explanation="In Kenya's vibrant heart, we bubble with the mission to refresh and delight with diverse, high-quality carbonated beverages like Pepsi, Mountain Dew, Seven Up, and Mirinda. We strive for responsible practices, sustainable choices, and community well-being, all while quenching thirsts and igniting smiles, sip by refreshing sip.">
+          MISSION</div>
+        <div class="explanation">Hover or click to see the explanation</div>
+      </div>
+      <div class="mission-item">
+        <div class="rectangle"
+          data-explanation="We envision ourselves as the leading beacon of refreshment in Kenya, captivating hearts with the fizz of Pepsi, Mountain Dew, Seven Up, and Mirinda. We dream of a future where every sip evokes joy, fuels innovation, and empowers communities, leaving a lasting, sustainable mark on the Kenyan landscape">
+          VISION</div>
+        <div class="explanation">Hover or click to see the explanation</div>
+      </div>
+      <div class="mission-item">
+        <div class="rectangle"
+          data-explanation='The Unwavering Quality, Customer Delight, Social Responsibility, and Uncompromising Compliance.'>
+          OBJECTIVES</div>
+        <div class="explanation">Hover or click to see the explanation</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quality-policy">
+    <div class="quality-txt">
+      <h2 class="staggered-reveal">SBC KENYA LTD Quality Guarantee.</h2>
+      <p class="staggered-reveal">At SBC KENYA LTD, "refreshment" begins with "assurance." We're committed to delivering
+        iconic brands like Pepsi, Mirinda, Seven Up, and Tonic, but just as crucial as their deliciousness is their
+        unwavering quality and safety. That's why we have a strict Quality Assurance Policy, ensuring every sip you
+        enjoy meets the highest standards.</p>
+      <h2 class="staggered-reveal">Our quality core values:</h2>
+      <ol>
+        <li class="staggered-reveal"><strong>Safety First:</strong> We comply with the strictest regulations,
+          implementing rigorous measures to eliminate potential hazards and prioritize consumer well-being.</li>
+        <li class="staggered-reveal"><strong>Unwavering Standards:</strong> From ingredient selection to bottling, every
+          stage undergoes meticulous testing to guarantee consistent quality and taste.</li>
+        <li class="staggered-reveal"><strong>Continuous Improvement:</strong> We strive for constant evolution, actively
+          seeking and implementing enhancements to stay at the forefront of quality practices.</li>
+        <li class="staggered-reveal"><strong>Transparency and Trust:</strong> We believe in open communication, readily
+          sharing relevant data with stakeholders to earn and maintain your trust.</li>
+      </ol>
+
+      <h2 class="staggered-reveal">Key pillars of our policy:</h2>
+      <ol>
+        <li class="staggered-reveal"><strong>Rigorous Quality Control:</strong> From raw materials to finished products,
+          our state-of-the-art lab conducts comprehensive analyses, guaranteeing safety and adherence to regulations.
+        </li>
+        <li class="staggered-reveal"><strong>Dedicated Quality Team:</strong> Our team proactively monitors every step,
+          addressing any potential deviations through regular checks and data analysis.</li>
+        <li class="staggered-reveal"><strong>Thorough Inspections:</strong> Every bottle undergoes rigorous checks
+          before leaving, ensuring it meets our aesthetic and quality requirements.</li>
+      </ol>
+      <div class="quality-logos">
+        <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
+        <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
+        <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
+        <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      var image = document.getElementById('moving-image');
+      image.classList.add('rotate');
+      var colors = ["#0E0E96", "#00FF00", "#FFA500", "#FFFFFF", "#FF0000"];
+      var currentColorIndex = 0;
+      var storyElement = document.getElementById('story');
+      function changeBackgroundColor() {
+        storyElement.style.backgroundColor = colors[currentColorIndex];
+        currentColorIndex = (currentColorIndex + 1) % colors.length;
+      }
+      setInterval(changeBackgroundColor, 5000);
+      changeBackgroundColor();
+    };
+    document.addEventListener("DOMContentLoaded", function () {
+      const revealElements = document.querySelectorAll(".staggered-reveal");
+      const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1
+      };
+      const baseDelay = 100;
+      const delayIncrement = 100;
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Array.from(revealElements).indexOf(entry.target);
+            const delay = baseDelay + index * delayIncrement;
+            entry.target.style.transitionDelay = `${delay}ms`;
+            entry.target.classList.add("reveal");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, options);
+
+      revealElements.forEach((element) => {
+        observer.observe(element);
+      });
+    });
+  </script>
+  {% endblock %}
