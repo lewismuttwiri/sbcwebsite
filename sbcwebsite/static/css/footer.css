@@ -1,0 +1,84 @@
+.footer-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0a2740;
+    margin-bottom: 10px;
+}
+
+.profile-pic img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 10px solid #0a2740;
+    object-fit: cover;
+}
+
+.footer-center h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #222;
+}
+
+.footer-center .title {
+    margin: 5px 0 15px;
+    font-size: 16px;
+    color: #555;
+}
+
+.contact-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #333;
+}
+
+.contact-info li {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.contact-info i {
+    color: #0a2740;
+    margin-right: 10px;
+}
+
+.footer-right .logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0a2740;
+    margin-bottom: 15px;
+}
+
+.social-icons a {
+    margin: 0 5px;
+    color: #fff;
+    background: #0a2740;
+    padding: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: #1b3c5f;
+}

@@ -21,6 +21,9 @@
     media="screen" charset="utf-8" />
   <!-- 3RD CUSTOM CSS -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+  <link rel="stylesheet" href="{% static 'css/purpose-section.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer.css' %}">
   <!-- 4TH FONTS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -144,6 +147,64 @@
       </div>
     </div>
   </footer>
+  <footer>
+    <div class="footer-card">
+      <div class="footer-left">
+        <div class="profile-pic">
+
+          <img src="{% static 'images/pep-logo.png' %}" alt="SBC Kenya" loading="lazy">
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="logo">SBC KENYA LTD</div>
+        <div class="title"><a href="{% url 'contact:contact' %}">Contact Us</div></a>
+        <ul class="contact-info">
+
+          <li><i class="fas fa-phone"></i> <a href="tel:(020)8635000" class="hover:text-red-500">(020)
+              8635000</a></li>
+          <li>
+            <i class="fas fa-globe"></i><a href="mailto:info@sbckenya.com"
+              class="hover:text-red-500">info@sbckenya.com</a></p>
+          </li>
+          <li><i class="fas fa-map-marker-alt"></i> P.O Box 76748-00620 Nairobi<br> Ruaraka off BabaDogo Road</li>
+        </ul>
+      </div>
+      <!-- <div class="footer-left">
+        <div class="logo">LOGO</div>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div> -->
+      <div class="footer-right">
+        <div class="logo">QUICK LINKS</div>
+        <div class="social-icons">
+          <a href="{% url 'sbcapp:home' %}">Our Home</i></a>
+          <a href="{% url 'sbcapp:about' %}"></i>Our Story</a>
+          <a href="{% url 'sbcapp:brands' %}"></i>Brands</a>
+          <a href="{% url 'store:category_list' %}"></i>Categories</a><br>
+        </div>
+        <div class="logo">SOCIAL MEDIA LINKS</div>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+
+          <p class="text-lg">&copy; 2024 SBC KENYA LTD. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  </footer>
+
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const navTrigger = document.querySelector('.navTrigger');
@@ -171,7 +232,9 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'js/script.js' %}"></script>
-  
+  <script src="{% static 'js/gallery.js' %}"></script>
+  <script src="{% static 'js/purpose-section.js' %}"></script>
+
   </div>
   {% include "store/product_added_modal.html" %}
   <script src="{% static 'js/productmodal.js' %}"></script>

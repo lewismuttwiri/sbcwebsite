@@ -3,7 +3,12 @@
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8 text-center">Connect With Us</h1>
+    <h1 class="text-3xl font-bold mb-8 text-center">Welcome to SBC Social App!</h1>
+    <div class="content-overlay">
+        <h2>Welcome to SBC Social App!</h2>
+        <p>We're passionate about creating refreshing beverages that bring people together.</p>
+        <a href="{% url 'sbcapp:about' %}" class="btn btn-danger">Learn More About Us</a>
+    </div>
 
     <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 max-w-4xl mx-auto">
         <div class="p-8">
