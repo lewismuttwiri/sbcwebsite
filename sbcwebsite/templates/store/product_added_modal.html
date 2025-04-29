@@ -1,0 +1,48 @@
+<div id="product-added-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="fixed inset-0 bg-black opacity-50" id="modal-overlay"></div>
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4 relative z-10">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-900">Item Added to Cart</h3>
+        <button id="close-modal" class="text-gray-400 hover:text-gray-500">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="flex items-center mb-4">
+        <div class="flex-shrink-0 h-16 w-16 mr-4">
+          <img id="product-image" class="h-16 w-16 object-cover rounded" src="" alt="Product image">
+        </div>
+        <div>
+          <p class="font-medium text-gray-900" id="product-name"></p>
+          <p class="text-sm text-gray-600">
+            <span id="product-quantity"></span> × KES <span id="product-price"></span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="bg-green-50 p-3 rounded-md mb-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-medium text-green-800">Successfully added to your cart</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-between">
+        <a href="{% url 'store:product_list' %}" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+          Continue Shopping
+        </a>
+        <a href="{% url 'store:cart' %}" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+          View Cart
+        </a>
+      </div>
+    </div>
+  </div>
+  

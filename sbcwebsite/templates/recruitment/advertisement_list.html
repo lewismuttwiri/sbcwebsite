@@ -62,8 +62,8 @@
                     {% endfor %}
                 </ul>
                 <h4>
-                    <a href="{% url 'apply' advertisement.id %}" class="text-red-500 hover:text-blue-700 font-bold"
-                        style="margin-top: 4rem;">
+                    <a href="{% url 'recruitment:apply' advertisement.id %}"
+                        class="text-red-500 hover:text-blue-700 font-bold" style="margin-top: 4rem;">
                         Apply Now: {{ advertisement.title }}
                     </a>
                 </h4>

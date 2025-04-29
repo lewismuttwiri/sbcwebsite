@@ -1,17 +1,18 @@
-{% extends "sbcapp1/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-8 text-center">Our Products</h1>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {% for product in products %}
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="relative">
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-64 object-cover">
                 {% if product.status == 'Coming soon' %}
-                <div class="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 m-2 rounded-full text-sm font-semibold">
+                <div
+                    class="absolute top-0 right-0 bg-yellow-500 text-white px-3 py-1 m-2 rounded-full text-sm font-semibold">
                     Coming Soon
                 </div>
                 {% endif %}
@@ -22,8 +23,9 @@
                 <div class="flex justify-between items-center">
                     <span class="text-xl font-bold text-blue-600">KES {{ product.price }}</span>
                     {% if product.status != 'Coming soon' %}
-                    <button class="add-to-cart-btn inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" 
-                            data-product-id="{{ product.id }}">
+                    <button
+                        class="add-to-cart-btn inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        data-product-id="{{ product.id }}">
                         Add to Cart
                     </button>
                     {% else %}
@@ -43,55 +45,55 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Update cart count on page load
-    updateCartCount();
-    
-    // Add to cart functionality
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.getAttribute('data-product-id');
-            addToCart(productId, 1);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Update cart count on page load
+        updateCartCount();
+
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const productId = this.getAttribute('data-product-id');
+                addToCart(productId, 1);
+            });
         });
-    });
-    
-    function addToCart(productId, quantity) {
-        fetch(`/store/add-to-cart/${productId}/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify({
-                quantity: quantity
+
+        function addToCart(productId, quantity) {
+            fetch(`/store/add-to-cart/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    quantity: quantity
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.count) {
-                updateCartCountDisplay(data.count);
-                showNotification('Product added to cart successfully!');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showNotification('Error adding product to cart', 'error');
-        });
-    }
-    
-    function updateCartCount() {
-        fetch('/store/cart-item-count/')
-        .then(response => response.json())
-        .then(data => {
-            updateCartCountDisplay(data.count);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-    
-    function updateCartCountDisplay(count) {
+                .then(response => response.json())
+                .then(data => {
+                    if (data.count) {
+                        updateCartCountDisplay(data.count);
+                        showNotification('Product added to cart successfully!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('Error adding product to cart', 'error');
+                });
+        }
+
+        function updateCartCount() {
+            fetch('/store/cart-item-count/')
+                .then(response => response.json())
+                .then(data => {
+                    updateCartCountDisplay(data.count);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function updateCartCountDisplay(count) {
             const cartCountElement = document.getElementById('cart-count');
             if (cartCountElement) {
                 cartCountElement.textContent = count;
@@ -102,18 +104,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-        
+
         function showNotification(message, type = 'success') {
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white`;
             notification.textContent = message;
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
                 notification.remove();
             }, 3000);
         }
-        
+
         // Helper function to get CSRF token
         function getCookie(name) {
             let cookieValue = null;
@@ -132,4 +134,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script>
 {% endblock %}
-

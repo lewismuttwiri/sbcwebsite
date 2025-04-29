@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 from sbcapp.views import CustomPasswordResetFromKeyView
 
 urlpatterns = [
@@ -20,3 +22,6 @@ urlpatterns = [
          CustomPasswordResetFromKeyView.as_view(),
          name='account_reset_password_from_key'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

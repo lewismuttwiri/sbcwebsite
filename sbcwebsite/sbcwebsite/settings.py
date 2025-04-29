@@ -18,7 +18,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATICFILES_DIRS = [BASE_DIR / 'static']
-MEDIA_DIR = Path(BASE_DIR) / "media"
 
 
 # Quick-start development settings - unsuitable for production
@@ -178,6 +177,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"   #For Python Anywhere deployment.
 # MEDIA FILES
+MEDIA_DIR = Path(BASE_DIR) / "media"
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = "/media/"
 

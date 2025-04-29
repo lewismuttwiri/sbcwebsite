@@ -1,4 +1,4 @@
-{% extends "sbcapp1/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block content %}
@@ -30,7 +30,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     {% for item in cart_items %}
-                    <tr>
+                    <tr class="cart-item" data-item-id="{{ item.id }}">
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-16 w-16">
@@ -46,15 +46,15 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
-                                <form method="post" action="{% url 'store:adjust_quantity' item.id %}" class="inline">
+                                <form method="post" action="{% url 'store:adjust_quantity' item.id %}" class="inline quantity-form">
                                     {% csrf_token %}
                                     <input type="hidden" name="action" value="decrement">
                                     <button type="submit" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded">
                                         -
                                     </button>
                                 </form>
-                                <span class="mx-2">{{ item.quantity }}</span>
-                                <form method="post" action="{% url 'store:adjust_quantity' item.id %}" class="inline">
+                                <span class="mx-2 quantity-display">{{ item.quantity }}</span>
+                                <form method="post" action="{% url 'store:adjust_quantity' item.id %}" class="inline quantity-form">
                                     {% csrf_token %}
                                     <input type="hidden" name="action" value="increment">
                                     <button type="submit" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded">
@@ -64,10 +64,10 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">KES {{ item.total_price }}</div>
+                            <div class="text-sm text-gray-900 item-total">KES {{ item.total_price }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{% url 'store:remove_from_cart' item.id %}" class="text-red-600 hover:text-red-900">
+                            <a href="{% url 'store:remove_from_cart' item.id %}" class="text-red-600 hover:text-red-900 remove-item">
                                 Remove
                             </a>
                         </td>
@@ -79,7 +79,7 @@
                         <td colspan="3" class="px-6 py-4 text-right font-bold">
                             Total:
                         </td>
-                        <td class="px-6 py-4 font-bold">
+                        <td class="px-6 py-4 font-bold" id="cart-total">
                             KES {{ total_price }}
                         </td>
                         <td></td>
@@ -138,4 +138,68 @@
     </div>
     {% endif %}
 </div>
+
+{% block extra_js %}
+<script>
+    // Helper function to get CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Add event listeners to quantity forms
+    document.addEventListener('DOMContentLoaded', function() {
+        const quantityForms = document.querySelectorAll('.quantity-form');
+        
+        quantityForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const url = this.getAttribute('action');
+                
+                fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update quantity display
+                        const itemRow = this.closest('.cart-item');
+                        itemRow.querySelector('.quantity-display').textContent = data.quantity;
+                        itemRow.querySelector('.item-total').textContent = 'KES ' + data.item_total;
+                        
+                        // Update cart total
+                        document.getElementById('cart-total').textContent = 'KES ' + data.cart_total;
+                        
+                        // Update cart count in header if it exists
+                        const cartCountElement = document.getElementById('cart-count');
+                        if (cartCountElement) {
+                            cartCountElement.textContent = data.cart_count;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}
 {% endblock %}

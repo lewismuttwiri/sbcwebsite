@@ -22,7 +22,7 @@
                     <p class="text-gray-600 mb-2"><strong>Reference:</strong> {{ tender.reference_number }}</p>
                     <p class="text-gray-600 mb-4"><strong>Closing Date:</strong> {{ tender.closing_date|date:"F j, Y, g:i a" }}</p>
                     <p class="text-gray-700 mb-4">{{ tender.description|truncatewords:50 }}</p>
-                    <a href="{% url 'tenders:tender_detail' tender.pk %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                    <a href="{% url 'procurement:tender_detail' tender.pk %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                         View Details
                     </a>
                 </div>
@@ -69,7 +69,7 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-medium text-gray-900">
-                                    <a href="{% url 'tenders:tender_detail' tender.pk %}" class="hover:text-blue-500">
+                                    <a href="{% url 'procurement:tender_detail' tender.pk %}" class="hover:text-blue-500">
                                         {{ tender.reference_number }}
                                     </a>
                                 </div>

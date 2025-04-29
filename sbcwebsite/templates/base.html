@@ -123,6 +123,8 @@
           <a href="{% url 'sbcapp:home' %}" class="block text-lg hover:text-red-500">Our Home</a>
           <a href="{% url 'sbcapp:about' %}" class="block text-lg hover:text-red-500">Our Story</a>
           <a href="{% url 'sbcapp:brands' %}" class="block text-lg hover:text-red-500">Brands</a>
+          <a href="{% url 'store:category_list' %}" class="text-white hover:text-gray-300">Categories</a>
+
         </div>
         <div>
           <h3 class="text-lg font-bold mb-4">Opportunities</h3>
@@ -169,7 +171,11 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'js/script.js' %}"></script>
+  
   </div>
+  {% include "store/product_added_modal.html" %}
+  <script src="{% static 'js/productmodal.js' %}"></script>
+
 </body>
 
 </html>

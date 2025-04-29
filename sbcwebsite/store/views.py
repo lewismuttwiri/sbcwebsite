@@ -4,13 +4,30 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
 from django.db.models import Sum
-from .models import Product, CartItem, Order
+from .models import Product, CartItem, Order, Category
 import json
 from openpyxl import Workbook
 
+
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'store/category_list.html', {'categories': categories})
+
+def category_detail(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    products = Product.objects.filter(category=category, status='Available')
+    return render(request, 'store/category_detail.html', {
+        'category': category,
+        'products': products
+    })
+
 def product_list(request):
     products = Product.objects.all()
-    return render(request, 'store/product_list.html', {'products': products})
+    categories = Category.objects.all()
+    return render(request, 'store/product_list.html', {
+        'products': products,
+        'categories': categories
+    })
 
 def add_to_cart(request, product_id):
     if request.method == 'POST':
@@ -19,34 +36,116 @@ def add_to_cart(request, product_id):
         quantity = int(data.get('quantity', 1))
         total_price = product.price * quantity
         
-        cart_item, created = CartItem.objects.get_or_create(
-            user=request.user,
-            product=product,
-            defaults={'quantity': quantity, 'total_price': total_price}
-        )
+        if request.user.is_authenticated:
+            # Existing logic for authenticated users
+            # Check for duplicate entries and clean up if needed
+            existing_items = CartItem.objects.filter(user=request.user, product=product)
+            if existing_items.count() > 1:
+                # Keep only the first item and delete the rest
+                first_item = existing_items.first()
+                existing_items.exclude(id=first_item.id).delete()
+                
+                # Update the quantity of the remaining item
+                first_item.quantity += quantity
+                first_item.total_price = product.price * first_item.quantity
+                first_item.save()
+                created = False
+            else:
+                # Normal get_or_create flow
+                try:
+                    cart_item, created = CartItem.objects.get_or_create(
+                        user=request.user,
+                        product=product,
+                        defaults={'quantity': quantity, 'total_price': total_price}
+                    )
+                    
+                    if not created:
+                        cart_item.quantity += quantity
+                        cart_item.total_price = product.price * cart_item.quantity
+                        cart_item.save()
+                except CartItem.MultipleObjectsReturned:
+                    # Handle the case if get_or_create still fails
+                    existing_items = CartItem.objects.filter(user=request.user, product=product)
+                    first_item = existing_items.first()
+                    existing_items.exclude(id=first_item.id).delete()
+                    
+                    first_item.quantity += quantity
+                    first_item.total_price = product.price * first_item.quantity
+                    first_item.save()
+                    created = False
+            
+            cart_items_count = CartItem.objects.filter(user=request.user).count()
+        else:
+            # Session-based cart for unauthenticated users
+            cart = request.session.get('cart', {})
+            product_id_str = str(product_id)
+            
+            if product_id_str in cart:
+                cart[product_id_str]['quantity'] += quantity
+                # Convert Decimal to float for JSON serialization
+                cart[product_id_str]['total_price'] = float(product.price * cart[product_id_str]['quantity'])
+            else:
+                cart[product_id_str] = {
+                    'quantity': quantity,
+                    'total_price': float(total_price),  # Convert Decimal to float
+                    'product_name': product.name,
+                    'price': float(product.price)  # Convert Decimal to float
+                }
+            
+            request.session['cart'] = cart
+            cart_items_count = len(cart)
         
-        if not created:
-            cart_item.quantity += quantity
-            cart_item.total_price = product.price * cart_item.quantity
-            cart_item.save()
-        
-        cart_items_count = CartItem.objects.filter(user=request.user).count()
-        return JsonResponse({'message': 'Cart item quantity updated successfully', 'count': cart_items_count})
+        # Return additional product details for the modal
+        return JsonResponse({
+            'message': 'Cart item quantity updated successfully',
+            'count': cart_items_count,
+            'product': {
+                'name': product.name,
+                'price': float(product.price),  # Convert Decimal to float
+                'image_url': product.image.url if product.image else '',
+                'quantity': quantity,
+                'total_price': float(total_price)  # Convert Decimal to float
+            }
+        })
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
-@login_required
+
+
+
 def cart_view(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_price = sum(item.total_price for item in cart_items)
+    if request.user.is_authenticated:
+        cart_items = CartItem.objects.filter(user=request.user)
+        total_price = sum(item.total_price for item in cart_items)
+    else:
+        # Get cart from session for unauthenticated users
+        session_cart = request.session.get('cart', {})
+        cart_items = []
+        
+        for product_id, item_data in session_cart.items():
+            product = get_object_or_404(Product, pk=product_id)
+            cart_items.append({
+                'id': product_id,
+                'product': product,
+                'quantity': item_data['quantity'],
+                'total_price': item_data['total_price']
+            })
+        
+        total_price = sum(item['total_price'] for item in cart_items)
+    
     return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_price': total_price})
 
-@login_required
 def adjust_quantity(request, item_id):
-    cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
+    if request.method != 'POST':
+        return redirect('store:cart')
     
-    if request.method == 'POST':
-        action = request.POST.get('action')
+    action = request.POST.get('action')
+    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+    
+    if request.user.is_authenticated:
+        # Handle authenticated user cart
+        cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
+        
         if action == 'increment':
             cart_item.quantity += 1
         elif action == 'decrement':
@@ -58,20 +157,78 @@ def adjust_quantity(request, item_id):
         
         cart_items = CartItem.objects.filter(user=request.user)
         total_price = sum(item.total_price for item in cart_items)
-        return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_price': total_price})
+        
+        if is_ajax:
+            return JsonResponse({
+                'success': True,
+                'quantity': cart_item.quantity,
+                'item_total': float(cart_item.total_price),
+                'cart_total': float(total_price),
+                'cart_count': cart_items.count()
+            })
+    else:
+        # Handle session-based cart for anonymous users
+        session_cart = request.session.get('cart', {})
+        item_id_str = str(item_id)
+        
+        if item_id_str in session_cart:
+            if action == 'increment':
+                session_cart[item_id_str]['quantity'] += 1
+            elif action == 'decrement':
+                if session_cart[item_id_str]['quantity'] > 1:
+                    session_cart[item_id_str]['quantity'] -= 1
+            
+            # Get the product to calculate the new total price
+            product = get_object_or_404(Product, pk=item_id)
+            session_cart[item_id_str]['total_price'] = float(product.price * session_cart[item_id_str]['quantity'])
+            
+            # Save the updated cart to the session
+            request.session['cart'] = session_cart
+            request.session.modified = True
+            
+            # Calculate the total price for all items in the cart
+            total_price = sum(item_data['total_price'] for item_data in session_cart.values())
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': True,
+                    'quantity': session_cart[item_id_str]['quantity'],
+                    'item_total': session_cart[item_id_str]['total_price'],
+                    'cart_total': total_price,
+                    'cart_count': len(session_cart)
+                })
     
-    return render(request, 'store/cart.html', {'cart_items': [cart_item], 'total_price': cart_item.total_price})
+    # For non-AJAX requests, redirect back to cart
+    return redirect('store:cart')
+
+
+
+
 
 def remove_from_cart(request, item_id):
-    cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
-    cart_item.delete()
-    return redirect('cart')
+    if request.user.is_authenticated:
+        cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
+        cart_item.delete()
+    else:
+        # Remove from session cart
+        session_cart = request.session.get('cart', {})
+        item_id_str = str(item_id)
+        if item_id_str in session_cart:
+            del session_cart[item_id_str]
+            request.session['cart'] = session_cart
+    
+    return redirect('store:cart')
+
 
 def cart_item_count(request):
     if request.user.is_authenticated:
         cart_items_count = CartItem.objects.filter(user=request.user).count()
-        return JsonResponse({'count': cart_items_count})
-    return JsonResponse({'count': 0})
+    else:
+        # Count items in session cart
+        session_cart = request.session.get('cart', {})
+        cart_items_count = len(session_cart)
+    
+    return JsonResponse({'count': cart_items_count})
 
 @login_required
 @csrf_protect
@@ -80,6 +237,20 @@ def checkout(request):
         name = request.POST.get('name')
         phone_number = request.POST.get('phone_number')
         region = request.POST.get('region')
+        
+        # Transfer session cart to database if it exists
+        session_cart = request.session.get('cart', {})
+        if session_cart and not CartItem.objects.filter(user=request.user).exists():
+            for product_id, item_data in session_cart.items():
+                product = get_object_or_404(Product, pk=product_id)
+                CartItem.objects.create(
+                    user=request.user,
+                    product=product,
+                    quantity=item_data['quantity'],
+                    total_price=item_data['total_price']
+                )
+            # Clear session cart after transfer
+            request.session['cart'] = {}
         
         cart_items = CartItem.objects.filter(user=request.user)
         total_price = sum(item.total_price for item in cart_items)
@@ -96,9 +267,11 @@ def checkout(request):
             )
         
         cart_items.delete()
-        return redirect('checkout_success')
+        # Send email to admin
+        return redirect('store:checkout_success')
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+
 
 def checkout_success(request):
     return render(request, 'store/checkout_success.html')

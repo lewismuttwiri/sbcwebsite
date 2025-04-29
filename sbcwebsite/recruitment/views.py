@@ -63,7 +63,7 @@ def apply(request, advertisement_id):
     else:
         form = JobApplicationForm()
     
-    return render(request, 'recruitment/apply.html', {
+    return render(request, 'recruitment/job_application_form.html', {
         'form': form,
         'advertisement': advertisement
     })
