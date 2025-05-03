@@ -35,22 +35,22 @@
         .media-grid {
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         }
-        
+
         .media-center-header h1 {
             font-size: 2.2rem;
         }
     }
-    
+
     @media (max-width: 576px) {
         .media-grid {
             grid-template-columns: 1fr;
         }
-        
+
         .media-center-header h1 {
             font-size: 1.8rem;
         }
     }
-    
+
     .row {
         opacity: 0;
         transform: translateY(25%);
@@ -78,36 +78,36 @@
             flex: 1;
         }
     }
-    
+
     /* Media card styles */
     .media-card {
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
+
     .media-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
-    
+
     /* Media carousel styles */
     .media-carousel {
         position: relative;
         margin: 0 auto;
         overflow: hidden;
     }
-    
+
     .media-carousel-inner {
         display: flex;
         transition: transform 0.5s ease;
     }
-    
+
     .media-carousel-controls {
         display: flex;
         justify-content: center;
         margin-top: 20px;
     }
-    
+
     .media-carousel-control {
         background-color: #030e4d;
         color: white;
@@ -122,17 +122,17 @@
         justify-content: center;
         transition: background-color 0.3s;
     }
-    
+
     .media-carousel-control:hover {
         background-color: #e61a27;
     }
-    
+
     .media-carousel-indicators {
         display: flex;
         justify-content: center;
         margin-top: 15px;
     }
-    
+
     .media-carousel-indicator {
         width: 10px;
         height: 10px;
@@ -142,7 +142,7 @@
         cursor: pointer;
         transition: background-color 0.3s;
     }
-    
+
     .media-carousel-indicator.active {
         background-color: #030e4d;
     }
@@ -155,16 +155,20 @@
         <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
     </div>
     <img src="{% static 'images/home.jpg' %}" class="slideshow-image" alt="Image 0"
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');" loading="lazy">
+        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
+        loading="lazy">
     <video class="slideshow-image" alt="Image 1" autoplay muted loop playsinline
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');" loading="lazy">
+        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
+        loading="lazy">
         <source src="{% static 'videos/intro.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <img src="{% static 'images/cover-pep.jpg' %}" class="slideshow-image" alt="Image 2"
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');" loading="lazy">
+        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
+        loading="lazy">
     <img src="{% static 'images/cover-pep.png' %}" class="slideshow-image" alt="Image 3"
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');" loading="lazy">
+        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
+        loading="lazy">
 </div>
 <div class="slider-dots">
     <div class="dot" data-index="0"></div>
@@ -218,61 +222,68 @@
 </div>
 </div>
 </div>
-<section class="brands-carousel">
-    <div class="carousel-btn left" onclick="scrollCarousel(-1)">&#8592;</div>
-    
-    <div class="brands-track">
-      <div class="brand-card">
-        <div class="brand-image" style="background-image: url('placeholder1.jpg');">
-          <img src="placeholder1.jpg" alt="Tusker Lite" />
+
+<div class="brands-carousel">
+    <div class="carousel-btn left" onclick="scrollBrands(-1)">←</div>
+
+    <div class="brands-window">
+        <div class="brands-track" id="brandsTrack">
+            <div class="brand-card">
+                <div class="brand-image" style="background-image: url('{% static 'images/placeholder2.jpg' %}');">
+                    <img src="{% static 'images/pepsi300.png' %}" alt="Tusker Lite" />
+                    <h3 class="lager">
+                        </h3class>TUSKER LITE</h3>
+                    <p>Low-carb beer brewed with natural ingredients.</p>
+                </div>
+            </div>
+            <div class="brand-card">
+                <div class="brand-image" style="background-image: url('{% static 'images/placeholder2.jpg' %}');">
+                    <img src="{% static 'images/pepsi300.png' %}" alt="Tusker Lager" />
+                    <h3 class="lager">TUSKER LAGER</h3>
+                    <p>Kenya’s Finest Lager</p>
+                </div>
+            </div>
+            <div class="brand-card">
+                <div class="brand-image" style="background-image: url('{% static 'images/placeholder2.jpg' %}');">
+                    <img src="{% static 'images/pepsi300.png' %}" alt="Tusker Lager" />
+                    <h3 class="lager">TUSKER LAGER</h3>
+                    <p>Kenya’s Finest Lager</p>
+                </div>
+            </div>
         </div>
-        <h3>TUSKER LITE</h3>
-        <p>Low-carb beer brewed with natural ingredients.</p>
-      </div>
-  
-      <div class="brand-card">
-        <div class="brand-image" style="background-image: url('placeholder2.jpg');">
-          <img src="placeholder2.jpg" alt="Tusker Lager" />
-        </div>
-        <h3 class="lager">TUSKER LAGER</h3>
-        <p>Kenya’s Finest Lager</p>
-      </div>
     </div>
-    
-    <div class="carousel-btn right" onclick="scrollCarousel(1)">&#8594;</div>
-  </section>
-  
+
+    <div class="carousel-btn right" onclick="scrollBrands(1)">→</div>
+</div>
+
+
+
 
 <div class="container mx-auto px-4">
     <!-- Media Center Header -->
     <div class="media-center-header">
         <h1>Media Center</h1>
     </div>
-    
-    <!-- Filter Options -->
-    <div class="filter-options">
-        <select class="filter-select" aria-label="Sort options" id="media-sort">
-            <option value="all">Select an option to apply sort order</option>
-            <option value="latest">Latest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="title">Title A-Z</option>
-        </select>
-    </div>
-    
+
+
+
     <!-- Media Carousel -->
     <div class="media-carousel">
         <div class="media-carousel-inner">
             {% for media_item in media_items %}
             <div class="media-carousel-item" style="flex: 0 0 100%;">
                 <div class="media-grid">
-                    <div class="media-card" onclick="window.location.href='{% url 'gallery:media_list' %} media_item.id %}'" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-card"
+                        onclick="window.location.href='{% url 'gallery:media_list' %} media_item.id %}'"
+                        data-aos="fade-up" data-aos-delay="100">
                         <div style="position: relative;">
                             {% if media_item.image %}
                             <img src="{{ media_item.image.url }}" alt="{{ media_item.title }}" class="media-card-image">
                             {% else %}
-                            <img src="{% static 'images/placeholder.jpg' %}" alt="{{ media_item.title }}" class="media-card-image">
+                            <img src="{% static 'images/placeholder.jpg' %}" alt="{{ media_item.title }}"
+                                class="media-card-image">
                             {% endif %}
-                            
+
                             {% if media_item.is_press_release %}
                             <span class="press-release-badge">Press Release</span>
                             {% endif %}
@@ -281,9 +292,9 @@
                             <h2 class="media-card-title">{{ media_item.title }}</h2>
                             <p class="media-card-desc">
                                 {% if media_item.description %}
-                                    {{ media_item.description|truncatechars:120 }}
+                                {{ media_item.description|truncatechars:120 }}
                                 {% else %}
-                                    No description available
+                                No description available
                                 {% endif %}
                             </p>
                             <p class="media-card-date">{{ media_item.date|date:"m-d-Y" }}</p>
@@ -291,7 +302,9 @@
                         <div class="media-card-footer">
                             <span class="read-more">
                                 Read more
-                                <svg class="read-more-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="read-more-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
@@ -306,25 +319,28 @@
             </div>
             {% endfor %}
         </div>
-        
+
         <!-- Carousel Controls -->
         <div class="media-carousel-controls">
             <button class="media-carousel-control prev-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
             </button>
             <button class="media-carousel-control next-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </button>
         </div>
-        
+
         <!-- Carousel Indicators -->
         <div class="media-carousel-indicators">
             {% for media_item in media_items %}
-            <div class="media-carousel-indicator {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}"></div>
+            <div class="media-carousel-indicator {% if forloop.first %}active{% endif %}"
+                data-index="{{ forloop.counter0 }}"></div>
             {% endfor %}
         </div>
     </div>
@@ -338,24 +354,27 @@
         <div class="purpose-image-column">
             <img src="{% static 'images/pep.jpg' %}" alt="Quality Assurance" class="purpose-image" loading="lazy">
         </div>
-        
+
         <!-- Right column with content -->
         <div class="purpose-content-column">
             <h1 class="purpose-heading">Quality Assurance</h1>
-            
+
             <div class="purpose-text">
-                <p>At SBC Kenya Ltd, we understand that every sip of your favorite soda should be a satisfying experience. That's why we hold ourselves to the highest standards throughout the entire production process.</p>
-                
+                <p>At SBC Kenya Ltd, we understand that every sip of your favorite soda should be a satisfying
+                    experience. That's why we hold ourselves to the highest standards throughout the entire production
+                    process.</p>
+
                 <p>Beyond technical excellence, we prioritize freshness.</p>
-                
-                <p>Our efficient distribution network ensures that our beverages reach you at their peak of flavor, delivering consistent refreshment in every bottle.</p>
+
+                <p>Our efficient distribution network ensures that our beverages reach you at their peak of flavor,
+                    delivering consistent refreshment in every bottle.</p>
             </div>
-            
+
             <div class="purpose-taglines">
                 <h2 class="tagline-primary">Quality is our Assurance!</h2>
                 <h2 class="tagline-secondary">Thirsty For More!</h2>
             </div>
-            
+
             <a href="{% url 'sbcapp:about' %}" class="purpose-cta">
                 Learn more about us
             </a>
@@ -364,199 +383,199 @@
 </div>
 
 <div class="contact-container">
-<div class="section-wrapper">
-    <div class="section-left">
-        <a href="{% url 'recruitment:advertisement_list' %}">
-            <h1>Careers</h1>
-        </a>
-        <section class="careers-section">
-            <div class="overlay-content">
-                <h2>JOIN THE SBC KENYA TEAM.</h2>
-                <h3>At SBC Kenya, we're building a diverse and talented team.</h3>
-                <h3>We're committed to equal opportunity and welcome applications from all qualified individuals.
-                </h3>
-            </div>
-        </section>
+    <div class="section-wrapper">
+        <div class="section-left">
+            <a href="{% url 'recruitment:advertisement_list' %}">
+                <h1>Careers</h1>
+            </a>
+            <section class="careers-section">
+                <div class="overlay-content">
+                    <h2>JOIN THE SBC KENYA TEAM.</h2>
+                    <h3>At SBC Kenya, we're building a diverse and talented team.</h3>
+                    <h3>We're committed to equal opportunity and welcome applications from all qualified individuals.
+                    </h3>
+                </div>
+            </section>
+        </div>
+        <div class="section-right">
+            <a href="{% url 'contact:contact' %}">
+                <h1>Contact us</h1>
+            </a>
+            <section class="contact-section">
+                <div class="overlay-content">
+                    <h2>Get in touch with us</h2>
+                    <h3>We are glad to hear your feedback.</h3>
+                    <h3>Explore our Contact-us page.We value your feedback. Welcome to SBC Kenya Ltd</h3>
+                </div>
+            </section>
+        </div>
     </div>
-    <div class="section-right">
-        <a href="{% url 'contact:contact' %}">
-            <h1>Contact us</h1>
-        </a>
-        <section class="contact-section">
-            <div class="overlay-content">
-                <h2>Get in touch with us</h2>
-                <h3>We are glad to hear your feedback.</h3>
-                <h3>Explore our Contact-us page.We value your feedback. Welcome to SBC Kenya Ltd</h3>
-            </div>
-        </section>
-    </div>
-</div>
 </div>
 
 <div class="quality-logos">
-<img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
-<img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
-<img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
-<img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
+    <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
+    <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
+    <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
+    <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
 </div>
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS animation library if available
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out',
-            once: true
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize AOS animation library if available
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out',
+                once: true
+            });
+        }
+
+        // Add filter functionality
+        document.getElementById('media-sort').addEventListener('change', function (e) {
+            const sortValue = e.target.value;
+
+            if (sortValue !== 'all') {
+                window.location.href = "{% url 'gallery:media_list' %}?sort=" + sortValue;
+            }
         });
-    }
-    
-    // Add filter functionality
-    document.getElementById('media-sort').addEventListener('change', function(e) {
-        const sortValue = e.target.value;
-        
-        if (sortValue !== 'all') {
-            window.location.href = "{% url 'gallery:media_list' %}?sort=" + sortValue;
+
+        // Pre-select the current sort option if any
+        const urlParams = new URLSearchParams(window.location.search);
+        const sortParam = urlParams.get('sort');
+        if (sortParam) {
+            document.getElementById('media-sort').value = sortParam;
         }
-    });
-    
-    // Pre-select the current sort option if any
-    const urlParams = new URLSearchParams(window.location.search);
-    const sortParam = urlParams.get('sort');
-    if (sortParam) {
-        document.getElementById('media-sort').value = sortParam;
-    }
-    
-    // Media Carousel Functionality
-    const carousel = document.querySelector('.media-carousel-inner');
-    const items = document.querySelectorAll('.media-carousel-item');
-    const indicators = document.querySelectorAll('.media-carousel-indicator');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    let currentIndex = 0;
-    const itemCount = items.length;
-    
-    // Skip carousel setup if no items
-    if (itemCount === 0) return;
-    
-    // Set initial width based on number of items
-    items.forEach(item => {
-        item.style.flex = `0 0 ${100/Math.min(3, itemCount)}%`;
-    });
-    
-    // Function to update carousel position
-    function updateCarousel() {
-        // Calculate how many items to show based on screen width
-        let itemsPerView = 1;
-        if (window.innerWidth >= 768) {
-            itemsPerView = 2;
-        }
-        if (window.innerWidth >= 1200) {
-            itemsPerView = 3;
-        }
-        
-        // Adjust item widths
+
+        // Media Carousel Functionality
+        const carousel = document.querySelector('.media-carousel-inner');
+        const items = document.querySelectorAll('.media-carousel-item');
+        const indicators = document.querySelectorAll('.media-carousel-indicator');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentIndex = 0;
+        const itemCount = items.length;
+
+        // Skip carousel setup if no items
+        if (itemCount === 0) return;
+
+        // Set initial width based on number of items
         items.forEach(item => {
-            item.style.flex = `0 0 ${100/Math.min(itemsPerView, itemCount)}%`;
+            item.style.flex = `0 0 ${100 / Math.min(3, itemCount)}%`;
         });
-        
-        // Calculate maximum index
-        const maxIndex = Math.max(0, itemCount - itemsPerView);
-        
-        // Ensure currentIndex is within bounds
-        if (currentIndex > maxIndex) {
-            currentIndex = maxIndex;
+
+        // Function to update carousel position
+        function updateCarousel() {
+            // Calculate how many items to show based on screen width
+            let itemsPerView = 1;
+            if (window.innerWidth >= 768) {
+                itemsPerView = 2;
+            }
+            if (window.innerWidth >= 1200) {
+                itemsPerView = 3;
+            }
+
+            // Adjust item widths
+            items.forEach(item => {
+                item.style.flex = `0 0 ${100 / Math.min(itemsPerView, itemCount)}%`;
+            });
+
+            // Calculate maximum index
+            const maxIndex = Math.max(0, itemCount - itemsPerView);
+
+            // Ensure currentIndex is within bounds
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+
+            // Update carousel position
+            carousel.style.transform = `translateX(-${currentIndex * (100 / itemsPerView)}%)`;
+
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+
+            // Update button states
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= maxIndex;
         }
-        
-        // Update carousel position
-        carousel.style.transform = `translateX(-${currentIndex * (100/itemsPerView)}%)`;
-        
-        // Update indicators
+
+        // Event listeners for controls
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            let itemsPerView = 1;
+            if (window.innerWidth >= 768) {
+                itemsPerView = 2;
+            }
+            if (window.innerWidth >= 1200) {
+                itemsPerView = 3;
+            }
+
+            const maxIndex = Math.max(0, itemCount - itemsPerView);
+
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        // Event listeners for indicators
         indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentIndex);
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
         });
-        
-        // Update button states
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= maxIndex;
-    }
-    
-    // Event listeners for controls
-    prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-        }
+
+        // Handle window resize
+        window.addEventListener('resize', updateCarousel);
+
+        // Initial setup
+        updateCarousel();
     });
-    
-    nextBtn.addEventListener('click', () => {
-        let itemsPerView = 1;
-        if (window.innerWidth >= 768) {
-            itemsPerView = 2;
-        }
-        if (window.innerWidth >= 1200) {
-            itemsPerView = 3;
-        }
-        
-        const maxIndex = Math.max(0, itemCount - itemsPerView);
-        
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-            updateCarousel();
-        }
-    });
-    
-    // Event listeners for indicators
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            currentIndex = index;
-            updateCarousel();
-        });
-    });
-    
-    // Handle window resize
-    window.addEventListener('resize', updateCarousel);
-    
-    // Initial setup
-    updateCarousel();
-});
 </script>
 {% endblock %}
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    function showSlides(slides, slideIndex) {
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex >= slides.length) {
-            slideIndex = 0;
-        }
-        slides[slideIndex].style.display = "block";
-        return slideIndex;
-    }
-
-    let brandSlideIndex = 0;
-    const brandSlides = document.getElementsByClassName("slides");
-    setInterval(() => {
-        brandSlideIndex = showSlides(brandSlides, brandSlideIndex);
-    }, 3000);
-
-    function animateOnScroll() {
-        const containers = document.querySelectorAll('.row');
-        containers.forEach(container => {
-            const containerTop = container.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            if (containerTop < windowHeight * 0.95) {
-                container.classList.add('animate');
+    document.addEventListener('DOMContentLoaded', function () {
+        function showSlides(slides, slideIndex) {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
             }
-        });
-    }
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll();
-});
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+            slides[slideIndex].style.display = "block";
+            return slideIndex;
+        }
+
+        let brandSlideIndex = 0;
+        const brandSlides = document.getElementsByClassName("slides");
+        setInterval(() => {
+            brandSlideIndex = showSlides(brandSlides, brandSlideIndex);
+        }, 3000);
+
+        function animateOnScroll() {
+            const containers = document.querySelectorAll('.row');
+            containers.forEach(container => {
+                const containerTop = container.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (containerTop < windowHeight * 0.95) {
+                    container.classList.add('animate');
+                }
+            });
+        }
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();
+    });
 </script>
 {% endblock %}
 
@@ -567,6 +586,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" as="script">
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js" as="script">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"
+    as="script">
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" as="script">
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" as="style">
