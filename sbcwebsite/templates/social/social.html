@@ -1,82 +1,150 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/social_app.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8 text-center">Welcome to SBC Social App!</h1>
-    <div class="content-overlay">
-        <h2>Welcome to SBC Social App!</h2>
-        <p>We're passionate about creating refreshing beverages that bring people together.</p>
-        <a href="{% url 'sbcapp:about' %}" class="btn btn-danger">Learn More About Us</a>
+<div class="social-app-container">
+  <h1 class="social-app-header">Welcome to SBC Social App!</h1>
+  
+  <div class="social-hero">
+    <div class="hero-content">
+      <h2>Welcome to SBC Social App!</h2>
+      <p>We're passionate about creating refreshing beverages that bring people together.</p>
+      <a href="{% url 'sbcapp:about' %}" class="hero-btn">Learn More About Us</a>
     </div>
-
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 max-w-4xl mx-auto">
-        <div class="p-8">
-            <p class="text-xl text-gray-700 mb-8 text-center">
-                Stay connected with SBC Kenya through our social media channels for the latest updates,
-                product information, and company news.
-            </p>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
-                {% for link in social_links %}
-                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
-                    class="flex flex-col items-center p-4 rounded-lg hover:bg-gray-100 transition duration-300">
-                    <div class="text-4xl mb-3 
-                        {% if 'facebook' in link.platform %}text-blue-600
-                        {% elif 'twitter' in link.platform %}text-blue-400
-                        {% elif 'instagram' in link.platform %}text-pink-500
-                        {% elif 'linkedin' in link.platform %}text-blue-700
-                        {% elif 'youtube' in link.platform %}text-red-600
-                        {% elif 'tiktok' in link.platform %}text-black
-                        {% elif 'whatsapp' in link.platform %}text-green-500
-                        {% else %}text-gray-700{% endif %}">
-                        <i class="{{ link.icon_class }}"></i>
-                    </div>
-                    <span class="text-lg font-medium">{{ link.get_platform_display }}</span>
-                </a>
-                {% empty %}
-                <div class="col-span-full text-center py-8">
-                    <p class="text-xl text-gray-600">No social media links available at the moment.</p>
-                </div>
-                {% endfor %}
-            </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Stay Connected with SBC Kenya</h2>
+      <p class="card-text">
+        Follow our social media channels for the latest updates, product information, and company news.
+      </p>
+    </div>
+    
+    <div class="card-body">
+      <div class="social-grid">
+        {% for link in social_links %}
+        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="social-link">
+          <div class="social-icon 
+            {% if 'facebook' in link.platform %}text-blue-600
+            {% elif 'twitter' in link.platform %}text-blue-400
+            {% elif 'instagram' in link.platform %}text-pink-500
+            {% elif 'linkedin' in link.platform %}text-blue-700
+            {% elif 'youtube' in link.platform %}text-red-600
+            {% elif 'tiktok' in link.platform %}text-black
+            {% elif 'whatsapp' in link.platform %}text-green-500
+            {% else %}text-gray-700{% endif %}">
+            <i class="{{ link.icon_class }}"></i>
+          </div>
+          <span class="social-name">{{ link.get_platform_display }}</span>
+        </a>
+        {% empty %}
+        <div class="col-span-full text-center py-8">
+          <p class="text-xl text-gray-600">No social media links available at the moment.</p>
         </div>
+        {% endfor %}
+      </div>
     </div>
-
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 max-w-4xl mx-auto">
-        <div class="p-8">
-            <h2 class="text-2xl font-bold mb-6 text-center">Why Follow Us?</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-4 border border-gray-200 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3">Latest Products</h3>
-                    <p class="text-gray-700">
-                        Be the first to know about our new product launches and updates.
-                    </p>
-                </div>
-
-                <div class="p-4 border border-gray-200 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3">Special Offers</h3>
-                    <p class="text-gray-700">
-                        Get exclusive deals and promotions available only to our social media followers.
-                    </p>
-                </div>
-
-                <div class="p-4 border border-gray-200 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3">Industry Insights</h3>
-                    <p class="text-gray-700">
-                        Stay informed about the latest trends and developments in the industry.
-                    </p>
-                </div>
-
-                <div class="p-4 border border-gray-200 rounded-lg">
-                    <h3 class="text-xl font-semibold mb-3">Community Engagement</h3>
-                    <p class="text-gray-700">
-                        Join our community discussions and share your experiences with our products.
-                    </p>
-                </div>
-            </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Why Follow Us?</h2>
+    </div>
+    
+    <div class="card-body">
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h3 class="feature-title">Latest Products</h3>
+          <p class="feature-text">
+            Be the first to know about our new product launches and updates.
+          </p>
         </div>
+        
+        <div class="feature-item">
+          <h3 class="feature-title">Special Offers</h3>
+          <p class="feature-text">
+            Get exclusive deals and promotions available only to our social media followers.
+          </p>
+        </div>
+        
+        <div class="feature-item">
+          <h3 class="feature-title">Industry Insights</h3>
+          <p class="feature-text">
+            Stay informed about the latest trends and developments in the industry.
+          </p>
+        </div>
+        
+        <div class="feature-item">
+          <h3 class="feature-title">Community Engagement</h3>
+          <p class="feature-text">
+            Join our community discussions and share your experiences with our products.
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<script>
+  // Add animation classes to elements as they scroll into view
+  document.addEventListener('DOMContentLoaded', function() {
+    const animateOnScroll = function() {
+      const cards = document.querySelectorAll('.card');
+      const featureItems = document.querySelectorAll('.feature-item');
+      
+      cards.forEach((card, index) => {
+        if (isElementInViewport(card)) {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, index * 200);
+        }
+      });
+      
+      featureItems.forEach((item, index) => {
+        if (isElementInViewport(item)) {
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, index * 150);
+        }
+      });
+    };
+    
+    function isElementInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+      );
+    }
+    
+    // Set initial styles
+    const cards = document.querySelectorAll('.card');
+    const featureItems = document.querySelectorAll('.feature-item');
+    
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    featureItems.forEach(item => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px)';
+      item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    // Run on load
+    animateOnScroll();
+    
+    // Run on scroll
+    window.addEventListener('scroll', animateOnScroll);
+  });
+</script>
 {% endblock %}

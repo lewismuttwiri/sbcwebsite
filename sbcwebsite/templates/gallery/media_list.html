@@ -1,101 +1,317 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/media_page.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
 {% block content %}
 <div class="media-container">
     <h1 class="media-title">News and Media</h1>
-
+    
     {% if media_items %}
         <link rel="preload" href="{{ media_items.0.image.url }}" as="image">
-
         <div class="media-grid">
             {% for media_item in media_items %}
-            <div class="media-item">
-                <!-- Media Title -->
-                <h3>{{ media_item.title }}</h3>
-
-                <!-- Date and Time Posted -->
-                <p class="datetime-posted">
-                    Updated on: {{ media_item.datetime_posted|date:"F j, Y, g:i a" }}
-                </p>
-
-                <!-- Media Description -->
-                <p>{{ media_item.description|linebreaksbr|safe }}</p>
-
+            <div class="media-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="media-content">
+                    <!-- Media Title -->
+                    <h3>{{ media_item.title }}</h3>
+                    
+                    <!-- Date and Time Posted -->
+                    <p class="datetime-posted">
+                        Updated on: {{ media_item.datetime_posted|date:"F j, Y, g:i a" }}
+                    </p>
+                    
+                    <!-- Media Description -->
+                    <p>{{ media_item.description|linebreaksbr|safe }}</p>
+                </div>
+                
                 <!-- Image and Related Images -->
                 <div class="media-image-related-wrapper">
-                    <!-- Media Image (Left) -->
+                    <!-- Main Media Image -->
                     <div class="media-image-container">
-                        <img src="{% static 'images/placeholder.jpg' %}" 
-                             data-src="{{ media_item.image.url }}" 
-                             alt="{{ media_item.title }}" 
-                             class="lazyload media-item-image" 
+                        <img src="{% static 'images/placeholder.jpg' %}"
+                             data-src="{{ media_item.image.url }}"
+                             alt="{{ media_item.title }}"
+                             class="lazyload media-item-image"
                              loading="lazy">
+                        <div class="image-caption">{{ media_item.title }}</div>
                     </div>
-
-                    <!-- Related Images (Right) -->
-                    {% if media_item.related_images.all %}
-                    <div class="related-images-scroll-wrapper">
-                        <button class="scroll-btn left">&laquo;</button>
-
-                        <div class="related-images-container">
-                            <div class="related-images">
-                                {% for related_image in media_item.related_images.all %}
-                                <img src="{% static 'images/placeholder.jpg' %}" 
-                                     data-src="{{ related_image.image.url }}" 
-                                     alt="{{ related_image.caption }}" 
-                                     class="lazyload related-image" 
-                                     loading="lazy">
+                    
+                                        <!-- Related Images Section -->
+                                        {% if media_item.related_images.all %}
+                                        <div class="related-images-section">
+                                            <h4 class="related-images-title">Related Images</h4>
+                                            <div class="related-images-scroll-wrapper">
+                                                <button class="scroll-btn left" aria-label="Scroll left">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                </button>
+                                                
+                                                <div class="related-images-container">
+                                                    <div class="related-images auto-scroll" style="--total-images: {{ media_item.related_images.all|length }}">
+                                                        {% for related_image in media_item.related_images.all %}
+                                                        <img src="{% static 'images/placeholder.jpg' %}"
+                                                             data-src="{{ related_image.image.url }}"
+                                                             alt="{{ related_image.caption }}"
+                                                             class="lazyload related-image"
+                                                             loading="lazy"
+                                                             data-caption="{{ related_image.caption }}">
+                                                        {% endfor %}
+                                                        
+                                                        <!-- Duplicate the first few images for seamless looping -->
+                                                        {% for related_image in media_item.related_images.all|slice:":3" %}
+                                                        <img src="{% static 'images/placeholder.jpg' %}"
+                                                             data-src="{{ related_image.image.url }}"
+                                                             alt="{{ related_image.caption }}"
+                                                             class="lazyload related-image"
+                                                             loading="lazy"
+                                                             data-caption="{{ related_image.caption }}">
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                
+                                                <button class="scroll-btn right" aria-label="Scroll right">
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
                                 {% endfor %}
                             </div>
-                        </div>
-
-                        <button class="scroll-btn right">&raquo;</button>
+                        {% else %}
+                            <div class="no-media-message">
+                                <i class="fas fa-newspaper"></i>
+                                <p>No media posts available at the moment. Please check back later.</p>
+                            </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
-                </div>
-
-                <hr>
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>No media posts available.</p>
-    {% endif %}
-</div>
-
-<script>
-    // Lazy Load Script
-    document.addEventListener('DOMContentLoaded', function () {
-        const lazyLoadImages = () => {
-            const lazyImages = document.querySelectorAll('img.lazyload');
-            lazyImages.forEach(image => {
-                if (image.dataset.src && image.getBoundingClientRect().top <= window.innerHeight) {
-                    image.src = image.dataset.src;
-                    image.removeAttribute('data-src');
-                    image.classList.remove('lazyload');
-                }
-            });
-        };
-
-        lazyLoadImages();
-        window.addEventListener('scroll', lazyLoadImages);
-
-        // Scroll related images horizontally
-        document.querySelectorAll('.related-images-scroll-wrapper').forEach(wrapper => {
-            const container = wrapper.querySelector('.related-images-container');
-            const leftBtn = wrapper.querySelector('.scroll-btn.left');
-            const rightBtn = wrapper.querySelector('.scroll-btn.right');
-
-            leftBtn.addEventListener('click', () => {
-                container.scrollBy({ left: -200, behavior: 'smooth' });
-            });
-
-            rightBtn.addEventListener('click', () => {
-                container.scrollBy({ left: 200, behavior: 'smooth' });
-            });
-        });
-    });
-</script>
-
-{% endblock %}
-
+                    
+                    <script>
+                        // Enhanced Lazy Load and Carousel Script
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Lazy loading images with improved performance
+                            const lazyLoadImages = () => {
+                                const lazyImages = document.querySelectorAll('img.lazyload');
+                                
+                                if ('IntersectionObserver' in window) {
+                                    const imageObserver = new IntersectionObserver((entries, observer) => {
+                                        entries.forEach(entry => {
+                                            if (entry.isIntersecting) {
+                                                const img = entry.target;
+                                                if (img.dataset.src) {
+                                                    img.src = img.dataset.src;
+                                                    img.onload = () => {
+                                                        img.classList.add('loaded');
+                                                    };
+                                                    img.onerror = () => {
+                                                        img.src = "{% static 'images/placeholder.jpg' %}";
+                                                        img.classList.add('error');
+                                                    };
+                                                    img.removeAttribute('data-src');
+                                                    observer.unobserve(img);
+                                                }
+                                            }
+                                        });
+                                    }, {
+                                        rootMargin: '200px 0px',
+                                        threshold: 0.01
+                                    });
+                                    
+                                    lazyImages.forEach(img => {
+                                        imageObserver.observe(img);
+                                    });
+                                } else {
+                                    // Fallback for browsers without IntersectionObserver
+                                    const lazyLoadThrottleTimeout = setTimeout(() => {
+                                        const scrollTop = window.scrollY;
+                                        lazyImages.forEach(img => {
+                                            if (img.dataset.src && img.offsetTop < window.innerHeight + scrollTop + 500) {
+                                                img.src = img.dataset.src;
+                                                img.onload = () => img.classList.add('loaded');
+                                                img.onerror = () => {
+                                                    img.src = "{% static 'images/placeholder.jpg' %}";
+                                                    img.classList.add('error');
+                                                };
+                                                img.removeAttribute('data-src');
+                                            }
+                                        });
+                                        
+                                        if (lazyImages.length === 0) {
+                                            document.removeEventListener('scroll', lazyLoadThrottle);
+                                            window.removeEventListener('resize', lazyLoadThrottle);
+                                            window.removeEventListener('orientationChange', lazyLoadThrottle);
+                                        }
+                                    }, 20);
+                                    
+                                    const lazyLoadThrottle = () => {
+                                        if (lazyLoadThrottleTimeout) {
+                                            clearTimeout(lazyLoadThrottleTimeout);
+                                        }
+                                        setTimeout(lazyLoadImages, 20);
+                                    };
+                                    
+                                    document.addEventListener('scroll', lazyLoadThrottle);
+                                    window.addEventListener('resize', lazyLoadThrottle);
+                                    window.addEventListener('orientationChange', lazyLoadThrottle);
+                                }
+                            };
+                            
+                            // Initialize lazy loading
+                            lazyLoadImages();
+                            
+                            // Enhanced carousel functionality with horizontal scrolling
+                            document.querySelectorAll('.related-images-scroll-wrapper').forEach(wrapper => {
+                                const container = wrapper.querySelector('.related-images-container');
+                                const imagesDiv = wrapper.querySelector('.related-images');
+                                const leftBtn = wrapper.querySelector('.scroll-btn.left');
+                                const rightBtn = wrapper.querySelector('.scroll-btn.right');
+                                const images = wrapper.querySelectorAll('.related-image');
+                                
+                                if (images.length === 0) return;
+                                
+                                // Set up the carousel
+                                let scrollAmount = 0;
+                                const imageWidth = images[0].offsetWidth + 15; // Image width + margin
+                                const containerWidth = container.offsetWidth;
+                                const maxScroll = (images.length * imageWidth) - containerWidth;
+                                
+                                // Ensure proper animation for horizontal scrolling
+                                imagesDiv.style.animation = 'horizontalScroll 30s linear infinite';
+                                imagesDiv.style.animationPlayState = 'running';
+                                
+                                // Handle manual scrolling with buttons
+                                leftBtn.addEventListener('click', () => {
+                                    // Pause auto-scrolling when manually scrolling
+                                    imagesDiv.style.animationPlayState = 'paused';
+                                    
+                                    scrollAmount -= imageWidth;
+                                    if (scrollAmount < 0) scrollAmount = 0;
+                                    
+                                    // Use requestAnimationFrame for smoother animation
+                                    requestAnimationFrame(() => {
+                                        imagesDiv.style.transform = `translateX(-${scrollAmount}px)`;
+                                    });
+                                });
+                                
+                                rightBtn.addEventListener('click', () => {
+                                    // Pause auto-scrolling when manually scrolling
+                                    imagesDiv.style.animationPlayState = 'paused';
+                                    
+                                    scrollAmount += imageWidth;
+                                    if (scrollAmount > maxScroll) scrollAmount = maxScroll;
+                                    
+                                    // Use requestAnimationFrame for smoother animation
+                                    requestAnimationFrame(() => {
+                                        imagesDiv.style.transform = `translateX(-${scrollAmount}px)`;
+                                    });
+                                });
+                                
+                                // Handle image click to show in main container
+                                images.forEach(img => {
+                                    img.addEventListener('click', () => {
+                                        const mainImage = wrapper.closest('.media-image-related-wrapper').querySelector('.media-image-container img');
+                                        const imageCaption = wrapper.closest('.media-image-related-wrapper').querySelector('.image-caption');
+                                        
+                                        // Animate the transition
+                                        mainImage.style.opacity = '0';
+                                        
+                                        setTimeout(() => {
+                                            mainImage.src = img.src;
+                                            mainImage.alt = img.alt;
+                                            
+                                            if (imageCaption) {
+                                                imageCaption.textContent = img.dataset.caption || img.alt;
+                                            }
+                                            
+                                            mainImage.style.opacity = '1';
+                                        }, 300);
+                                    });
+                                });
+                                
+                                // Pause animation on hover
+                                container.addEventListener('mouseenter', () => {
+                                    imagesDiv.style.animationPlayState = 'paused';
+                                });
+                                
+                                container.addEventListener('mouseleave', () => {
+                                    if (!imagesDiv.style.transform) { // Only resume if not manually scrolled
+                                        imagesDiv.style.animationPlayState = 'running';
+                                    }
+                                });
+                                
+                                // Reset animation on window resize
+                                let resizeTimeout;
+                                window.addEventListener('resize', () => {
+                                    clearTimeout(resizeTimeout);
+                                    resizeTimeout = setTimeout(() => {
+                                        // Reset scroll position
+                                        scrollAmount = 0;
+                                        imagesDiv.style.transform = '';
+                                        
+                                        // Update dimensions
+                                        const updatedImageWidth = images[0].offsetWidth + 15;
+                                        const updatedContainerWidth = container.offsetWidth;
+                                        const updatedMaxScroll = (images.length * updatedImageWidth) - updatedContainerWidth;
+                                        
+                                        // Restart animation
+                                        imagesDiv.style.animation = 'none';
+                                        setTimeout(() => {
+                                            imagesDiv.style.animation = 'horizontalScroll 30s linear infinite';
+                                            imagesDiv.style.animationPlayState = 'running';
+                                        }, 10);
+                                    }, 200);
+                                });
+                            });
+                            
+                            // Add entrance animations for media items
+                            const animateMediaItems = () => {
+                                const mediaItems = document.querySelectorAll('.media-item');
+                                
+                                if ('IntersectionObserver' in window) {
+                                    const itemObserver = new IntersectionObserver((entries, observer) => {
+                                        entries.forEach((entry, index) => {
+                                            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                                                setTimeout(() => {
+                                                    entry.target.style.opacity = '1';
+                                                    entry.target.style.transform = 'translateY(0)';
+                                                    entry.target.classList.add('animated');
+                                                }, index * 150);
+                                            }
+                                        });
+                                    }, {
+                                        rootMargin: '0px 0px -100px 0px',
+                                        threshold: 0.1
+                                    });
+                                    
+                                    mediaItems.forEach(item => {
+                                        itemObserver.observe(item);
+                                    });
+                                } else {
+                                    // Fallback for browsers without IntersectionObserver
+                                    mediaItems.forEach((item, index) => {
+                                        setTimeout(() => {
+                                            item.style.opacity = '1';
+                                            item.style.transform = 'translateY(0)';
+                                        }, index * 150);
+                                    });
+                                }
+                            };
+                            
+                            // Set initial styles for animation
+                            const mediaItems = document.querySelectorAll('.media-item');
+                            mediaItems.forEach(item => {
+                                item.style.opacity = '0';
+                                item.style.transform = 'translateY(30px)';
+                                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            });
+                            
+                            // Run animations
+                            animateMediaItems();
+                        });
+                    </script>
+                    {% endblock %}
+                    

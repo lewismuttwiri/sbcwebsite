@@ -1,36 +1,188 @@
-{% extends "base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
+{% extends 'base.html' %}
+
+{% block title %}Contact Us | Pepsi{% endblock %}
 
 {% block content %}
-<script src="https://cdn.tailwindcss.com"></script>
-<div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="mt-20 p-6 lg:p-10 bg-white shadow-lg rounded-lg border border-gray-400 mb-20">
-            <h2 class="text-2xl lg:text-3xl font-semibold text-black mt-10">Talk To Us!</h2>
-            <form method="post" class="space-y-4">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    Submit
-                </button>
-            </form>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Get in Touch</h1>
+        <p>We'd love to hear from you. Reach out to us with any questions or feedback.</p>
+    </div>
+</section>
+
+<section class="contact-container">
+    <div class="contact-info">
+        <h2>Contact Information</h2>
+        <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+                <h3>Our Office</h3>
+                <p>P.O Box 76748-00620 Nairobi</p>
+                <p>Ruaraka off BabaDogo Road</p>
+            </div>
         </div>
-        <div class="mt-20 p-6 lg:p-10 bg-white shadow-lg rounded-lg border border-gray-300 text-3xl mb-20">
-            <h2 class="text-xl lg:text-2.5 xl font-semibold text-black mb-6">SBC KENYA LTD</h2>
-            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-map-marker"></i> P.O Box 76748-00620 Nairobi</p>
-            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-map-marker"></i> Ruaraka off BabaDogo Road</p>
-            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-envelope"></i> info@sbckenya.com</p>
-            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-phone"></i> 0208635000</p>
-            <p class="text-xl lg:text-2.0 xl text-black mb-2"><i class="fa fa-globe"></i> www.sbckenya.com</p>
-            <iframe
-                class="w-full h-74 lg:h-96 mt-20"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8795905284487!2d36.87120887548512!3d-1.2429105987452373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f15d5864ff359%3A0x1c77a411313dc6f1!2sSBC%20Kenya%20Ltd!5e0!3m2!1sen!2ske!4v1717694158021!5m2!1sen!2ske"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+        <div class="info-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+                <h3>Phone</h3>
+                <p>0208635000</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+                <h3>Email</h3>
+                <p>info@sbckenya.com</p>
+            </div>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+                <h3>Hours</h3>
+                <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+        <div class="social-links">
+            <h3>Connect With Us</h3>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
     </div>
-</div>
+
+    <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Send Message</button>
+            </div>
+            <div id="formStatus" class="hidden"></div>
+        </form>
+    </div>
+</section>
+
+<section class="global-presence">
+    <h2>Our Location in Kenya</h2>
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps?q=-1.242740,36.873979&z=15&output=embed" 
+            width="100%" 
+            height="400" 
+            frameborder="0" 
+            style="border:0;" 
+            allowfullscreen 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+    <div class="regions">
+        <div class="region">
+            <h3>Nairobi</h3>
+            <p>Baba Dogo Area, Nairobi</p>
+        </div>
+        <div class="region">
+            <h3>Central</h3>
+            <p>Serving Murang’a, Nyeri, Kiambu, and nearby counties</p>
+        </div>
+        <div class="region">
+            <h3>Rift Valley</h3>
+            <p>Including Nakuru, Eldoret, and surrounding towns</p>
+        </div>
+        <div class="region">
+            <h3>Western/Nyanza</h3>
+            <p>Including Kisumu, Kakamega, Bungoma, and beyond</p>
+        </div>
+        <div class="region">
+            <h3>Eastern</h3>
+            <p>Serving Machakos, Meru, Embu, and nearby areas</p>
+        </div>
+        <div class="region">
+            <h3>Coast</h3>
+            <p>Mombasa, Kilifi, Kwale and surrounding counties</p>
+        </div>
+    </div>
+</section>
+
+<section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How can I find Pepsi products near me?</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>You can use our store locator tool on our website to find retail locations near you that carry Pepsi
+                    products. Simply enter your zip code or city to get started.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How can I apply for a job at Pepsi?</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Visit our careers page to browse current openings and submit your application online. We offer
+                    opportunities in various departments worldwide.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How can I request sponsorship for an event?</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Please submit your sponsorship request through our dedicated sponsorship form. Include details about
+                    your event, expected attendance, and how Pepsi can contribute.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How can I provide feedback about a product?</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>We appreciate your feedback! You can use the contact form on this page, call our customer service
+                    line, or reach out via social media with your comments or concerns.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter">
+    <div class="newsletter-content">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with our latest products, promotions, and news.</p>
+        <form id="newsletterForm">
+            <div class="form-group newsletter-form-group">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </div>
+            <div id="newsletterStatus" class="hidden"></div>
+        </form>
+    </div>
+</section>
 {% endblock %}

@@ -102,107 +102,123 @@
   <!-- Everything that is outside this is inherited when you extend in the child  -->
   {% endblock %}
 
-  <footer class="bg-gray-800 text-white py-10">
-    <div class="container mx-auto flex flex-wrap justify-between">
-      <div class="flex-1 text-center lg:text-left mb-8 lg:mb-0">
-        <h2 class="text-xl font-bold mb-4">SBC KENYA LTD</h2>
-        <p class="text-lg">P.O Box 76748-00620 Nairobi</p>
-        <p class="text-lg">Ruaraka off BabaDogo Road</p>
-        <div class="mt-8">
-          <h3 class="text-lg font-bold mb-4">Contact Us</h3>
-          <p class="mb-2 text-lg">&#9993; Email: <a href="mailto:info@sbckenya.com"
-              class="hover:text-red-500">info@sbckenya.com</a></p>
-          <p class="text-lg">&#9742; Phone: <a href="tel:(020)8635000" class="hover:text-red-500">(020) 8635000</a></p>
-        </div>
-        <p><a href="{% url 'sbcapp:privacy_and_terms' %}" class="underline text-lg hover:text-red-500">Privacy
-            Policy</a></p>
-        <p><a href="{% url 'sbcapp:privacy_and_terms' %}" class="underline text-lg hover:text-red-500">Terms of
-            Service</a></p>
-        <p class="text-lg">&copy; 2024 SBC KENYA LTD. All rights reserved.</p>
-      </div>
-      <div class="flex-1 text-center lg:text-left mb-8 lg:mb-0">
-        <div class="mb-8">
-          <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-          <a href="{% url 'sbcapp:home' %}" class="block text-lg hover:text-red-500">Our Home</a>
-          <a href="{% url 'sbcapp:about' %}" class="block text-lg hover:text-red-500">Our Story</a>
-          <a href="{% url 'sbcapp:brands' %}" class="block text-lg hover:text-red-500">Brands</a>
-          <a href="{% url 'store:category_list' %}" class="text-white hover:text-gray-300">Categories</a>
 
-        </div>
-        <div>
-          <h3 class="text-lg font-bold mb-4">Opportunities</h3>
-          <a href="{% url 'recruitment:advertisement_list' %}" class="block text-lg hover:text-red-500">Careers</a>
-          <a href="{% url 'procurement:tender_list' %}" class="block text-lg hover:text-red-500">Tenders</a>
-        </div>
-      </div>
-      <div class="flex-1 text-center lg:text-left">
-        <h3 class="text-lg font-bold mb-4">Follow Us on Social Media</h3>
-        <a href="#" class="block text-lg hover:text-red-500"><i class="fab fa-facebook-f"></i> Facebook</a>
-        <a href="#" class="block text-lg hover:text-red-500"><i class="fab fa-twitter"></i> Twitter</a>
-        <a href="#" class="block text-lg hover:text-red-500"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="#" class="block text-lg hover:text-red-500"><i class="fab fa-tiktok"></i> TikTok</a>
-        <a href="#" class="block text-lg hover:text-red-500"><i class="fab fa-youtube"></i> YouTube</a>
-        <a href="#" class="block text-lg hover:text-red-500"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="#" class="block text-lg hover:text-red-500"><i class="fas fa-globe"></i> SBC Kenya Ltd</a>
-      </div>
-    </div>
-  </footer>
-  <footer>
-    <div class="footer-card">
-      <div class="footer-left">
-        <div class="profile-pic">
-
+  <!-- Updated Footer with Modern Professional Design -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Company Information Section -->
+      <div class="footer-section company-info">
+        <div class="company-logo">
           <img src="{% static 'images/pep-logo.png' %}" alt="SBC Kenya" loading="lazy">
         </div>
+        <h3 class="section-title">SBC KENYA LTD</h3>
+        <p class="company-description">Committed to excellence in service and product quality since our establishment.
+        </p>
       </div>
-      <div class="footer-right">
-        <div class="logo">SBC KENYA LTD</div>
-        <div class="title"><a href="{% url 'contact:contact' %}">Contact Us</div></a>
-        <ul class="contact-info">
 
-          <li><i class="fas fa-phone"></i> <a href="tel:(020)8635000" class="hover:text-red-500">(020)
-              8635000</a></li>
-          <li>
-            <i class="fas fa-globe"></i><a href="mailto:info@sbckenya.com"
-              class="hover:text-red-500">info@sbckenya.com</a></p>
-          </li>
-          <li><i class="fas fa-map-marker-alt"></i> P.O Box 76748-00620 Nairobi<br> Ruaraka off BabaDogo Road</li>
+      <!-- Quick Links Section -->
+      <div class="footer-section quick-links">
+        <h3 class="section-title">QUICK LINKS</h3>
+        <ul class="footer-links">
+          <li><a href="{% url 'sbcapp:home' %}">Our Home</a></li>
+          <li><a href="{% url 'sbcapp:about' %}">Our Story</a></li>
+          <li><a href="{% url 'sbcapp:privacy_and_terms' %}" id="legal-link">Terms & Policies</a></li>
+          <li><a href="{% url 'store:category_list' %}">Categories</a></li>
+          <li><a href="{% url 'recruitment:advertisement_list' %}">Careers</a></li>
+          <li><a href="{% url 'procurement:tender_list' %}">Tenders</a></li>
         </ul>
       </div>
-      <!-- <div class="footer-left">
-        <div class="logo">LOGO</div>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-        </div> -->
-      <div class="footer-right">
-        <div class="logo">QUICK LINKS</div>
-        <div class="social-icons">
-          <a href="{% url 'sbcapp:home' %}">Our Home</i></a>
-          <a href="{% url 'sbcapp:about' %}"></i>Our Story</a>
-          <a href="{% url 'sbcapp:brands' %}"></i>Brands</a>
-          <a href="{% url 'store:category_list' %}"></i>Categories</a><br>
-        </div>
-        <div class="logo">SOCIAL MEDIA LINKS</div>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-tiktok"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
 
-          <p class="text-lg">&copy; 2024 SBC KENYA LTD. All rights reserved.</p>
+      <!-- Contact Information Section -->
+      <div class="footer-section contact-section">
+        <h3 class="section-title">CONTACT US</h3>
+        <ul class="contact-info">
+          <li>
+            <i class="fas fa-phone"></i>
+            <span><a href="tel:(020)8635000">(020) 8635000</a></span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span><a href="mailto:info@sbckenya.com">info@sbckenya.com</a></span>
+          </li>
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>P.O Box 76748-00620 Nairobi<br>Ruaraka off BabaDogo Road</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Media Section -->
+      <div class="footer-section social-section">
+        <h3 class="section-title">CONNECT WITH US</h3>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <div class="social-icons">
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
     </div>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+    <!-- Bottom Bar with Copyright -->
+    <div class="footer-bottom">
+      <div class="footer-container">
+        <p class="copyright">&copy; 2024 SBC KENYA LTD. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="{% url 'contact:contact' %}">Contact Us</a>
+          <a href="#" id="privacy-link">Privacy</a>
+          <a href="#" id="terms-link">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay for Legal Information -->
+    <div id="legal-overlay" class="overlay">
+      <div class="overlay-content">
+        <div class="overlay-header">
+          <h2>Legal Information</h2>
+          <span class="close-btn">&times;</span>
+        </div>
+        <div class="overlay-body">
+          <div class="tab-container">
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="privacy">Privacy Policy</button>
+              <button class="tab-btn" data-tab="terms">Terms of Service</button>
+            </div>
+
+            <div class="tab-content">
+              <div id="privacy" class="tab-pane active">
+                <h3>Privacy Policy</h3>
+                <!-- Privacy policy content goes here -->
+                <p>This Privacy Policy describes how your personal information is collected, used, and shared when you
+                  visit our website.</p>
+                <!-- Add more privacy policy content -->
+              </div>
+              <div id="terms" class="tab-pane">
+                <h3>Terms of Service</h3>
+                <!-- Terms of service content goes here -->
+                <p>By accessing this website, you are agreeing to be bound by these Terms of Service and all applicable
+                  laws and regulations.</p>
+                <!-- Add more terms of service content -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <!-- Custom Scripts -->
+  <script src="{% static 'js/footer.js' %}"></script>
+  <script src="{% static 'js/contact.js' %}"></script>
+  <!-- Font Awesome - Local hosting recommended for production -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 
   <script>
