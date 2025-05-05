@@ -148,34 +148,46 @@
     }
 </style>
 <div class="home">
-    <div class="logo-column">
-        <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
-        <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
-        <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
-        <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
+    <!-- Slide 0 -->
+    <div class="slide" data-index="0">
+        <img src="{% static 'images/home.jpg' %}" alt="Image 0" loading="lazy">
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
     </div>
-    <img src="{% static 'images/home.jpg' %}" class="slideshow-image" alt="Image 0"
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
-        loading="lazy">
-    <video class="slideshow-image" alt="Image 1" autoplay muted loop playsinline
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
-        loading="lazy">
-        <source src="{% static 'videos/intro.mp4' %}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <img src="{% static 'images/cover-pep.jpg' %}" class="slideshow-image" alt="Image 2"
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
-        loading="lazy">
-    <img src="{% static 'images/cover-pep.png' %}" class="slideshow-image" alt="Image 3"
-        onload="this.parentElement.querySelector('.spinner-circle') && (this.parentElement.querySelector('.spinner-circle').style.display = 'none');"
-        loading="lazy">
+
+    <!-- Slide 1 (video) -->
+    <div class="slide" data-index="1">
+        <video autoplay muted loop playsinline loading="lazy">
+            <source src="{% static 'videos/intro.mp4' %}" type="video/mp4">
+        </video>
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" data-index="2">
+        <img src="{% static 'images/cover-pep.jpg' %}" alt="Image 2" loading="lazy">
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" data-index="3">
+        <img src="{% static 'images/cover-pep.png' %}" alt="Image 3" loading="lazy">
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
+    </div>
+
+    <!-- Arrows -->
+    <button class="arrow prev">&lt;</button>
+    <button class="arrow next">&gt;</button>
+
+    <div class="slider-dots">
+        <div class="dot" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+        <div class="dot" data-index="3"></div>
+    </div>
 </div>
-<div class="slider-dots">
-    <div class="dot" data-index="0"></div>
-    <div class="dot" data-index="1"></div>
-    <div class="dot" data-index="2"></div>
-    <div class="dot" data-index="3"></div>
-</div>
+
+
+
 
 <div id="brand-row" class="row">
     <div class="col-md-6">
@@ -544,39 +556,88 @@
 {% endblock %}
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        function showSlides(slides, slideIndex) {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex >= slides.length) {
-                slideIndex = 0;
-            }
-            slides[slideIndex].style.display = "block";
-            return slideIndex;
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.home .slide');
+        const dots = document.querySelectorAll('.home .dot');
+        const prev = document.querySelector('.home .arrow.prev');
+        const next = document.querySelector('.home .arrow.next');
+        let current = 0;
 
-        let brandSlideIndex = 0;
-        const brandSlides = document.getElementsByClassName("slides");
-        setInterval(() => {
-            brandSlideIndex = showSlides(brandSlides, brandSlideIndex);
-        }, 3000);
+        function goToSlide(idx) {
+            // hide old
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
 
-        function animateOnScroll() {
-            const containers = document.querySelectorAll('.row');
-            containers.forEach(container => {
-                const containerTop = container.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (containerTop < windowHeight * 0.95) {
-                    container.classList.add('animate');
-                }
+            // new index
+            current = (idx + slides.length) % slides.length;
+
+            // show new
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+
+            // trigger arrows fade‑in
+            [prev, next].forEach(arrow => {
+                arrow.classList.remove('animate');
+                // force reflow to restart animation
+                void arrow.offsetWidth;
+                arrow.classList.add('animate');
             });
         }
-        window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll();
+
+        // init
+        goToSlide(0);
+
+        // dot clicks
+        dots.forEach(dot =>
+            dot.addEventListener('click', () =>
+                goToSlide(+dot.dataset.index)
+            )
+        );
+
+        // arrows
+        prev.addEventListener('click', () => goToSlide(current - 1));
+        next.addEventListener('click', () => goToSlide(current + 1));
+
+        // optional auto‑play
+        setInterval(() => goToSlide(current + 1), 6000);
+    });
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.home .slide');
+        const dots = document.querySelectorAll('.slider-dots .dot');
+        const prev = document.querySelector('.arrow.prev');
+        const next = document.querySelector('.arrow.next');
+        let current = 0;
+
+        function goToSlide(idx) {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (idx + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
+
+        // init
+        goToSlide(0);
+
+        // dot click
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                goToSlide(parseInt(dot.dataset.index));
+            });
+        });
+
+        // arrows
+        prev.addEventListener('click', () => goToSlide(current - 1));
+        next.addEventListener('click', () => goToSlide(current + 1));
+
+        // auto-advance (optional)
+        setInterval(() => goToSlide(current + 1), 6000);
     });
 </script>
+
 {% endblock %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>

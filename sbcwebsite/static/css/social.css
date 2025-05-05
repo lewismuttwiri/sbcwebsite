@@ -1,0 +1,311 @@
+/* SBC Social App Styles */
+
+.social-app-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  .social-app-header {
+    color: #0E0E96;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+  }
+
+  .social-app-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #c72020;
+    border-radius: 2px;
+  }
+
+  .social-hero {
+    position: relative;
+    background: url('/static/images/socialbanner.jpeg') no-repeat center center;
+    background-size: cover;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .social-hero:hover {
+    transform: translateY(-5px);
+  }
+
+  .social-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 14, 150, 0.7);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    z-index: 2;
+    color: white;
+    padding: 20px;
+  }
+
+  .hero-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInDown 0.8s ease forwards;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+  }
+
+  .hero-btn {
+    display: inline-block;
+    background-color: #c72020;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.6s forwards;
+    box-shadow: 0 4px 15px rgba(199, 32, 32, 0.3);
+  }
+
+  .hero-btn:hover {
+    background-color: #a51b1b;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(199, 32, 32, 0.4);
+  }
+
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 2rem;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    color: #0E0E96;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .card-text {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .social-link:hover {
+    background-color: #f5f7fa;
+    transform: translateY(-5px);
+  }
+
+  .social-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    transition: transform 0.3s ease;
+  }
+
+  .social-link:hover .social-icon {
+    transform: scale(1.2);
+  }
+
+  .social-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .feature-item:hover {
+    border-color: #0E0E96;
+    box-shadow: 0 5px 15px rgba(14, 14, 150, 0.1);
+    transform: translateY(-5px);
+  }
+
+  .feature-title {
+    color: #0E0E96;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .feature-text {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .social-app-header {
+      font-size: 2rem;
+    }
+
+    .hero-content h2 {
+      font-size: 1.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+    }
+
+    .card-text {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .social-app-header {
+      font-size: 1.8rem;
+    }
+
+    .social-hero {
+      height: 250px;
+    }
+
+    .hero-content h2 {
+      font-size: 1.3rem;
+    }
+
+    .hero-btn {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .social-icon {
+      font-size: 2rem;
+    }
+
+    .social-name {
+      font-size: 0.9rem;
+    }
+
+    .feature-item {
+      padding: 1.2rem;
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+    }
+
+    .feature-text {
+      font-size: 0.9rem;
+    }
+  }
