@@ -21,10 +21,13 @@
     media="screen" charset="utf-8" />
   <!-- 3RD CUSTOM CSS -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/about.css' %}">
   <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
   <link rel="stylesheet" href="{% static 'css/purpose-section.css' %}">
   <link rel="stylesheet" href="{% static 'css/footer.css' %}">
   <link rel="stylesheet" href="{% static 'css/brands.css' %}">
+  <link rel="stylesheet" href="{% static 'css/social.css' %}">
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
   <!-- 4TH FONTS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,7 +51,12 @@
   <nav class="nav">
     <div class="container">
       <div class="logo">
-        <a href="{% url 'sbcapp:home' %}" class="logo-link">SBC KENYA LIMITED</a>
+        <img src="{% static 'images/pep-logo.png' %}" class="company1-logo" alt="SBC Kenya" loading="lazy">
+      </div>
+      <div class="logo logo1">
+        <a href="{% url 'sbcapp:home' %}" class="logo-link">SBC KENYA </a> 
+ 
+        <a href="{% url 'sbcapp:home' %}" class="logo-link"> LTD</a>
       </div>
       <div class="navTrigger" id="navTrigger">
         <i></i>

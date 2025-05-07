@@ -14,27 +14,31 @@ html,
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   font-family: "Quicksand", sans-serif;
   font-size: 62.5%;
   font-size: 10px;
 }
+/* --Pepsi Hero Banner -- */
+
 
 /* === Home Section === */
 .home {
-  position: relative;
+  
   overflow: hidden;
   width: 100%;
-  height: 80vh;
+  height: 700px;
+  margin: 0px;
+  padding: 0px;
 }
 
 /* Ensure slides stack correctly */
 .slide {
   position: absolute;
   inset: 0;
-  /* shorthand for top:0; right:0; bottom:0; left:0; */
   opacity: 0;
   transition: opacity 0.6s ease;
+  
 }
 
 .slide.active {
@@ -104,209 +108,7 @@ body {
 
 
 
-/* === About Us Section === */
-.aboutus {
-  margin-top: 20px;
-}
 
-.aboutus-text h2 {
-  font-weight: 800;
-  font-size: 34px;
-  color: var(--primary-color);
-  margin-bottom: 20px;
-}
-
-.aboutus-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-height: 670px;
-  opacity: 0.5;
-  transition: opacity 1s ease-in-out;
-}
-
-.aboutus,
-.history {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.history-image img {
-  max-width: auto;
-  height: auto;
-  border-radius: 40px;
-  transition: opacity 1s ease-in-out;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-.history-text p,
-.aboutus-text p {
-  font-size: 20px;
-  margin: 20px 10px;
-  color: var(--black);
-  line-height: 1.5;
-  font-weight: 400;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  padding: 0px;
-  margin-left: 30px;
-}
-
-.aboutus-text h2,
-.history h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  line-height: 1.5;
-  color: var(--primary-color);
-  font-weight: 600;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-/* === Mission Section === */
-.mission-item {
-  display: flex;
-  align-items: flex-start;
-  margin: 25px 120px;
-  font-size: 17px;
-}
-
-.mission-item:hover {
-  color: var(--primary-color);
-}
-
-.rectangle {
-  background: var(--primary-color);
-  color: var(--white);
-  padding: 35px;
-  border-radius: 80px;
-  font-weight: 900;
-  text-align: center;
-  cursor: pointer;
-  transition: var(--transition);
-  z-index: 1;
-}
-
-.rectangle:hover {
-  background-color: var(--white);
-  transform: scale(1.1);
-}
-
-.explanation {
-  background-color: var(--primary-color);
-  color: var(--white);
-  padding: 15px;
-  border-radius: 20px;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: left;
-  display: none;
-  left: 50px;
-  position: absolute;
-  z-index: 2;
-  max-width: 500px;
-  font-size: 20px;
-  transition: font-size 0.3s, display 0.3s;
-}
-
-.mission-item:hover .explanation {
-  display: block;
-}
-
-/* === Jumbotron Sections === */
-.custom-jumbotron {
-  position: relative;
-  background: url('/static/images/crates.jpg') no-repeat center center fixed;
-  background-size: cover;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  text-align: center;
-}
-
-.custom-jumbotron::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-/* === Quality Policy Section === */
-.quality-policy {
-  background: url('/static/images/quality-back.jpeg') no-repeat center center;
-  background-size: cover;
-  padding: 50px 20px;
-  color: var(--white);
-}
-
-.quality-txt {
-  position: relative;
-  padding: 40px;
-  border-radius: 10px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-  font-size: 22px;
-  line-height: 1.5;
-  color: var(--black);
-  font-weight: 400;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  transition: opacity 0.3s ease;
-}
-
-.quality-policy h2 {
-  font-size: 24px;
-  margin-bottom: 30px;
-  font-weight: 600;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.quality-policy ol li,
-.quality-policy p {
-  font-size: 20px;
-  margin-bottom: 10px;
-  line-height: 1.5;
-  color: var(--black);
-  font-weight: 400;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.quality-image img {
-  width: 100%;
-  height: 50vh;
-}
-
-.quality-txt h2 {
-  font-size: 24px;
-  line-height: 1.5;
-  color: #ec290f;
-  font-weight: 800;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.quality-logos {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.quality-logos .logo {
-  max-width: 150px;
-  max-height: 100px;
-  margin: 0 10px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.quality-logos .logo:hover {
-  transform: scale(1.2);
-}
 
 /* === Brand Sections === */
 .brand-intro {
@@ -864,6 +666,80 @@ section h2 {
 
 /* === Contact Page Styles === */
 .hero {
+  position: relative;
+  background: url('/static/images/socialbanner.jpeg') no-repeat center center;
+  background-size: cover;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.hero:hover {
+  transform: translateY(-5px);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(14, 14, 150, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  z-index: 2;
+  color: white;
+  padding: 20px;
+}
+
+.hero-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  animation: fadeInDown 0.8s ease forwards;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+.hero-btn {
+  display: inline-block;
+  background-color: #c72020;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.6s forwards;
+  box-shadow: 0 4px 15px rgba(199, 32, 32, 0.3);
+}
+
+.hero-btn:hover {
+  background-color: #a51b1b;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(199, 32, 32, 0.4);
+}
+
+/* .hero {
   background: linear-gradient(rgba(10, 39, 64, 0.85), rgba(10, 39, 64, 0.85)), url('../images/contact-hero.jpg') no-repeat center center/cover;
   color: var(--white);
   text-align: center;
@@ -884,7 +760,7 @@ section h2 {
 .hero-content p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-}
+} */
 
 .contact-container {
   display: flex;
@@ -948,6 +824,7 @@ section h2 {
 .social-icons {
   display: flex;
   gap: 1rem;
+  
 }
 
 .social-icons a {
@@ -956,14 +833,14 @@ section h2 {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
+  background-color: rgb(240, 238, 238);
+  border-radius: 75%;
   color: var(--white);
   transition: var(--transition);
 }
 
 .social-icons a:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   transform: translateY(-3px);
 }
 
@@ -1275,7 +1152,7 @@ section h2 {
   right: 0;
   width: 3px;
   height: 100%;
-  background-color: #ccc;
+  background-color: #cccccc;
 }
 
 .about-section {
@@ -1422,7 +1299,7 @@ section h2 {
 img {
   max-width: 100%;
   height: 100%;
-  padding: 10px 5px;
+  /* padding: 10px 5px; */
 }
 
 .section-wrapper {
@@ -5207,7 +5084,7 @@ img {
     }
   }
 
-  
+
 
   /* News and Media Page Styles - Enhanced Version */
   :root {
@@ -5798,3 +5675,4 @@ img {
 
   @media (-webkit-min-device-pixel-ratio: 3),
   (min-resolution: 288dpi) {}
+}

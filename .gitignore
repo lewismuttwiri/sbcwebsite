@@ -1,1 +1,5 @@
 /sbcwebsite/sbcwebsite/.env
+.env
+venv/
+db.sqlite3
+media/

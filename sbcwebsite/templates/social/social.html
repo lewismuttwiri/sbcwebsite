@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/social_app.css' %}">
+<link rel="stylesheet" href="{% static 'css/social.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="social-app-container">
-  <h1 class="social-app-header">Welcome to SBC Social App!</h1>
   
+
   <div class="social-hero">
     <div class="hero-content">
       <h2>Welcome to SBC Social App!</h2>
@@ -16,7 +16,7 @@
       <a href="{% url 'sbcapp:about' %}" class="hero-btn">Learn More About Us</a>
     </div>
   </div>
-  
+
   <div class="card">
     <div class="card-header">
       <h2 class="card-title">Stay Connected with SBC Kenya</h2>
@@ -24,7 +24,7 @@
         Follow our social media channels for the latest updates, product information, and company news.
       </p>
     </div>
-    
+
     <div class="card-body">
       <div class="social-grid">
         {% for link in social_links %}
@@ -50,12 +50,12 @@
       </div>
     </div>
   </div>
-  
+
   <div class="card">
     <div class="card-header">
       <h2 class="card-title">Why Follow Us?</h2>
     </div>
-    
+
     <div class="card-body">
       <div class="feature-grid">
         <div class="feature-item">
@@ -64,21 +64,21 @@
             Be the first to know about our new product launches and updates.
           </p>
         </div>
-        
+
         <div class="feature-item">
           <h3 class="feature-title">Special Offers</h3>
           <p class="feature-text">
             Get exclusive deals and promotions available only to our social media followers.
           </p>
         </div>
-        
+
         <div class="feature-item">
           <h3 class="feature-title">Industry Insights</h3>
           <p class="feature-text">
             Stay informed about the latest trends and developments in the industry.
           </p>
         </div>
-        
+
         <div class="feature-item">
           <h3 class="feature-title">Community Engagement</h3>
           <p class="feature-text">
@@ -92,11 +92,11 @@
 
 <script>
   // Add animation classes to elements as they scroll into view
-  document.addEventListener('DOMContentLoaded', function() {
-    const animateOnScroll = function() {
+  document.addEventListener('DOMContentLoaded', function () {
+    const animateOnScroll = function () {
       const cards = document.querySelectorAll('.card');
       const featureItems = document.querySelectorAll('.feature-item');
-      
+
       cards.forEach((card, index) => {
         if (isElementInViewport(card)) {
           setTimeout(() => {
@@ -105,7 +105,7 @@
           }, index * 200);
         }
       });
-      
+
       featureItems.forEach((item, index) => {
         if (isElementInViewport(item)) {
           setTimeout(() => {
@@ -115,7 +115,7 @@
         }
       });
     };
-    
+
     function isElementInViewport(el) {
       const rect = el.getBoundingClientRect();
       return (
@@ -123,26 +123,26 @@
         rect.bottom >= 0
       );
     }
-    
+
     // Set initial styles
     const cards = document.querySelectorAll('.card');
     const featureItems = document.querySelectorAll('.feature-item');
-    
+
     cards.forEach(card => {
       card.style.opacity = '0';
       card.style.transform = 'translateY(20px)';
       card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     });
-    
+
     featureItems.forEach(item => {
       item.style.opacity = '0';
       item.style.transform = 'translateY(20px)';
       item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     });
-    
+
     // Run on load
     animateOnScroll();
-    
+
     // Run on scroll
     window.addEventListener('scroll', animateOnScroll);
   });
