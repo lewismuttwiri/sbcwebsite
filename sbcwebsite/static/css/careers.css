@@ -1,0 +1,121 @@
+.career-app-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #123782 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.career-hero {
+    position: relative;
+    background: url('/static/images/socialbanner.jpeg') no-repeat center center;
+    background-size: cover;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.career-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.career-hero p {
+    font-size: 1.2rem;
+}
+
+.career-hero:hover {
+    transform: translateY(-5px);
+}
+
+.career-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 14, 150, 0.7);
+    z-index: 1;
+}
+
+.career-hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    z-index: 2;
+    color: white;
+    padding: 20px;
+}
+
+
+.career-hero-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInDown 0.8s ease forwards;
+}
+
+.career-hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.job-card {
+    background-color: #fff !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 10px !important;
+    padding: 20px !important;
+    transition: box-shadow 0.3s !important;
+}
+
+.job-card:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h3 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+.job-card h4 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.job-card p {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.job-card ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.apply-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #0056b3;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.apply-btn:hover {
+    background-color: #004a99;
+}

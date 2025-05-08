@@ -10,7 +10,7 @@
 
 .brands-window {
   overflow: hidden;
-  width: 760px;
+  width: 1200px;
   /* 2 x 360px card + 2 x 20px gap */
 }
 
@@ -21,7 +21,7 @@
 }
 
 .brand-card {
-  flex: 0 0 360px;
+  flex: 0 0 420px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
@@ -34,7 +34,7 @@
 }
 
 .brand-image {
-  height: 300px;
+  height: 380px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -48,7 +48,7 @@
 }
 
 .brand-image img {
-  height: 350px;
+  height: 430px;
   z-index: 1;
   position: absolute;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -100,3 +100,32 @@
   position: relative;
   right: 0;
 }
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+.card-link:hover {
+  color: inherit;
+}
+
+
+@media (max-width: 768px) {
+  .brands-window {
+    width: 100%;
+  }
+
+  .brand-card {
+    flex: 0 0 80%;
+  }
+
+  .brand-image {
+    height: 300px;
+  }
+
+  .brand-image img {
+    height: 320px;
+  }
+  
+}
+
+

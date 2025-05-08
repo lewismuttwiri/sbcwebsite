@@ -1,34 +1,85 @@
-{% extends "base.html" %}
 {% load static %}
 
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8 text-center">Product Categories</h1>
+<div class="category-container">
+    <h1 class="page-title">Our Brands</h1>
+
+    <div class="swiper">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-wrapper">
+            {% for category in categories %}
+            <div class="swiper-slide">
+                <a href="{{ category.get_absolute_url }}" class="card-link">
+                    <div class="card">
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}" />
+                        <h2>{{ category.name }}</h2>
+                        <p>{{ category.description|truncatewords:15 }}</p>
+
+                        <!-- card-footer must be inside .card -->
+                        <div class="card-footer">
+                            <button class="btn-add">View More</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for category in categories %}
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <a href="{{ category.get_absolute_url }}">
-                {% if category.image %}
-                <img class="w-full h-48 object-cover" src="{{ category.image.url }}" alt="{{ category.name }}">
-                {% else %}
-                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500">No image available</span>
-                </div>
-                {% endif %}
-                <div class="p-4">
-                    <h2 class="text-xl font-bold mb-2">{{ category.name }}</h2>
-                    {% if category.description %}
-                    <p class="text-gray-700 text-sm">{{ category.description|truncatewords:20 }}</p>
-                    {% endif %}
-                </div>
-            </a>
-        </div>
-        {% empty %}
-        <div class="col-span-3 text-center py-8">
-            <p class="text-gray-500">No categories available yet.</p>
-        </div>
-        {% endfor %}
+
+
+    <div class="brand-logos">
+        <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
+        <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
+        <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
+        <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
     </div>
 </div>
+
+
 {% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            centeredSlides: true,
+            slidesPerView: '3',
+            spaceBetween: 20,
+            rtl: false,
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            navigation: {
+                nextEl: '.swiper-button-prev',
+                prevEl: '.swiper-button-next',
+            },
+            on: {
+                slideChangeTransitionStart: () =>
+                    document.querySelectorAll('.card').forEach(c => c.classList.remove('is-active')),
+                slideChangeTransitionEnd: function () {
+                    this.slides[this.activeIndex]
+                        .querySelector('.card')
+                        .classList.add('is-active');
+                },
+            },
+        });
+        document.querySelector('.swiper-slide-active .card').classList.add('is-active');
+    });
+</script>
+{% endblock %}
+
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'css/category.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />

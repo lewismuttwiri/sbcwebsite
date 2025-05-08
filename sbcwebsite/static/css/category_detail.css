@@ -1,0 +1,143 @@
+:root {
+    --primary-color: #0E0E96;
+    --secondary-color: #e51e2a;
+    --font-main: 'Montserrat', sans-serif;
+}
+
+.category-header1 {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--primary-color);
+    color: white;
+}
+
+.back-link {
+    color: var(--secondary-color);
+    display: inline-block;
+    margin-bottom: .5rem;
+    font-weight: 600;
+}
+
+.category-title {
+    font-family: var(--font-main);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.category-desc {
+    margin-top: .5rem;
+    color: #e0e0e0;
+}
+
+.product-swiper {
+    width: 100%;
+    padding: 3rem 0;
+    position: relative;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--secondary-color);
+}
+
+/* slide sizing & flex centering */
+.swiper-slide {
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card animation & style */
+.price-card {
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-main);
+}
+
+.price-card:hover {
+    transform: translateY(-10px) rotate(-1deg);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Image */
+.price-card__img {
+    position: relative;
+    padding: 1.25rem;
+    background: #f7f1f4;
+}
+
+.price-card__img img {
+    max-height: 100px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: .5rem;
+}
+
+.price-badge {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--secondary-color);
+    color: #fff;
+    padding: .4rem .8rem;
+    border-radius: .5rem;
+    font-weight: 700;
+}
+
+/* Body */
+.price-card__body {
+    padding: 1rem .75rem;
+    flex-grow: 1;
+}
+
+.price-card__body h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+    color: #333;
+}
+
+.price-card__desc {
+    font-size: .9rem;
+    color: #555;
+    line-height: 1.4;
+    overflow: hidden;
+}
+
+/* Footer */
+.price-card__footer {
+    padding: 0.5rem;
+}
+
+.add-to-cart-btn {
+    background: linear-gradient(100deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+    transform: scale(1.1);
+}
+
+.icon-cart {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}

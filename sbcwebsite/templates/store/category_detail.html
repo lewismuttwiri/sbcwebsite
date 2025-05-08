@@ -1,97 +1,120 @@
-{% extends "base.html" %}
+
 {% load static %}
 
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <div class="mb-8">
-        <a href="{% url 'store:category_list' %}" class="text-blue-500 hover:underline">
-            &larr; Back to Categories
-        </a>
-    </div>
-    
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold mb-2">{{ category.name }}</h1>
-        {% if category.description %}
-        <p class="text-gray-700">{{ category.description }}</p>
-        {% endif %}
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="category-header1">
+    <a href="{% url 'store:category_list' %}" class="back-link">&larr; Back to Categories</a>
+    <h1 class="category-title">{{ category.name }}</h1>
+    {% if category.description %}
+    <p class="category-desc">{{ category.description }}</p>
+    {% endif %}
+</div>
+
+<div class="swiper product-swiper">
+    <div class="swiper-wrapper">
         {% for product in products %}
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img class="w-full h-48 object-cover" src="{{ product.image.url }}" alt="{{ product.name }}">
-            <div class="p-4">
-                <h2 class="text-xl font-bold mb-2">{{ product.name }}</h2>
-                <p class="text-gray-700 text-sm mb-4">{{ product.description|truncatewords:20 }}</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-900 font-bold">KES {{ product.price }}</span>
-                    <button class="add-to-cart-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" 
-                            data-product-id="{{ product.id }}">
-                        Add to Cart
+        <div class="swiper-slide">
+            <div class="price-card">
+                <div class="price-card__img">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <div class="price-badge">KES {{ product.price }}</div>
+                </div>
+                <div class="price-card__body">
+                    <h2>{{ product.name }}</h2>
+                    <p class="price-card__desc">{{ product.description|truncatewords:12 }}</p>
+                </div>
+                <div class="price-card__footer">
+                    <button class="add-to-cart-btn" data-product-id="{{ product.id }}">
+                        <!-- cart icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-cart" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                            <circle cx="7" cy="21" r="2" />
+                            <circle cx="17" cy="21" r="2" />
+                        </svg>
                     </button>
                 </div>
             </div>
         </div>
-        {% empty %}
-        <div class="col-span-3 text-center py-8">
-            <p class="text-gray-500">No products available in this category yet.</p>
-        </div>
         {% endfor %}
     </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
 </div>
+<div class="brand-logos mt-8">
+    <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
+    <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
+    <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
+    <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
+</div>
+{% endblock %}
 
 {% block extra_js %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-        
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch(`/store/add-to-cart/${productId}/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken')
-                    },
-                    body: JSON.stringify({
-                        quantity: 1
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Update cart count in header
-                    const cartCountElement = document.getElementById('cart-count');
-                    if (cartCountElement) {
-                        cartCountElement.textContent = data.count;
-                    }
-                    
-                    // Show success message
-                    alert('Product added to cart!');
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            });
-        });
-        
-        // Helper function to get CSRF token
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script></script>
+document.addEventListener('DOMContentLoaded', () => {
+// Initialize Swiper
+new Swiper('.product-swiper', {
+loop: true,
+centeredSlides: true,
+slidesPerView: 'auto',
+spaceBetween: 24,
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev',
+}
+});
+
+// Add to cart functionality
+const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+// Define getCookie function for CSRF token
+function getCookie(name) {
+let cookieValue = null;
+if (document.cookie && document.cookie !== '') {
+const cookies = document.cookie.split(';');
+for (let i = 0; i < cookies.length; i++) { const cookie=cookies[i].trim(); if (cookie.substring(0, name.length +
+    1)===(name + '=' )) { cookieValue=decodeURIComponent(cookie.substring(name.length + 1)); break; } } } return
+    cookieValue; } addToCartButtons.forEach(button=> {
+    button.addEventListener('click', function() {
+    const productId = this.getAttribute('data-product-id');
+
+    fetch(`/store/add-to-cart/${productId}/`, {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'X-CSRFToken': getCookie('csrftoken')
+    },
+    body: JSON.stringify({
+    quantity: 1
+    })
+    })
+    .then(response => response.json())
+    .then(data => {
+    // Update cart count in header
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+    cartCountElement.textContent = data.count;
+    }
+
+    // Show success message
+    alert('Product added to cart!');
+    })
+    .catch(error => {
+    console.error('Error:', error);
     });
-</script>
-{% endblock %}
-{% endblock %}
+    });
+    });
+    });
+    </script>
+    {% endblock %}
+
+
+
+
+    <link rel="stylesheet" href="{% static 'css/category_detail.css' %}">

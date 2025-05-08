@@ -46,3 +46,55 @@
       </div>
     </div>
   </footer>
+
+  <div id="brand-row" class="row">
+    <div class="col-md-6">
+        <a href="{% url 'sbcapp:brands' %}" id="brands-link">
+            <section id="brands">
+                <h2>Our Brands</h2>
+                <div id="brands-slideshow" class="slideshow-container">
+                    <img class="slides" src="{% static 'images/pepsi1.png' %}" alt="Brand 1" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/dew1.png' %}" alt="Brand 2" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/mirf300.png' %}" alt="Brand 3" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/mir-Gapple1.png' %}" alt="Brand 4" loading="lazy"
+                        preload>
+                    <img class="slides" src="{% static 'images/mir-papple1.png' %}" alt="Brand 5" loading="lazy"
+                        preload>
+                    <img class="slides" src="{% static 'images/Mir-org1.png' %}" alt="Brand 6" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/mir-lem1.png' %}" alt="Brand 7" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/aquaf1.png' %}" alt="Brand 8" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/stingred1.png' %}" alt="Brand 9" loading="lazy" preload>
+                    <img class="slides" src="{% static 'images/stinggold1.png' %}" alt="Brand 10" loading="lazy"
+                        preload>
+                </div>
+            </section>
+        </a>
+    </div>
+   
+    </div>
+    </section>
+</div>
+</div>
+</div>
+
+
+<div class="media-center-header">
+  <h1>About Us</h1>
+</div>
+ <a href="{% url 'sbcapp:about' %}" id="about-us-link">
+      <section id="about-us" class="about-section">
+          <div class="about-us-container">
+              <h2 class="z-10 text-white font-extrabold text-4xl"
+                  style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; padding: -50px;">
+                  About-Us</h2>
+          </div>
+              <div class="about-us-image">
+                  <img src="{% static 'images/about-home.png' %}" alt="About Image" loading="lazy">
+              </div>
+  </a>
+  <div class="about-us-content">
+      <h3>Thirsty For More!</h3>
+      <h3>Learn more about Pepsi Kenya.</h3>
+      <h3>Quenching Thirst, Inspiring Lives!</h3>
+      <a href="{% url 'sbcapp:about' %}" class="read-more-link">Read More About Us</a>
+  </div>

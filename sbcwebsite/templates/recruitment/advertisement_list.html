@@ -1,80 +1,55 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block extra_css %}
+
+
+{% endblock %}
+
 {% block content %}
-<div class="job">
-    <h2>MAKE YOUR MARK.JOIN THE SBC KENYA TEAM.</h2>
-    <img src="{% static 'images/career-boss.png' %}" alt="Job Cover Image" class="job-cover">
+
+<!-- Hero Section -->
+<div class="career-hero">
+    <div class="career-hero-content">
+    <h2>Join Our Team</h2>
+    <p>At SBC Kenya, your career matters. Be part of something impactful.</p>
+
 </div>
-<div class="job-container container">
-    <div class="jumbotron-job jumbotron">
-        <h3>At SBC Kenya, we're building a diverse and talented team.</h3>
-        <h3>We're committed to equal opportunity and welcome applications from all qualified individuals regardless of
-            race, ethnicity, gender, sexual orientation, or disability. </h3>
-        <h3>We believe the best talent comes from a variety of backgrounds, and we encourage you to submit your
-            application!</h3>
-        </h3>
-        <div class="job-application-process">
-            <h2 style="color: rgb(189, 13, 13); font-weight: bold; font-family: 'Arial', sans-serif;">The Job
-                Application Process</h2>
-            <div class="step">
-                <p>Launch Your Application: Fill the online Job application form and attach Resume and submit.</p>
-                <span class="glyphicon glyphicon-arrow-down arrow"></span>
-            </div>
-            <div class="step">
-                <p>Pass the Initial Screening: Get noticed by HR and move forward in the application process.</p>
-                <span class="glyphicon glyphicon-arrow-down arrow"></span>
-            </div>
-            <div class="step">
-                <p>Showcase Your Abilities: Demonstrate your capabilities for the role.</p>
-                <span class="glyphicon glyphicon-arrow-down arrow"></span>
-            </div>
-            <div class="step">
-                <p>Interview with the Team: In-person interview.</p>
-                <span class="glyphicon glyphicon-arrow-down arrow"></span>
-            </div>
-            <div class="step">
-                <p>Learn Your Fate: Receive an offer or await the company's decision on your candidacy.</p>
-                <span class="glyphicon glyphicon-arrow-down arrow"></span>
-            </div>
-            <div class="step">
-                <p>Join the Journey: Accept the offer and embark on your new career path with the team!</p>
-            </div>
+</div>
+
+<div class="career-app-container">
+    <div class="job-grid">
+        {% for advertisement in advertisements %}
+        <div class="job-card">
+            <h3>{{ advertisement.title }}</h3>
+            <p><strong>Location:</strong> {{ advertisement.location }}</p>
+            <p><strong>Posted:</strong> {{ advertisement.posted_date|date:"F j, Y" }}</p>
+            <p><strong>Deadline:</strong> {{ advertisement.closing_date|date:"F j, Y" }}</p>
+
+            <h4>Responsibilities</h4>
+            <ul>
+                {% for line in advertisement.responsibilities.splitlines %}
+                <li>{{ line }}</li>
+                {% empty %}
+                <li>No responsibilities listed.</li>
+                {% endfor %}
+            </ul>
+
+            <h4>Requirements</h4>
+            <ul>
+                {% for line in advertisement.requirements.splitlines %}
+                <li>{{ line }}</li>
+                {% empty %}
+                <li>No requirements listed.</li>
+                {% endfor %}
+            </ul>
+
+            <a href="{% url 'recruitment:apply' advertisement.id %}" class="apply-btn">Apply Now</a>
         </div>
-        <div class="vacancy">
-            {% if advertisements %}
-            {% for advertisement in advertisements %}
-            <div class="job-advertisement" style="margin-bottom: 3rem;"> <!-- Adjusted spacing -->
-                <h3 style="color: rgb(189, 13, 13); font-weight: bold; font-family: 'Arial', sans-serif;">
-                    {{ advertisement.title }} ({{ advertisement.positions_available }})
-                </h3>
-                <p style="font-size: 12px;">Date Posted: {{ advertisement.date_posted }}</p>
-                <p style="font-size: 12px;">Application Deadline: {{ advertisement.deadline_date }}</p>
-                <h3>Responsibilities:</h3>
-                <ul class="list-disc ml-6">
-                    {% for responsibility in advertisement.key_responsibilities %}
-                    <li class="text-lg">{{ responsibility }}</li>
-                    {% endfor %}
-                </ul>
-                <h3>Qualifications:</h3>
-                <ul class="list-disc ml-6">
-                    {% for qualification in advertisement.qualifications %}
-                    <li class="text-lg">{{ qualification }}</li>
-                    {% endfor %}
-                </ul>
-                <h4>
-                    <a href="{% url 'recruitment:apply' advertisement.id %}"
-                        class="text-red-500 hover:text-blue-700 font-bold" style="margin-top: 4rem;">
-                        Apply Now: {{ advertisement.title }}
-                    </a>
-                </h4>
-            </div>
-            {% endfor %}
-            {% else %}
-            <p class="text-center font-bold" style="color: #b91c1c; hover:!text-blue-700">
-                There are currently no vacancies available. Please check back later.
-            </p>
-            {% endif %}
-        </div>
+        {% empty %}
+        <p>No job advertisements available right now.</p>
+        {% endfor %}
     </div>
 </div>
+
 {% endblock %}
