@@ -10,7 +10,7 @@ body {
 
 .nav {
   width: 90%;
-  height: 100px; /* Increased height */
+  height: 120px; /* Increased height */
   position: fixed;
   top: 30px;
   left: 5%; /* Centered with percentage */

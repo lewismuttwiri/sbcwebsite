@@ -126,6 +126,11 @@
   color: #0a2740;
 }
 
+.social1{
+  display: block;
+  gap: 10px;
+}
+
 /* Social Media Icons */
 .social-icons {
   display: flex;
@@ -139,7 +144,7 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background-color: #0a2740;
+  background-color: #0E0E96;
   color: white;
   border-radius: 50%;
   transition: all 0.3s ease;

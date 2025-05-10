@@ -144,28 +144,7 @@ showSlides("mirinda-container");
 showSlides("energy-container");
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  const bubblesContainer = document.getElementById('bubbles');
-  const bubbleCount = 50;
 
-  for (let i = 0; i < bubbleCount; i++) {
-    const bubble = document.createElement('div');
-    bubble.classList.add('bubble');
-
-    const size = Math.random() * 60 + 10;
-    const left = Math.random() * 100;
-    const animationDuration = Math.random() * 10 + 5;
-    const animationDelay = Math.random() * 5;
-
-    bubble.style.width = `${size}px`;
-    bubble.style.height = `${size}px`;
-    bubble.style.left = `${left}%`;
-    bubble.style.animationDuration = `${animationDuration}s`;
-    bubble.style.animationDelay = `${animationDelay}s`;
-
-    bubblesContainer.appendChild(bubble);
-  }
-});
 
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.home .slide');

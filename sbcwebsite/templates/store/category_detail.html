@@ -1,4 +1,4 @@
-
+{% extends 'base.html' %}
 {% load static %}
 
 {% block head %}
@@ -7,6 +7,13 @@
 {% endblock %}
 
 {% block content %}
+<div class="social-hero">
+    <div class="hero-content">
+        <h2>Welcome to SBC Brands Kenya!</h2>
+        <p>We're passionate about creating refreshing beverages that bring people together.</p>
+        <a href="{% url 'store:product_list' %}" class="hero-btn">Explore</a>
+    </div>
+</div>
 <div class="category-header1">
     <a href="{% url 'store:category_list' %}" class="back-link">&larr; Back to Categories</a>
     <h1 class="category-title">{{ category.name }}</h1>
@@ -15,106 +22,332 @@
     {% endif %}
 </div>
 
-<div class="swiper product-swiper">
-    <div class="swiper-wrapper">
-        {% for product in products %}
-        <div class="swiper-slide">
-            <div class="price-card">
-                <div class="price-card__img">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                    <div class="price-badge">KES {{ product.price }}</div>
-                </div>
-                <div class="price-card__body">
-                    <h2>{{ product.name }}</h2>
-                    <p class="price-card__desc">{{ product.description|truncatewords:12 }}</p>
-                </div>
-                <div class="price-card__footer">
-                    <button class="add-to-cart-btn" data-product-id="{{ product.id }}">
-                        <!-- cart icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-cart" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
-                            <circle cx="7" cy="21" r="2" />
-                            <circle cx="17" cy="21" r="2" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+<div class="product-grid">
+    {% for product in products %}
+    <div class="price-card">
+        <div class="price-card__img">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <div class="price-badge">KES {{ product.price }}</div>
         </div>
-        {% endfor %}
+        <div class="price-card__body">
+            <h2>{{ product.name }}</h2>
+            <p class="price-card__desc">{{ product.description|truncatewords:12 }}</p>
+        </div>
+        <div class="price-card__footer">
+            <button class="add-to-cart-btn" data-product-id="{{ product.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon-cart" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                    <circle cx="7" cy="21" r="2" />
+                    <circle cx="17" cy="21" r="2" />
+                </svg>
+            </button>
+        </div>
     </div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    {% endfor %}
 </div>
+
 <div class="brand-logos mt-8">
     <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
     <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
     <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
     <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
 </div>
+<link rel="stylesheet" href="{% static 'css/category_detail.css' %}">
+<style>
+    :root {
+        --primary-color: #0E0E96;
+        --secondary-color: #e51e2a;
+        --font-main: 'Montserrat', sans-serif;
+    }
+
+    body {
+        background-color: #0E0E96;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+
+    .social-hero {
+        position: relative;
+        background: url('/static/images/social.jpg') no-repeat center center;
+        background-size: cover;
+        height: 400px;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .social-hero:hover {
+        transform: translateY(-5px);
+    }
+
+    .social-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(14, 14, 150, 0.7);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 600px;
+        text-align: center;
+        z-index: 2;
+        color: white;
+        padding: 20px;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        animation: fadeInDown 0.8s ease forwards;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-btn {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+
+    .hero-btn:hover {
+        background-color: #c52e2e;
+    }
+
+    .category-header1 {
+        text-align: center;
+        padding: 2rem 1rem;
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .back-link {
+        color: var(--secondary-color);
+        display: inline-block;
+        margin-bottom: .5rem;
+        font-weight: 600;
+    }
+
+    .category-title {
+        font-family: var(--font-main);
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .category-desc {
+        margin-top: .5rem;
+        color: #e0e0e0;
+    }
+
+    .product-grid {
+        display: grid;
+        background-color: #b70b0b;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 24px;
+        padding: 3rem 1rem;
+        background-color: #0E0E96;
+        border-radius: 1rem;
+        margin-top: 2rem;
+    }
+
+
+    .product-swiper {
+        width: 100%;
+        padding: 3rem 0;
+        position: relative;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: var(--secondary-color);
+    }
+
+    /* slide sizing & flex centering */
+    .swiper-slide {
+        width: 280px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Card animation & style */
+    .price-card {
+        background: #fff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        font-family: var(--font-main);
+    }
+
+    .price-card:hover {
+        transform: translateY(-10px) rotate(-1deg);
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Image */
+    .price-card__img {
+        position: relative;
+        padding: 9rem;
+        background: #1a0dd2;
+    }
+
+    .price-card__img img {
+        max-height: 250px;
+        width: auto;
+        display: block;
+        margin: 0 auto;
+        border-radius: .9rem;
+    }
+
+    .price-badge {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--secondary-color);
+        color: #fff;
+        padding: .4rem .8rem;
+        border-radius: .5rem;
+        font-weight: 700;
+    }
+
+    /* Body */
+    .price-card__body {
+        padding: 1rem .75rem;
+        flex-grow: 1;
+    }
+
+    .price-card__body h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: .5rem;
+        color: #333;
+    }
+
+    .price-card__desc {
+        font-size: .9rem;
+        color: #555;
+        line-height: 1.4;
+        overflow: hidden;
+    }
+
+    /* Footer */
+    .price-card__footer {
+        padding: 0.5rem;
+    }
+
+    .add-to-cart-btn {
+        background: linear-gradient(100deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .add-to-cart-btn:hover {
+        transform: scale(1.1);
+    }
+
+    .icon-cart {
+        width: 20px;
+        height: 20px;
+        fill: #fff;
+    }
+</style>
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script></script>
-document.addEventListener('DOMContentLoaded', () => {
-// Initialize Swiper
-new Swiper('.product-swiper', {
-loop: true,
-centeredSlides: true,
-slidesPerView: 'auto',
-spaceBetween: 24,
-navigation: {
-nextEl: '.swiper-button-next',
-prevEl: '.swiper-button-prev',
-}
-});
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize Swiper
+        new Swiper('.product-swiper', {
+            loop: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            spaceBetween: 24,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        });
 
-// Add to cart functionality
-const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
 
-// Define getCookie function for CSRF token
-function getCookie(name) {
-let cookieValue = null;
-if (document.cookie && document.cookie !== '') {
-const cookies = document.cookie.split(';');
-for (let i = 0; i < cookies.length; i++) { const cookie=cookies[i].trim(); if (cookie.substring(0, name.length +
-    1)===(name + '=' )) { cookieValue=decodeURIComponent(cookie.substring(name.length + 1)); break; } } } return
-    cookieValue; } addToCartButtons.forEach(button=> {
-    button.addEventListener('click', function() {
-    const productId = this.getAttribute('data-product-id');
+        // Define getCookie function for CSRF token
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim(); if (cookie.substring(0, name.length +
+                        1) === (name + '=')) { cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); break; }
+                }
+            } return
+            cookieValue;
+        } addToCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const productId = this.getAttribute('data-product-id');
 
-    fetch(`/store/add-to-cart/${productId}/`, {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': getCookie('csrftoken')
-    },
-    body: JSON.stringify({
-    quantity: 1
-    })
-    })
-    .then(response => response.json())
-    .then(data => {
-    // Update cart count in header
-    const cartCountElement = document.getElementById('cart-count');
-    if (cartCountElement) {
-    cartCountElement.textContent = data.count;
-    }
+                fetch(`/store/add-to-cart/${productId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({
+                        quantity: 1
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update cart count in header
+                        const cartCountElement = document.getElementById('cart-count');
+                        if (cartCountElement) {
+                            cartCountElement.textContent = data.count;
+                        }
 
-    // Show success message
-    alert('Product added to cart!');
-    })
-    .catch(error => {
-    console.error('Error:', error);
+                        // Show success message
+                        alert('Product added to cart!');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
     });
-    });
-    });
-    });
-    </script>
-    {% endblock %}
-
-
-
-
-    <link rel="stylesheet" href="{% static 'css/category_detail.css' %}">
+</script>
+{% endblock %}

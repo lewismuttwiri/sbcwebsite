@@ -27,6 +27,7 @@
 
   .hero-content {
     position: relative;
+    justify-self: auto;
     z-index: 2;
     text-align: center;
     max-width: 800px;
@@ -53,7 +54,7 @@
   .hero-brands {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 100px;
     margin-top: 40px;
   }
 
