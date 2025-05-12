@@ -63,14 +63,11 @@
 <body data-aos="fade">
   <nav class="nav">
     <div class="container">
-      <div class="logo">
-        <img src="{% static 'images/pep-logo.png' %}" class="company1-logo" alt="SBC Kenya" loading="lazy">
-      </div>
-      <div class="logo logo1">
-        <a href="{% url 'sbcapp:home' %}" class="logo-link">SBC KENYA </a>
-
-        <a href="{% url 'sbcapp:home' %}" class="logo-link"> LTD</a>
-      </div>
+        <div class="logo logo-link">
+         <a href="{% url 'sbcapp:home' %}">
+          <img src="{% static 'images/pep-logo.png' %}" class="logo1" alt="SBC Kenya" loading="lazy">
+         </a>
+         </div>
       <div class="navTrigger" id="navTrigger">
         <i></i>
         <i></i>

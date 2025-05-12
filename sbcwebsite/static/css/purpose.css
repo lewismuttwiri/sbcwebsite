@@ -21,27 +21,18 @@ body {
 .purpose-wrapper {
     max-width: 1440px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Individual purpose blocks */
 .purpose-block {
     display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+    flex-direction: column;
     background-color: #ffffff;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
     border-radius: 12px;
     overflow: hidden;
-}
-
-.purpose-block:last-child {
-    margin-bottom: 0;
-}
-
-/* Alternating layout */
-.purpose-block:nth-child(even) {
-    flex-direction: row-reverse;
 }
 
 /* Image card */
@@ -49,7 +40,7 @@ body {
     flex: 1;
     position: relative;
     overflow: hidden;
-    min-height: 400px;
+    min-height: 300px;
 }
 
 .purpose-image {
@@ -68,7 +59,7 @@ body {
 /* Content card */
 .purpose-content-card {
     flex: 1;
-    padding: 4rem 3.5rem;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,32 +71,32 @@ body {
 /* Decorative elements */
 .content-accent {
     position: absolute;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: rgba(14, 14, 150, 0.05);
-    top: -50px;
-    right: -50px;
+    top: -30px;
+    right: -30px;
     z-index: -1;
 }
 
 .content-accent-2 {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-color: rgba(230, 26, 39, 0.03);
-    bottom: -30px;
+    bottom: -20px;
     left: 10%;
     z-index: -1;
 }
 
 /* Section heading */
 .purpose-heading {
-    font-size: 2.8rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #0E0E96;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     position: relative;
     padding-bottom: 0.8rem;
     line-height: 1.1;
@@ -116,19 +107,19 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 80px;
-    height: 4px;
+    width: 60px;
+    height: 3px;
     background: linear-gradient(90deg, #e61a27 0%, #0E0E96 100%);
     border-radius: 2px;
 }
 
 /* Text content */
 .purpose-text {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .purpose-text p {
-    font-size: 1.15rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: #444;
     margin-bottom: 1rem;
@@ -147,36 +138,37 @@ body {
 
 /* Taglines section */
 .purpose-taglines {
-    
-    padding-left: 50px;
-    border-left: 3px solid #e61a27;
+    padding-left: 20px;
+    border-left: 2px solid #e61a27;
+    margin: 1.5rem 0;
 }
 
 .tagline-primary {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #e61a27;
     margin-bottom: 0.5rem;
 }
 
 .tagline-secondary {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #0E0E96;
+    margin-bottom: 0.5rem;
 }
 
 /* CTA button */
 .purpose-cta-wrapper {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .purpose-cta {
     display: inline-block;
     background-color: #0E0E96;
     color: #ffffff;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    padding: 0.8rem 2rem;
+    padding: 0.7rem 1.5rem;
     border: none;
     border-radius: 50px;
     text-decoration: none;
@@ -212,12 +204,13 @@ body {
 .quality-icons {
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
 .quality-icon {
-    flex: 0 0 30%;
+    flex: 1 1 100%;
     text-align: center;
     margin-bottom: 1rem;
     padding: 1rem 0.5rem;
@@ -232,7 +225,7 @@ body {
 }
 
 .icon-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #0E0E96;
     margin-top: 0.5rem;
@@ -290,60 +283,230 @@ body {
     color: #ffffff;
 }
 
-/* Responsive styles */
-@media (max-width: 992px) {
-
-    .purpose-block,
-    .purpose-block:nth-child(even) {
-        flex-direction: column;
-    }
-
-    .purpose-content-card {
-        padding: 3rem 2rem;
-    }
-
-    .purpose-image-card {
-        min-height: 300px;
-    }
-
-    .purpose-heading {
-        font-size: 2.3rem;
-    }
-
-    .quality-icon {
-        flex: 0 0 48%;
-    }
+/* Media Center Header */
+.media-center-header {
+    padding: 2rem 1.5rem;
+    text-align: center;
 }
 
-@media (max-width: 576px) {
-    .purpose-content-card {
-        padding: 2.5rem 1.5rem;
-    }
+.media-center-header h1 {
+    font-size: 2rem;
+    color: #0E0E96;
+    margin-bottom: 1rem;
+}
+
+/* About Us Link */
+#about-us-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.read-more-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #0E0E96;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.read-more-link:hover {
+    color: #e61a27;
+    text-decoration: underline;
+}
+
+/* ============================================= */
+/* MOBILE RESPONSIVENESS */
+/* ============================================= */
+
+/* Extra small devices (320px and below) */
+@media (min-width: 320px) and (max-width: 520px) {
+
+    /* Image card */
+.purpose-image-card {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    padding: 0;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.purpose-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+}
+
+.purpose-image-card:hover .purpose-image {
+    transform: scale(1.05);
+}
+
+/* Content card */
+.purpose-content-card {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+}
+
+/* About Us specific styles */
+.about-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-us-image {
+    width: 100%;
+}
+
+.about-us-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.purpose-taglines {
+    padding-left: 20px;
+    border-left: 2px solid #e61a27;
+    margin-top: 1.5rem;
+}
 
     .purpose-heading {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .purpose-heading:after {
+        width: 50px;
+        height: 2px;
     }
 
     .purpose-text p {
-        font-size: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .purpose-taglines {
+        padding-left: 15px;
+        margin: 1rem 0;
     }
 
     .tagline-primary {
-        font-size: 1.4rem;
+        font-size: 1rem;
     }
 
     .tagline-secondary {
-        font-size: 1.2rem;
+        font-size: 0.9rem;
     }
 
-    .purpose-cta {
-        font-size: 1rem;
-        padding: 0.7rem 1.5rem;
-        width: 100%;
-        text-align: center;
+}
+
+/* Small devices (321px to 767px) */
+@media (min-width: 521px) and (max-width: 767px) {
+
+    /* Most base styles are already mobile-first */
+    /* Adjustments only where needed */
+    .purpose-content-card {
+        padding: 2rem 1.25rem;
     }
 
     .quality-icon {
-        flex: 0 0 100%;
+        flex: 1 1 calc(50% - 10px);
+    }
+}
+
+/* Tablet and Desktop layout (768px and up) */
+@media (min-width: 768px) {
+    .purpose-block {
+        flex-direction: row;
+        margin-bottom: 3rem;
+    }
+
+    .purpose-block:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .purpose-image-card {
+        min-height: 400px;
+    }
+
+    .purpose-content-card {
+        padding: 4rem 3.5rem;
+    }
+
+    .content-accent {
+        width: 150px;
+        height: 150px;
+        top: -50px;
+        right: -50px;
+    }
+
+    .content-accent-2 {
+        width: 100px;
+        height: 100px;
+        bottom: -30px;
+    }
+
+    .purpose-heading {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .purpose-heading:after {
+        width: 80px;
+        height: 4px;
+    }
+
+    .purpose-text p {
+        font-size: 1.15rem;
+    }
+
+    .purpose-taglines {
+        padding-left: 50px;
+        border-left: 3px solid #e61a27;
+    }
+
+    .tagline-primary {
+        font-size: 1.6rem;
+    }
+
+    .tagline-secondary {
+        font-size: 1.4rem;
+    }
+
+    .purpose-cta-wrapper {
+        margin-top: 2rem;
+    }
+
+    .purpose-cta {
+        font-size: 1.1rem;
+        padding: 0.8rem 2rem;
+    }
+
+    .quality-icon {
+        flex: 0 0 30%;
+    }
+
+    .icon-title {
+        font-size: 1rem;
+    }
+
+    .media-center-header {
+        padding: 3rem 2rem;
+    }
+
+    .media-center-header h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Medium devices (480px to 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+    .quality-icon {
+        flex: 1 1 calc(50% - 10px);
     }
 }
