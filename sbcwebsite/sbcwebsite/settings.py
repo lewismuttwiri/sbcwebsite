@@ -31,8 +31,7 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 IN_PROD = os.getenv('IN_PROD', 'False').lower() == 'true'
 
 # ALLOWED_HOSTS configuration
-ALLOWED_HOSTS = ['lewismutwiri.pythonanywhere.com', 'www.lewismutwiri.pythonanywhere.com',
-                'sbckenya.com', 'sbckenya.pythonanywhere.com', 'localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['sbckenya.com', 'www.sbckenya.com', 'localhost', '127.0.0.1','95.111.225.106', '*']
 # for custom user
 
 
