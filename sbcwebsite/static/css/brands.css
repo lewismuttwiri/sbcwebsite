@@ -1,5 +1,5 @@
 .brand-center-header {
-  background: #0E0E96;
+  background: #eff2f1;
   text-align: center;
   padding: 60px 0 40px;
   position: relative;
@@ -55,6 +55,7 @@
 .brands-window {
   overflow: hidden;
   width: 100%;
+  border-radius: 8px;
   /* 2 x 360px card + 2 x 20px gap */
 }
 
@@ -65,10 +66,8 @@
 }
 
 .brand-card {
-  flex: 0 0 550px;
+  flex: 0 0 350px;
   height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
   position: relative;
   background: none;
 }

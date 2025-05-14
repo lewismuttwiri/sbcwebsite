@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+{% extends "base.html"%}
+{% load static %}
+{% block content %}
+<br>
+<link rel="preload" href="{% static 'videos/intro.mp4' %}" as="video" type="video/mp4">
+<link rel="preload" href="{% static 'images/7up.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mir.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mtn.png' %}" as="image">
+<link rel="preload" href="{% static 'images/pep-logo.png' %}" as="image">
+<link rel="preload" href="{% static 'images/cover-pep.png' %}" as="image">
+<link rel="preload" href="{% static 'images/cover-pep.jpg' %}" as="image">
+<link rel="preload" href="{% static 'images/Pepsi-home.jpg' %}" as="image">
+<link rel="preload" href="{% static 'images/home.jpg' %}" as="image">
+<link rel="preload" href="{% static 'images/sting3.png' %}" as="image">
+<link rel="preload" href="{% static 'images/pepsi1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mirf300.png' %}" as="image">
+<link rel="preload" href="{% static 'images/aquaf1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/dew1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mir-Gapple1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mir-papple1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/Mir-org1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/stingred1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/stinggold1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/mir-lem1.png' %}" as="image">
+<link rel="preload" href="{% static 'images/log-cover.png' %}" as="image">
+<link rel="preload" href="{% static 'images/quality.png' %}" as="image">
+<link rel="preload" href="{% static 'images/pep.jpg' %}" as="image">
+{% for media_item in media_items %}
+<link rel="preload" href="{{ media_item.image.url }}" as="image">
+{% endfor %}
+
+
+<!-- < ---- Hero Section --->
+<div class="home">
+    <!-- Slide 0 -->
+    <div class="slide" data-index="0">
+        <img src="{% static 'images/home.jpg' %}" alt="Image 0" loading="lazy">
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
+    </div>
+    <div class="hero-container slide">
+        <div class="bubbles-container" id="bubbles"></div>
+        <div class="wave"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-heading">Refresh Your World</h1>
+            <p class="hero-subheading">Experience the bold, crisp taste that has defined generations</p>
+            <button class="cta-button">Discover More</button>
+        </div>
+
+        <img class="product-bottle" src="{% static 'images/sbc1.png' %}" alt="Pepsi bottle silhouette">
+    </div>
+
+
+    <!-- Slide 1 (video) -->
+    <!-- <div class="slide" data-index="1">
+        <video autoplay muted loop playsinline loading="lazy">
+            <source src="{% static 'videos/intro.mp4' %}" type="video/mp4">
+        </video>
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
+    </div> -->
+
+    <!-- Slide 2 -->
+    <div class="slide" data-index="2">
+        <img src="{% static 'images/design1.jpg' %}" alt="Image 2" loading="lazy">
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
+    </div>
+
+    <!-- Slide 3 -->
+    <!-- <div class="slide" data-index="3">
+        <img src="{% static 'images/cover-pep.png' %}" alt="Image 3" loading="lazy">
+        <a href="{{ category.get_absolute_url }}" class="slide-btn">Explore</a>
+    </div> -->
+
+    <!-- Arrows -->
+    <div>
+        <button class="arrow prev">&lt;</button>
+        <button class="arrow next">&gt;</button>
+    </div>
+    <div class="slider-dots">
+        <div class="dot" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+        <div class="dot" data-index="3"></div>
+    </div>
+</div>
+
+<div class="media-center-header">
+    <h1>About Us</h1>
+</div>
+<div class="purpose-content-card">
+
+    <a href="{% url 'sbcapp:about' %}" id="about-us-link">
+        <section id="about-us" class="about-section">
+            <div class="about-us-image">
+                <img src="{% static 'images/best_pepsi.jpg' %}" alt="About Image" loading="lazy">
+            </div>
+    </a>
+
+    <div class="purpose-taglines">
+        <h3>SBC Kenya has been a key player in <br> the Kenyan beverage market,<br>
+            aiming to provide quality products<br> at affordable prices</h3>
+        <h3>Learn more about Pepsi Kenya.</h3>
+        <h3>Quenching Thirst, Inspiring Lives!</h3>
+        <a href="{% url 'sbcapp:about' %}" class="read-more-link">Read More About Us</a>
+    </div>
+</div>
+
+
+
+<div class="brand-center-header">
+    <h1>Our Brands</h1>
+</div>
+<div class="brands-carousel">
+
+    <div class="carousel-btn left" onclick="scrollBrands(-1)">←</div>
+
+    <div class="brands-window">
+        <div class="brands-track" id="brandsTrack">
+            {% for category in categories %}
+            <div class="brand-card">
+                <a href="{{ category.get_absolute_url }}" class="card-link">
+                    <div class="brand-image">
+
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                        <h3 class="lager">{{ category.name }}</h3>
+                        <p>{{ category.description|truncatewords:15 }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="carousel-btn right" onclick="scrollBrands(1)">→</div>
+</div>
+<!-- Start Product Section -->
+<div class="product-section">
+    <div class="prod-container">
+        <div class="row">
+
+            <!-- Start Column 1 -->
+            <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                <h2 class="mb-4 section-title">Crafted with excellent material.</h2>
+                <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate
+                    velit imperdiet dolor tempor tristique. </p>
+                <p><a href="shop.html" class="btn">Explore</a></p>
+            </div>
+            <!-- End Column 1 -->
+
+            <!-- Start Column 2 -->
+            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{% static 'images/Artboard-86@300x.webp' %}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">Nordic Chair</h3>
+                    <strong class="product-price">$50.00</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div>
+            <!-- End Column 2 -->
+
+            <!-- Start Column 3 -->
+            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{% static 'images/Artboard-91@300x.webp' %}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">Kruzo Aero Chair</h3>
+                    <strong class="product-price">$78.00</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div>
+            <!-- End Column 3 -->
+
+            <!-- Start Column 4 -->
+            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                <a class="product-item" href="cart.html">
+                    <img src="{% static 'images/Artboard-95@300x.webp' %}" class="img-fluid product-thumbnail">
+                    <h3 class="product-title">Ergonomic Chair</h3>
+                    <strong class="product-price">$43.00</strong>
+
+                    <span class="icon-cross">
+                        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+                    </span>
+                </a>
+            </div>
+            <!-- End Column 4 -->
+
+        </div>
+    </div>
+</div>
+<!-- End Product Section -->
+
+<title>Media Center - SBC Kenya</title>
+
+<div class="container">
+    <!-- Media Center Header -->
+    <div class="media-center-header">
+        <h1>Media Center</h1>
+        <p class="media-center-subheading">Stay updated with the latest news, press releases, and media
+            coverage about SBC Kenya Ltd.</p>
+    </div>
+</div>
+
+<!-- Media Carousel -->
+<div class="media-carousel">
+    <div class="media-carousel-inner" id="carousel-inner">
+        <!-- Media Item 1 -->
+        <div class="media-carousel-item">
+            <div class="media-grid">
+                <div class="media-card" data-aos="fade-up" data-aos-delay="100">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="{% static 'images/mirindafun.jpg' %}" alt="Quality Control Enhancement"
+                            class="media-card-image">
+                        <span class="press-release-badge">Press Release</span>
+                    </div>
+                    <div class="media-card-content">
+                        <h2 class="media-card-title">SBC Kenya Enhances Quality Control Measures</h2>
+                        <p class="media-card-desc">
+                            SBC Kenya Ltd announces significant improvements to its quality control
+                            measures, ensuring higher standards for all beverage products...
+                        </p>
+                        <p class="media-card-date">05-01-2025</p>
+                    </div>
+                    <div class="media-card-footer">
+                        <span class="read-more">
+                            Read more
+                            <svg class="read-more-icon" xmlns="{% static 'images/mirindafun.jpg' %}" width="16"
+                                height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Item 2 -->
+        <div class="media-carousel-item">
+            <div class="media-grid">
+                <div class="media-card" data-aos="fade-up" data-aos-delay="200">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="{% static 'images/mirindafun.jpg' %}" alt="Community Initiative"
+                            class="media-card-image">
+                    </div>
+                    <div class="media-card-content">
+                        <h2 class="media-card-title">SBC Kenya Launches Community Water Project</h2>
+                        <p class="media-card-desc">
+                            As part of our commitment to sustainability, SBC Kenya has initiated a
+                            community water conservation project in partnership with local
+                            authorities...
+                        </p>
+                        <p class="media-card-date">04-15-2025</p>
+                    </div>
+                    <div class="media-card-footer">
+                        <span class="read-more">
+                            Read more
+                            <svg class="read-more-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="no-items-found">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p>No media items found.</p>
+        </div>
+
+    </div>
+    <!-- Carousel Controls -->
+    <div class="media-carousel-controls">
+        <button class="media-carousel-control prev-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button class="media-carousel-control next-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+    <!-- Carousel Indicators -->
+    <div class="media-carousel-indicators">
+        {% for media_item in media_items %}
+        <div class="media-carousel-indicator {% if forloop.first %}active{% endif %}"
+            data-index="{{ forloop.counter0 }}"></div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+<title>Purpose Section</title>
+
+
+<!-- Purpose-Driven Section -->
+<section class="purpose-section">
+    <div class="purpose-wrapper">
+        <!-- First purpose block - Quality Assurance -->
+        <div class="purpose-block">
+            <!-- Image Card -->
+            <div class="purpose-image-card">
+                <img src="{% static 'images/dew.jpg' %}" alt="Quality Assurance" class="purpose-image">
+            </div>
+
+            <!-- Content Card -->
+            <div class="purpose-content-card">
+                <div class="content-accent"></div>
+                <div class="content-accent-2"></div>
+
+                <h1 class="purpose-heading">Quality Assurance</h1>
+
+                <div class="purpose-text">
+                    <p>At SBC Kenya Ltd, we understand that <span class="text-highlight">every sip of your
+                            favorite soda</span> should be a satisfying
+                        experience. That's why we hold
+                        ourselves to the highest standards throughout
+                        the entire production process.</p>
+
+                    <p>Beyond technical excellence, we prioritize
+                        freshness.</p>
+
+                    <p>Our efficient distribution network ensures that
+                        our beverages reach you at their peak
+                        of flavor, delivering <span class="text-highlight">consistent
+                            refreshment in every
+                            bottle</span>.</p>
+                </div>
+
+                <div class="purpose-taglines">
+                    <h2 class="tagline-primary">Quality is our
+                        Assurance!</h2>
+                    <h2 class="tagline-secondary">Thirsty For More!</h2>
+                </div>
+
+                <div class="quality-icons">
+                    <div class="quality-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E0E96" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z">
+                            </path>
+                        </svg>
+                        <div class="icon-title">Premium Quality</div>
+                    </div>
+                    <div class="quality-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E0E96" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88">
+                            </polyline>
+                        </svg>
+                        <div class="icon-title">Certified</div>
+                    </div>
+                    <div class="quality-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E0E96" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <div class="icon-title">Secure Process</div>
+                    </div>
+                </div>
+
+                <div class="purpose-cta-wrapper">
+                    <a href="#" class="purpose-cta">
+                        Learn more about us
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second purpose block - Our Mission (demonstrates the alternating layout) -->
+        <div class="purpose-block">
+            <!-- Image Card (will appear on right due to nth-child(even) styling) -->
+            <div class="purpose-image-card">
+                <img src="{% static 'images/social.jpg' %}" alt="Our Mission" class="purpose-image">
+            </div>
+
+            <!-- Content Card (will appear on left) -->
+            <div class="purpose-content-card">
+                <div class="content-accent"></div>
+                <div class="content-accent-2"></div>
+
+                <h1 class="purpose-heading">Our Mission</h1>
+
+                <div class="purpose-text">
+                    <p>To deliver <span class="text-highlight">world-class
+                            beverages</span> that exceed
+                        customer expectations while maintaining the
+                        highest standards of quality and
+                        sustainability.</p>
+
+                    <p>We aim to be the leading beverage provider in
+                        Kenya, creating value for our
+                        customers, employees, and communities through
+                        innovation and excellence.</p>
+
+                    <p>Our commitment to <span class="text-highlight">environmental
+                            sustainability</span>
+                        ensures that we minimize our ecological
+                        footprint while maximizing our positive
+                        impact.</p>
+                </div>
+
+                <div class="purpose-taglines">
+                    <h2 class="tagline-primary">Refreshing Communities!
+                    </h2>
+                    <h2 class="tagline-secondary">Building a Better
+                        Tomorrow!</h2>
+                </div>
+
+                <div class="quality-icons">
+                    <div class="quality-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E0E96" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path
+                                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z">
+                            </path>
+                        </svg>
+                        <div class="icon-title">Customer Support</div>
+                    </div>
+                    <div class="quality-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E0E96" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z">
+                            </path>
+                            <line x1="6" y1="1" x2="6" y2="4"></line>
+                            <line x1="10" y1="1" x2="10" y2="4"></line>
+                            <line x1="14" y1="1" x2="14" y2="4"></line>
+                        </svg>
+                        <div class="icon-title">Sustainability</div>
+                    </div>
+                    <div class="quality-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E0E96" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z">
+                            </path>
+                        </svg>
+                        <div class="icon-title">Innovation</div>
+                    </div>
+                </div>
+
+                <div class="purpose-cta-wrapper">
+                    <a href="#" class="purpose-cta">
+                        Discover our mission
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- <div class="contact-container">
+        <div class="section-wrapper">
+            <div class="section-left">
+                <a href="{% url 'recruitment:advertisement_list' %}">
+                    <h1>Careers</h1>
+                </a>
+                <section class="careers-section">
+                    <div class="overlay-content">
+                        <h2>JOIN THE SBC KENYA TEAM.</h2>
+                        <h3>At SBC Kenya, we're building a diverse and
+                            talented team.</h3>
+                        <h3>We're committed to equal opportunity and welcome
+                            applications from all qualified
+                            individuals.
+                        </h3>
+                    </div>
+                </section>
+            </div>
+            <div class="section-right">
+                <a href="{% url 'contact:contact' %}">
+                    <h1>Contact us</h1>
+                </a>
+                <section class="contact-section">
+                    <div class="overlay-content">
+                        <h2>Get in touch with us</h2>
+                        <h3>We are glad to hear your feedback.</h3>
+                        <h3>Explore our Contact-us page.We value your
+                            feedback. Welcome to SBC Kenya Ltd</h3>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div> -->
+
+<div class="brand-logos">
+    <img src="{% static 'images/7up.png' %}" class="logo" alt="Logo 1" loading="lazy">
+    <img src="{% static 'images/mir.png' %}" class="logo" alt="Logo 2" loading="lazy">
+    <img src="{% static 'images/mtn.png' %}" class="logo" alt="Logo 3" loading="lazy">
+    <img src="{% static 'images/pep-logo.png' %}" class="logo" alt="Logo 4" loading="lazy">
+</div>
+<link rel="stylesheet" href="{% static 'css/brands.css' %}">
+<link rel="stylesheet" href="{% static 'css/purpose.css' %}">
+<link rel="stylesheet" href="{% static 'css/media.css' %}" />
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize AOS animation library if available
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out',
+                once: true
+            });
+        }
+
+        // Add filter functionality
+        document.getElementById('media-sort').addEventListener('change', function (e) {
+            const sortValue = e.target.value;
+
+            if (sortValue !== 'all') {
+                window.location.href = "{% url 'gallery:media_list' %}?sort=" + sortValue;
+            }
+        });
+
+        // Pre-select the current sort option if any
+        const urlParams = new URLSearchParams(window.location.search);
+        const sortParam = urlParams.get('sort');
+        if (sortParam) {
+            document.getElementById('media-sort').value = sortParam;
+        }
+
+        // Media Carousel Functionality
+        const carousel = document.querySelector('.media-carousel-inner');
+        const items = document.querySelectorAll('.media-carousel-item');
+        const indicators = document.querySelectorAll('.media-carousel-indicator');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentIndex = 0;
+        const itemCount = items.length;
+
+        // Skip carousel setup if no items
+        if (itemCount === 0) return;
+
+        // Set initial width based on number of items
+        items.forEach(item => {
+            item.style.flex = `0 0 ${100 / Math.min(3, itemCount)}%`;
+        });
+
+        // Function to update carousel position
+        function updateCarousel() {
+            // Calculate how many items to show based on screen width
+            let itemsPerView = 1;
+            if (window.innerWidth >= 768) {
+                itemsPerView = 2;
+            }
+            if (window.innerWidth >= 1200) {
+                itemsPerView = 3;
+            }
+
+            // Adjust item widths
+            items.forEach(item => {
+                item.style.flex = `0 0 ${100 / Math.min(itemsPerView, itemCount)}%`;
+            });
+
+            // Calculate maximum index
+            const maxIndex = Math.max(0, itemCount - itemsPerView);
+
+            // Ensure currentIndex is within bounds
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+
+            // Update carousel position
+            carousel.style.transform = `translateX(-${currentIndex * (100 / itemsPerView)}%)`;
+
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+
+            // Update button states
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= maxIndex;
+        }
+
+        // Event listeners for controls
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            let itemsPerView = 1;
+            if (window.innerWidth >= 768) {
+                itemsPerView = 2;
+            }
+            if (window.innerWidth >= 1200) {
+                itemsPerView = 3;
+            }
+
+            const maxIndex = Math.max(0, itemCount - itemsPerView);
+
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        // Event listeners for indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', updateCarousel);
+
+        // Initial setup
+        updateCarousel();
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const bubblesContainer = document.getElementById('bubbles');
+        const bubbleCount = 50;
+
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+
+            const size = Math.random() * 60 + 10;
+            const left = Math.random() * 100;
+            const animationDuration = Math.random() * 10 + 5;
+            const animationDelay = Math.random() * 5;
+
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${left}%`;
+            bubble.style.animationDuration = `${animationDuration}s`;
+            bubble.style.animationDelay = `${animationDelay}s`;
+
+            bubblesContainer.appendChild(bubble);
+        }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const track = document.getElementById("brandsTrack");
+        const cards = track.querySelectorAll(".brand-card");
+
+        // Get the width of one brand card (including margin/gap)
+        const cardWidth = cards[0].offsetWidth + 20; // 40px gap from CSS
+        const totalCards = cards.length;
+
+        let currentIndex = 0;
+
+        window.scrollBrands = function (direction) {
+            // Update index in a loop
+            currentIndex += direction;
+
+            if (currentIndex < 0) {
+                currentIndex = totalCards - 2; // Show the last 2 cards
+            } else if (currentIndex > totalCards - 2) {
+                currentIndex = 0;
+            }
+
+            const offset = currentIndex * cardWidth;
+
+            track.style.transform = `translateX(-${offset}px)`;
+        };
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.home .slide');
+        const dots = document.querySelectorAll('.slider-dots .dot');
+        const prev = document.querySelector('.arrow.prev');
+        const next = document.querySelector('.arrow.next');
+        let current = 0;
+
+        function goToSlide(idx) {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (idx + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
+
+        // init
+        goToSlide(0);
+
+        // dot click
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                goToSlide(parseInt(dot.dataset.index));
+            });
+        });
+
+        // arrows
+        prev.addEventListener('click', () => goToSlide(current - 1));
+        next.addEventListener('click', () => goToSlide(current + 1));
+
+        // auto-advance (optional)
+        setInterval(() => goToSlide(current + 1), 6000);
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Carousel functionality
+        const carousel = document.querySelector('.media-carousel-inner');
+        const items = document.querySelectorAll('.media-carousel-item');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const indicators = document.querySelectorAll('.media-carousel-indicator');
+
+        let currentIndex = 0;
+        const itemCount = items.length;
+
+        // Determine how many items to show based on screen width
+        function getItemsPerView() {
+            if (window.innerWidth < 768) return 1;
+            if (window.innerWidth < 1200) return 2;
+            return 3;
+        }
+
+        function updateCarousel() {
+            let itemsPerView = getItemsPerView();
+            let itemWidth = 100 / itemsPerView;
+
+            // Set width for each item
+            items.forEach(item => {
+                item.style.flex = `0 0 ${itemWidth}%`;
+            });
+
+            // Move carousel to current position
+            carousel.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+
+            // Enable/disable buttons
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= itemCount - itemsPerView;
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            let itemsPerView = getItemsPerView();
+            if (currentIndex < itemCount - itemsPerView) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', updateCarousel);
+
+        // Initialize carousel
+        updateCarousel();
+
+        // Filter functionality
+        const filterSelect = document.getElementById('media-sort');
+        const searchInput = document.querySelector('.media-search input');
+
+        filterSelect.addEventListener('change', filterMedia);
+        searchInput.addEventListener('input', filterMedia);
+
+        function filterMedia() {
+            const filterValue = filterSelect.value;
+            const searchValue = searchInput.value.toLowerCase();
+
+            // Reset carousel position
+            currentIndex = 0;
+
+            // Filter logic would go here - this is a placeholder
+            // In a real implementation, you would filter the items based on the selected criteria
+
+            // Update carousel after filtering
+            updateCarousel();
+        }
+    });
+</script>
+{% endblock %}
+
+{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"
+    as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" as="script">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" as="style">

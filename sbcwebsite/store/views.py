@@ -230,47 +230,52 @@ def cart_item_count(request):
     
     return JsonResponse({'count': cart_items_count})
 
-@login_required
+
 @csrf_protect
 def checkout(request):
     if request.method == 'POST':
+        # Your existing POST handling code
         name = request.POST.get('name')
         phone_number = request.POST.get('phone_number')
         region = request.POST.get('region')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        company_name = request.POST.get('company_name', '')
+        order_notes = request.POST.get('order_notes', '')
         
-        # Transfer session cart to database if it exists
-        session_cart = request.session.get('cart', {})
-        if session_cart and not CartItem.objects.filter(user=request.user).exists():
-            for product_id, item_data in session_cart.items():
-                product = get_object_or_404(Product, pk=product_id)
-                CartItem.objects.create(
-                    user=request.user,
-                    product=product,
-                    quantity=item_data['quantity'],
-                    total_price=item_data['total_price']
-                )
-            # Clear session cart after transfer
-            request.session['cart'] = {}
+        # Process cart items and create orders
+        # ...
         
-        cart_items = CartItem.objects.filter(user=request.user)
-        total_price = sum(item.total_price for item in cart_items)
-        
-        for item in cart_items:
-            Order.objects.create(
-                user=request.user,
-                product_name=item.product.name,
-                quantity=item.quantity,
-                total_price=item.total_price,
-                phone_number=phone_number,
-                region=region,
-                name=name
-            )
-        
-        cart_items.delete()
-        # Send email to admin
         return redirect('store:checkout_success')
     else:
-        return JsonResponse({'error': 'Method not allowed'}, status=405)
+        # For GET requests, render the checkout page with a form
+        # Get cart items to display on checkout page
+        if request.user.is_authenticated:
+            cart_items = CartItem.objects.filter(user=request.user)
+            total_price = sum(item.total_price for item in cart_items)
+        else:
+            session_cart = request.session.get('cart', {})
+            cart_items = []
+            total_price = 0
+            
+            for product_id, item_data in session_cart.items():
+                product = get_object_or_404(Product, pk=product_id)
+                cart_item = type('CartItem', (), {
+                    'product': product,
+                    'quantity': item_data['quantity'],
+                    'total_price': item_data['total_price']
+                })
+                cart_items.append(cart_item)
+                total_price += item_data['total_price']
+        
+        context = {
+            'cart_items': cart_items,
+            'total_price': total_price,
+            'regions': Order.REGION_CHOICES,
+        }
+        
+        return render(request, 'store/checkout.html', context)
+
 
 
 def checkout_success(request):

@@ -2,6 +2,11 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 <!-- Hero Section -->
 <section class="about-hero">
   <div class="hero-content">
@@ -16,6 +21,7 @@
   </div>
   <img src="{% static 'images/Pepsi-rotate.png' %}" alt="Pepsi Bottle" class="floating-bottle">
 </section>
+
 
 <!-- About Section -->
 <section class="about-section">
@@ -194,6 +200,31 @@
     </div>
   </div>
 </section>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    breakpoints: {
+      576: {
+        slidesPerView: 1
+      },
+      768: {
+        slidesPerView: 2
+      },
+      992: {
+        slidesPerView: 3
+      }
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    }
+  });
+</script>
+
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {

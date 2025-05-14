@@ -1,30 +1,32 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Order Confirmed{% endblock %}
+
 {% block content %}
-<div class="container mx-auto px-4 py-16">
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 max-w-2xl mx-auto">
-        <div class="p-8 text-center">
-            <div class="text-green-500 mb-6">
-                <svg class="w-24 h-24 mx-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
+<!-- Start Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Thank You!</h1>
+                </div>
             </div>
-            
-            <h1 class="text-3xl font-bold mb-4">Order Placed Successfully!</h1>
-            
-            <p class="text-gray-700 text-xl mb-8">
-                Thank you for your order. We have received your order details and will process it shortly.
-            </p>
-            
-            <p class="text-gray-700 mb-8">
-                Our team will contact you soon to confirm your order and arrange delivery.
-            </p>
-            
-            <div class="flex justify-center">
-                <a href="{% url 'store:product_list' %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-xl">
-                    Continue Shopping
-                </a>
+            <div class="col-lg-7">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+<div class="untree_co-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center py-5">
+                <h2 class="display-3 text-black">Your order has been placed successfully!</h2>
+                <p class="lead mb-5">We've received your order and will contact you soon with the delivery details.</p>
+                <p><a href="{% url 'store:product_list' %}" class="btn btn-sm btn-outline-black">Back to shop</a></p>
             </div>
         </div>
     </div>

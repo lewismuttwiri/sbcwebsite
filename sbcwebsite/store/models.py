@@ -56,6 +56,15 @@ class Order(models.Model):
         ('Southern', 'Southern'),
     ]
     
+class Order(models.Model):
+    REGION_CHOICES = [
+        ('Nairobi', 'Nairobi'),
+        ('Coast', 'Coast'),
+        ('Western', 'Western'),
+        ('Mt Kenya', 'Mt Kenya'),
+        ('Southern', 'Southern'),
+    ]
+    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     product_name = models.CharField(max_length=100)
     quantity = models.IntegerField(default=1)
@@ -64,6 +73,10 @@ class Order(models.Model):
     name = models.CharField(max_length=100, default='name')
     phone_number = models.CharField(max_length=20, default='phone_number')
     region = models.CharField(max_length=100, choices=REGION_CHOICES, default='region')
+    company_name = models.CharField(max_length=100, blank=True, null=True)
+    address = models.TextField()
+    email = models.EmailField()
+    order_notes = models.TextField(blank=True, null=True)
     
     def __str__(self):
         user_info = f'{self.user.username} ({self.user.email})' if self.user else 'Guest'
@@ -71,3 +84,4 @@ class Order(models.Model):
     
     class Meta:
         ordering = ['-created_at']
+

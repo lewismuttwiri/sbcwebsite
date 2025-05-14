@@ -20,8 +20,8 @@
   <link rel="stylesheet" href="{% static 'css/footer.css' %}">
   <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
   <link rel="stylesheet" href="{% static 'css/careers.css' %}">
- 
-  
+
+
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -63,11 +63,11 @@
 <body data-aos="fade">
   <nav class="nav">
     <div class="container">
-        <div class="logo logo-link">
-         <a href="{% url 'sbcapp:home' %}">
+      <div class="logo logo-link">
+        <a href="{% url 'sbcapp:home' %}">
           <img src="{% static 'images/pep-logo.png' %}" class="logo1" alt="SBC Kenya" loading="lazy">
-         </a>
-         </div>
+        </a>
+      </div>
       <div class="navTrigger" id="navTrigger">
         <i></i>
         <i></i>
@@ -78,7 +78,7 @@
           <li class="close-button animate alternate-style ">
             <button class="close-btn" id="closeBtn"><i class="fas fa-times"></i></button>
           </li>
-          <li class="animate alternate-style"><a href="{% url 'sbcapp:home' %}">Home<i ></i></a></li>
+          <li class="animate alternate-style"><a href="{% url 'sbcapp:home' %}">Home<i></i></a></li>
           <li class="animate has-dropdown alternate-style">
             <a href="{% url 'sbcapp:about' %}">Our&nbsp;Story</a>
           </li>
@@ -90,10 +90,10 @@
               <a href="{% url 'sbcapp:brands' %}#energy-container">Sting Energy Drinks</a>
             </div>
           </li>
-          <li class="animate alternate-style"><a href="{% url 'gallery:media_list' %}"> Media&nbsp;<br>Center</a></li>
+          <li class="animate alternate-style"><a href="{% url 'gallery:media_list' %}"> Media</a></li>
           <li class="animate alternate-style"><a href="{% url 'social:social' %}"> Social</a></li>
           <li class="animate has-dropdown alternate-style">
-            <a href="#" onclick="return false;">Opportunities</a>
+            <a href="#" onclick="return false;">Careers</a>
             <div class="dropdown-content">
               <a href="{% url 'recruitment:advertisement_list' %}">Careers</a>
               <a href="{% url 'procurement:tender_list' %}">Tenders</a>
@@ -170,69 +170,66 @@
       <!-- Social Media Section -->
       <div class="footer-section social-section">
         <h3 class="section-title">CONNECT WITH US</h3>
-        <div class="social1" >
-          <div class="social-icons">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-          </div>
-          <div class="social-icons">
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <div class="social1">
+          <ul class="list-unstyled custom-social">
+            <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+            <li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+            <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+            <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+      <!-- Bottom Bar with Copyright -->
+      <div class="footer-bottom">
+        <div class="footer-container">
+          <p class="copyright">&copy; 2024 SBC KENYA LTD. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="{% url 'contact:contact' %}">Contact Us</a>
+            <a href="#" id="privacy-link">Privacy</a>
+            <a href="#" id="terms-link">Terms of Use</a>
           </div>
         </div>
       </div>
-  
 
-
-
-    <!-- Bottom Bar with Copyright -->
-    <div class="footer-bottom">
-      <div class="footer-container">
-        <p class="copyright">&copy; 2024 SBC KENYA LTD. All rights reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="{% url 'contact:contact' %}">Contact Us</a>
-          <a href="#" id="privacy-link">Privacy</a>
-          <a href="#" id="terms-link">Terms of Use</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Overlay for Legal Information -->
-    <div id="legal-overlay" class="overlay">
-      <div class="overlay-content">
-        <div class="overlay-header">
-          <h2>Legal Information</h2>
-          <span class="close-btn">&times;</span>
-        </div>
-        <div class="overlay-body">
-          <div class="tab-container">
-            <div class="tabs">
-              <button class="tab-btn active" data-tab="privacy">Privacy Policy</button>
-              <button class="tab-btn" data-tab="terms">Terms of Service</button>
-            </div>
-
-            <div class="tab-content">
-              <div id="privacy" class="tab-pane active">
-                <h3>Privacy Policy</h3>
-                <!-- Privacy policy content goes here -->
-                <p>This Privacy Policy describes how your personal information is collected, used, and shared when you
-                  visit our website.</p>
-                <!-- Add more privacy policy content -->
+      <!-- Overlay for Legal Information -->
+      <div id="legal-overlay" class="overlay">
+        <div class="overlay-content">
+          <div class="overlay-header">
+            <h2>Legal Information</h2>
+            <span class="close-btn">&times;</span>
+          </div>
+          <div class="overlay-body">
+            <div class="tab-container">
+              <div class="tabs">
+                <button class="tab-btn active" data-tab="privacy">Privacy Policy</button>
+                <button class="tab-btn" data-tab="terms">Terms of Service</button>
               </div>
-              <div id="terms" class="tab-pane">
-                <h3>Terms of Service</h3>
-                <!-- Terms of service content goes here -->
-                <p>By accessing this website, you are agreeing to be bound by these Terms of Service and all applicable
-                  laws and regulations.</p>
-                <!-- Add more terms of service content -->
+
+              <div class="tab-content">
+                <div id="privacy" class="tab-pane active">
+                  <h3>Privacy Policy</h3>
+                  <!-- Privacy policy content goes here -->
+                  <p>This Privacy Policy describes how your personal information is collected, used, and shared when you
+                    visit our website.</p>
+                  <!-- Add more privacy policy content -->
+                </div>
+                <div id="terms" class="tab-pane">
+                  <h3>Terms of Service</h3>
+                  <!-- Terms of service content goes here -->
+                  <p>By accessing this website, you are agreeing to be bound by these Terms of Service and all
+                    applicable
+                    laws and regulations.</p>
+                  <!-- Add more terms of service content -->
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </footer>
 
   <!-- Custom Scripts -->
@@ -265,16 +262,16 @@
           navTrigger.classList.remove('active');
         });
       });
-      
+
     });
 
 
 
-    
+
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'js/script.js' %}"></script>
- 
+
   <script src="{% static 'js/purpose-section.js' %}"></script>
 
   </div>

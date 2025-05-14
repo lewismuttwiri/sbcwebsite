@@ -323,59 +323,60 @@ body {
 @media (min-width: 320px) and (max-width: 520px) {
 
     /* Image card */
-.purpose-image-card {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    min-height: 300px;
-    padding: 0;
-    border-radius: 8px;
-    justify-content: center;
-}
+    .purpose-image-card {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        min-height: 300px;
+        padding: 0;
+        border-radius: 8px;
+        justify-content: center;
+    }
 
-.purpose-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.8s ease;
-}
+    .purpose-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.8s ease;
+    }
 
-.purpose-image-card:hover .purpose-image {
-    transform: scale(1.05);
-}
+    .purpose-image-card:hover .purpose-image {
+        transform: scale(1.05);
+    }
 
-/* Content card */
-.purpose-content-card {
-    width: 100%;
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
-}
+    /* Content card */
+    .purpose-content-card {
+        width: 100%;
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+    }
 
-/* About Us specific styles */
-.about-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+    /* About Us specific styles */
+    .about-section {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
 
-.about-us-image {
-    width: 100%;
-}
+    .about-us-image {
+        width: 100%;
+    }
 
-.about-us-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
+    .about-us-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
 
-.purpose-taglines {
-    padding-left: 20px;
-    border-left: 2px solid #e61a27;
-    margin-top: 1.5rem;
-}
+    .purpose-taglines {
+        padding-left: 20px;
+        border-left: 2px solid #e61a27;
+        margin-top: 1.5rem;
+    }
 
     .purpose-heading {
         font-size: 1.5rem;

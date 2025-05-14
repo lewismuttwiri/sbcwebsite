@@ -16,7 +16,11 @@ body {
   /* top: 30px;
   left: 5%; Centered with percentage */
   z-index: 9999;
-  background-color: #0000008a;
+  background-color: #0E0E96;
+  border-width: 0px 0px 1px 0px;
+  border-style: ridge;
+  border-color: #ffffff4f;
+  border-bottom-left-radius: 3px;
   display: flex;
   align-items: center;
   padding: 0 20px;
