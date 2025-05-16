@@ -4,6 +4,8 @@
 {% block head %}
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'css/hero.css' %}" />
+
 
 {% endblock %}
 
@@ -13,7 +15,7 @@
     <div class="hero-content">
         <h2>Welcome to SBC Brands Kenya!</h2>
         <p>We're passionate about creating refreshing beverages that bring people together.</p>
-        <a href="{% url 'store:product_list' %}" class="hero-btn">Explore</a>
+        <a href="{% url 'store:product_list' %}" class="cta-button">Explore</a>
     </div>
 </div>
 
@@ -39,7 +41,7 @@
 
                         <!-- b-card-footer must be inside .card -->
                         <div class="b-card-footer">
-                            <button class="btn-add">View More</button>
+                            <button class="cta-button">View More</button>
                         </div>
                     </div>
                 </a>
@@ -103,7 +105,7 @@
 
     .social-hero {
         position: relative;
-        background: url('/static/images/social.jpg') no-repeat center center;
+        background: url('/static/videos/BRANDBANNER.mp4') no-repeat center center;
         background-size: cover;
         height: 400px;
         border-radius: 12px;
@@ -364,6 +366,8 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="{% static 'css/hero.css' %}" />
+
 
 {% endblock %}
 

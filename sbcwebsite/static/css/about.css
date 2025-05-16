@@ -21,13 +21,36 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--primary-blue), #1a1a7a);
     color: var(--white);
   }
 
-  .hero-content {
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(14, 14, 150, 0.7), rgba(26, 26, 122, 0.7));
+  }
+
+  .video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-hero-content {
     position: relative;
-    justify-self: auto;
     z-index: 2;
     text-align: center;
     max-width: 800px;
@@ -41,6 +64,7 @@
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s forwards 0.3s;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   }
 
   .hero-subtitle {
@@ -49,7 +73,69 @@
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s forwards 0.6s;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   }
+
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes floatIn {
+    0% {
+      opacity: 0;
+      transform: translateY(50px) rotate(-10deg);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 991px) {
+    .hero-title {
+      font-size: 3rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+
+    .floating-bottle {
+      height: 60%;
+      right: 2%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+
+  }
+
+  @media (max-width: 480px) {
+    .about-hero {
+      height: 70vh;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+  
+  }
+
 
   .hero-brands {
     display: flex;

@@ -8,23 +8,19 @@
 
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-
-
 <!-- Hero Section -->
 <section class="about-hero">
-  <div class="hero-content">
+  <div class="video-background">
+    <video autoplay muted loop id="hero-video">
+      <source src="{% static 'videos/ABOUTUSBANNER.mp4' %}" type="video/mp4">
+    </video>
+  </div>
+  <div class="about-hero-content">
     <h1 class="hero-title">About SBC Kenya Ltd</h1>
     <p class="hero-subtitle">Quenching Thirst, Inspiring Lives Since 2013</p>
-    <div class="hero-brands">
-      <img src="{% static 'images/pep-logo.png' %}" alt="Pepsi" class="brand-icon">
-      <img src="{% static 'images/7up.png' %}" alt="7UP" class="brand-icon">
-      <img src="{% static 'images/mir.png' %}" alt="Mirinda" class="brand-icon">
-      <img src="{% static 'images/mtn.png' %}" alt="Mountain Dew" class="brand-icon">
-    </div>
   </div>
-  <img src="{% static 'images/Pepsi-rotate.png' %}" alt="Pepsi Bottle" class="floating-bottle">
 </section>
-
+<!-- End Hero Section -->
 
 <!-- About Section -->
 <section class="about-section">

@@ -16,7 +16,7 @@ body {
   /* top: 30px;
   left: 5%; Centered with percentage */
   z-index: 9999;
-  background-color: #0E0E96;
+  background-color: #00000000;
   border-width: 0px 0px 1px 0px;
   border-style: ridge;
   border-color: #ffffff4f;
@@ -36,8 +36,8 @@ body {
 
 .logo1 {
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   margin-left: 30px;
   transition: all 0.3s ease;
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
@@ -99,14 +99,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%,
       rgba(255, 255, 255, 0.8) 0%,
       rgba(30, 144, 255, 0.6) 50%,
       #0E0E96 100%);
-  border: 3px solid rgba(255, 255, 255, 0.5);
+  border: 1px  solid  rgba(255, 255, 255, 0.5);
   box-shadow: 0 5px 15px rgba(14, 14, 150, 0.4),
     inset 0 3px 10px rgba(255, 255, 255, 0.4),
     inset 0 -3px 10px rgba(0, 0, 0, 0.2);

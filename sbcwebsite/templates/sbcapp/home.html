@@ -16,7 +16,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="Untree.co">
-	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+	<link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
 	<meta name="description" content="" />
 	<meta name="keywords" content="bootstrap, bootstrap4" />
@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/purpose.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/hero.css' %}" />
 	<link rel="stylesheet" href="{% static 'css/tiny-slider.css' %}" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<!-- Swiper CSS -->
@@ -36,30 +37,106 @@
 <body>
 
 
-	<!-- Start Hero Section -->
-	<div class="home-hero">
-		<div class="container">
-			<div class="row justify-content-between">
-				<div class="col-lg-4">
-					<div class="intro-excerpt">
-						<h1>SBC <span clsas="d-block">KENYA LTD</span></h1>
-						<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-							vulputate velit imperdiet dolor tempor tristique.</p>
-						<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#"
-								class="btn btn-white-outline">Explore</a></p>
-					</div>
-				</div>
-				<div class="col-lg-7">
-					<div class="home-hero-img-wrap">
-						<img src="{% static 'images/PackSOLO.png' %}" class="img-fluid">
-
-					</div>
-
+	<!-- Hero Section with Video Slider -->
+	<section class="hero-section">
+		<div class="video-slider">
+			<!-- Slide 1 -->
+			<div class="slide active">
+				<video autoplay muted loop>
+					<source src="{% static 'videos/MOUNTAINBANNER.mp4' %}" type="video/mp4">
+				</video>
+				<div class="slide-content">
+					<h1>Welcome to SBC</h1>
+					<p>Discover our innovative solutions and services</p>
+					<a href="#services" class="cta-button">Explore More</a>
 				</div>
 			</div>
+
+			<!-- Slide 2 -->
+			<div class="slide">
+				<video autoplay muted loop>
+					<source src="{% static 'videos/AQUAFINABANNER.mp4' %}" type="video/mp4">
+				</video>
+				<div class="slide-content">
+					<h1>Corporate Excellence</h1>
+					<p>Building partnerships that last through quality service</p>
+					<a href="#about" class="cta-button">About Us</a>
+				</div>
+			</div>
+
+			<!-- Slide 3 -->
+			<div class="slide">
+				<video autoplay muted loop>
+					<source src="{% static 'videos/EVERVESSBANNER.mp4' %}" type="video/mp4">
+				</video>
+				<div class="slide-content">
+					<h1>Product Showcase</h1>
+					<p>Explore our range of high-quality products</p>
+					<a href="#products" class="cta-button">View Products</a>
+				</div>
+			</div>
+
+			<!-- Slide 4 -->
+			<div class="slide">
+				<video autoplay muted loop>
+					<source src="{% static 'videos/STINGBANNER.mp4' %}" type="video/mp4">
+				</video>
+				<div class="slide-content">
+					<h1>Our Team</h1>
+					<p>Meet the experts behind our success</p>
+					<a href="#team" class="cta-button">Meet Us</a>
+				</div>
+			</div>
+
+			<!-- Slide 5 -->
+			<div class="slide">
+				<video autoplay muted loop>
+					<source src="{% static 'videos/MIRINDABANNER.mp4' %}" type="video/mp4">
+				</video>
+				<div class="slide-content">
+					<h1>Innovation Hub</h1>
+					<p>Where creativity meets technology</p>
+					<a href="#innovation" class="cta-button">Discover</a>
+				</div>
+			</div>
+
+			<!-- Slide 6 -->
+			<div class="slide">
+				<video autoplay muted loop>
+					<source src="{% static 'videos/PEPSIBANNER.mp4' %}" type="video/mp4">
+				</video>
+				<div class="slide-content">
+					<h1>Client Success Stories</h1>
+					<p>See what our clients have to say about us</p>
+					<a href="#testimonials" class="cta-button">Read More</a>
+				</div>
+			</div>
+
+			<!-- Slide 7 -->
+			<div class="slide">
+				<video autoplay muted loop>
+					<source src="{% static 'videos/SEVENUPBANNER.mp4' %}" type="video/mp4">
+				</video>
+				<div class="slide-content">
+					<h1>Get In Touch</h1>
+					<p>Let's start a conversation about your needs</p>
+					<a href="#contact" class="cta-button">Contact Us</a>
+				</div>
+			</div>
+
+			<!-- Slider Controls -->
+			<div class="slider-controls">
+				<div class="slider-dot active" data-slide="0"></div>
+				<div class="slider-dot" data-slide="1"></div>
+				<div class="slider-dot" data-slide="2"></div>
+				<div class="slider-dot" data-slide="3"></div>
+				<div class="slider-dot" data-slide="4"></div>
+				<div class="slider-dot" data-slide="5"></div>
+				<div class="slider-dot" data-slide="6"></div>
+			</div>
 		</div>
-	</div>
-	<!-- End Hero Section -->
+	</section>
+
 
 
 
@@ -75,7 +152,7 @@
 						objectives is demonstrated through the diversification of our beverage
 						portfolio, thereby furnishing consumers with an expanded range of choices
 						and the requisite information for making sound decisions regarding a balanced diet.</p>
-					<p><a href="{% url 'store:category_list' %}" class="btn">Explore</a></p>
+					<p><a href="{% url 'store:category_list' %}" class="cta-button">Explore</a></p>
 				</div>
 
 				<!-- Column 2: Swiper Slider -->
@@ -181,7 +258,8 @@
 						is grounded<br> in four pillars.</p>
 
 					<div class="row my-5">
-						<div class="col-6 col-md-6">
+						<!-- tile 1 -->
+						<div class="col-12 col-md-6">
 							<div class="feature">
 								<div class="icon">
 									<img src="{% static 'images/truck.svg' %}" alt="Image" class="imf-fluid">
@@ -191,8 +269,9 @@
 									circularity.</p>
 							</div>
 						</div>
+						<!-- tile 2 -->
 
-						<div class="col-6 col-md-6">
+						<div class="col-12 col-md-6">
 							<div class="feature">
 								<div class="icon">
 									<img src="{% static 'images/bag.svg' %}" alt="Image" class="imf-fluid">
@@ -202,8 +281,9 @@
 									opportunity programs.</p>
 							</div>
 						</div>
+						<!-- tile 3 -->
 
-						<div class="col-6 col-md-6">
+						<div class="col-12 col-md-6">
 							<div class="feature">
 								<div class="icon">
 									<img src="{% static 'images/support.svg' %}" alt="Image" class="imf-fluid">
@@ -213,8 +293,9 @@
 									strengthen communities.</p>
 							</div>
 						</div>
+						<!-- tile 4 -->
 
-						<div class="col-6 col-md-6">
+						<div class="col-12 col-md-6">
 							<div class="feature">
 								<div class="icon">
 									<img src="{% static 'images/return.svg' %}" alt="Image" class="imf-fluid">
@@ -224,14 +305,15 @@
 									ambitions.</p>
 							</div>
 						</div>
-						<p><a href="{% url 'sbcapp:about' %}" class="btn">Learn More About Us</a></p>
+
+						<p><a href="{% url 'sbcapp:about' %}" class="cta-button">Learn More About Us</a></p>
 
 					</div>
 				</div>
 
 				<div class="col-lg-5">
-					<div class="img-wrap">
-						<img src="{% static 'images/best_pepsi.jpg' %}" alt="Image" class="img-fluid">
+					<div class="about-img-wrap">
+						<img src="{% static 'images/pepsipost.png' %}" alt="Image" class="img-fluid">
 
 					</div>
 				</div>
@@ -247,10 +329,10 @@
 			<div class="row justify-content-between">
 				<div class="col-lg-7 mb-5 mb-lg-0">
 					<div class="imgs-grid">
-						<div class="grid grid-1"><img src="{% static 'images/sevenup.jpg' %}" alt="Untree.co"></div>
-						<div class="grid grid-2"><img src="{% static 'images/coldpepsi.jpg' %}" alt="Untree.co">
+						<div class="grid grid-1"><img src="{% static 'images/mirndaflip.jpg' %}" alt="Untree.co"></div>
+						<div class="grid grid-2"><img src="{% static 'images/8.png' %}" alt="Untree.co">
 						</div>
-						<div class="grid grid-3"><img src="{% static 'images/funwithmirinda.jpg' %}" alt="Untree.co">
+						<div class="grid grid-3"><img src="{% static 'images/5.png' %}" alt="Untree.co">
 						</div>
 					</div>
 				</div>
@@ -264,7 +346,7 @@
 						<li>Competitive Benefits & Rewards</li>
 						<li>Community Engagement</li>
 					</ul>
-					<p><a herf="{% url 'recruitment:advertisement_list' %}" class="btn">Explore</a></p>
+					<p><a herf="{% url 'recruitment:advertisement_list' %}" class="cta-button">Explore</a></p>
 				</div>
 			</div>
 		</div>
@@ -340,7 +422,7 @@
 					</div>
 
 					<div class="purpose-cta-wrapper">
-						<a href="#" class="purpose-cta">
+						<a href="#" class="cta-button">
 							Learn more about us
 						</a>
 					</div>
@@ -421,7 +503,7 @@
 					</div>
 
 					<div class="purpose-cta-wrapper">
-						<a href="#" class="purpose-cta">
+						<a href="#" class="cta-button">
 							Discover our mission
 						</a>
 					</div>
@@ -476,6 +558,7 @@
 
 
 
+	<script src="{% static 'js/hero-slider.js' %}"></script>
 	<script src="{% static 'js/custom.js' %}"></script>
 	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 	<script src="{% static 'js/tiny-slider.js' %}"></script>
