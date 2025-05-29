@@ -1,0 +1,95 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}Welcome to SBC Kenya{% endblock %}
+
+{% block header_class %}success{% endblock %}
+
+{% block header_title %}🎉 Welcome to SBC Kenya!{% endblock %}
+
+{% block header_subtitle %}
+<p class="header-subtitle">Your account has been created successfully</p>
+{% endblock %}
+
+{% block content %}
+<h2 class="greeting">Hello <span class="highlight-text">{{ user.get_full_name|default:user.username }}</span>,</h2>
+
+<p>🎊 <strong>Welcome to SBC Kenya!</strong> We're absolutely thrilled to have you join our growing community of satisfied customers. Thank you for choosing us as your trusted partner!</p>
+
+<p>Your account has been created following your recent order. This account will make all your future interactions with us smoother and more convenient.</p>
+
+<div class="info-box success-box">
+    <h4>Your Account Details</h4>
+    <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 15px;">
+        <div style="display: grid; gap: 12px;">
+            <div style="display: flex; align-items: center; padding: 8px; border-bottom: 1px solid #eee;">
+                <strong style="color: #28a745; min-width: 120px;">📧 Email:</strong>
+                <span style="font-size: 16px;">{{ user.email }}</span>
+            </div>
+            <div style="display: flex; align-items: center; padding: 8px;">
+                <strong style="color: #28a745; min-width: 120px;">👤 Username:</strong>
+                <span style="font-size: 16px; font-weight: 600;">{{ user.username }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if reset_url %}
+<div class="info-box warning-box">
+    <h4>Set Your Password</h4>
+    <p style="margin-bottom: 0;">To access your account, you'll need to set a secure password. Click the button below to get started!</p>
+</div>
+{% elif password %}
+<div class="info-box warning-box">
+    <h4>Temporary Password</h4>
+    <p><strong>Your temporary password:</strong></p>
+    <div style="background: white; padding: 15px; border-radius: 8px; margin: 10px 0; border: 2px dashed #ffc107;">
+        <code style="font-size: 18px; font-weight: bold; color: #856404; letter-spacing: 1px;">{{ password }}</code>
+    </div>
+    <p style="margin-bottom: 0;"><strong>⚠️ Important:</strong> Please login and change this password immediately for security reasons.</p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block action_section %}
+{% if reset_url %}
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ reset_url }}" class="button">🔐 Set Your Password</a>
+    <p style="font-size: 12px; color: #6c757d; margin-top: 10px;">⏰ This link expires in 24 hours</p>
+</div>
+{% else %}
+<div style="text-align: center; margin: 30px 0;">
+    <a href="https://sbckenya.com/login" class="button">🚀 Login to Your Account</a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block additional_info %}
+<div class="info-box">
+    <h4>What You Can Do With Your Account</h4>
+    <ul class="steps-list">
+        <li><strong>Track Orders:</strong> Monitor your purchases in real-time</li>
+        <li><strong>Order History:</strong> View all your past transactions</li>
+        <li><strong>Quick Reorder:</strong> Easily reorder your favorite items</li>
+        <li><strong>Exclusive Offers:</strong> Get access to member-only deals</li>
+        <li><strong>Priority Support:</strong> Faster customer service response</li>
+        <li><strong>Wishlist:</strong> Save items for later purchase</li>
+    </ul>
+</div>
+
+<div class="info-box success-box">
+    <h4>Getting Started Tips</h4>
+    <ul class="steps-list">
+        <li><strong>Complete Your Profile:</strong> Add your details for personalized service</li>
+        <li><strong>Set Preferences:</strong> Customize your shopping experience</li>
+        <li><strong>Subscribe to Updates:</strong> Stay informed about new products</li>
+        <li><strong>Follow Us:</strong> Connect on social media for latest news</li>
+    </ul>
+</div>
+
+<div class="divider"></div>
+
+<p style="text-align: center; font-size: 18px; color: #666; font-style: italic;">
+    "Welcome aboard! Your journey with SBC Kenya starts now!" 🚀
+</p>
+{% endblock %}
+

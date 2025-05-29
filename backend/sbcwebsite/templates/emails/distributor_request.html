@@ -1,0 +1,47 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}New Distributor Partnership Application - SBC Kenya{% endblock %}
+
+{% block header_class %}info{% endblock %}
+
+{% block header_title %}New Partnership Application{% endblock %}
+
+{% block header_subtitle %}
+<p>Distributor Partnership Request</p>
+{% endblock %}
+
+{% block content %}
+<p>A new distributor partnership application has been received from the SBC Kenya website.</p>
+
+
+<h2>Applicant Information:</h2>
+<p><strong>Name:</strong> {{ full_name }}</p>
+<p><strong>Email:</strong> {{ email }}</p>
+<p><strong>Phone:</strong> {{ phone_number }}</p>
+<p><strong>Company Name:</strong> {{ company_name }}</p>
+<p><strong>Distribution Area:</strong> {{ distribution_area }}</p>
+<p><strong>Application Status:</strong> {{ status }}</p>
+<p><strong>Submitted:</strong> {{ submitted_at|date:"F d, Y \a\t g:i A" }}</p>
+
+<h2>Documents Submitted:</h2>
+<p>ID Document (Front)</p>
+<p>ID Document (Back)</p>
+<p>Business License</p>
+<p>Tax Certificate</p>
+
+{% endblock %}
+
+{% block action_section %}
+<div class="action-section">
+    <a href="sbckenya.com/admin/partner/partnerapplication/" class="button">View in Admin Panel</a>
+</div>
+{% endblock %}
+
+{% block contact_section %}
+<div class="contact-section">
+    <p>
+        This application was submitted through the SBC Kenya partnership portal.<br>
+        Application ID: #{{ id }} | For questions, contact the Sales team.
+    </p>
+</div>
+{% endblock %}

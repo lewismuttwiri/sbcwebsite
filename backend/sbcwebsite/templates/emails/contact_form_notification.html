@@ -1,0 +1,34 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}New Contact Form Submission - SBC Kenya{% endblock %}
+
+{% block header_class %}info{% endblock %}
+
+{% block header_title %}New Contact Submission{% endblock %}
+
+{% block header_subtitle %}
+<p>Website Contact Form</p>
+{% endblock %}
+
+{% block content %}
+<p>A new contact form submission has been received from the SBC Kenya website.</p>
+
+<h4>Contact Details:</h4>
+<p><strong>Name:</strong> {{ name }}</p>
+<p><strong>Email:</strong> {{ email }}</p>
+{% if phone %}
+<p><strong>Phone:</strong> {{ phone }}</p>
+{% endif %}
+<p><strong>Subject:</strong> {{ subject_text }}</p>
+<p><strong>Submitted:</strong> {{ submission_date }}</p>
+
+<h4>Message:</h4>
+<p>{{ message_text|linebreaks }}</p>
+{% endblock %}
+
+{% block action_section %}
+<p>To reply, click the email below:</p>
+<p><a href="mailto:{{ email }}">{{ email }}</a></p>
+{% endblock %}
+
+{% block contact_section %}{% endblock %}

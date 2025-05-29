@@ -1,0 +1,54 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}Order Confirmation #{{ order.id }} - SBC Kenya{% endblock %}
+
+{% block header_class %}success{% endblock %}
+
+{% block header_title %}Order Confirmed!{% endblock %}
+
+{% block header_subtitle %}
+<p>Order #{{ order.id }} • {{ order.created_at|date:"F d, Y" }}</p>
+{% endblock %}
+
+{% block content %}
+<h2>Hello {{ order.name|default:user.get_full_name|default:user.username }},</h2>
+
+<p>Your order has been confirmed and we're working to get it ready for you. Thank you for choosing SBC Kenya!</p>
+
+<h2>Order Summary</h2>
+<p><strong>Order Number:</strong> #{{ order.id }}</p>
+<p><strong>Order Date:</strong> {{ order.created_at|date:"F d, Y \a\t g:i A" }}</p>
+<p><strong>Total Amount:</strong> KSh {{ order.total_price|floatformat:2 }}</p>
+<p><strong>Status:</strong> {{ order.get_status_display }}</p>
+
+<h2>Items Ordered</h2>
+{% for item in order.items.all %}
+<div>
+    <p>{{ item.product_name }}</p>
+    {% if item.product and item.product.category %}
+    <p>Brand: {{ item.product.category.name }}</p>
+    {% endif %}
+    <p>Quantity: {{ item.quantity }}</p>
+    <p>Price: KSh {{ item.price|floatformat:2 }}</p>
+    <p>Total: KSh {{ item.total_price|floatformat:2 }}</p>
+</div>
+{% empty %}
+<p>No items found in this order.</p>
+{% endfor %}
+
+<p><strong>Order Total: KSh {{ order.total_price|floatformat:2 }}</strong></p>
+
+<h2>Delivery Information</h2>
+<p><strong>Email:</strong> {{ order.email }}</p>
+<p><strong>Phone:</strong> {{ order.phone_number }}</p>
+<p><strong>City/Region:</strong> {{ order.city }}</p>
+<p><strong>Delivery Address:</strong> {{ order.address }}</p>
+{% if order.order_notes %}
+<p><strong>Additional Notes:</strong> {{ order.order_notes }}</p>
+{% endif %}
+
+{% endblock %}
+
+{% block action_section %}
+<p><a href="https://sbckenya.com/products">Continue Shopping</a></p>
+{% endblock %}

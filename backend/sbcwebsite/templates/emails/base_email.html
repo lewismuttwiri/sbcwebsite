@@ -1,0 +1,394 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block email_title %}SBC Kenya{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #000000;
+            background: #0e0e96;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .email-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header.primary {
+            background: #0e0e96;
+        }
+
+        .header.success {
+            background: #0e0e96;
+        }
+
+        .header.warning {
+            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+            color: #333;
+        }
+
+        .header.info {
+            background: #0E0E96;
+        }
+
+        .header.danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+
+        .logo {
+            max-width: 160px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-subtitle {
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        .content {
+            padding: 40px 30px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .greeting {
+            font-size: 24px;
+            color: #0E0E96;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .content p {
+            margin-bottom: 16px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: #0E0E96;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #0e0e96;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-box h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #000000;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-box h4::before {
+            content: "ℹ️";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left-color: #0E0E96;
+        }
+
+        .success-box h4 {
+            color: #155724;
+        }
+
+        .success-box h4::before {
+            content: "✅";
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left-color: #ffc107;
+        }
+
+        .warning-box h4 {
+            color: #856404;
+        }
+
+        .warning-box h4::before {
+            content: "⚠️";
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .steps-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-start;
+            font-size: 15px;
+        }
+
+        .steps-list li:last-child {
+            border-bottom: none;
+        }
+
+        .steps-list li::before {
+            content: "👉";
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid #dee2e6;
+        }
+
+        .contact-info h3 {
+            color: #0E0E96;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info h3::before {
+            content: "📞";
+            margin-right: 10px;
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item strong {
+            color: #0E0E96;
+            min-width: 120px;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #0E0E96;
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            margin: 25px 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 8px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #dee2e6, transparent);
+            margin: 30px 0;
+            border-radius: 1px;
+        }
+
+        .highlight-text {
+            background: linear-gradient(120deg, #FFFFFF);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .footer {
+                padding: 30px 20px;
+            }
+
+            .contact-info {
+                padding: 20px;
+            }
+
+            .social-links a {
+                margin: 5px;
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <div class="email-wrapper">
+        <div class="header {% block header_class %}primary{% endblock %}">
+            <h1>{% block header_title %}SBC Kenya{% endblock %}</h1>
+            {% block header_subtitle %}{% endblock %}
+        </div>
+
+        <div class="content">
+            {% block content %}
+            <h2 class="greeting">Hello!</h2>
+            <p>This is a message from SBC Kenya.</p>
+            {% endblock %}
+
+            {% block action_section %}{% endblock %}
+
+            {% block additional_info %}{% endblock %}
+        </div>
+
+        {% block contact_section %}
+        <div class="contact-info">
+            <h3>Contact Information</h3>
+
+            <div class="contact-item">
+                <strong>📧 Email:</strong> info@sbckenya.com
+            </div>
+
+            <div class="contact-item">
+                <strong>📞 Phone:</strong> +254 (0)20 8635000
+            </div>
+
+            <div class="contact-item">
+                <strong>🏢 Address:</strong> SBC Kenya,Babadogo-Nairobi, Kenya
+            </div>
+
+            <div class="contact-item">
+                <strong>🕒 Hours:</strong> Mon-Fri: 8AM-5PM, Sat: 9AM-1PM
+            </div>
+        </div>
+        {% endblock %}
+
+        <div class="footer">
+            <p><strong>SBC Kenya</strong></p>
+            <p>Your trusted partner for quality products and services</p>
+            <p>Visit: <a href="https://sbckenya.com" style="color: #74b9ff;">www.sbckenya.com</a></p>
+
+            <div class="social-links">
+                <a href="https://facebook.com/sbckenya">📘 Facebook</a>
+                <a href="https://twitter.com/sbckenya">🐦 Twitter</a>
+                <a href="https://linkedin.com/company/sbckenya">💼 LinkedIn</a>
+                <a href="https://instagram.com/sbckenya">📸 Instagram</a>
+            </div>
+
+            <p style="margin-top: 20px; font-size: 12px; opacity: 0.7;">
+                &copy; {% now "Y" %} SBC Kenya. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

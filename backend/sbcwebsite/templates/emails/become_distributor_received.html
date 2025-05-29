@@ -1,0 +1,61 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}Partnership Application Received - SBC Kenya{% endblock %}
+
+{% block header_class %}success{% endblock %}
+
+{% block header_title %}Application Received{% endblock %}
+
+{% block header_subtitle %}
+<p style="margin: 10px 0 0 0; opacity: 0.9;">Thank you for your interest in partnering with SBC Kenya</p>
+{% endblock %}
+
+{% block content %}
+<h2>Dear {{ first_name }} {{ last_name }},</h2>
+
+<p>Thank you for submitting your distributor partnership application with SBC Kenya. We have successfully received your
+    application and our sales team will review it shortly.</p>
+
+
+<h2>Application Summary:</h2>
+<p><strong>Application ID:</strong> #{{ id }}</p>
+<p><strong>Applicant Name:</strong> {{ full_name }}</p>
+{% if company_name %}<p><strong>Company Name:</strong> {{ company_name }}</p>{% endif %}
+<p><strong>Distribution Area:</strong> {{ distribution_area }}</p>
+<p><strong>Submission Date:</strong> {{ submitted_at|date:"F d, Y \a\t g:i A" }}</p>
+<p><strong>Status:</strong> <span style="color: #ffc107; font-weight: bold;">{{ status }}</span></p>
+
+<p>We appreciate your interest in becoming a distribution partner with SBC Kenya.
+    You will be contacted within 3-5 business days for further evaluation and discussion on the next steps in the
+    partnership process.</p>
+
+<p>If you have any questions about your application, please don't hesitate to contact us using the
+    information below.</p>
+{% endblock %}
+
+{% block action_section %}
+<div style="text-align: center; margin: 30px 0;">
+    <a href="mailto:info@sbckenya.com" class="button" style="background-color: #007bff;">Email Us</a>
+</div>
+{% endblock %}
+{% block contact_section %}
+<div class="contact-info">
+    <h3>Contact Information</h3>
+
+    <div class="contact-item">
+        <strong>📧 Email:</strong> info@sbckenya.com
+    </div>
+
+    <div class="contact-item">
+        <strong>📞 Phone:</strong> +254 (0)20 8635000
+    </div>
+
+    <div class="contact-item">
+        <strong>🏢 Address:</strong> SBC Kenya,Babadogo-Nairobi, Kenya
+    </div>
+
+    <div class="contact-item">
+        <strong>🕒 Hours:</strong> Mon-Fri: 8AM-5PM, Sat: 9AM-1PM
+    </div>
+</div>
+{% endblock %}

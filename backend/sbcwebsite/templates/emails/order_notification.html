@@ -1,0 +1,68 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}New Order #{{ order.id }} - SBC Kenya Admin{% endblock %}
+
+{% block header_class %}info{% endblock %}
+
+{% block header_title %} New Order Received{% endblock %}
+
+{% block header_subtitle %}
+<p class="header-subtitle">Order #{{ order.id }} • {{ order.created_at|date:"F d, Y \a\t g:i A" }}</p>
+{% endblock %}
+
+{% block content %}
+<h2 class="greeting">New Order Alert!</h2>
+
+<p>A new order has been placed on SBC Kenya. Here are the details:</p>
+
+<div class="info-box info-box-blue">
+    <h4>Order Information</h4>
+    <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 15px;">
+        <div style="display: grid; gap: 12px;">
+            <div style="display: flex; justify-content: space-between;">
+                <strong>Order ID:</strong>
+                <span>#{{ order.id }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <strong>Customer:</strong>
+                <span>{{ order.name }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <strong>Email:</strong>
+                <span>{{ order.email }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <strong>Phone:</strong>
+                <span>{{ order.phone_number }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <strong>Total Amount:</strong>
+                <span style="font-weight: bold; color: #28a745;">KSh {{ order.total_price|floatformat:2 }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="info-box">
+    <h4>Order Items</h4>
+    <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 15px;">
+        {% for item in order.items.all %}
+        <div style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee;">
+            <div>
+                <strong>{{ item.product_name }}</strong><br>
+                <small>Qty: {{ item.quantity }} × KSh {{ item.price|floatformat:2 }}</small>
+            </div>
+            <div style="font-weight: bold;">
+                KSh {{ item.total_price|floatformat:2 }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ admin_order_url }}" class="button button-primary">
+        View Order in Admin
+    </a>
+</div>
+{% endblock %}
