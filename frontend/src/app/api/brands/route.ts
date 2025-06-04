@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const url = `${API_URL}/store/api/categories/`;
+  const url = `${API_URL}store/api/categories/`;
 
   try {
     const response = await fetch(url, {

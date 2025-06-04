@@ -124,8 +124,7 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    {
+        {
       name: "Our Story",
       href: "/about",
       dropdown: [
@@ -155,18 +154,15 @@ const Navbar = () => {
         },
       ],
     },
-    // {
-    //   name: "Careers",
-    //   href: "/careers",
-    //   dropdown: [
-    //     { name: "Job Openings", href: "/careers/jobs" },
-    //     { name: "Why Join Us", href: "/careers" },
-    //   ],
-    // },
-    {
-      name: "Become a Distributor",
-      href: "/partner/distributor",
-    },
+   {
+     name: "Opportunities",
+     href: "/careers",
+     dropdown: [
+       { name: "Careers", href: "/careers" },
+       { name: "Tenders", href: "/tenders" },
+       {name: "Become a distributor", href: "/partner/distributor"},
+     ],
+   },
   ];
 
   return (
@@ -204,9 +200,9 @@ const Navbar = () => {
                                 className={`px-3 py-2 text-sm text-white font-medium text-left ${
                                   isActive(link.href)
                                     ? "text-white font-medium"
-                                    : "hover:text-white"
+                                    : "hover:opacity-70"
                                 }`}
-                                onClick={() => router.push(link.href)}
+                                onClick={() => router.push(link.href)}	
                               >
                                 {link.name}
                               </button>
@@ -220,7 +216,7 @@ const Navbar = () => {
                                       : link.name
                                   );
                                 }}
-                                className="p-1 text-white hover:text-white focus:outline-none"
+                                className="p-1 text-white hover:opacity-80 focus:outline-none"
                                 aria-expanded={activeDropdown === link.name}
                                 aria-label="Toggle dropdown"
                               >
@@ -239,7 +235,7 @@ const Navbar = () => {
                               className={`px-3 py-2 text-sm font-medium ${
                                 isActive(link.href)
                                   ? "text-white font-medium"
-                                  : "text-white hover:text-white"
+                                  : "text-white hover:opacity-80"
                               }`}
                             >
                               {link.name}
@@ -255,7 +251,7 @@ const Navbar = () => {
                               <Link
                                 key={item.name}
                                 href={item.href}
-                                className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-white hover:text-black transition-colors duration-300"
+                                className="flex items-center px-4 py-3 text-sm text-gray-700 hover:text-black transition-colors duration-300"
                                 onClick={() => setActiveDropdown(null)}
                               >
                                 {item.name}
@@ -320,14 +316,14 @@ const Navbar = () => {
                         <>
                           <Link
                             href="/auth/signup"
-                            className="flex items-center px-4 py-3 text-gray-800 hover:bg-white hover:text-white transition-colors duration-300"
+                            className="flex items-center px-4 py-3 text-gray-800 hover:bg-white transition-colors duration-300"
                             onClick={() => setActiveDropdown(null)}
                           >
                             Sign Up
                           </Link>
                           <Link
                             href="/auth/login"
-                            className="flex items-center px-4 py-3 text-gray-800 hover:bg-white hover:text-white transition-colors duration-300 border-t border-gray-100"
+                            className="flex items-center px-4 py-3 text-gray-800 hover:bg-whit transition-colors duration-300 border-t border-gray-100"
                             onClick={() => setActiveDropdown(null)}
                           >
                             Log In
@@ -503,22 +499,24 @@ const Navbar = () => {
                       )}
                     </div>
                     {link.dropdown && activeDropdown === link.name && (
-                      <div className="pl-4">
-                        {link.dropdown.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            className="block px-3 py-2 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors duration-300"
-                            onClick={() => {
-                              setIsMenuOpen(false);
-                              setActiveDropdown(null);
-                            }}
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+			                          <div className="relative left-0 mt-2 w-56 bg-white z-50 dropdown-container">
+						                          <div className="py-1">
+									                            {link.dropdown.map((item) => (
+													                                <Link
+																	                              key={item.name}
+																				                                    href={item.href}
+																								                                  className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-white hover:text-black transition-colors duration-300"
+																												                                onClick={() => {
+																																	                                setActiveDropdown(null);
+																																					                                setIsMenuOpen(false);
+																																									                              }}
+																																												                                  >
+																																																                                {item.name}
+																																																				                            </Link>
+																																																							                              ))}
+																																																										                              </div>
+																																																													                            </div>
+																																																																                        )}
                   </div>
                 ))}
               </div>

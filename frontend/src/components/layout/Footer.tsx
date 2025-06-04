@@ -151,7 +151,7 @@ const Footer = ({
                 </li>
                 <li>
                   <Link
-                    href="contact/distributor"
+                    href="/contact/distributor"
                     className="text-gray-300 hover:text-white transition-colors"
                   >
                     Find a Distributor Near Me
@@ -182,7 +182,7 @@ const Footer = ({
                 <li className="flex items-start space-x-2">
                   <CiPhone size={24} />
                   <Link href="tel:+020 8635000" className="text-gray-300">
-                    +020 8635000
+                    020 8635000
                   </Link>
                 </li>
               </ul>

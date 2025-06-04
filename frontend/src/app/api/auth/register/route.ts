@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const url = `${apiUrl}api/auth/register/`;
+  const url = `${apiUrl}auth/api/auth/register/`;
 
   try {
     const requestData = await request.json();

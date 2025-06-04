@@ -83,35 +83,37 @@ export default function ProductDetailPage({
   }, [product, isInitialized]);
 
   // Load product data
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        const params = await paramsPromise;
+   useEffect(() => {
+	       const loadProduct = async () => {
+		             try {
+				             const params = await paramsPromise;
 
-        // Find the product by slug asynchronously
-        const foundProduct = await getProductBySlug(params.slug);
+					             const products = await fetch("/api/products");
+						             if (!products.ok) {
+								               toast("Failed to fetch products");
+									                 return;
+											         }
+												         const data = await products.json();
+													         
+													         const foundProduct = data.find(
+															           (product: Product) => product.slug.toLowerCase() === params.slug.toLowerCase()
+																           );
+																	           if (foundProduct) {
+																			             setProduct(foundProduct);
+																				             } else {
+																						               console.error(`Product with slug ${params.slug} not found`);
+																							                 router.push("/products");
+																									         }
+																										       } catch (error) {
+																											               console.error("Error loading product:", error);
+																														             router.push("/products");
+																															           } finally {
+																																	           setIsLoading(false);
+																																		         }
+																																			     };
 
-        if (foundProduct) {
-          setProduct({
-            ...foundProduct,
-            price: foundProduct.price || 0, // Ensure price is always a number
-            images: foundProduct.images || [],
-          });
-        } else {
-          console.error(`Product with slug ${params.slug} not found`);
-          // Redirect to products page if product not found
-          router.push("/products");
-        }
-      } catch (error) {
-        console.error("Error loading product:", error);
-        router.push("/products");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadProduct();
-  }, [paramsPromise, router]);
+																																			         loadProduct();
+																																				   }, [paramsPromise, router]);
 
   if (isLoading) {
     return (

@@ -92,7 +92,7 @@ export default function HeroSection() {
       {/* Gradient overlay for better text visibility */}
       <div className="absolute inset-0">
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/70 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent mix-blend-multiply" />
         {/* Gradient overlay - darker at the top, lighter at the bottom */}
         {/* bg-gradient-to-b from-black/40 via-black/40 to-black/10 */}
         <div className="absolute inset-0" />
@@ -156,7 +156,7 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start max-w-xs md:max-w-none md:mx-0">
               <button
                 className="bg-white text-black px-3 md:px-6 py-3 md:py-3 rounded-lg text-sm md:text-base font-semibold hover:bg-opacity-90 transition-all tracking-wide"
-                onClick={() => (window.location.href = "/products")}
+                onClick={() => (window.location.href = "/brands")}
               >
                 Explore Our brands
               </button>

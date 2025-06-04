@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Container from '@/components/layout/Container';
 import Input from '@/components/ui/Input';
 import Button from '@/components/Button';
+import {useRouter} from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -17,9 +18,11 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+
 export default function ForgotPasswordPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -32,7 +35,7 @@ export default function ForgotPasswordPage() {
   const onSubmit = async (data: FormData) => {
     try {
       setIsSubmitting(true);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/auth/resetpassword/`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/api/auth/sendOTP/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,6 +50,7 @@ export default function ForgotPasswordPage() {
       }
 
       setEmailSent(true);
+      router.push("auth/verify-email");
       toast.success('Password reset link sent to your email!');
     } catch (error: any) {
       console.error('Password reset error:', error);
@@ -65,7 +69,7 @@ export default function ForgotPasswordPage() {
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Check your email</h2>
           <p className="mt-2 text-sm text-gray-600">
-            We've sent a password reset link to your email address. Please check your inbox and follow the instructions to reset your password.
+            We've sent an OTP to your email address. Please check your inbox and follow the instructions to reset your password.
           </p>
           <div className="mt-6">
             <Link

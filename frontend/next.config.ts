@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       "https://cbc5-197-248-44-59.ngrok-free.app", //new backend link
       "http://localhost:3000",
       "http://localhost:3001",
+      "https://sbckenya.com",
     ];
 
     return [
@@ -65,15 +66,20 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "8ab7-197-248-44-59.ngrok-free.app", //frontend link
+        hostname: "sbckenya.com",
+	
+      },
+      {
+        protocol: "https",
+        hostname: "sbckenya.com", //frontend link
         port: "",
         pathname: "/media/images/**",
       },
     ],
     unoptimized: false,
     domains: [
-      "1d4d-197-248-44-59.ngrok-free.app", //backend link
-      "8ab7-197-248-44-59.ngrok-free.app", //frontend link
+      "sbckenya.com", //backend link
+      "sbckenya.com", //frontend link
       "localhost",
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

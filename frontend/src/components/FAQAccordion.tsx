@@ -103,7 +103,7 @@ const FAQAccordion = () => {
           </p>
           <ol className="list-decimal pl-5 space-y-1">
             <li>Contact our sales team or your local PEPSI distributor</li>
-            <li>Complete the retailer application form</li>
+            <li>Distribution route planning</li>
             <li>Agree to our terms and conditions</li>
             <li>Set up your account with our distribution network</li>
           </ol>
@@ -153,7 +153,7 @@ const FAQAccordion = () => {
                 href="tel:+0208635000"
                 className="text-blue-600 hover:underline"
               >
-                +020 863 5000
+                020 863 5000
               </a>
             </li>
             <li>

@@ -22,7 +22,7 @@ export async function GET(
     );
   }
 
-  const url = `${apiUrl}/store/api/orders/${id}/`;
+  const url = `${apiUrl}store/api/orders/${id}/`;
 
   const token = req.headers.get("Authorization");
 

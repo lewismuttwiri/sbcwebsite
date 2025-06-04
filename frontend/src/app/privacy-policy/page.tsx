@@ -146,7 +146,7 @@ export default function PrivacyPolicy() {
                 <br />
                 Email: info@sbckenya.com
                 <br />
-                Phone: +254 722 000 000
+                Phone: 020 8635000
               </address>
             </section>
           </div>

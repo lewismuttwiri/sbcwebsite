@@ -4,7 +4,7 @@ import { NewsArticle } from "@/data/news";
 // Get all news articles
 export async function GET() {
   const api_url = process.env.NEXT_PUBLIC_API_URL;
-  const url = `${api_url}/news/api/news/`;
+  const url = `${api_url}news/api/news/`;
 
   try {
     const response = await fetch(url, {

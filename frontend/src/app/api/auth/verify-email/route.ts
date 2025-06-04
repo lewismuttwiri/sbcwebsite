@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const url = `${apiUrl}api/auth/verifyOTP/`;
+  const url = `${apiUrl}auth/api/auth/verifyOTP/`;
   console.log("Verification URL:", url);
 
   try {

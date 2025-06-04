@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const url = `${apiUrl}api/auth/login/`;
+  const url = `${apiUrl}auth/api/auth/login/`;
   console.log("Login URL:", url);
 
   try {

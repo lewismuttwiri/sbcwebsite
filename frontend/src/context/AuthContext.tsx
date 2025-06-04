@@ -141,6 +141,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         if (!response.ok) {
           console.error("Login failed:", "Unknown error");
+	  toast("Login failed");
           throw new Error("Login failed");
         }
 
@@ -152,6 +153,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           console.error("Failed to parse login response:", error);
           throw new Error("Invalid response from server");
         });
+
+	if(data.entity == null){
+		toast.error("Login failed");
+		return;
+	}	
 
         console.log("Login successful, user data:", data);
 

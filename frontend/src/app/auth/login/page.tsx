@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-
+import { useRef } from "react";
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z
@@ -30,7 +30,7 @@ const formSchema = z.object({
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { login, error, clearError } = useAuth();
-
+  const hasRun = useRef(false);
   const {
     register,
     handleSubmit,
@@ -49,8 +49,10 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (error) {
+     if (hasRun.current) return;
       toast.error(error);
       clearError();
+      hasRun.current = true;
     }
   }, [error, clearError]);
 
@@ -145,13 +147,13 @@ export default function LoginPage() {
                   </div>
 
                   <div className="text-sm">
-                    <Link
-                      href="/auth/forgot-password"
-                      className="font-medium text-blue-600 hover:text-blue-500"
+                  <Link
+                     href="/auth/forgot-password"
+                     className="font-medium text-blue-600 hover:text-blue-500"
                     >
-                      Forgot your password?
-                    </Link>
-                  </div>
+                   {/*  Forgot your password? */}
+                   </Link>
+                 </div> 
                 </div>
 
                 <div className="text-center">

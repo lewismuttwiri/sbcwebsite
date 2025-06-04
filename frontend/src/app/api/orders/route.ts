@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  const url = `${apiUrl}/store/api/orders/`;
+  const url = `${apiUrl}store/api/orders/`;
 
   const token = req.headers.get("Authorization");
 

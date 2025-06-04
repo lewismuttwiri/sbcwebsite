@@ -30,7 +30,7 @@ async function fetchFromApi(
   options: RequestInit = {}
 ): Promise<any> {
   try {
-    const response = await fetch(`/api/${endpoint}`, {
+    const response = await fetch(`api/${endpoint}`, {
       // ...options,
       headers: {
         // ...options.headers,
@@ -76,7 +76,7 @@ export async function getAllProducts(): Promise<Product[]> {
 
 export async function getFeaturedProducts(count: number): Promise<Product[]> {
   try {
-    const data = await fetchFromApi("/products", {
+    const data = await fetchFromApi("products", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export async function getProductsByBrandId(
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    const products = await fetchFromApi("/products");
+    const products = await fetchFromApi("products");
     return (
       products.find(
         (product: Product) => product.slug.toLowerCase() === slug.toLowerCase()

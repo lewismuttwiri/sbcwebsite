@@ -4,7 +4,7 @@ const API_URL = process.env.API_URL;
 
 // Request a password reset email
 export async function POST(request: Request) {
-  const url = `${API_URL}/api/auth/forgot-password/`;
+  const url = `${API_URL}auth/api/auth/resetpassword/`;
 
   try {
     const { email } = await request.json();
