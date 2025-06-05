@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z
@@ -29,7 +30,7 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login, error, clearError } = useAuth();
+  const { login, error, clearError, signInWithGoogle } = useAuth();
   const hasRun = useRef(false);
   const {
     register,
@@ -49,7 +50,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (error) {
-     if (hasRun.current) return;
+      if (hasRun.current) return;
       toast.error(error);
       clearError();
       hasRun.current = true;
@@ -147,13 +148,13 @@ export default function LoginPage() {
                   </div>
 
                   <div className="text-sm">
-                  <Link
-                     href="/auth/forgot-password"
-                     className="font-medium text-blue-600 hover:text-blue-500"
+                    <Link
+                      href="/auth/forgot-password"
+                      className="font-medium text-blue-600 hover:text-blue-500"
                     >
-                   {/*  Forgot your password? */}
-                   </Link>
-                 </div> 
+                      Forgot your password?
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="text-center">
@@ -164,11 +165,11 @@ export default function LoginPage() {
                     {isSubmitting ? "Signing in..." : "Sign in"}
                   </Button>
                 </div>
-                {/* 
+
                 <div className="text-center">
                   <button
                     onClick={() => {
-                      toast("Google login not implemented yet");
+                      signInWithGoogle();
                       return;
                     }}
                     className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors w-full justify-center"
@@ -176,7 +177,7 @@ export default function LoginPage() {
                     <FaGoogle className="w-5 h-5 mr-2" />
                     Continue with Google
                   </button>
-                </div> */}
+                </div>
 
                 <div className="text-center">
                   <p className="text-sm text-gray-600">

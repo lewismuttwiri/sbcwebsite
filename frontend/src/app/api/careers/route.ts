@@ -4,13 +4,12 @@ export async function GET() {
   const api_url = process.env.NEXT_PUBLIC_API_URL;
 
   try {
-    const response = await fetch(`${api_url}careers/api/jobs-applications/`, {
+    const response = await fetch(`${api_url}careers/api/job-advertisements/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      mode: "cors",
       credentials: "include",
     });
 
@@ -21,8 +20,8 @@ export async function GET() {
       throw new Error("Failed to fetch jobs");
     }
     const data = await response.json();
-    console.log("data", data);
-    return NextResponse.json(data);
+    console.log("data", data.results);
+    return NextResponse.json(data.results);
   } catch (error) {
     console.error("Error fetching jobs:", error);
     return NextResponse.json(

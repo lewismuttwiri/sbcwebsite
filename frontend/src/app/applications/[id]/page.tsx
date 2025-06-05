@@ -1,39 +1,73 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { Application } from '../types';
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import {
+  FiArrowLeft,
+  FiDownload,
+  FiMail,
+  FiPhone,
+  FiBriefcase,
+  FiMapPin,
+  FiClock,
+  FiFileText,
+  FiUser,
+  FiCalendar,
+} from "react-icons/fi";
+
+interface Application {
+  id: number;
+  job_advertisement: number;
+  job_title: string;
+  job_department: string;
+  job_type: string;
+  job_location: string;
+  applicant_name: string;
+  email: string;
+  phone: string;
+  cover_letter: string;
+  experience: string;
+  skills: string[];
+  status?: string;
+  status_display: string;
+  applied_date: string;
+  resume_url: string | null;
+  notes: string;
+}
 
 const ApplicationDetailsPage = () => {
   const { id } = useParams();
   const router = useRouter();
   const [application, setApplication] = useState<Application | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [notes, setNotes] = useState('');
+  const [error, setError] = useState("");
+  const [notes, setNotes] = useState("");
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 
   useEffect(() => {
     const fetchApplication = async () => {
       try {
-        // In a real app, fetch the specific application by ID
-        const response = await fetch(`/api/applications/${id}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            // Include auth token in a real application
-            // 'Authorization': `Bearer ${token}`
-          },
-        });
+        const response = await fetch(
+          `${apiUrl}careers/api/job-applications/${id}/`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) {
-          throw new Error('Failed to fetch application');
+          throw new Error("Failed to fetch application");
         }
 
         const data = await response.json();
         setApplication(data);
-        setNotes(data.notes || '');
+        setNotes(data.notes || "");
       } catch (err) {
-        setError('Failed to load application details');
-        console.error('Error fetching application:', err);
+        setError("Failed to load application details");
+        console.error("Error fetching application:", err);
       } finally {
         setLoading(false);
       }
@@ -45,31 +79,40 @@ const ApplicationDetailsPage = () => {
   }, [id]);
 
   const handleStatusChange = async (newStatus: string) => {
+    if (!application) return;
+
     try {
-      const response = await fetch(`/api/applications/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          // Include auth token in a real application
-          // 'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ 
-          status: newStatus,
-          notes: notes
-        }),
-      });
+      const response = await fetch(
+        `${apiUrl}careers/api/job-applications/${id}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            status: newStatus,
+            notes: notes || application.notes || "",
+          }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to update application status');
+        throw new Error("Failed to update application status");
       }
 
-      // Refresh the application data
       const updatedApp = await response.json();
-      setApplication(updatedApp);
-      setNotes(updatedApp.notes || '');
+      setApplication((prev) => ({
+        ...prev,
+        ...updatedApp,
+        status: newStatus,
+        status_display: newStatus.charAt(0).toUpperCase() + newStatus.slice(1),
+      }));
+
+      alert("Application status updated successfully");
     } catch (err) {
-      console.error('Error updating application status:', err);
-      alert('Failed to update application status');
+      console.error("Error updating application status:", err);
+      alert("Failed to update application status");
     }
   };
 
@@ -79,15 +122,22 @@ const ApplicationDetailsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-6xl mx-auto">
           <button
             onClick={() => router.back()}
-            className="mb-6 text-blue-600 hover:text-blue-800"
+            className="flex items-center text-blue-600 hover:text-blue-800 mb-6"
           >
-            &larr; Back to Applications
+            <FiArrowLeft className="mr-2" /> Back to Applications
           </button>
-          <p>Loading application details...</p>
+          <div className="bg-white rounded-lg shadow p-6 animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mb-6"></div>
+            <div className="space-y-4">
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -95,165 +145,238 @@ const ApplicationDetailsPage = () => {
 
   if (error || !application) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-6xl mx-auto">
           <button
             onClick={() => router.back()}
-            className="mb-6 text-blue-600 hover:text-blue-800"
+            className="flex items-center text-blue-600 hover:text-blue-800 mb-6"
           >
-            &larr; Back to Applications
+            <FiArrowLeft className="mr-2" /> Back to Applications
           </button>
-          <p className="text-red-500">{error || 'Application not found'}</p>
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="text-red-500 p-4 bg-red-50 rounded-md">
+              {error || "Application not found"}
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto">
         <button
           onClick={() => router.back()}
-          className="mb-6 text-blue-600 hover:text-blue-800"
+          className="flex items-center text-blue-600 hover:text-blue-800 mb-6"
         >
-          &larr; Back to Applications
+          <FiArrowLeft className="mr-2" /> Back to Applications
         </button>
 
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-          <div className="px-4 py-5 sm:px-6 flex justify-between items-center border-b border-gray-200">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                {application.applicantName}
-              </h1>
-              <p className="mt-1 text-sm text-gray-500">
-                Applied for {application.position}
-              </p>
-            </div>
-            <div className="flex space-x-2">
-              <a
-                href={application.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-              >
-                View Resume
-              </a>
+        <div className="bg-white shadow rounded-lg overflow-hidden">
+          <div className="px-6 py-5 border-b border-gray-200">
+            <div className="flex justify-between items-center">
+              <div>
+                <h1 className="text-xl font-semibold text-gray-900">
+                  {application.job_title}
+                </h1>
+                <p className="text-sm text-gray-500">
+                  {application.job_department} • {application.job_location}
+                </p>
+              </div>
+              <div className="flex items-center">
+                <span
+                  className={`px-3 py-1 text-xs font-medium rounded-full ${
+                    application.status === "pending"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : application.status === "approved"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {application.status_display}
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="px-4 py-5 sm:p-6">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div>
-                <h3 className="text-lg font-medium text-gray-900">Contact Information</h3>
-                <dl className="mt-2 space-y-2">
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">Email</dt>
-                    <dd className="mt-1 text-sm text-gray-900">
-                      <a href={`mailto:${application.email}`} className="text-blue-600 hover:underline">
+          <div className="p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Applicant Information */}
+              <div className="lg:col-span-1 space-y-6">
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                    <FiUser className="mr-2" /> Applicant Information
+                  </h2>
+                  <div className="space-y-4">
+                    <div className="flex items-center">
+                      <FiMail className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
                         {application.email}
-                      </a>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">Phone</dt>
-                    <dd className="mt-1 text-sm text-gray-900">
-                      <a href={`tel:${application.phone}`} className="text-blue-600 hover:underline">
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <FiPhone className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
                         {application.phone}
-                      </a>
-                    </dd>
+                      </p>
+                    </div>
                   </div>
-                </dl>
+                </div>
+
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                    <FiClock className="mr-2" /> Application Timeline
+                  </h2>
+                  <div className="space-y-4">
+                    <div className="flex items-center">
+                      <FiCalendar className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
+                        Applied on{" "}
+                        {new Date(
+                          application.applied_date
+                        ).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <FiFileText className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
+                        {application.cover_letter
+                          ? "Cover letter provided"
+                          : "No cover letter"}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <FiDownload className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
+                        {application.resume_url
+                          ? "Resume uploaded"
+                          : "No resume uploaded"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-lg font-medium text-gray-900">Application Details</h3>
-                <dl className="mt-2 space-y-2">
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">Status</dt>
-                    <dd className="mt-1">
-                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                        ${application.status === 'hired' ? 'bg-green-100 text-green-800' : 
-                          application.status === 'rejected' ? 'bg-red-100 text-red-800' : 
-                          'bg-yellow-100 text-yellow-800'}`}>
-                        {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
-                      </span>
-                    </dd>
+              {/* Job Information */}
+              <div className="lg:col-span-1 space-y-6">
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                    <FiBriefcase className="mr-2" /> Job Information
+                  </h2>
+                  <div className="space-y-4">
+                    <div className="flex items-center">
+                      <FiMapPin className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
+                        Location: {application.job_location}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <FiBriefcase className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
+                        Department: {application.job_department}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <FiClock className="w-5 h-5 text-gray-400 mr-2" />
+                      <p className="text-sm text-gray-700">
+                        Type: {application.job_type}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">Applied On</dt>
-                    <dd className="mt-1 text-sm text-gray-900">
-                      {new Date(application.appliedDate).toLocaleDateString()}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">Experience</dt>
-                    <dd className="mt-1 text-sm text-gray-900">{application.experience}</dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
+                </div>
 
-            {application.skills && application.skills.length > 0 && (
-              <div className="mt-6">
-                <h3 className="text-lg font-medium text-gray-900">Skills</h3>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {application.skills.map((skill, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                    <FiFileText className="mr-2" /> Experience & Skills
+                  </h2>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600 mb-2">
+                        Experience:
+                      </p>
+                      <p className="text-sm text-gray-700 whitespace-pre-line">
+                        {application.experience ||
+                          "No experience details provided"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-600 mb-2">
+                        Skills:
+                      </p>
+                      {application.skills.length > 0 ? (
+                        <div className="flex flex-wrap gap-2">
+                          {application.skills.map((skill, index) => (
+                            <span
+                              key={index}
+                              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-500">
+                          No skills listed
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Notes & Actions */}
+              <div className="lg:col-span-1 space-y-6">
+                {/* <div className="bg-gray-50 p-6 rounded-lg">
+                  <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                    <FiFileText className="mr-2" /> Notes
+                  </h2>
+                  <textarea
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    rows={4}
+                    value={notes}
+                    onChange={handleNotesChange}
+                    placeholder="Add your notes here..."
+                  />
+                </div> */}
+
+                {/* <div className="bg-gray-50 p-6 rounded-lg">
+                  <h2 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                    <FiArrowLeft className="mr-2" /> Status
+                  </h2>
+                  <div className="flex flex-col space-y-3">
+                    <button
+                      onClick={() => handleStatusChange('pending')}
+                      className={`px-4 py-2 text-sm font-medium rounded-md ${
+                        application.status === 'pending'
+                          ? 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                      }`}
                     >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {application.coverLetter && (
-              <div className="mt-6">
-                <h3 className="text-lg font-medium text-gray-900">Cover Letter</h3>
-                <div className="mt-2 p-4 bg-gray-50 rounded-md">
-                  <p className="whitespace-pre-line text-gray-700">{application.coverLetter}</p>
-                </div>
-              </div>
-            )}
-
-            <div className="mt-6">
-              <h3 className="text-lg font-medium text-gray-900">HR Notes</h3>
-              <div className="mt-2">
-                <textarea
-                  rows={4}
-                  className="shadow-sm focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md p-2"
-                  placeholder="Add private notes about this applicant..."
-                  value={notes}
-                  onChange={handleNotesChange}
-                />
-              </div>
-            </div>
-
-            <div className="mt-8 pt-5 border-t border-gray-200">
-              <div className="flex justify-end space-x-3">
-                <button
-                  type="button"
-                  onClick={() => handleStatusChange('rejected')}
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                >
-                  Reject
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleStatusChange('interviewed')}
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                >
-                  Mark as Interviewed
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleStatusChange('hired')}
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                >
-                  Hire
-                </button>
+                      Pending
+                    </button>
+                    <button
+                      onClick={() => handleStatusChange('approved')}
+                      className={`px-4 py-2 text-sm font-medium rounded-md ${
+                        application.status === 'approved'
+                          ? 'bg-green-100 text-green-800 border border-green-200'
+                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      onClick={() => handleStatusChange('rejected')}
+                      className={`px-4 py-2 text-sm font-medium rounded-md ${
+                        application.status === 'rejected'
+                          ? 'bg-red-100 text-red-800 border border-red-200'
+                          : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      Reject
+                    </button>
+                  </div>
+                </div> */}
               </div>
             </div>
           </div>

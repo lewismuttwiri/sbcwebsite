@@ -1,14 +1,21 @@
 export interface Application {
-  id: string;
-  applicantName: string;
+  position: string;
+  department: string;
+  id: number;
+  job_advertisement: number;
+  job_title: string;
+  job_department: string;
+  job_type: string;
+  job_location: string;
+  applicant_name: string;
   email: string;
   phone: string;
-  position: string;
-  resumeUrl: string;
-  coverLetter?: string;
-  status: 'pending' | 'reviewed' | 'interviewed' | 'hired' | 'rejected';
-  appliedDate: string;
-  skills: string[];
+  cover_letter: string;
   experience: string;
-  notes?: string;
+  skills: string[];
+  status: "pending" | "reviewed" | "interviewed" | "hired" | "rejected";
+  status_display: string;
+  applied_date: string;
+  resume_url: string | null;
+  notes: string;
 }

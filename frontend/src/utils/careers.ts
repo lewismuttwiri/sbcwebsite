@@ -9,7 +9,6 @@ export const getAllJobs = async () => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      mode: "cors",
       credentials: "include",
     });
 
@@ -36,39 +35,46 @@ export const getAllJobs = async () => {
 
 export const getJobById = async (id: string) => {
   try {
-    const response = await fetch(`/api/careers/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      mode: "cors",
-      credentials: "include",
-    });
+    const api_url = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(
+      `${api_url}careers/api/job-advertisements/${id}/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        credentials: "include",
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch job");
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
     console.error("Error fetching job:", error);
-    return [];
+    throw error; // Re-throw to be handled by the component
   }
 };
 
 export const applyForJob = async (id: string) => {
   try {
-    const response = await fetch(`/api/careers/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      mode: "cors",
-      credentials: "include",
-    });
+    const api_url = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(
+      `${api_url}/careers/api/job-advertisements/${id}/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        mode: "cors",
+        credentials: "include",
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to apply for job");
@@ -102,16 +108,16 @@ export const createJob = async (jobData: any) => {
   try {
     const response = await fetch("/api/careers/jobs", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   Accept: "application/json",
+      // },
       credentials: "include",
       body: JSON.stringify(jobData),
     });
 
     const responseData = await parseResponse(response);
-
+    console.log("Response data from createJob:", responseData);
     if (!response.ok) {
       console.error("Backend error response:", responseData);
       const errorMessage =

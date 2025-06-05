@@ -17,6 +17,7 @@ import { getFeaturedProducts } from "@/utils/productUtils";
 import { getAllNews } from "@/utils/news";
 import SlidingBrands from "@/components/SlidingBrands";
 import FAQAccordion from "@/components/FAQAccordion";
+import { useRouter } from "next/navigation";
 
 const factoryImages = [
   "/images/factory/factory-two.jpg",
@@ -36,6 +37,12 @@ export default function Home() {
   // Refs for auto-scroll functionality
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollContentRef = useRef<HTMLDivElement>(null);
+
+  const router = useRouter();
+
+  const handleBrandClick = (brandId: string) => {
+    router.push(`/brands#${brandId}`);
+  };
 
   // Load initial data
   useEffect(() => {
@@ -246,13 +253,50 @@ export default function Home() {
               every taste and occasion.
             </p>
           </div>
-
+          {/* Replace the existing brand logos div with this animated version */}
+          <div className="flex justify-center gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
+            {[
+              { src: "/images/logo/7up.png", alt: "7up" },
+              { src: "/images/logo/mir.png", alt: "Mirinda" },
+              { src: "/images/logo/mtn.png", alt: "Mountain+Dew" },
+              { src: "/images/logo/pepsi_logo.png", alt: "Pepsi" },
+            ].map((brand, index) => (
+              <motion.div
+                key={index}
+                className="h-16 w-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{
+                  opacity: 0.8,
+                  y: 0,
+                  transition: {
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    ease: "easeOut",
+                  },
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  opacity: 1,
+                  transition: { duration: 0.2 },
+                }}
+                viewport={{ once: true }}
+                onClick={() => handleBrandClick(brand.alt)}
+              >
+                <Image
+                  src={brand.src}
+                  alt={brand.alt}
+                  width={80}
+                  height={64}
+                  className="h-full w-auto object-contain"
+                />
+              </motion.div>
+            ))}
+          </div>
           <div className="relative">
             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r" />
             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l" />
             <SlidingBrands brands={featuredBrands} />
           </div>
-
           <div className="text-center mt-12">
             <Link href="/brands">
               <Button variant="secondary" className="text-gray-900 bg-white">
@@ -394,21 +438,41 @@ export default function Home() {
       </section>
 
       {/* Sustainability Section */}
-      <section className="py-20 bg-gray-50">
-        <Container className="px-4">
+      <section className="relative py-32 overflow-hidden">
+        <div
+          className="fixed inset-0 -z-10"
+          style={{
+            backgroundImage: "url('/images/logo/pepsi-home.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            backgroundRepeat: "no-repeat",
+            height: "100vh",
+            width: "100vw",
+            top: 0,
+            left: 0,
+            transform: "scale(1.02)",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/80" />
+        </div>
+
+        {/* Content */}
+        <Container className="relative z-10 px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               Sustainability at SBC Kenya
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              We're committed to making a positive impact on our environment and
-              communities.
+            <p className="text-white/90 max-w-3xl mx-auto">
+              Committed to environmental responsibility and sustainable
+              practices in every aspect of our operations.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {sustainabilityItems.map((item, idx) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {sustainabilityItems.map((item, index) => (
               <SustainabilityCard
-                key={idx}
+                key={index}
                 Icon={item.icon}
                 heading={item.heading}
                 description={item.description}

@@ -60,7 +60,7 @@ interface AuthContextType {
     newPassword: string;
     confirmPassword: string;
   }) => Promise<{ success: boolean }>;
-  signInWithGoogle: () => Promise<void>;
+  signInWithGoogle: () => Promise<{ success: boolean }>;
   handleGoogleCallback: (
     code: string,
     state: string
@@ -141,7 +141,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         if (!response.ok) {
           console.error("Login failed:", "Unknown error");
-	  toast("Login failed");
+          toast("Login failed");
           throw new Error("Login failed");
         }
 
@@ -154,10 +154,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           throw new Error("Invalid response from server");
         });
 
-	if(data.entity == null){
-		toast.error("Login failed");
-		return;
-	}	
+        if (data.entity == null) {
+          toast.error("Login failed");
+          return;
+        }
 
         console.log("Login successful, user data:", data);
 
@@ -400,8 +400,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signInWithGoogle = async () => {
     try {
       setIsLoading(true);
-      // This will redirect to Google's OAuth page
-      window.location.href = "/api/auth/google";
+      const response = await fetch("/api/auth/google", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Google sign in failed");
+      }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Google sign in failed");
+      }
+
+      // Update user state
+      // await checkAuth();
+      toast.success("Signed in with Google successfully!");
+      router.push("/cart");
+      return { success: true };
     } catch (error: any) {
       toast.error(error.message || "Failed to initiate Google sign in");
       throw error;

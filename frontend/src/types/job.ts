@@ -8,4 +8,5 @@ export interface JobPosting {
   posted: string;
   description: string;
   requirements: string[];
+  responsibilities: string;
 }

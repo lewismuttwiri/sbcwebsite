@@ -67,9 +67,19 @@ export default function JobsPage() {
   const router = useRouter();
   const [jobListings, setJobListings] = useState<any>([]);
 
-  // useEffect(() => {
-  //   getAllJobs().then((data) => setJobListings(data));
-  // }, []);
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await getAllJobs();
+
+        setJobListings(response);
+        console.log("Job listings:", jobListings);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+    fetchJobs();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">

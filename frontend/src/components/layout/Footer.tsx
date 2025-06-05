@@ -19,11 +19,11 @@ const Footer = ({
             <div className="mb-6">
               <div className="flex items-center mb-4">
                 <Image
-                  src="/images/logo/pepsi_logo.png"
+                  src="/images/logo/sbc-logo.png"
                   alt="SBC Kenya Logo"
                   width={60}
                   height={60}
-                  className="mr-3"
+                  className="mr-3 bg-white p-2 rounded-full"
                 />
                 <h3 className="text-xl font-bold">SBC KENYA LTD</h3>
               </div>

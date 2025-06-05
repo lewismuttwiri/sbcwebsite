@@ -52,9 +52,9 @@ const Navbar = () => {
   };
 
   const isLoggedIn = !!user;
-  const isHR = user?.entity?.user_role == 10;
-  console.log("user", user);
-  console.log("user", isHR);
+  const isHR = user?.entity?.user_role == 4;
+  console.log("user is Customer", user);
+  console.log("user is Hr", isHR);
 
   // Account links for the dropdown menu
   const accountLinks = [
@@ -68,7 +68,7 @@ const Navbar = () => {
       ? [
           {
             name: "Applications",
-            href: "/",
+            href: "/applications",
             icon: <FiPackage className="mr-2" />,
           },
         ]
@@ -124,7 +124,7 @@ const Navbar = () => {
   };
 
   const navLinks = [
-        {
+    {
       name: "Our Story",
       href: "/about",
       dropdown: [
@@ -142,6 +142,16 @@ const Navbar = () => {
       name: "Products",
       href: "/products",
     },
+
+    {
+      name: "Opportunities",
+      href: "/careers",
+      dropdown: [
+        { name: "Careers", href: "/careers" },
+        { name: "Tenders", href: "/tenders" },
+        { name: "Become a distributor", href: "/partner/distributor" },
+      ],
+    },
     { name: "Media", href: "/media" },
     {
       name: "Contact",
@@ -154,15 +164,6 @@ const Navbar = () => {
         },
       ],
     },
-   {
-     name: "Opportunities",
-     href: "/careers",
-     dropdown: [
-       { name: "Careers", href: "/careers" },
-       { name: "Tenders", href: "/tenders" },
-       {name: "Become a distributor", href: "/partner/distributor"},
-     ],
-   },
   ];
 
   return (
@@ -173,7 +174,7 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex-shrink-0 justify-start">
               <Link href="/" className="flex items-center">
-                <div className="relative w-[60px] h-[60px]">
+                {/* <div className="relative w-[60px] h-[60px]">
                   <Image
                     src="/images/logo/pepsi_logo.png"
                     alt="SBC Kenya Logo"
@@ -182,6 +183,18 @@ const Navbar = () => {
                     className="object-contain transition-all duration-300"
                     priority
                   />
+                </div> */}
+                <div className="flex items-center">
+                  <Image
+                    src="/images/logo/pepsi_logo.png"
+                    alt="SBC Kenya Logo"
+                    width={60}
+                    height={60}
+                    className="mr-3"
+                  />
+                  <h3 className="md:text-xl text-white  font-bold text-sm">
+                    SBC KENYA LTD
+                  </h3>
                 </div>
               </Link>
             </div>
@@ -202,7 +215,7 @@ const Navbar = () => {
                                     ? "text-white font-medium"
                                     : "hover:opacity-70"
                                 }`}
-                                onClick={() => router.push(link.href)}	
+                                onClick={() => router.push(link.href)}
                               >
                                 {link.name}
                               </button>
@@ -221,7 +234,7 @@ const Navbar = () => {
                                 aria-label="Toggle dropdown"
                               >
                                 <FaChevronDown
-                                  className={`h-3 w-3 transition-transform duration-200 ${
+                                  className={` h-4 w-4 font-bold transition-transform duration-200 ${
                                     activeDropdown === link.name
                                       ? "transform rotate-180"
                                       : ""
@@ -499,24 +512,24 @@ const Navbar = () => {
                       )}
                     </div>
                     {link.dropdown && activeDropdown === link.name && (
-			                          <div className="relative left-0 mt-2 w-56 bg-white z-50 dropdown-container">
-						                          <div className="py-1">
-									                            {link.dropdown.map((item) => (
-													                                <Link
-																	                              key={item.name}
-																				                                    href={item.href}
-																								                                  className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-white hover:text-black transition-colors duration-300"
-																												                                onClick={() => {
-																																	                                setActiveDropdown(null);
-																																					                                setIsMenuOpen(false);
-																																									                              }}
-																																												                                  >
-																																																                                {item.name}
-																																																				                            </Link>
-																																																							                              ))}
-																																																										                              </div>
-																																																													                            </div>
-																																																																                        )}
+                      <div className="relative left-0 mt-2 w-56 bg-white z-50 dropdown-container">
+                        <div className="py-1">
+                          {link.dropdown.map((item) => (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-white hover:text-black transition-colors duration-300"
+                              onClick={() => {
+                                setActiveDropdown(null);
+                                setIsMenuOpen(false);
+                              }}
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

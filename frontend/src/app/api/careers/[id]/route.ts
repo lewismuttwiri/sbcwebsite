@@ -9,7 +9,7 @@ export async function GET(
 
   try {
     const response = await fetch(
-      `${api_url}/careers/api/jobs-advertisements/${id}`,
+      `${api_url}careers/api/job-advertisements/${id}/`,
       {
         method: "GET",
         headers: {

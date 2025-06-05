@@ -13,12 +13,12 @@ export default function SustainabilityCard({
   description,
 }: SustainabilityCardProps) {
   return (
-    <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl">
+    <div className="bg-white/20 backdrop-blur-sm p-8 rounded-xl">
       <div className="mb-4">
-        <Icon size={20} color="blue" />
+        <Icon size={20} color="white" />
       </div>
-      <h3 className="text-xl font-bold mb-3">{heading}</h3>
-      <p className="text-gray-700">{description}</p>
+      <h3 className="text-xl text-white font-bold mb-3">{heading}</h3>
+      <p className="text-white">{description}</p>
     </div>
   );
 }

@@ -47,15 +47,15 @@ export default function ResetPasswordForm() {
   });
 
   const onSubmit = async (data: FormData) => {
-    if (!token || !email) {
-      toast.error("Invalid reset link. Please request a new one.");
-      return;
-    }
+    // if (!token || !email) {
+    //   toast.error("Invalid reset link. Please request a new one.");
+    //   return;
+    // }
 
     try {
       setIsSubmitting(true);
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}api/auth/reset-password-confirm/`,
+        `${process.env.NEXT_PUBLIC_API_URL}auth/api/auth/resetpassword/`,
         {
           method: "POST",
           headers: {
@@ -88,32 +88,32 @@ export default function ResetPasswordForm() {
     }
   };
 
-  if (!token || !email) {
-    return (
-      <Container className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8 text-center">
-          <div className="bg-red-50 rounded-full p-4 inline-flex items-center justify-center">
-            <FiLock className="h-12 w-12 text-red-600" />
-          </div>
-          <h2 className="mt-6 text-2xl font-extrabold text-gray-900">
-            Invalid reset link
-          </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            The password reset link is invalid or has expired. Please request a
-            new reset link.
-          </p>
-          <div className="mt-6">
-            <Link
-              href="/auth/forgot-password"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
-              Request new reset link
-            </Link>
-          </div>
-        </div>
-      </Container>
-    );
-  }
+  // if (!token || !email) {
+  //   return (
+  //     <Container className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  //       <div className="max-w-md w-full space-y-8 text-center">
+  //         <div className="bg-red-50 rounded-full p-4 inline-flex items-center justify-center">
+  //           <FiLock className="h-12 w-12 text-red-600" />
+  //         </div>
+  //         <h2 className="mt-6 text-2xl font-extrabold text-gray-900">
+  //           Invalid reset link
+  //         </h2>
+  //         <p className="mt-2 text-sm text-gray-600">
+  //           The password reset link is invalid or has expired. Please request a
+  //           new reset link.
+  //         </p>
+  //         <div className="mt-6">
+  //           <Link
+  //             href="/auth/forgot-password"
+  //             className="font-medium text-blue-600 hover:text-blue-500"
+  //           >
+  //             Request new reset link
+  //           </Link>
+  //         </div>
+  //       </div>
+  //     </Container>
+  //   );
+  // }
 
   if (isSuccess) {
     return (

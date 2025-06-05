@@ -1,12 +1,18 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Container from "@/components/layout/Container";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+// Dynamically import the LocationMap component with SSR disabled
+const LocationMap = dynamic(() => import("@/components/contact/LocationMap"), {
+  ssr: false,
+});
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -17,7 +23,7 @@ const formSchema = z.object({
 });
 
 type FormData = z.infer<typeof formSchema>;
- 
+
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
@@ -48,10 +54,8 @@ export default function ContactPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Add CSRF token if using Django's CSRF protection
-          // 'X-CSRFToken': getCookie('csrftoken') || '',
         },
-        credentials: "include", // Important for cookies/sessions
+        credentials: "include",
         body: JSON.stringify({
           first_name: data.firstName,
           last_name: data.lastName,
@@ -65,18 +69,14 @@ export default function ContactPage() {
       if (!response.ok) {
         let errorData;
         try {
-          // Try to parse error response as JSON
           errorData = await response.json();
         } catch (e) {
-          // If response is not JSON, use status text
           throw new Error(
             `Request failed with status ${response.status}: ${response.statusText}`
           );
         }
 
-        // Handle specific error cases
         if (response.status === 400 && errorData) {
-          // Handle validation errors from the server
           const errorMessages = Object.entries(errorData)
             .map(
               ([field, errors]) =>
@@ -98,7 +98,7 @@ export default function ContactPage() {
       console.log("Message submitted successfully:", responseData);
       setSubmissionSuccess(true);
       toast.success("Message submitted successfully");
-      reset(); // Reset form fields
+      reset();
     } catch (error) {
       console.error("Message submission error:", error);
       setError(
@@ -204,7 +204,7 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   <div>
                     <label
-                      htmlFor="text"
+                      htmlFor="subject"
                       className="block text-sm font-medium text-gray-700 mb-1"
                     >
                       Subject
@@ -247,6 +247,12 @@ export default function ContactPage() {
                   </div>
                 </div>
 
+                {error && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                    {error}
+                  </div>
+                )}
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -282,6 +288,12 @@ export default function ContactPage() {
                   >
                     +020 8635000
                   </Link>
+                  <Link
+                    href="tel:+0800230055"
+                    className="text-gray-600 hover:underline"
+                  >
+                    +0800230055
+                  </Link>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Email</h3>
@@ -295,7 +307,16 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
- 
+
+          {/* Location Map Section */}
+          <div className="mt-16">
+            {/* <h2 className="text-2xl font-bold">Our Locations</h2> */}
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className=" w-full">
+                <LocationMap />
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
     </div>

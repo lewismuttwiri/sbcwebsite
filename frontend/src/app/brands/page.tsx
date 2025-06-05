@@ -122,7 +122,43 @@ export default function BrandsPage() {
             Discover our premium selection of trusted brands
           </p>
         </motion.div>
-
+        <div className="flex justify-center gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
+          {[
+            { src: "/images/logo/7up.png", alt: "7Up Logo" },
+            { src: "/images/logo/mir.png", alt: "Mirinda Logo" },
+            { src: "/images/logo/mtn.png", alt: "Mountain Dew Logo" },
+            { src: "/images/logo/pepsi_logo.png", alt: "Pepsi Logo" },
+          ].map((brand, index) => (
+            <motion.div
+              key={index}
+              className="h-16 w-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{
+                opacity: 0.8,
+                y: 0,
+                transition: {
+                  duration: 0.5,
+                  delay: index * 0.1,
+                  ease: "easeOut",
+                },
+              }}
+              whileHover={{
+                scale: 1.1,
+                opacity: 1,
+                transition: { duration: 0.2 },
+              }}
+              viewport={{ once: true }}
+            >
+              <Image
+                src={brand.src}
+                alt={brand.alt}
+                width={80}
+                height={64}
+                className="h-full w-auto object-contain"
+              />
+            </motion.div>
+          ))}
+        </div>
         <motion.div
           variants={container}
           initial="hidden"

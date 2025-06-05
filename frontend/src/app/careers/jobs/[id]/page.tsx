@@ -1,36 +1,37 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getJobById } from "@/utils/careers";
 
 // Mock data - replace with actual data fetching
-const getJobDetails = async (id: string) => {
-  // In a real app, you would fetch this from your API
-  const jobs = [
-    {
-      id: "1",
-      title: "Software Engineer",
-      location: "Nairobi, Kenya",
-      type: "Full-time",
-      description:
-        "We are looking for a skilled software engineer to join our team...",
-      requirements: [
-        "3+ years of experience with React and Next.js",
-        "Strong TypeScript skills",
-        "Experience with modern frontend tooling",
-      ],
-    },
-    // Add more mock jobs as needed
-  ];
+// const getJobDetails = async (id: string) => {
+//   // In a real app, you would fetch this from your API
+//   const jobs = [
+//     {
+//       id: "1",
+//       title: "Software Engineer",
+//       location: "Nairobi, Kenya",
+//       type: "Full-time",
+//       description:
+//         "We are looking for a skilled software engineer to join our team...",
+//       requirements: [
+//         "3+ years of experience with React and Next.js",
+//         "Strong TypeScript skills",
+//         "Experience with modern frontend tooling",
+//       ],
+//     },
+//     // Add more mock jobs as needed
+//   ];
 
-  return jobs.find((job) => job.id === id);
-};
+//   return jobs.find((job) => job.id === id);
+// };
 
 export default async function JobDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const job = await getJobDetails((await params).id);
+  const job = await getJobById((await params).id);
 
   if (!job) {
     notFound();
@@ -59,7 +60,7 @@ export default async function JobDetailsPage({
 
             <h2 className="text-xl font-semibold mb-4">Requirements</h2>
             <ul className="list-disc pl-6 mb-8">
-              {job.requirements.map((req, index) => (
+              {job.requirements.map((req: any, index: any) => (
                 <li key={index} className="mb-2">
                   {req}
                 </li>

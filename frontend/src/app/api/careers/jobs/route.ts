@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   console.log("Job posting request:", body);
 
   try {
-    const endpoint = `${api_url}careers/api/jobs-advertisements/`;
+    const endpoint = `${api_url}careers/api/job-advertisements/`;
     console.log("Forwarding to:", endpoint);
 
     const response = await fetch(endpoint, {

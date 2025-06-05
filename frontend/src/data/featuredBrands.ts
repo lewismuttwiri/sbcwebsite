@@ -1,6 +1,6 @@
 export const featuredBrands = [
   {
-    id: "pepsi",
+    id: "Pepsi",
     name: "PEPSI",
     image: [
       "/images/brands/pepsi_500ml.png",
