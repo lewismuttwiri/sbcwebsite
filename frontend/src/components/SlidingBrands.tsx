@@ -40,11 +40,11 @@ export default function SlidingBrands({ brands }: SlidingBrandsProps) {
           <div
             key={brand.id}
             onClick={() => handleBrandClick(brand.id)}
-            className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col cursor-pointer"
+            className="group relative bg-[#0d0d7a] rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col cursor-pointer"
           >
-            <div className="relative w-full aspect-square overflow-hidden">
+            <div className="relative w-full aspect-square overflow-hidden ">
               {Array.isArray(brand.image) ? (
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full ">
                   {brand.image.map((img, idx) => (
                     <div
                       key={idx}
@@ -77,16 +77,27 @@ export default function SlidingBrands({ brands }: SlidingBrandsProps) {
               )}
             </div>
             <div className="p-6 flex-1 flex flex-col">
-              <h3 className="text-xl font-bold mb-2 text-gray-900">
-                {brand.name}
-              </h3>
-              <p className="text-gray-600 mb-2 flex-1">
-                {brand.description.slice(0, 80) + "..."}
-              </p>
-              <span className="inline-flex items-center text-blue-600 font-medium group-hover:underline">
-                Explore {brand.name}
-                <IoIosArrowForward size={20} />
-              </span>
+              <div className="flex-1">
+                <div className="md:transform md:group-hover:-translate-y-12 transition-transform duration-500 ease-out">
+                  <h3 className="text-xl font-bold mb-2 text-white">
+                    {brand.name}
+                  </h3>
+                  <p className="text-white mb-4">
+                    {brand.description.slice(0, 80) + "..."}
+                  </p>
+                </div>
+              </div>
+              {/* Explore button - always visible on small screens, slides up on hover for larger screens */}
+              <div className="mt-4 md:absolute md:bottom-6 md:left-4 md:right-0 md:mt-0">
+                <div className="w-fit flex items-center justify-start py-2 px-4 bg-amber-50 rounded-4xl 
+                  md:transform md:translate-y-full md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 
+                  transition-all duration-500 ease-out">
+                  <span className="inline-flex items-center text-[#0d0d7a] font-medium group-hover:underline">
+                    Explore {brand.name}
+                    <IoIosArrowForward size={20} />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         );

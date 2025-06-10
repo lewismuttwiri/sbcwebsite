@@ -49,23 +49,23 @@ const locations: Location[] = [
   {
     id: "nairobi",
     name: "Nairobi Main Plant",
-    position: { lat: -1.286389, lng: 36.817223 },
+    position: { lat: -1.24257, lng: 36.87357 },
     address: "Nairobi, Kenya",
-    googleMapsUrl: "https://www.google.com/maps?q=-1.286389,36.817223",
+    googleMapsUrl: "https://www.google.com/maps?q=-1.24257,36.87357",
   },
   {
     id: "mombasa",
     name: "Mombasa Depot",
-    position: { lat: -4.0435, lng: 39.6682 },
+    position: { lat: -3.99625, lng: 39.56668 },
     address: "Mombasa, Kenya",
-    googleMapsUrl: "https://www.google.com/maps?q=-4.0435,39.6682",
+    googleMapsUrl: "https://www.google.com/maps?q=-3.99625,39.56668",
   },
   {
     id: "kisumu",
     name: "Kisumu Depot",
-    position: { lat: -0.1022, lng: 34.7617 },
+    position: { lat: -0.13843, lng: 34.79798 },
     address: "Kisumu, Kenya",
-    googleMapsUrl: "https://www.google.com/maps?q=-0.1022,34.7617",
+    googleMapsUrl: "https://www.google.com/maps?q=-0.13843,34.79798",
   },
 ];
 

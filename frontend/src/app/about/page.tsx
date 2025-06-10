@@ -61,22 +61,24 @@ export default function AboutPage() {
             <div className="space-y-6">
               <h2 className="text-3xl font-bold text-gray-900">Our Story</h2>
               <p className="text-lg text-gray-700">
-                Seven Up Bottling Company (SBC) Kenya is a leading beverage
-                company and the official bottler of PepsiCo beverages in Kenya.
-                Founded with a vision to deliver world-class beverages to the
-                Kenyan market, we have grown to become a cornerstone of the
-                beverage industry in East Africa.
+                Seven Up Bottling Company (SBC) Kenya is the official bottler of
+                PepsiCo beverages in Kenya. As one of the leading beverage
+                companies in the region, our portfolio includes popular brands
+                such as Pepsi, Mountain Dew, 7UP, Mirinda, and Evervess. Our
+                products are available in various packaging options including
+                returnable glass bottles and PET plastic bottles.
               </p>
               <p className="text-lg text-gray-700">
-                Our state-of-the-art production facilities and commitment to
-                quality have made us a trusted partner for PepsiCo, ensuring
-                that every bottle of Pepsi, Mountain Dew, 7UP, and Mirinda that
-                reaches our consumers meets the highest international standards.
+                As a proud Kenyan company, we are committed to making a positive
+                impact in our communities. Our corporate social responsibility
+                initiatives focus on sports development, education,
+                environmental sustainability through plastic recycling programs,
+                and various community development projects across the country.
               </p>
             </div>
             <div className="relative h-[400px] md:h-[500px] w-full">
               <Image
-                src="/images/factory/factory-six.jpg"
+                src="/images/factory/factory-2.webp"
                 alt="SBC Kenya Factory"
                 fill
                 className="object-cover rounded-lg"
@@ -104,81 +106,74 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-gray-900">
                 Our Mission & Values
               </h2>
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      Quality First
-                    </h3>
-                    <p className="text-gray-700">
-                      We maintain the highest standards of quality in our
-                      production processes, ensuring every product meets
-                      international standards.
+              <div className="pt-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                  Our Core Values
+                </h3>
+                <div className="space-y-6">
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-800">
+                      Customer Centricity
+                    </h4>
+                    <p className="text-gray-700 mt-1">
+                      At the heart of our operations is a deep commitment to
+                      understanding and meeting the evolving needs of our Kenyan
+                      consumers, ensuring their satisfaction in every sip.
                     </p>
                   </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      Sustainability
-                    </h3>
-                    <p className="text-gray-700">
-                      We are committed to sustainable practices that minimize
-                      our environmental impact while maximizing social benefits.
+
+                  <div className="bg-amber-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-amber-800">
+                      Partnership Excellence
+                    </h4>
+                    <p className="text-gray-700 mt-1">
+                      We nurture strong, mutually beneficial relationships with
+                      our distributors, suppliers, and business partners across
+                      Kenya, fostering growth and shared success.
                     </p>
                   </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                      />
-                    </svg>
+
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-green-800">
+                      Uncompromising Quality
+                    </h4>
+                    <p className="text-gray-700 mt-1">
+                      We maintain the highest international standards in our
+                      products and operations, ensuring consistent quality that
+                      Kenyan consumers can trust.
+                    </p>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Innovation</h3>
-                    <p className="text-gray-700">
-                      We continuously innovate in our production processes and
-                      product offerings to stay ahead in the beverage industry.
+
+                  <div className="bg-purple-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-purple-800">
+                      Ethical Leadership
+                    </h4>
+                    <p className="text-gray-700 mt-1">
+                      Integrity and transparency guide our business practices,
+                      as we uphold the highest standards of corporate governance
+                      in Kenya's beverage industry.
+                    </p>
+                  </div>
+
+                  <div className="bg-teal-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-teal-800">
+                      Sustainable Growth
+                    </h4>
+                    <p className="text-gray-700 mt-1">
+                      We're committed to environmental stewardship and
+                      sustainable business practices that benefit both our
+                      communities and the Kenyan ecosystem.
+                    </p>
+                  </div>
+
+                  <div className="bg-rose-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-rose-800">
+                      People First
+                    </h4>
+                    <p className="text-gray-700 mt-1">
+                      Our team is our greatest asset. We cultivate a supportive
+                      work environment built on trust, respect, and continuous
+                      development for all our employees.
                     </p>
                   </div>
                 </div>

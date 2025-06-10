@@ -37,7 +37,7 @@ export const getJobById = async (id: string) => {
   try {
     const api_url = process.env.NEXT_PUBLIC_API_URL;
     const response = await fetch(
-      `${api_url}careers/api/job-advertisements/${id}/`,
+      `${api_url}careers/api/job-advertisement/${id}/`,
       {
         method: "GET",
         headers: {

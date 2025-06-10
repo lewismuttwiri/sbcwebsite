@@ -105,7 +105,7 @@ export default function QualityPage() {
                   Quality Certifications
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white p-6 rounded-lg shadow-md">
+                  {/* <div className="bg-white p-6 rounded-lg shadow-md">
                     <h3 className="text-xl font-semibold mb-2">
                       ISO Certifications
                     </h3>
@@ -114,7 +114,7 @@ export default function QualityPage() {
                       <li>ISO 22000 Food Safety Management</li>
                       <li>ISO 14001 Environmental Management</li>
                     </ul>
-                  </div>
+                  </div> */}
                   <div className="bg-white p-6 rounded-lg shadow-md">
                     <h3 className="text-xl font-semibold mb-2">
                       PepsiCo Standards

@@ -4,7 +4,7 @@ export async function GET() {
   const api_url = process.env.NEXT_PUBLIC_API_URL;
 
   try {
-    const response = await fetch(`${api_url}careers/api/job-advertisements/`, {
+    const response = await fetch(`${api_url}careers/api/job-advertisement/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

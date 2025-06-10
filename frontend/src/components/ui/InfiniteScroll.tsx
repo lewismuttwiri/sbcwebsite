@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 interface InfiniteScrollProps {
-  images: string[];
+  images: { image: string }[];
   speed?: "slow" | "normal" | "fast";
   scrollDirection?: "up" | "down";
   columns?: number;
@@ -32,7 +32,7 @@ export default function InfiniteScroll({
         {images.map((image, index) => (
           <div key={index} className="relative w-64 h-96 flex-shrink-0">
             <Image
-              src={image}
+              src={image.image}
               alt={`Event ${index + 1}`}
               fill
               className="object-cover rounded-lg"
@@ -172,7 +172,7 @@ export default function InfiniteScroll({
         {getItems().map((image, index) => (
           <div key={`img-${index}`} className="scroll-item">
             <Image
-              src={image}
+              src={image.image}
               alt={`Event ${index + 1}`}
               fill
               className="object-cover"

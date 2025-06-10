@@ -124,7 +124,7 @@ const products: Product[] = [
     name: "Tonic Water 300ml",
     images: [
       {
-        src: "/images/brands/Tonic_300ml.jpg",
+        src: "/images/brands/Tonic_300ml.webp",
         alt: "Tonic Water 300ml Bottle",
       },
       {

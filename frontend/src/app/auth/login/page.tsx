@@ -166,7 +166,7 @@ export default function LoginPage() {
                   </Button>
                 </div>
 
-                <div className="text-center">
+                {/* <div className="text-center">
                   <button
                     onClick={() => {
                       signInWithGoogle();
@@ -177,7 +177,7 @@ export default function LoginPage() {
                     <FaGoogle className="w-5 h-5 mr-2" />
                     Continue with Google
                   </button>
-                </div>
+                </div> */}
 
                 <div className="text-center">
                   <p className="text-sm text-gray-600">

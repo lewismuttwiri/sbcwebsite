@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-// Dynamically import the LocationMap component with SSR disabled
 const LocationMap = dynamic(() => import("@/components/contact/LocationMap"), {
   ssr: false,
 });

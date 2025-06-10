@@ -192,7 +192,7 @@ const Navbar = () => {
                     height={60}
                     className="mr-3"
                   />
-                  <h3 className="md:text-xl text-white  font-bold text-sm">
+                  <h3 className="md:text-xl text-white  font-bold text-sm ">
                     SBC KENYA LTD
                   </h3>
                 </div>

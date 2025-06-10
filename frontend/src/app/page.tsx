@@ -21,10 +21,10 @@ import { useRouter } from "next/navigation";
 
 const factoryImages = [
   "/images/factory/factory-two.jpg",
-  "/images/factory/factory-three.jpg",
-  "/images/factory/factory-four.jpg",
+  "/images/factory/factory-2.webp",
+  "/images/factory/factory-4.jpg",
   "/images/factory/factory-five.jpeg",
-  "/images/factory/factory-six.jpg",
+  // "/images/factory/factory-six.jpg",
 ];
 
 export default function Home() {

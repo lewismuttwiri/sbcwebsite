@@ -420,7 +420,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Update user state
       // await checkAuth();
       toast.success("Signed in with Google successfully!");
-      router.push("/cart");
+      // router.push("/cart");
       return { success: true };
     } catch (error: any) {
       toast.error(error.message || "Failed to initiate Google sign in");

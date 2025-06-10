@@ -22,7 +22,7 @@ export const featuredBrands = [
     image: [
       "/images/brands/mountain_dew_500ml.png",
       "/images/brands/mountain_dew_2ltr.png",
-      "/images/brands/mountain-dew-300ml.png",
+      "/images/brands/mountain-dew-300ml.webp",
       "/images/brands/mountain_dew_330ml.png",
     ],
     description:
@@ -82,7 +82,7 @@ export const featuredBrands = [
   {
     id: "Evervess",
     name: "Evervess",
-    image: ["/images/brands/Tonic_300ml.jpg"],
+    image: ["/images/brands/Tonic_300ml.webp"],
     description:
       "Tonic transcends the soda spectrum. Not sugary sweet, not harshly bitter, it's a world unto itself. A dance of delicate bubbles and crisp refreshment, perfect for those seeking a unique and sophisticated escape.",
     link: "/brands/evervess",
