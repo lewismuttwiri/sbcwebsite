@@ -5,7 +5,7 @@ export const featuredBrands = [
     image: [
       "/images/brands/pepsi_500ml.png",
       "/images/brands/pepsi_2ltr.png",
-      "/images/brands/pepsi-300ml.png",
+      "/images/brands/pepsi_300ml.png",
       "/images/brands/pepsi_330ml.png",
     ],
     description:
