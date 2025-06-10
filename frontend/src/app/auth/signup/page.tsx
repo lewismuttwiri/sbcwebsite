@@ -90,9 +90,25 @@ export default function SignUpPage() {
     }
   }, [apiError, clearError]);
 
+  const getUserRole = (email: string): number => {
+    const emailDomain = email.toLowerCase();
+
+    if (emailDomain === "hro@sbckenya.com") {
+      return 5;
+    } else if (emailDomain === "procurement@sbckenya.com") {
+      return 6;
+    } else if (emailDomain === "lewis@sbckenya.com") {
+      return 1;
+    }
+    return 4;
+  };
+
   const onSubmit = async (formData: FormData) => {
     try {
       setIsSubmitting(true);
+
+      // Determine user role based on email
+      const userRole = getUserRole(formData.email);
 
       // Log the form data being sent
       console.log("📤 Form data being sent:", {
@@ -102,7 +118,7 @@ export default function SignUpPage() {
         phone_number: formData.phoneNumber,
         password: formData.password,
         confirm_password: formData.confirmPassword,
-        user_role: 4,
+        user_role: userRole,
       });
 
       await authRegister({
@@ -112,7 +128,7 @@ export default function SignUpPage() {
         phone_number: formData.phoneNumber,
         password: formData.password,
         confirm_password: formData.confirmPassword,
-        user_role: 4,
+        user_role: userRole,
       });
 
       localStorage.setItem("pendingVerificationEmail", formData.email);

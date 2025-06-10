@@ -52,7 +52,9 @@ const Navbar = () => {
   };
 
   const isLoggedIn = !!user;
-  const isHR = user?.entity?.user_role == 4;
+  const isHR = user?.entity?.user_role == 5;
+  const isProcurement = user?.entity?.user_role == 6;
+  const isAdmin = user?.entity?.user_role == 1;
   console.log("user is Customer", user);
   console.log("user is Hr", isHR);
 
@@ -69,6 +71,29 @@ const Navbar = () => {
           {
             name: "Applications",
             href: "/applications",
+            icon: <FiPackage className="mr-2" />,
+          },
+        ]
+      : []),
+    ...(isProcurement
+      ? [
+          {
+            name: "Add Tenders",
+            href: "/tenders/add",
+            icon: <FiPackage className="mr-2" />,
+          },
+        ]
+      : []),
+    ...(isAdmin
+      ? [
+          {
+            name: "Applications",
+            href: "/applications",
+            icon: <FiPackage className="mr-2" />,
+          },
+          {
+            name: "Add tenders",
+            href: "/tenders/add",
             icon: <FiPackage className="mr-2" />,
           },
         ]

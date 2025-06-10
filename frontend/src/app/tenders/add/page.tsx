@@ -148,7 +148,7 @@ export default function AddTenderPage() {
   }
 
   // Check if user has procurement role
-  if (!isAuthenticated || userRole !== 4) {
+  if (![1, 6].includes(userRole)) {
     return (
       <Container>
         <div className="bg-red-50 border-l-4 border-red-400 p-4 my-8">
