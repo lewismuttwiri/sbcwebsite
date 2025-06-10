@@ -292,7 +292,7 @@ export default function ContactPage() {
                       href="tel:+0800230055"
                       className="text-gray-600 hover:underline"
                     >
-                      +0800230055
+                      +0800230055 (Toll Free)
                     </Link>
                   </div>
                 </div>

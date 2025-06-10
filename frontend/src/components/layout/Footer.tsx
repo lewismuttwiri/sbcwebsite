@@ -188,7 +188,7 @@ const Footer = ({
                 <li className="flex items-start space-x-2">
                   <CiPhone size={24} />
                   <Link href="tel:+0800230055" className="text-gray-300">
-                    +0800230055
+                    +0800230055 (Toll Free)
                   </Link>
                 </li>
               </ul>
