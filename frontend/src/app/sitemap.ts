@@ -72,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "Mountain+Dew",
   ];
   const brandRoutes = brands.map((brand) => ({
-    url: `${baseUrl}/products?brand=${brand}`,
+    url: `${baseUrl}/products?brand=${encodeURIComponent(brand)}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.8,
@@ -91,18 +91,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const productRoutes =
       products.results?.map((product: any) => ({
-        url: `${baseUrl}/products/${product.slug}`,
+        url: `${baseUrl}/products/${encodeURIComponent(product.slug)}`,
         lastModified: new Date(product.updated_at),
         changeFrequency: "monthly" as const,
         priority: 0.7,
       })) || [];
-
-    // const newsResponse = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/api/news/`,
-    //   {
-    //     next: { revalidate: 3600 },
-    //   }
-    // );
 
     const newsResponse = await fetch(`/api/news`, {
       method: "GET",
@@ -122,7 +115,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const newsRoutes =
       newsData?.map((article: any) => ({
-        url: `${baseUrl}/news/${article.slug}`,
+        url: `${baseUrl}/news/${encodeURIComponent(article.slug)}`,
         lastModified: new Date(article.updated_at),
         changeFrequency: "monthly" as const,
         priority: 0.6,
