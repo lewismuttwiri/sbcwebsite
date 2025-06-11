@@ -122,12 +122,15 @@ export default function BrandsPage() {
             Discover our premium selection of trusted brands
           </p>
         </motion.div>
-        <div className="flex justify-center gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
+        <div className="flex justify-between gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
           {[
             { src: "/images/logo/7up.png", alt: "7Up Logo" },
             { src: "/images/logo/mir.png", alt: "Mirinda Logo" },
             { src: "/images/logo/mtn.png", alt: "Mountain Dew Logo" },
             { src: "/images/logo/pepsi_logo.png", alt: "Pepsi Logo" },
+            { src: "/images/logo/aquafina-logo.jpg", alt: "Aquafina Logo" },
+            { src: "/images/logo/evervess-logo.png", alt: "Evervess Logo" },
+            { src: "/images/logo/sting-logo.png", alt: "Sting Logo" },
           ].map((brand, index) => (
             <motion.div
               key={index}
