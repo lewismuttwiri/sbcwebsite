@@ -1,8 +1,4 @@
 "use client";
-import { Metadata } from "next";
-import { metadata as siteMetadata } from "./metadata";
-
-export const metadata: Metadata = siteMetadata;
 
 import { useState, useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
