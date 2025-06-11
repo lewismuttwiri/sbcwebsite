@@ -31,7 +31,7 @@ const Footer = ({
                 Committed to excellence in service and product quality since our
                 establishment.
               </p>
-              <div className="flex space-x-4">
+              {/* <div className="flex space-x-4">
                 <a
                   href="/"
                   // target="_blank"
@@ -108,7 +108,7 @@ const Footer = ({
                     />
                   </svg>
                 </a>
-              </div>
+              </div> */}
             </div>
 
             {/* Quick Links */}

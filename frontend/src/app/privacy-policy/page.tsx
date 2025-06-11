@@ -71,8 +71,8 @@ export default function PrivacyPolicy() {
                 <li>Communicate with you about your orders and account</li>
                 <li>Improve our website and services</li>
                 <li>Send you marketing communications (with your consent)</li>
-                <li>Prevent fraud and enhance security</li>
-                <li>Comply with legal obligations</li>
+                {/* <li>Prevent fraud and enhance security</li> */}
+                {/* <li>Comply with legal obligations</li> */}
               </ul>
             </section>
 
@@ -93,7 +93,7 @@ export default function PrivacyPolicy() {
               </ul>
               <p>We do not sell your personal information to third parties.</p>
             </section>
-
+            {/* 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">5. Data Security</h2>
               <p className="mb-4">
@@ -102,7 +102,7 @@ export default function PrivacyPolicy() {
                 the internet is 100% secure, and we cannot guarantee absolute
                 security.
               </p>
-            </section>
+            </section> */}
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">6. Your Rights</h2>
@@ -146,7 +146,10 @@ export default function PrivacyPolicy() {
                 <br />
                 Email: info@sbckenya.com
                 <br />
-                Phone: 020 8635000
+                <Link href="tel:+0208635000">Phone: +020 8635000</Link>
+                <Link href="tel:+0800230055" className="ml-2">
+                  +0800230055 (Toll Free)
+                </Link>
               </address>
             </section>
           </div>
