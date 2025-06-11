@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/static/
+
+# Allow important pages
+Allow: /products
+Allow: /brands
+Allow: /contact
+Allow: /about
+
+Sitemap: https://sbckenya.com/sitemap.xml
