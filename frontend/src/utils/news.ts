@@ -22,6 +22,7 @@ export async function getAllNews(): Promise<NewsArticle[]> {
     }
 
     const data = await response.json();
+    console.log("data", data);
     // Handle both array and object with results property
     if (Array.isArray(data)) {
       return data;
