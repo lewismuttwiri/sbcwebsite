@@ -20,11 +20,10 @@ import FAQAccordion from "@/components/FAQAccordion";
 import { useRouter } from "next/navigation";
 
 const factoryImages = [
-  "/images/factory/factory-two.jpg",
-  "/images/factory/factory-2.webp",
-  "/images/factory/factory-4.jpg",
-  "/images/factory/factory-five.jpeg",
-  // "/images/factory/factory-six.jpg",
+  "/images/factory/factory-1.jpeg",
+  "/images/factory/factory-2.jpeg",
+  "/images/factory/factory-3.jpeg",
+  "/images/factory/factory-4.jpeg",
 ];
 
 export default function Home() {

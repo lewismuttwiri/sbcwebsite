@@ -80,7 +80,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-[400px] md:h-[500px] w-full">
               <Image
-                src="/images/factory/factory-2.webp"
+                src="/images/factory/factory-2.jpeg"
                 alt="SBC Kenya Factory"
                 fill
                 className="object-cover rounded-lg"
@@ -97,7 +97,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[400px] md:h-[500px] w-full">
               <Image
-                src="/images/factory/factory-two.jpg"
+                src="/images/factory/factory-3.jpeg"
                 alt="SBC Kenya Production Line"
                 fill
                 className="object-cover rounded-lg"

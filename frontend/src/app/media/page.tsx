@@ -22,57 +22,22 @@ export default function EventsPage() {
     fetchStaffImages();
   }, []);
 
-  // Club images
-  // const clubImages = [
-  //   "/images/events/clubs/club10.jpeg",
-  //   "/images/events/clubs/club11.jpeg",
-  //   "/images/events/clubs/club12.jpeg",
-  //   "/images/events/clubs/club13.jpeg",
-  //   "/images/events/clubs/club3.jpeg",
-  //   "/images/events/clubs/club4.jpeg",
-  //   "/images/events/clubs/club5.jpeg",
-  //   "/images/events/clubs/club6.jpeg",
-  //   "/images/events/clubs/club7.jpeg",
-  //   "/images/events/clubs/club8.jpeg",
-  //   // "/images/events/clubs/pepsi x quiver.jpeg",
-  //   // "/images/events/clubs/pepsi-x-quiver2.jpeg",
-  // ];
-
-  // // Staff images
-  // const staffImages = [
-  //   "/images/events/staff/staff1.jpeg",
-  //   "/images/events/staff/staff2.jpeg",
-  //   "/images/events/staff/staff3.jpeg",
-  //   "/images/events/staff/staff5.jpeg",
-  //   "/images/events/staff/staff6.jpeg",
-  //   "/images/events/staff/staff7.jpeg",
-  //   "/images/events/staff/staff8.jpeg",
-  //   "/images/events/staff/staff9.jpeg",
-  //   "/images/events/staff/staff10.jpeg",
-  //   "/images/events/staff/staff11.jpeg",
-  //   "/images/events/staff/staff13.jpeg",
-  //   "/images/events/staff/staff14.jpeg",
-  //   "/images/events/staff/staff15.jpeg",
-  //   "/images/events/staff/staff16.jpeg",
-  //   "/images/events/staff/staff17.jpeg",
-  //   "/images/events/staff/staff18.jpeg",
-  //   "/images/events/staff/staff20.jpeg",
-  //   "/images/events/staff/staff21.jpeg",
-  // ];
-
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 text-center">
+      <section
+        className="relative py-60 bg-cover bg-center bg-fixed "
+        style={{ backgroundImage: 'url("images/logo/pepsi-home.jpg")' }}
+      ></section>
+      <div className="container mx-auto px-4 py-4 relative z-10 text-center  flex items-start justify-center">
+        <div className="w-fit p-4 rounded-lg">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Events & Activities
+            Events & Team Activities
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto">
             Explore our recent events and team activities
           </p>
         </div>
-      </section>
+      </div>
 
       {/* Clubs Section */}
       <section className="py-20 bg-gray-50">
