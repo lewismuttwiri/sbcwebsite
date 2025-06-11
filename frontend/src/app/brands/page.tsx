@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Container from "@/components/layout/Container";
 import Button from "@/components/Button";
 import { FiArrowRight } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 const container = {
   hidden: { opacity: 0 },
@@ -32,6 +33,7 @@ const item = {
 
 export default function BrandsPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const router = useRouter();
 
   // Rotate through images every 3 seconds
   useEffect(() => {
@@ -124,13 +126,13 @@ export default function BrandsPage() {
         </motion.div>
         <div className="flex justify-between gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
           {[
-            { src: "/images/logo/7up.png", alt: "7Up Logo" },
-            { src: "/images/logo/mir.png", alt: "Mirinda Logo" },
-            { src: "/images/logo/mtn.png", alt: "Mountain Dew Logo" },
-            { src: "/images/logo/pepsi_logo.png", alt: "Pepsi Logo" },
-            { src: "/images/logo/aquafina-logo.jpg", alt: "Aquafina Logo" },
-            { src: "/images/logo/evervess-logo.png", alt: "Evervess Logo" },
-            { src: "/images/logo/sting-logo.png", alt: "Sting Logo" },
+            { src: "/images/logo/7up.png", alt: "7up" },
+            { src: "/images/logo/mir.png", alt: "Mirinda" },
+            { src: "/images/logo/mtn.png", alt: "Mountain+Dew" },
+            { src: "/images/logo/pepsi_logo.png", alt: "Pepsi" },
+            { src: "/images/logo/aquafina-logo.jpg", alt: "Aquafina" },
+            { src: "/images/logo/evervess-logo.png", alt: "Evervess" },
+            { src: "/images/logo/sting-logo.png", alt: "Sting" },
           ].map((brand, index) => (
             <motion.div
               key={index}
@@ -151,6 +153,7 @@ export default function BrandsPage() {
                 transition: { duration: 0.2 },
               }}
               viewport={{ once: true }}
+              onClick={() => router.push(`/products?brand=${brand.alt}`)}
             >
               <Image
                 src={brand.src}
