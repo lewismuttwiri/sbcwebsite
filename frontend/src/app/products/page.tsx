@@ -1,6 +1,9 @@
 // app/products/page.tsx
-import { Suspense } from "react";
+"use client";
+
+import { Suspense, useEffect, useState } from "react";
 import ProductsContent from "./ProductsContent";
+import { useRouter } from "next/navigation";
 
 function ProductsLoading() {
   return (
@@ -33,7 +36,20 @@ function ProductsLoading() {
   );
 }
 
+export const dynamic = "force-dynamic";
+
 export default function ProductsPage() {
+  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return <ProductsLoading />;
+  }
+
   return (
     <Suspense fallback={<ProductsLoading />}>
       <ProductsContent />

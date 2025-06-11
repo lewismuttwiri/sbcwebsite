@@ -3,6 +3,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Font styles */
+:root {
+  --font-poetsen: "Poetsen One", system-ui, -apple-system, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-poetsen);
+  font-weight: 400;
+}
+
 :root {
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-heading: var(--font-poetsen), system-ui, -apple-system, sans-serif;
