@@ -66,7 +66,7 @@ export default function MissionVisionPage() {
                   impact.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white p-6 rounded-lg shadow-md">
+                  {/* <div className="bg-white p-6 rounded-lg shadow-md">
                     <h3 className="text-xl font-semibold mb-2">2025 Goals</h3>
                     <ul className="list-disc list-inside text-gray-600">
                       <li>Expand our product portfolio</li>
@@ -74,7 +74,7 @@ export default function MissionVisionPage() {
                       <li>Grow our market share</li>
                       <li>Strengthen community partnerships</li>
                     </ul>
-                  </div>
+                  </div> */}
                   <div className="bg-white p-6 rounded-lg shadow-md">
                     <h3 className="text-xl font-semibold mb-2">Core Values</h3>
                     <ul className="list-disc list-inside text-gray-600">

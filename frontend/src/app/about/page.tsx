@@ -36,7 +36,9 @@ export default function AboutPage() {
               <div className="p-6 rounded-lg border border-gray-200 hover:border-blue-600 transition-colors">
                 <h3 className="text-xl font-semibold mb-2">Mission & Vision</h3>
                 <p className="text-gray-600">
-                  Discover our guiding principles and goals
+                  We produce and distribute refreshments to delight our
+                  consumers and provide a robust return to our stakeholders
+                  through continual process improvement.
                 </p>
               </div>
             </Link>
@@ -113,67 +115,65 @@ export default function AboutPage() {
                 <div className="space-y-6">
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-blue-800">
-                      Customer Centricity
+                      Consumer focused
                     </h4>
                     <p className="text-gray-700 mt-1">
-                      At the heart of our operations is a deep commitment to
-                      understanding and meeting the evolving needs of our Kenyan
-                      consumers, ensuring their satisfaction in every sip.
+                      Consumers are our strength and survival. We therefore
+                      tailor our operations to suit their needs and
+                      expectations.
                     </p>
                   </div>
 
                   <div className="bg-amber-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-amber-800">
-                      Partnership Excellence
+                      Distributors & Suppliers Partners
                     </h4>
                     <p className="text-gray-700 mt-1">
-                      We nurture strong, mutually beneficial relationships with
-                      our distributors, suppliers, and business partners across
-                      Kenya, fostering growth and shared success.
+                      Distributors and suppliers are our partners and we are
+                      committed to maintaining a mutually beneficial
+                      relationship with them, as well as other business
+                      associates.
                     </p>
                   </div>
 
                   <div className="bg-green-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-green-800">
-                      Uncompromising Quality
+                      Quality First
                     </h4>
                     <p className="text-gray-700 mt-1">
-                      We maintain the highest international standards in our
-                      products and operations, ensuring consistent quality that
-                      Kenyan consumers can trust.
+                      We aim at achieving the highest international quality
+                      standards in all we do.
                     </p>
                   </div>
 
                   <div className="bg-purple-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-purple-800">
-                      Ethical Leadership
+                      Integrity & Transparency
                     </h4>
                     <p className="text-gray-700 mt-1">
-                      Integrity and transparency guide our business practices,
-                      as we uphold the highest standards of corporate governance
-                      in Kenya's beverage industry.
+                      We emphasize and pursue integrity in all our dealings and
+                      operations and will not compromise on generally acceptance
+                      corporate governance.
                     </p>
                   </div>
 
                   <div className="bg-teal-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-teal-800">
-                      Sustainable Growth
+                      Social & environmental responsibilities
                     </h4>
                     <p className="text-gray-700 mt-1">
-                      We're committed to environmental stewardship and
-                      sustainable business practices that benefit both our
-                      communities and the Kenyan ecosystem.
+                      We are committed to our social and environmental
+                      responsibilities.
                     </p>
                   </div>
 
                   <div className="bg-rose-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-rose-800">
-                      People First
+                      People are key
                     </h4>
                     <p className="text-gray-700 mt-1">
-                      Our team is our greatest asset. We cultivate a supportive
-                      work environment built on trust, respect, and continuous
-                      development for all our employees.
+                      We foster an enabling environment that builds teamwork,
+                      trust and respect.
                     </p>
                   </div>
                 </div>

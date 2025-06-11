@@ -1,9 +1,7 @@
-import { ReactNode } from "react";
-import { MdOutlineEnergySavingsLeaf } from "react-icons/md";
-import { IoWaterOutline } from "react-icons/io5";
-import { MdOutlineRecycling } from "react-icons/md";
-import { SlPeople } from "react-icons/sl";
 import { IconType } from "react-icons/lib";
+import { MdOutlineHighQuality } from "react-icons/md";
+import { RiGovernmentFill } from "react-icons/ri";
+import { IoIosPeople } from "react-icons/io";
 
 export interface SustainabilityItem {
   icon: IconType;
@@ -13,27 +11,27 @@ export interface SustainabilityItem {
 
 export const sustainabilityItems: SustainabilityItem[] = [
   {
-    icon: MdOutlineEnergySavingsLeaf,
-    heading: "Renewable Energy",
+    icon: MdOutlineHighQuality,
+    heading: "Quality First",
     description:
-      "We're transitioning to renewable energy sources across our production facilities to reduce our carbon footprint.",
+      "We aim at achieving the highest international quality standards in all we do.",
   },
   {
-    icon: IoWaterOutline,
-    heading: "Water Conservation",
+    icon: RiGovernmentFill,
+    heading: "Integrity & Good corporate governance",
     description:
-      "Implementing advanced water recycling systems and sustainable water management practices.",
+      "We emphasize and pursue integrity in all our dealings and operations and will not compromise on generally acceptance corporate governance.",
   },
   {
-    icon: MdOutlineRecycling,
-    heading: "Waste Reduction",
+    icon: MdOutlineHighQuality,
+    heading: "Consumer focused",
     description:
-      "Reducing waste through recycling programs and sustainable packaging solutions.",
+      "Consumers are our strength and survival. We therefore tailor our operations to suit their needs and expectations.",
   },
   {
-    icon: SlPeople,
-    heading: "Community Impact",
+    icon: IoIosPeople,
+    heading: "People are key",
     description:
-      "Supporting local communities through environmental initiatives and education programs.",
+      "We foster an enabling environment that builds teamwork, trust and respect.",
   },
 ];

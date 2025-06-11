@@ -254,16 +254,19 @@ export default function Home() {
             </p>
           </div>
           {/* Replace the existing brand logos div with this animated version */}
-          <div className="flex justify-center gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
+          <div className="flex justify-between gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
             {[
               { src: "/images/logo/7up.png", alt: "7up" },
               { src: "/images/logo/mir.png", alt: "Mirinda" },
               { src: "/images/logo/mtn.png", alt: "Mountain+Dew" },
               { src: "/images/logo/pepsi_logo.png", alt: "Pepsi" },
+              { src: "/images/logo/aquafina-logo.jpg", alt: "Aquafina" },
+              { src: "/images/logo/evervess-logo.png", alt: "Evervess" },
+              { src: "/images/logo/sting-logo.png", alt: "Sting" },
             ].map((brand, index) => (
               <motion.div
                 key={index}
-                className="h-16 w-auto"
+                className="h-16 flex items-center justify-between"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{
                   opacity: 0.8,
@@ -461,11 +464,11 @@ export default function Home() {
         <Container className="relative z-10 px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Sustainability at SBC Kenya
+              Core Values at SBC Kenya
             </h2>
             <p className="text-white/90 max-w-3xl mx-auto">
-              Committed to environmental responsibility and sustainable
-              practices in every aspect of our operations.
+              Committed to integrity, quality, consumer focus, and people
+              empowerment.
             </p>
           </div>
 
