@@ -3,10 +3,10 @@ export const featuredBrands = [
     id: "Pepsi",
     name: "PEPSI",
     image: [
-      "/images/featured brands/pepsi-500ml.webp",
-      "/images/featured brands/pepsi-2l.webp",
+      "/images/featured brands/Pepsi-500ml.webp",
+      "/images/featured brands/Pepsi-2l.webp",
       "/images/featured brands/pepsi-300ml.png",
-      "/images/featured brands/pepsi-330ml.webp",
+      "/images/featured brands/Pepsi-330ml.webp",
     ],
     description:
       "Pepsi isn't just a drink, it's a refreshingly versatile companion. Fits your mood and moment perfectly, with options from the pocket-sized 300ml can for a quick solo pick-me-up to the shareable 1L bottle for movie nights with friends. No matter the occasion, that iconic fizz bursts with vibrant cola flavor, leaving you cool and satisfied. Whether you're grabbing a plastic bottle for a park stroll or pouring a stylish glass from a sleek 300ml bottle, every sip feels like a mini-celebration. So, reach for a Pepsi – it's more than a drink, it's an invitation to fizz up your life, one delicious sip at a time.",
@@ -23,7 +23,7 @@ export const featuredBrands = [
       "/images/featured brands/mountain dew 500ml.png",
       "/images/featured brands/mountain-dew-2l.png",
       "/images/featured brands/mountain dew 300ml.webp",
-      "/images/featured brands/mountain dew 330ml.png",
+      "/images/featured brands/Mountain dew 330ml.png",
     ],
     description:
       "Forget ordinary, thirst-quenching. Mountain Dew isn't just a soda, it's a bold invitation: Do the Dew. Unleash a surge of citrusy, electrifying flavor that ignites your senses and fuels your adventures. Whether you're shredding trails, conquering deadlines, or rocking out with friends, Mountain Dew's electric bite keeps you charged and ready to push your limits. Crack open a can and feel the amped-up energy course through you, a vibrant jolt that dares you to `Do the Dew` in your own unique way. It's more than a drink, it's a battle cry, a call to action to seize the day and embrace the extraordinary. So, answer the call, grab a Mountain Dew, and let the adventure begin!",

@@ -334,11 +334,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Redirect to home
-      // router.push("/");
+      router.push("/");
 
       // Force a hard refresh to ensure all state is cleared
       // This is important to clear any in-memory state
-      // window.location.href = "/";
+      window.location.href = "/";
     } catch (error: any) {
       console.error("Logout error:", error);
       toast.error(error?.message || "Logout failed");
