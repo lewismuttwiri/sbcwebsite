@@ -254,28 +254,99 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(async () => {
     try {
       setIsLoading(true);
-      // Clear cookies by setting their expiration to a past date
-      document.cookie.split(";").forEach((c) => {
-        document.cookie = c
-          .replace(/^ +/, "")
-          .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
-      });
+      const csrf = getCsrfToken();
+      console.log("CSRF Token:", csrf);
 
-      // Clear local storage
-      localStorage.removeItem("user");
+      // 1. First, make a direct request to the backend's logout endpoint
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}auth/api/auth/logout/`,
+          {
+            method: "POST",
+            credentials: "include", // This is crucial for sending cookies
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": getCsrfToken(),
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to log out from server");
+        }
+      } catch (error) {
+        console.error("Error during server logout:", error);
+        // Continue with client-side cleanup even if server logout fails
+      }
+
+      // 2. Clear all possible cookies
+      const clearAllCookies = () => {
+        const cookies = document.cookie.split(";");
+
+        cookies.forEach((cookie) => {
+          const [name] = cookie.split("=").map((c) => c.trim());
+          if (name) {
+            // Clear for all possible paths and domains
+            const domains = [
+              "",
+              window.location.hostname,
+              `.${window.location.hostname}`,
+              ...(window.location.hostname.split(".").length > 2
+                ? [
+                    `.${window.location.hostname
+                      .split(".")
+                      .slice(-2)
+                      .join(".")}`,
+                  ]
+                : []),
+            ];
+
+            const paths = ["/", "/auth", ""];
+
+            domains.forEach((domain) => {
+              paths.forEach((path) => {
+                const domainPart = domain ? `; domain=${domain}` : "";
+                const pathPart = path ? `; path=${path}` : "; path=/";
+                document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT${pathPart}${domainPart}; SameSite=Lax`;
+              });
+            });
+          }
+        });
+      };
+
+      // Clear cookies immediately
+      clearAllCookies();
+
+      // Clear all local storage
+      localStorage.clear();
+      sessionStorage.clear();
 
       // Clear auth state
       setUser(null);
 
+      // Clear any cached data in memory
+      if (typeof window !== "undefined") {
+        // Clear any IndexedDB data if you're using it
+        if (window.indexedDB) {
+          // You might want to clear specific databases here
+          // indexedDB.deleteDatabase('yourDbName');
+        }
+      }
+
       // Redirect to home
-      router.push("/");
+      // router.push("/");
+
+      // Force a hard refresh to ensure all state is cleared
+      // This is important to clear any in-memory state
+      // window.location.href = "/";
     } catch (error: any) {
-      toast.error(error.message || "Logout failed");
+      console.error("Logout error:", error);
+      toast.error(error?.message || "Logout failed");
       throw error;
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [router, setUser, setIsLoading]);
 
   // Email verification
   const verifyEmail = async (email: string, otp: string) => {
@@ -499,3 +570,17 @@ export const useAuth = () => {
   }
   return context;
 };
+function getCsrfToken(): string {
+  // Get CSRF token from cookies
+  const cookieValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("csrftoken="))
+    ?.split("=")[1];
+
+  if (!cookieValue) {
+    console.warn("CSRF token not found in cookies");
+    return "";
+  }
+
+  return cookieValue;
+}
