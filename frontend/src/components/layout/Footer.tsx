@@ -182,7 +182,7 @@ const Footer = ({
                 <li className="flex items-start space-x-2">
                   <CiPhone size={24} />
                   <Link href="tel:0208635000" className="text-gray-300">
-                    020 8635000
+                    0208635000
                   </Link>
                 </li>
                 <li className="flex items-start space-x-2">

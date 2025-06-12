@@ -261,7 +261,7 @@ export default function Home() {
               { src: "/images/logo/pepsi_logo.png", alt: "Pepsi" },
               { src: "/images/logo/aquafina-logo.jpg", alt: "Aquafina" },
               { src: "/images/logo/evervess-logo.png", alt: "Evervess" },
-              { src: "/images/logo/sting-logo.png", alt: "Sting" },
+              { src: "/images/logo/sting-logo.png", alt: "sting" },
             ].map((brand, index) => (
               <motion.div
                 key={index}

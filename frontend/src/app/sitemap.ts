@@ -2,7 +2,7 @@
 import type { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sbckenya.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sbckenya.com/";
 
   // Static routes (what you know exists)
   const staticRoutes = [
@@ -13,49 +13,49 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${baseUrl}/partner`,
+      url: `${baseUrl}partner`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${baseUrl}about`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/brands`,
+      url: `${baseUrl}brands`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/news`,
+      url: `${baseUrl}news`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/products`,
+      url: `${baseUrl}products`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}contact`,
       lastModified: new Date(),
       changeFrequency: "yearly" as const,
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/careers`,
+      url: `${baseUrl}careers`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/privacy-policy`,
+      url: `${baseUrl}privacy-policy`,
       lastModified: new Date(),
       changeFrequency: "yearly" as const,
       priority: 0.3,
@@ -72,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "Mountain+Dew",
   ];
   const brandRoutes = brands.map((brand) => ({
-    url: `${baseUrl}/products?brand=${encodeURIComponent(brand)}`,
+    url: `${baseUrl}products?brand=${encodeURIComponent(brand)}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.8,
@@ -82,7 +82,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const productsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/products/`,
+      `${process.env.NEXT_PUBLIC_API_URL}api/products/`,
       {
         next: { revalidate: 3600 }, // Cache for 1 hour
       }
@@ -91,22 +91,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const productRoutes =
       products.results?.map((product: any) => ({
-        url: `${baseUrl}/products/${encodeURIComponent(product.slug)}`,
+        url: `${baseUrl}products/${encodeURIComponent(product.slug)}`,
         lastModified: new Date(product.updated_at),
         changeFrequency: "monthly" as const,
         priority: 0.7,
       })) || [];
 
-    const newsResponse = await fetch(`/api/news`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      mode: "cors",
-      next: { revalidate: 3600 },
-    });
+    const newsResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}api/news`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        mode: "cors",
+        next: { revalidate: 3600 },
+      }
+    );
 
     const news = await newsResponse.json();
     const newsData = news.results;
@@ -115,7 +118,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const newsRoutes =
       newsData?.map((article: any) => ({
-        url: `${baseUrl}/news/${encodeURIComponent(article.slug)}`,
+        url: `${baseUrl}news/${encodeURIComponent(article.slug)}`,
         lastModified: new Date(article.updated_at),
         changeFrequency: "monthly" as const,
         priority: 0.6,
