@@ -254,23 +254,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(async () => {
     try {
       setIsLoading(true);
-      // const response = await fetch(
-      //   `${process.env.NEXT_PUBLIC_API_URL}auth/logout/`,
-      //   {
-      //     method: "POST",
-      //     credentials: "include",
-      //   }
-      // );
-      const user = localStorage.getItem("user");
-      if (!user) {
-        setUser(null);
-        return;
-      }
+      // Clear cookies by setting their expiration to a past date
+      document.cookie.split(";").forEach((c) => {
+        document.cookie = c
+          .replace(/^ +/, "")
+          .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
+      });
 
+      // Clear local storage
       localStorage.removeItem("user");
 
+      // Clear auth state
       setUser(null);
-      // toast.success("Logged out successfully!");
+
+      // Redirect to home
       router.push("/");
     } catch (error: any) {
       toast.error(error.message || "Logout failed");
