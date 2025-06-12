@@ -69,7 +69,7 @@ export const featuredBrands = [
     id: "sting",
     name: "STING",
     image: [
-      "/images/featured brands/Sting red 330ml.webp",
+      "/images/featured brands/Sting-red-330ml.webp",
       "/images/featured brands/Sting gold 330ml.webp",
     ],
     description:
