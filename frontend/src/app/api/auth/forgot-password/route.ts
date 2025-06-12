@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Request a password reset email
 export async function POST(request: Request) {
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
 
   try {
     const { email } = await request.json();
-    
+
     if (!email) {
       return NextResponse.json(
         { success: false, error: "Email is required" },
@@ -28,9 +28,9 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { 
+        {
           success: false,
-          error: data.detail || "Failed to process password reset request"
+          error: data.detail || "Failed to process password reset request",
         },
         { status: response.status }
       );
@@ -38,15 +38,15 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "If an account with this email exists, a password reset link has been sent"
+      message:
+        "If an account with this email exists, a password reset link has been sent",
     });
-
   } catch (error) {
     console.error("Password reset request error:", error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: "An error occurred while processing your request" 
+      {
+        success: false,
+        error: "An error occurred while processing your request",
       },
       { status: 500 }
     );
@@ -59,12 +59,12 @@ export async function PUT(request: Request) {
 
   try {
     const { token, new_password, confirm_password } = await request.json();
-    
+
     if (!token || !new_password || !confirm_password) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: "Token, new password, and confirmation are required" 
+        {
+          success: false,
+          error: "Token, new password, and confirmation are required",
         },
         { status: 400 }
       );
@@ -72,9 +72,9 @@ export async function PUT(request: Request) {
 
     if (new_password !== confirm_password) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: "Passwords do not match" 
+        {
+          success: false,
+          error: "Passwords do not match",
         },
         { status: 400 }
       );
@@ -85,10 +85,10 @@ export async function PUT(request: Request) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         token,
         new_password,
-        confirm_password 
+        confirm_password,
       }),
     });
 
@@ -96,9 +96,9 @@ export async function PUT(request: Request) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { 
+        {
           success: false,
-          error: data.detail || "Failed to reset password"
+          error: data.detail || "Failed to reset password",
         },
         { status: response.status }
       );
@@ -106,15 +106,14 @@ export async function PUT(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Password has been reset successfully"
+      message: "Password has been reset successfully",
     });
-
   } catch (error) {
     console.error("Password reset error:", error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: "An error occurred while resetting your password" 
+      {
+        success: false,
+        error: "An error occurred while resetting your password",
       },
       { status: 500 }
     );
@@ -122,8 +121,5 @@ export async function PUT(request: Request) {
 }
 
 export async function GET() {
-  return NextResponse.json(
-    { error: "Method not allowed" },
-    { status: 405 }
-  );
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }

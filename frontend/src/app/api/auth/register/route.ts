@@ -4,7 +4,6 @@ export async function POST(request: Request) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   console.log("Environment variables:", {
-    API_URL: process.env.API_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   });
 
@@ -17,7 +16,6 @@ export async function POST(request: Request) {
         error: "Server configuration error",
         details: errorMsg,
         availableVars: {
-          API_URL: process.env.API_URL,
           NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
         },
       },

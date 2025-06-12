@@ -15,7 +15,7 @@ const poetsen = Poetsen_One({
   weight: ["400"],
   display: "swap",
   adjustFontFallback: false,
-  variable: "--font-poetsen"
+  variable: "--font-poetsen",
 });
 
 export const metadata: Metadata = siteMetadata;
@@ -28,13 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poetsen.className} h-full`}>
       <head>
-        <style dangerouslySetInnerHTML={{
-          __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             :root {
               --font-poetsen: ${poetsen.style.fontFamily};
             }
-          `
-        }} />
+          `,
+          }}
+        />
       </head>
       <body className="min-h-screen bg-white">
         <Providers>
