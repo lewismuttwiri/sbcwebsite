@@ -235,14 +235,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // If registration is successful, verify the session
         await checkAuth();
 
-        toast.success("Registration successful!");
+        // toast.success("Registration successful!");
         router.push("/");
         setIsLoading(false);
         return data;
       } catch (error: any) {
         setIsLoading(false);
         console.error("Registration error:", error);
-        toast.error(error.message || "Registration failed");
+        // toast.error(error.message || "Registration failed");
         throw error;
       } finally {
         setIsLoading(false);
@@ -270,7 +270,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.removeItem("user");
 
       setUser(null);
-      toast.success("Logged out successfully!");
+      // toast.success("Logged out successfully!");
       router.push("/");
     } catch (error: any) {
       toast.error(error.message || "Logout failed");
@@ -318,7 +318,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Clear the pending verification email from local storage
       localStorage.removeItem("pendingVerificationEmail");
 
-      toast.success("Email verified successfully!");
+      // toast.success("Email verified successfully!");
       return { success: true };
     } catch (error: any) {
       console.error("Email verification error:", error);

@@ -187,12 +187,12 @@ export default function VerifyEmailPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <Link
+              {/* <Link
                 href="/auth/resend-verification"
                 className="text-sm font-medium text-blue-600 hover:text-blue-500"
               >
                 Didn't receive a code?
-              </Link>
+              </Link> */}
             </div>
 
             <div>
