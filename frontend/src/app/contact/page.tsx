@@ -286,13 +286,13 @@ export default function ContactPage() {
                       href="tel:+020 8635000"
                       className="text-gray-600 hover:underline"
                     >
-                      +020 8635000
+                      020 8635000
                     </Link>
                     <Link
                       href="tel:+0800230055"
                       className="text-gray-600 hover:underline"
                     >
-                      +0800230055 (Toll Free)
+                      0800230055 (Toll Free)
                     </Link>
                   </div>
                 </div>
