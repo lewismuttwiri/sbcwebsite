@@ -15,7 +15,14 @@ export const featuredBrands = [
       from: "#0E0E96",
       to: "#0E0E99",
     },
-    sizes: ["300ml glass", "500ml glass", "330ml", "500ml", "2L"],
+    sizes: [
+      "300ml glass",
+      "500ml glass",
+      "300ml Cans",
+      "330ml Plastic",
+      "500ml Plastic",
+      "2L Plastic",
+    ],
     ingredients: [
       "Carbonated water",
       "High fructose corn syrup",
@@ -43,7 +50,13 @@ export const featuredBrands = [
       from: "#9FCA09",
       to: "#9FCA09",
     },
-    sizes: ["300ml glass", "500ml glass", "330ml", "500ml", "2L"],
+    sizes: [
+      "300ml glass",
+      "300ml Cans",
+      "330ml Plastic",
+      "500ml Plastic",
+      "2L Plastic",
+    ],
     ingredients: [
       "Carbonated water",
       "High fructose corn syrup",
@@ -70,7 +83,13 @@ export const featuredBrands = [
       from: "#008B47",
       to: "#00A957",
     },
-    sizes: ["300ml glass", "500ml glass", "330ml", "500ml", "2L"],
+    sizes: [
+      "300ml glass",
+      "300ml Cans",
+      "330ml Plastic",
+      "500ml Plastic",
+      "2L Plastic",
+    ],
     ingredients: [
       "Carbonated water",
       "High fructose corn syrup (or sugar)",
@@ -104,7 +123,14 @@ export const featuredBrands = [
       from: "#FF6B00",
       to: "#FF8800",
     },
-    sizes: ["300ml glass", "500ml glass", "330ml", "500ml", "2L"],
+    sizes: [
+      "300ml glass",
+      "500ml glass",
+      "300ml Cans",
+      "330ml Plastic",
+      "500ml Plastic",
+      "2L Plastic",
+    ],
   },
   {
     id: "sting",
@@ -133,7 +159,7 @@ export const featuredBrands = [
       from: "#FF0000",
       to: "#FF6600",
     },
-    sizes: ["330ml"],
+    sizes: ["330ml Plastic"],
   },
   {
     id: "Evervess",
@@ -152,7 +178,7 @@ export const featuredBrands = [
       from: "#ffffff",
       to: "#ffffff",
     },
-    sizes: ["300ml glass", "330ml", "500ml"],
+    sizes: ["300ml glass", "330ml Plastic", "500ml Plastic"],
   },
   {
     id: "Aquafina",
@@ -171,6 +197,6 @@ export const featuredBrands = [
       from: "#ffffff",
       to: "#ffffff",
     },
-    sizes: ["500ml"],
+    sizes: ["500ml Plastic"],
   },
 ];
