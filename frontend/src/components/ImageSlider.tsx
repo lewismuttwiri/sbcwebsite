@@ -55,7 +55,7 @@ export default function ImageSlider({
               alt={`Slider image ${(index % images.length) + 1}`}
               fill
               quality={100}
-              className="object-cover"
+              className="object-contain"
               priority={index === 0}
               sizes="100vw"
             />

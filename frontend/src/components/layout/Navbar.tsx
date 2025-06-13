@@ -199,16 +199,6 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex-shrink-0 justify-start">
               <Link href="/" className="flex items-center">
-                {/* <div className="relative w-[60px] h-[60px]">
-                  <Image
-                    src="/images/logo/pepsi_logo.png"
-                    alt="SBC Kenya Logo"
-                    fill
-                    sizes="60px"
-                    className="object-contain transition-all duration-300"
-                    priority
-                  />
-                </div> */}
                 <div className="flex items-center">
                   <Image
                     src="/images/logo/pepsi_logo.png"
