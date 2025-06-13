@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/products";
 import { getProductsByBrandId } from "@/utils/productUtils";
 import type { Product } from "@/utils/productUtils";
 import { getBrands } from "@/utils/productUtils";
+import { Container } from "lucide-react";
 export default function ProductsContent() {
   const router = useRouter();
   const pathname = usePathname();
@@ -122,7 +123,7 @@ export default function ProductsContent() {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="mx-auto px-4 py-8">
         <div className="animate-pulse space-y-8">
           <div className="h-10 bg-gray-200 rounded w-1/3"></div>
           <div className="h-12 bg-gray-200 rounded w-full max-w-md"></div>
@@ -165,7 +166,7 @@ export default function ProductsContent() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="px-4 py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <h1 className="text-3xl font-bold">Our Products</h1>
         <div className="w-full md:w-96">
