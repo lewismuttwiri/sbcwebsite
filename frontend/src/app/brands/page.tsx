@@ -356,10 +356,8 @@ export default function BrandsPage() {
                         </div>
                       </div>
 
-                      {/* Ingredients Section */}
-                      {brand.ingredients && (
+                      {/* {brand.ingredients && (
                         <>
-                          {/* Elegant divider with subtle glow */}
                           <div className="relative">
                             <div
                               className="absolute inset-0 flex items-center"
@@ -375,7 +373,6 @@ export default function BrandsPage() {
                           </div>
 
                           <div className="space-y-6 pt-6">
-                            {/* Section header with enhanced styling */}
                             <div className="flex items-center gap-4">
                               <div className="relative">
                                 <div className="absolute inset-0 bg-[#0E0E96]/20 rounded-xl blur-sm"></div>
@@ -393,7 +390,6 @@ export default function BrandsPage() {
                               </div>
                             </div>
 
-                            {/* Ingredients grid with improved layout */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                               {brand.ingredients.map(
                                 (ingredient: string, idx: number) => (
@@ -417,7 +413,6 @@ export default function BrandsPage() {
                                       }}
                                       whileTap={{ scale: 0.98 }}
                                     >
-                                      {/* Subtle hover effect background */}
                                       <div className="absolute inset-0 bg-gradient-to-r from-[#0E0E96]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
 
                                       <div className="relative flex items-center gap-2">
@@ -432,7 +427,6 @@ export default function BrandsPage() {
                               )}
                             </div>
 
-                            {/* Enhanced disclaimer */}
                             <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-gray-300">
                               <div className="flex items-start gap-3">
                                 <div className="flex-shrink-0 mt-0.5">
@@ -463,7 +457,8 @@ export default function BrandsPage() {
                             </div>
                           </div>
                         </>
-                      )}
+                      )} 
+                       */}
                     </div>
                     <div className="w-60 h-px bg-gradient-to-r from-gray-300 to-transparent mx-auto lg:mx-0"></div>
 
