@@ -60,3 +60,34 @@ class AuthUserSerializer(serializers.ModelSerializer):
             user.save()
         
         return user
+class GoogleAuthUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Google OAuth user registration
+    """
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'first_name', 'last_name', 'phone_number', 'user_role', 'is_verified']
+        
+    def create(self, validated_data):
+        """
+        Create user without password for Google OAuth
+        """
+        # Set a random unusable password for Google users
+        user = CustomUser.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
+            phone_number=validated_data.get('phone_number', ''),
+        )
+        
+        # Set additional fields
+        user.user_role = validated_data.get('user_role', 4)
+        user.is_verified = validated_data.get('is_verified', True)
+        
+        # Set unusable password for Google users
+        user.set_unusable_password()
+        user.save()
+        
+        return user
+

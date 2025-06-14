@@ -29,6 +29,7 @@ urlpatterns = [
     path('contact/', include('contact.urls', namespace='contact')),
     path('gallery/', include('gallery.urls', namespace='gallery')),
     path('careers/', include('recruitment.urls', namespace='recruitment')),
+    path('events/', include('events.urls')),
     path('social/', include('social.urls', namespace='social')),
     path('tenders/', include('procurement.urls', namespace='procurement')),
     path('store/', include('store.urls', namespace='store')),
@@ -39,7 +40,7 @@ urlpatterns = [
     
 
     # REST API authentication endpoints
-    path('api/', include('authuser.urls')),
+    path('auth/api/', include('authuser.urls')),
     
     # Add the sbcapp URLs
     path('sbcapp/', include('sbcapp.urls', namespace='sbcapp')),
@@ -48,9 +49,6 @@ urlpatterns = [
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    
-    # Redirect root URL to Swagger UI
-    path('', lambda request: redirect('schema-swagger-ui'), name='root-redirect'),
     
     # Optional: API browser provided by DRF
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

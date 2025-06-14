@@ -13,38 +13,38 @@
 {% block content %}
 <h2 class="greeting">Hello <span class="highlight-text">{{ name }}</span>,</h2>
 
-<p>Welcome to the <strong>SBC Kenya</strong> family! 🎉 To complete your registration and secure your account, please
+<p>Welcome to the <strong>SBC Kenya</strong> family! To complete your registration and secure your account, please
     verify your email address using the code below.</p>
 
 <div style="text-align: center; margin: 40px 0;">
     <div
-        style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); border: 3px dashed #ffc107; padding: 30px; border-radius: 16px; display: inline-block; box-shadow: 0 8px 16px rgba(255,193,7,0.2);">
-        <p style="margin: 0; font-size: 16px; color: #856404; font-weight: 600;">🔑 Your Verification Code:</p>
+        style="background: linear-gradient(135deg, #0404af 0%, #074fad 100%); border: 3px dashed #0E0E96; padding: 30px; border-radius: 16px; display: inline-block; box-shadow: 0 8px 16px rgba(6, 23, 221, 0.2);">
+        <p style="margin: 0; font-size: 16px; color: #f8f8fa; font-weight: 600;">🔑 Your Verification Code:</p>
         <h1
-            style="margin: 15px 0; font-size: 42px; color: #856404; letter-spacing: 8px; font-family: 'Courier New', monospace; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+            style="margin: 15px 0; font-size: 42px; color: #f8f8fa; letter-spacing: 8px; font-family: 'Courier New', monospace; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
             {{ otp }}</h1>
-        <p style="margin: 0; font-size: 14px; color: #856404; opacity: 0.8;">⏰ Valid for 2 hours</p>
+        <p style="margin: 0; font-size: 14px; color: #f8f8fa; opacity: 0.8;">⏰ Valid for 2 hours</p>
     </div>
 </div>
 
 <div class="info-box warning-box">
     <h4>Security Guidelines</h4>
     <ul class="steps-list">
-        <li><strong>Keep it Private:</strong> Never share this code with anyone</li>
-        <li><strong>Official Use Only:</strong> SBC Kenya will never ask for your code via phone</li>
-        <li><strong>Time Sensitive:</strong> This code expires in 2 hours for your security</li>
-        <li><strong>Didn't Request?</strong> If you didn't sign up, please ignore this email</li>
+        <h4>Keep it Private:</strong> Never share this code with anyone</h4>
+        <h4>Official Use Only:</strong> SBC Kenya will never ask for your code via phone</h4>
+        <h4>Time Sensitive:</strong> This code expires in 2 hours for your security</h4>
+        <h4>Didn't Request?</strong> If you didn't sign up, please ignore this email</h4>
     </ul>
 </div>
 
 <p style="text-align: center; font-size: 18px; color: #666; font-style: italic;">
-    "Security is our priority, your peace of mind is our goal!" 🛡️
+    "Security is our priority, your peace of mind is our goal!"
 </p>
 {% endblock %}
 
 {% block action_section %}
 <div style="text-align: center; margin: 30px 0;">
-    <a href="https://sbckenya.com/auth/verify-account/" class="button">✅ Verify Email Address</a>
+    <a href="https://sbckenya.com/auth/verify-email/" class="button"> Verify Email Address</a>
 </div>
 {% endblock %}
 

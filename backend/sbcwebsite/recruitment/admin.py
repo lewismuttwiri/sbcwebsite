@@ -9,34 +9,39 @@ from .models import JobAdvertisement, JobApplication
 @admin.register(JobAdvertisement)
 class JobAdvertisementAdmin(admin.ModelAdmin):
     list_display = [
-        'title', 
-        'location', 
-        'is_active', 
-        'posted_date', 
-        'closing_date', 
+        'title',
+        'department',
+        'type',
+        'location',
+        'is_active',
+        'posted_date',
+        'closing_date',
         'applications_count',
         'days_remaining',
         'status_indicator'
     ]
     list_filter = [
-        'is_active', 
-        'location', 
-        'posted_date', 
+        'is_active',
+        'department',
+        'type',
+        'location',
+        'posted_date',
         'closing_date'
     ]
     search_fields = [
-        'title', 
-        'description', 
+        'title',
+        'description',
+        'department',
         'location'
     ]
     readonly_fields = [
-        'posted_date', 
-        'applications_count', 
+        'posted_date',
+        'applications_count',
         'days_remaining'
     ]
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'location', 'is_active')
+            'fields': ('title', 'department', 'type', 'location', 'is_active')
         }),
         ('Job Details', {
             'fields': ('description', 'requirements', 'responsibilities')
@@ -71,6 +76,12 @@ class JobAdvertisementAdmin(admin.ModelAdmin):
     applications_count.admin_order_field = '_applications_count'
     
     def days_remaining(self, obj):
+        """Calculate days remaining, handling None closing_date"""
+        # Handle None closing_date
+        if obj.closing_date is None:
+            return format_html('<span style="color: blue;">No deadline</span>')
+        
+        # Compare with current time
         if obj.closing_date > timezone.now():
             delta = obj.closing_date.date() - timezone.now().date()
             days = delta.days
@@ -89,9 +100,14 @@ class JobAdvertisementAdmin(admin.ModelAdmin):
     days_remaining.short_description = 'Days Remaining'
     
     def status_indicator(self, obj):
+        """Show status indicator, handling None closing_date"""
         if not obj.is_active:
             return format_html(
                 '<span style="color: gray;">●</span> Inactive'
+            )
+        elif obj.closing_date is None:
+            return format_html(
+                '<span style="color: blue;">●</span> Open (No deadline)'
             )
         elif obj.closing_date < timezone.now():
             return format_html(
@@ -110,6 +126,8 @@ class JobApplicationAdmin(admin.ModelAdmin):
         'email',
         'phone',
         'job_title',
+        'job_department',
+        'job_type',
         'status',
         'applied_date',
         'resume_link',
@@ -119,18 +137,23 @@ class JobApplicationAdmin(admin.ModelAdmin):
         'status',
         'job_advertisement',
         'applied_date',
-        'job_advertisement__location'
+        'job_advertisement__location',
+        'job_advertisement__department',
+        'job_advertisement__type'
     ]
     search_fields = [
         'applicant_name',
         'email',
         'phone',
         'job_advertisement__title',
+        'job_advertisement__department',
         'skills'
     ]
     readonly_fields = [
         'applied_date',
         'job_title',
+        'job_department',
+        'job_type',
         'resume_link',
         'skills_display'
     ]
@@ -139,6 +162,8 @@ class JobApplicationAdmin(admin.ModelAdmin):
             'fields': (
                 'job_advertisement',
                 'job_title',
+                'job_department',
+                'job_type',
                 'status',
                 'applied_date'
             )
@@ -184,6 +209,17 @@ class JobApplicationAdmin(admin.ModelAdmin):
     job_title.short_description = 'Job Title'
     job_title.admin_order_field = 'job_advertisement__title'
     
+    def job_department(self, obj):
+        return obj.job_advertisement.department
+    job_department.short_description = 'Department'
+    job_department.admin_order_field = 'job_advertisement__department'
+    
+    def job_type(self, obj):
+        # Changed this line - removed get_type_display()
+        return obj.job_advertisement.type
+    job_type.short_description = 'Job Type'
+    job_type.admin_order_field = 'job_advertisement__type'
+    
     def resume_link(self, obj):
         if obj.resume_url:
             return format_html(
@@ -224,7 +260,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
     mark_as_interviewed.short_description = 'Mark selected applications as interviewed'
     
     def mark_as_hired(self, request, queryset):
-        updated = queryset.update(status='hired')
+        updated = queryset.update(status='accepted')
         self.message_user(
             request,
             f'{updated} application(s) marked as hired.'
@@ -243,3 +279,4 @@ class JobApplicationAdmin(admin.ModelAdmin):
 admin.site.site_header = 'SBC Recruitment Administration'
 admin.site.site_title = 'SBC Recruitment Admin'
 admin.site.index_title = 'Welcome to SBC Recruitment Administration'
+
