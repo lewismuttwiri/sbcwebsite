@@ -25,7 +25,7 @@ export default function EventsPage() {
   return (
     <main className="min-h-screen">
       <section
-        className="relative py-60 bg-cover bg-center bg-fixed "
+        className="relative h-0  lg:h-100  bg-contain md:bg-cover bg-no-repeat bg-center bg-fixed overflow-hidden"
         style={{ backgroundImage: 'url("images/logo/pepsi-home.jpg")' }}
       ></section>
       <div className="container mx-auto px-4 py-4 relative z-10 text-center  flex items-start justify-center">
