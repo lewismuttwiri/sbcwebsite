@@ -27,7 +27,7 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 IN_PROD = os.getenv('IN_PROD', 'False').lower() == 'true'
 
 # ALLOWED_HOSTS configuration
-ALLOWED_HOSTS = ['sbckenya.com', 'www.sbckenya.com', 'localhost', '127.0.0.1','95.111.225.106','172.25.9.24','cbc5-197-248-44-59.ngrok-free.app']
+ALLOWED_HOSTS = ['sbckenya.com', 'www.sbckenya.com', 'localhost', '127.0.0.1','95.111.225.106','172.25.9.24','5724-197-248-44-59.ngrok-free.app']
 
 # for custom user
 AUTH_USER_MODEL = 'sbcapp.CustomUser'
@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',  # Required for token authentication
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
+    
+    
 
     'drf_yasg', 
     'django_extensions',  # Added for HTTPS in development
@@ -66,19 +66,18 @@ INSTALLED_APPS = [
     'sbcapp',
     'news',
     'partner',
-    'authuser',
-    
+    'authuser',   
+    'events',
 
     
     
-    # FOR SSO
+    # FOR SSO 
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'crispy_forms',
-    "crispy_bootstrap3",
+    
+   
     'bootstrap_datepicker_plus',
     'bootstrap4',
     'widget_tweaks',
@@ -91,8 +90,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Added for CORS - must be at the top
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'django.middleware.common.CommonMiddleware', 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -102,21 +101,21 @@ MIDDLEWARE = [
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = False
 
-# For development - restrict in production
-CORS_ALLOWED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = [
     "https://sbckenya.com",
-    "http://localhost:3000",
-    "https://48af-197-248-44-59.ngrok-free.app",
-    "https://7d8c-197-248-44-59.ngrok-free.app",
-    "https://architecture-muscles-carol-lit.trycloudflare.com",
-    "https://8ab7-197-248-44-59.ngrok-free.app",    
+    "https://www.sbckenya.com",
 ]
 
 
-SITE_ID = 1
-ACCOUNT_EMAIL_VERIFICATION = "none"  # optional: skip email verification
-ACCOUNT_AUTHENTICATION_METHOD = "username"  # or "email" or "username_email"
-ACCOUNT_EMAIL_REQUIRED = False
+# For development - restrict in production
+CORS_ALLOWED_ORIGINS = [
+    "https://sbckenya.com",
+    "https://www.sbckenya.com",
+    "http://localhost:3000",
+   
+]
+
+
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -156,9 +155,6 @@ REST_FRAMEWORK = {
 }
 
 # Add this to your settings.py file
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'sbcapp.serializers.CustomRegisterSerializer',
-}
 
 REST_AUTH = {
     'USE_JWT': False,  # Set to True if you want to use JWT tokens
@@ -294,23 +290,9 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        },
-        'OAUTH_PKCE_ENABLED': True,
-        'APP': {
-            'client_id': os.getenv('GOOGLE_CLIENT_ID', ''),
-            'secret': os.getenv('GOOGLE_CLIENT_SECRET', ''),
-            'key': ''
-        }
-    },
-}
+
+#google_auth
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', '')
 
 # Disable signup URL for django-allauth if you're not expecting users to sign up directly
 # SOCIALACCOUNT_ADAPTER = 'sbcapp1.adapters.CustomSocialAccountAdapter'
@@ -378,3 +360,4 @@ X_FRAME_OPTIONS = 'DENY'
 SESSION_COOKIE_AGE = 28800   # 8 hour
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_SAVE_EVERY_REQUEST = True
+
