@@ -25,9 +25,12 @@ export default function EventsPage() {
   return (
     <main className="min-h-screen">
       <section
-        className="relative h-0  lg:h-100  bg-contain md:bg-cover bg-no-repeat bg-center bg-fixed overflow-hidden"
-        style={{ backgroundImage: 'url("images/logo/pepsi-home.jpg")' }}
+        className="bg-fixed h-[20vh] md:h-[60vh] bg-center bg-contain md:bg-cover -z-10 m-0 flex items-center justify-center pt-[25px] md:pt-0"
+        style={{
+          backgroundImage: "url('/images/logo/pepsi-home.jpg')",
+        }}
       ></section>
+
       <div className="container mx-auto px-4 py-4 relative z-10 text-center  flex items-start justify-center">
         <div className="w-fit p-4 rounded-lg">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
