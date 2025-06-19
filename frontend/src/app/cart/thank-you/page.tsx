@@ -18,7 +18,7 @@ export default function ThankYouPage() {
     if (hasRun.current) return;
 
     // Show a success message when the page loads
-    toast.success("Thank you for your order! We'll be in touch soon.");
+    // toast.success("Thank you for your order! We'll be in touch soon.");
     clearCart();
 
     // Mark that this effect has run
