@@ -13,7 +13,7 @@ export default function SustainabilityCard({
   description,
 }: SustainabilityCardProps) {
   return (
-    <div className="bg-black/30 backdrop-blur-sm p-8 rounded-xl">
+    <div className="bg-black transparent p-8 rounded-xl">
       <div className="mb-4">
         <Icon size={20} color="white" />
       </div>
