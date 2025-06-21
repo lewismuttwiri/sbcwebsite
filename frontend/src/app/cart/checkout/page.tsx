@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { toast } from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext";
 import Loader from "@/components/loader";
@@ -106,7 +105,7 @@ export default function CheckoutPage() {
       clearCart();
 
       // Show success message
-      toast.success("Order submitted successfully!");
+      // toast.success("Order submitted successfully!");
 
       // Redirect to thank you page
       router.push("/cart/thank-you");

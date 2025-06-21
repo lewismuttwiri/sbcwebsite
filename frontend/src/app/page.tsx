@@ -440,23 +440,18 @@ export default function Home() {
       </section>
 
       {/* Sustainability Section */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-32 overflow-hidden bg-[#0E0E96] md:bg-transparent">
+        {/* Background image - only visible on medium+ screens */}
         <div
-          className="fixed inset-0 -z-10"
+          className="hidden md:block fixed inset-0 -z-10"
           style={{
             backgroundImage: "url('/images/logo/pepsi-home.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundAttachment: "fixed",
             backgroundRepeat: "no-repeat",
-            height: "100vh",
-            width: "100vw",
-            top: 0,
-            left: 0,
-            transform: "scale(1.02)",
           }}
         >
-          <div className="absolute inset-0 bg-black/80" />
+          {/* No overlay div here - just the image */}
         </div>
 
         {/* Content */}
