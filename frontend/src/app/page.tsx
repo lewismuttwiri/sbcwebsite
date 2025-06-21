@@ -439,7 +439,6 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Sustainability Section */}
       <section className="relative py-32 overflow-hidden bg-[#0E0E96] md:bg-transparent">
         {/* Background image - only visible on medium+ screens */}
         <div
@@ -480,7 +479,7 @@ export default function Home() {
       </section>
 
       {/* Latest News Section */}
-      <section className="py-20 bg-gray-200">
+      <section className="py-20 bg-white">
         <Container className="px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Latest News</h2>
