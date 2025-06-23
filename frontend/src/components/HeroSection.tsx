@@ -101,8 +101,7 @@ export default function HeroSection() {
     >
       {/* Loading state background - only show if current video isn't loaded */}
       {!loadedVideos.has(videos[currentIndex]?.src) && (
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
-          <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-750 via-blue-600 to-blue-900">
           {/* Loading indicator */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
@@ -110,13 +109,9 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* Gradient overlay for better text visibility */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent mix-blend-multiply" />
-        <div className="absolute inset-0" />
-      </div>
-
-      {/* Video Background */}
+      {/* Single effective gradient overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent m" />
+      <div className="absolute inset-0" />
       <div className="absolute inset-0 w-full h-full">
         {videos.map((video, index) => (
           <video
@@ -159,10 +154,7 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Semi-transparent overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black/30" />
-
-      {/* Content container */}
+      {/* Video Background */}
       <Container className="relative z-20 px-4">
         <div className="flex flex-col justify-center h-full">
           <div className="text-left">
@@ -172,7 +164,7 @@ export default function HeroSection() {
                 One Sip at a Time
               </span>
             </h1>
-            <p className="text-base sm:text-lg md:text-lg mb-4 opacity-80 md:mb-4 text-white text-opacity-90 max-w-md md:mx-0 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-lg mb-4 md:mb-4 text-white text-opacity-90 max-w-md md:mx-0 leading-relaxed">
               Experience the vibrant, refreshing taste of our world-class
               beverages.
             </p>
