@@ -37,6 +37,15 @@ export default function ContactPage() {
     resolver: zodResolver(formSchema),
   });
 
+  const getCsrfToken = () => {
+    const cookies = document.cookie.split("");
+    const csrfCookie = cookies.find((cookies) =>
+      cookies.trim().startsWith("csrftoken=")
+    );
+
+    return csrfCookie;
+  };
+
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setSubmissionSuccess(false);
@@ -49,10 +58,19 @@ export default function ContactPage() {
         throw new Error("API URL is not configured");
       }
 
+      const csrftoken = getCsrfToken();
+      console.log("Csrf Token", csrftoken);
+      if (!csrftoken) {
+        throw new Error(
+          "CSRF token not found. Please refresh the page and try again."
+        );
+      }
+
       const response = await fetch(`${apiUrl}contact/api/comments/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken,
         },
         body: JSON.stringify({
           first_name: data.firstName,
