@@ -8,6 +8,7 @@ import Container from "@/components/layout/Container";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import Cookies from "js-cookie";
 
 const LocationMap = dynamic(() => import("@/components/contact/LocationMap"), {
   ssr: false,
@@ -38,12 +39,9 @@ export default function ContactPage() {
   });
 
   const getCsrfToken = () => {
-    const cookies = document.cookie.split("");
-    const csrfCookie = cookies.find((cookies) =>
-      cookies.trim().startsWith("csrftoken=")
-    );
-
-    return csrfCookie;
+    const token = Cookies.get("csrftoken");
+    console.log("Token from js-cookie:", token);
+    return token;
   };
 
   const onSubmit = async (data: FormData) => {
