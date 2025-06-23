@@ -40,16 +40,16 @@ export default function HeroSection() {
       src: "/videos/hero_section/evervess.mp4",
       name: "Evervess",
       mobileSrc: "/videos/hero_section/mobile/evervess.mp4",
-    }, // Fallback to desktop version if mobile not available
+    },
   ];
 
   const [isMobile, setIsMobile] = useState(false);
   const [videos, setVideos] = useState(desktopVideos);
+  const [loadedVideos, setLoadedVideos] = useState(new Set());
 
   useEffect(() => {
-    // Check if mobile device on component mount and window resize
     const checkIfMobile = () => {
-      const mobile = window.innerWidth < 768; // Tailwind's md breakpoint
+      const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       setVideos(
         desktopVideos.map((video) => ({
@@ -59,18 +59,24 @@ export default function HeroSection() {
       );
     };
 
-    // Initial check
     checkIfMobile();
-
-    // Add event listener for window resize
     window.addEventListener("resize", checkIfMobile);
-
-    // Clean up
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Handle individual video loading
+  const handleVideoLoad = (videoSrc: string) => {
+    console.log("Video loaded:", videoSrc); // Debug log
+    setLoadedVideos((prev) => new Set([...prev, videoSrc]));
+  };
+
+  // Handle video errors
+  const handleVideoError = (videoSrc: string) => {
+    console.error("Video failed to load:", videoSrc);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -87,16 +93,29 @@ export default function HeroSection() {
   return (
     <section
       aria-label="Featured Beverages"
-      className="relative min-h-[90vh] flex items-center overflow-hidden transition-colors duration-500 py-8 md:py-4"
+      className={clsx(
+        "relative min-h-[90vh] flex items-center overflow-hidden transition-colors duration-500 py-8 md:py-4",
+        // Add a branded background color instead of grey
+        "bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900"
+      )}
     >
+      {/* Loading state background - only show if current video isn't loaded */}
+      {!loadedVideos.has(videos[currentIndex]?.src) && (
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+          <div className="absolute inset-0 bg-black/20" />
+          {/* Loading indicator */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+          </div>
+        </div>
+      )}
+
       {/* Gradient overlay for better text visibility */}
       <div className="absolute inset-0">
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent mix-blend-multiply" />
-        {/* Gradient overlay - darker at the top, lighter at the bottom */}
-        {/* bg-gradient-to-b from-black/40 via-black/40 to-black/10 */}
         <div className="absolute inset-0" />
       </div>
+
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
         {videos.map((video, index) => (
@@ -106,15 +125,21 @@ export default function HeroSection() {
             loop
             muted
             playsInline
+            preload="auto"
+            onLoadedData={() => handleVideoLoad(video.src)}
+            onError={() => handleVideoError(video.src)}
+            onCanPlay={() => handleVideoLoad(video.src)}
             className={clsx(
-              "absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-in-out hero-video",
-              isTransitioning && index === currentIndex
-                ? "translate-x-0 opacity-100"
-                : index === currentIndex
-                ? "translate-x-0 opacity-100"
-                : index === (currentIndex - 1 + videos.length) % videos.length
-                ? "translate-x-[-100%] opacity-100"
-                : "translate-x-full opacity-0"
+              "absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out hero-video",
+              // Show video if it's loaded AND it's the current video
+              loadedVideos.has(video.src) && index === currentIndex
+                ? "opacity-100 translate-x-0"
+                : loadedVideos.has(video.src) &&
+                  index === (currentIndex - 1 + videos.length) % videos.length
+                ? "opacity-100 translate-x-[-100%]"
+                : loadedVideos.has(video.src)
+                ? "opacity-0 translate-x-full"
+                : "opacity-0 translate-x-0"
             )}
             style={{
               position: "absolute",
@@ -123,7 +148,8 @@ export default function HeroSection() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              zIndex: -1,
+              zIndex:
+                loadedVideos.has(video.src) && index === currentIndex ? 1 : -1,
               pointerEvents: "none",
             }}
           >
