@@ -54,7 +54,6 @@ export default function ContactPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
         body: JSON.stringify({
           first_name: data.firstName,
           last_name: data.lastName,
