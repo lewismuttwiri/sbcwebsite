@@ -12,17 +12,27 @@ export default function NewJobOpening() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [csrfToken, setCsrfToken] = useState("");
-  const [userRole, setUserRole] = useState<any | null>();
+  const [userRole, setUserRole] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    const user: any = localStorage.getItem("user");
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      setUserRole(user.entity.role.id);
-      setCsrfToken(parsedUser.entity.token);
+    // Only run on client side
+    if (typeof window !== "undefined") {
+      const user = localStorage.getItem("user");
+      if (user) {
+        try {
+          const parsedUser = JSON.parse(user);
+          setUserRole(parsedUser.entity.role.id); // Fixed: use parsedUser instead of user
+          setCsrfToken(parsedUser.entity.token);
+        } catch (error) {
+          console.error("Error parsing user data:", error);
+        }
+      }
+      setIsLoading(false);
     }
   }, []);
+
   const [jobData, setJobData] = useState<Omit<JobPosting, "id" | "posted">>({
     title: "",
     description: "",
@@ -102,6 +112,17 @@ export default function NewJobOpening() {
     }
   };
 
+  // Show loading state while checking user data
+  if (isLoading) {
+    return (
+      <Container>
+        <div className="flex items-center justify-center h-64">
+          <div className="text-lg">Loading...</div>
+        </div>
+      </Container>
+    );
+  }
+
   if (!isAuthenticated) {
     return (
       <Container>
@@ -131,7 +152,7 @@ export default function NewJobOpening() {
     );
   }
 
-  if (![1, 2].includes(userRole)) {
+  if (userRole !== null && ![1, 2].includes(userRole)) {
     //This should be procurement role
     return (
       <Container>
