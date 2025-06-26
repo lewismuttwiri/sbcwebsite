@@ -178,10 +178,7 @@ const Navbar = () => {
       ],
     },
     { name: "Media", href: "/media" },
-    {
-      name: "Socials",
-      href: "/social",
-    },
+
     {
       name: "Contact",
       href: "/contact",
@@ -190,6 +187,10 @@ const Navbar = () => {
         {
           name: "Find a distributor near me",
           href: "/contact/distributor",
+        },
+        {
+          name: "Socials",
+          href: "/social",
         },
       ],
     },
