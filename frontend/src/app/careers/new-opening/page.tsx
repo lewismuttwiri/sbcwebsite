@@ -173,8 +173,8 @@ export default function NewJobOpening() {
             </div>
             <div className="ml-3">
               <p className="text-sm text-red-700">
-                You don't have permission to access this page. Only procurement
-                staff can add tenders.
+                You don't have permission to access this page. Only HR staff can
+                add tenders.
               </p>
             </div>
           </div>
