@@ -34,7 +34,7 @@ const Footer = ({
               <div className="flex space-x-4">
                 <a
                   href="https://www.facebook.com/profile.php?id=61565704941051"
-                  // target="_blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white"
                 >
@@ -70,7 +70,7 @@ const Footer = ({
                 </a> */}
                 <a
                   href="https://www.instagram.com/pepsikenya_/"
-                  // target="_blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white"
                 >

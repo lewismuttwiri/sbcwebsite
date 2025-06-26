@@ -56,7 +56,7 @@ export default function SocialsPage() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 max-w-6xl mx-auto ">
+        <div className="flex justify-center flex-wrap gap-8 max-w-6xl mx-auto items-center ">
           {socialLinks.map((social) => (
             <motion.div
               key={social.name}
