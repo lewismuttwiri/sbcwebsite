@@ -109,7 +109,6 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* Single effective gradient overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent m" />
       <div className="absolute inset-0" />
       <div className="absolute inset-0 w-full h-full">

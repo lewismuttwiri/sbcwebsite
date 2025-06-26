@@ -13,33 +13,28 @@ const socialLinks = [
   {
     name: "Facebook",
     icon: CiFacebook,
-    url: "https://facebook.com/sbc",
+    url: "https://www.facebook.com/profile.php?id=61565704941051",
   },
   {
     name: "Instagram",
     icon: CiInstagram,
-    url: "https://instagram.com/sbc",
+    url: "https://www.instagram.com/pepsikenya_/",
   },
-  {
-    name: "Twitter",
-    icon: RiTwitterXLine,
-    url: "https://twitter.com/sbc",
-  },
-  {
-    name: "LinkedIn",
-    icon: CiLinkedin,
-    url: "https://linkedin.com/company/sbc",
-  },
-  {
-    name: "YouTube",
-    icon: CiYoutube,
-    url: "https://youtube.com/sbc",
-  },
-  {
-    name: "TikTok",
-    icon: BsTiktok,
-    url: "https://tiktok.com/sbc",
-  },
+  // {
+  //   name: "Twitter",
+  //   icon: RiTwitterXLine,
+  //   url: "https://twitter.com/sbc",
+  // },
+  // {
+  //   name: "LinkedIn",
+  //   icon: CiLinkedin,
+  //   url: "https://linkedin.com/company/sbc",
+  // },
+  // {
+  //   name: "YouTube",
+  //   icon: CiYoutube,
+  //   url: "https://youtube.com/sbc",
+  // },
 ];
 
 export default function SocialsPage() {

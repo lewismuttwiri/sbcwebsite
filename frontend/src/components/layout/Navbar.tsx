@@ -187,6 +187,10 @@ const Navbar = () => {
           name: "Find a distributor near me",
           href: "/contact/distributor",
         },
+        {
+          name: "Socials",
+          href: "/social",
+        },
       ],
     },
   ];
