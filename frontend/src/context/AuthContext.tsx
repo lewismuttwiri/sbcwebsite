@@ -82,12 +82,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const clearError = useCallback(() => setError(null), []);
 
   const checkAuth = useCallback(async () => {
-    if (!process.env.NEXT_PUBLIC_API_URL) {
-      console.error("API URL is not defined");
-      setIsLoading(false);
-      return { user: null, isAuthenticated: false };
-    }
-
     try {
       // First, check if we have a token in localStorage
       const userStr = localStorage.getItem("user");

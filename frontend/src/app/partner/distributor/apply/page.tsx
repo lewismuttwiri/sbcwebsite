@@ -118,7 +118,7 @@ export default function DistributorApplication() {
       }
 
       if (formData.krapin) {
-        formDataToSend.append("krapin", formData.krapin);
+        formDataToSend.append("tax_certificate", formData.krapin);
       }
 
       // Log FormData entries for debugging
