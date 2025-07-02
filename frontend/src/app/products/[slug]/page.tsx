@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FiShoppingCart, FiChevronLeft } from "react-icons/fi";
 import Link from "next/link";
+import Image from "next/image";
 
 import type { Product } from "@/data/brands";
 import Button from "@/components/Button";
@@ -12,17 +12,18 @@ import { CartItem, useCart } from "@/hooks/useCart";
 import toast from "react-hot-toast";
 import Container from "@/components/layout/Container";
 
+// This is a client component that will be hydrated on the client
 export default function ProductDetailPage({
   params: paramsPromise,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const router = useRouter();
+  const [slug, setSlug] = useState<string | null>(null);
   const [product, setProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  // const [slug, setSlug] = useState<string | null>(null);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showAddedToCart, setShowAddedToCart] = useState(false);
 
@@ -87,18 +88,19 @@ export default function ProductDetailPage({
     const loadProduct = async () => {
       try {
         const params = await paramsPromise;
+        setSlug(params.slug);
 
-        const products = await fetch("/api/products");
-        if (!products.ok) {
-          toast("Failed to fetch products");
+        const productsResponse = await fetch("/api/products");
+        if (!productsResponse.ok) {
+          toast.error("Failed to fetch products");
           return;
         }
-        const data = await products.json();
+        const data = await productsResponse.json();
 
         const foundProduct = data.find(
-          (product: Product) =>
-            product.slug.toLowerCase() === params.slug.toLowerCase()
+          (p: Product) => p.slug.toLowerCase() === params.slug.toLowerCase()
         );
+        
         if (foundProduct) {
           setProduct(foundProduct);
         } else {
@@ -107,6 +109,7 @@ export default function ProductDetailPage({
         }
       } catch (error) {
         console.error("Error loading product:", error);
+        toast.error("Error loading product details");
         router.push("/products");
       } finally {
         setIsLoading(false);
@@ -180,8 +183,35 @@ export default function ProductDetailPage({
     setCurrentImageIndex(index);
   };
 
+  // Generate structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.images?.[0]?.src || "/images/og-image.jpg",
+    "description": product.description || `Buy ${product.name} online from SBC Kenya`,
+    "brand": {
+      "@type": "Brand",
+      "name": product.brand
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": `https://sbc-kenya.com/products/${product.slug}`,
+      "priceCurrency": "KES",
+      "price": product.price,
+      "priceValidUntil": new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString().split('T')[0], // 30 days from now
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      {/* Add structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Container>
         <div className="max-w-7xl mx-auto">
           <div className="mb-6">
@@ -240,7 +270,7 @@ export default function ProductDetailPage({
               {/* Product Details */}
               <div className="flex flex-col">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                  {product.name}
+                  Buy {product.name} Online - {product.brand}
                 </h1>
                 <p className="text-lg text-gray-600 mb-4">{product.brand}</p>
 
