@@ -20,11 +20,11 @@ const socialLinks = [
     icon: CiInstagram,
     url: "https://www.instagram.com/pepsikenya_/",
   },
-  // {
-  //   name: "Twitter",
-  //   icon: RiTwitterXLine,
-  //   url: "https://twitter.com/sbc",
-  // },
+  {
+    name: "Tiktok",
+    icon: BsTiktok,
+    url: "https://www.tiktok.com/@pepsikenya_",
+  },
   // {
   //   name: "LinkedIn",
   //   icon: CiLinkedin,
