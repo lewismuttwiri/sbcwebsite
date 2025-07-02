@@ -3,11 +3,20 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/static/
+Disallow: /_next/
+Disallow: /private/
+Disallow: /tmp/
 
-# Allow important pages
+# Explicitly allow important sections
 Allow: /products
+Allow: /products/
+Allow: /products/*
 Allow: /brands
+Allow: /brands/
+Allow: /brands/*
 Allow: /contact
 Allow: /about
+Allow: /news
+Allow: /careers
 
 Sitemap: https://sbckenya.com/sitemap.xml
