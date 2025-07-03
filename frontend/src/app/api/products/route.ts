@@ -1,4 +1,3 @@
-import { Product } from "@/utils/productUtils";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
