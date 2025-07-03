@@ -84,7 +84,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const productsResponse = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}store/api/products/`,
       {
-        next: { revalidate: 3600 }, // Cache for 1 hour
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        credentials: "include",
+        next: { revalidate: 3600 },
       }
     );
     const products = await productsResponse.json();
