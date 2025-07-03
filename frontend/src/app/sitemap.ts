@@ -82,7 +82,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const productsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}api/products/`,
+      `${process.env.NEXT_PUBLIC_API_URL}store/api/products/`,
       {
         next: { revalidate: 3600 }, // Cache for 1 hour
       }
