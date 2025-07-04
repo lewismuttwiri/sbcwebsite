@@ -3,10 +3,8 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { ProductCard } from "@/components/products";
-import { getProductsByBrandId } from "@/utils/productUtils";
 import type { Product } from "@/utils/productUtils";
-import { getBrands } from "@/utils/productUtils";
-import { Container } from "lucide-react";
+
 export default function ProductsContent() {
   const router = useRouter();
   const pathname = usePathname();

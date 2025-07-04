@@ -38,10 +38,10 @@ export const featuredBrands = [
     id: "Mountain+Dew",
     name: "MOUNTAIN DEW",
     image: [
-      "/images/featured brands/mountain dew 500ml.png",
+      "/images/featured brands/mountain-dew-500ml.png",
       "/images/featured brands/mountain-dew-2l.png",
-      "/images/featured brands/mountain dew 300ml.webp",
-      "/images/featured brands/Mountain dew 330ml.png",
+      "/images/featured brands/mountain-dew-300ml.webp",
+      "/images/featured brands/mountain-dew-330ml.png",
     ],
     description:
       "Mountain Dew delivers a bold, citrusy kick that awakens the senses and powers through high-energy adventures with its distinctive taste and electrifying rush.",

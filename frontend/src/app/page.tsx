@@ -359,7 +359,7 @@ export default function Home() {
                 <div
                   ref={scrollContainerRef}
                   className="flex overflow-x-hidden py-6 md:py-8 scrollbar-hide"
-                  style={{ scrollBehavior: "auto" }} // Disable smooth scrolling
+                  style={{ scrollBehavior: "auto" }}
                 >
                   <div
                     ref={scrollContentRef}
@@ -370,7 +370,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Progress indicator */}
               {filteredProducts.length > 0 && renderProgressIndicator()}
             </div>
           )}

@@ -1,62 +1,71 @@
 // app/sitemap.ts
 import type { MetadataRoute } from "next";
 
+// Helper function to safely create a date
+function getValidDate(dateString?: string | Date | null): Date {
+  if (!dateString) return new Date();
+
+  const date = new Date(dateString);
+  return isNaN(date.getTime()) ? new Date() : date;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sbckenya.com/";
+  const currentDate = new Date();
 
   // Static routes (what you know exists)
-  const staticRoutes = [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "weekly" as const,
       priority: 1,
     },
     {
       url: `${baseUrl}partner`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}about`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}brands`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}news`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}products`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}contact`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "yearly" as const,
       priority: 0.6,
     },
     {
       url: `${baseUrl}careers`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}privacy-policy`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "yearly" as const,
       priority: 0.3,
     },
@@ -71,40 +80,69 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "7up",
     "Mountain+Dew",
   ];
-  const brandRoutes = brands.map((brand) => ({
+  const brandRoutes: MetadataRoute.Sitemap = brands.map((brand) => ({
     url: `${baseUrl}products?brand=${encodeURIComponent(brand)}`,
-    lastModified: new Date(),
+    lastModified: currentDate,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
 
   let dynamicRoutes: MetadataRoute.Sitemap = [];
 
-  try {
-    const productsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}store/api/products/`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        mode: "cors",
-        credentials: "include",
-        next: { revalidate: 3600 },
-      }
-    );
-    const products = await productsResponse.json();
+  console.log("Starting to generate sitemap...");
+  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 
-    const productRoutes =
-      products.results?.map((product: any) => ({
-        url: `${baseUrl}products/${encodeURIComponent(product.slug)}`,
-        lastModified: new Date(product.updated_at),
-        changeFrequency: "monthly" as const,
-        priority: 0.7,
-      })) || [];
+  try {
+    // Use the full URL for server-side fetching
+    const productsResponse = await fetch(`${baseUrl}api/products`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 3600 },
+    });
+    if (!productsResponse.ok) {
+      console.error("Products API error:", await productsResponse.text());
+      throw new Error(`Products API returned ${productsResponse.status}`);
+    }
+
+    const products = await productsResponse.json();
+    console.log("Products API response:", {
+      status: productsResponse.status,
+      hasResults: !!products,
+      resultsCount: Array.isArray(products) ? products.length : 0,
+      firstItem: Array.isArray(products) ? products[0] : undefined,
+    });
+
+    // Handle both array and object with results property
+    const productsList = Array.isArray(products)
+      ? products
+      : products?.results || [];
+
+    const productRoutes: MetadataRoute.Sitemap = productsList
+      .map((product: any) => {
+        // Ensure we have a valid slug or id for the URL
+        const productSlug = product.slug || product.id;
+        if (!productSlug) {
+          console.warn("Product missing slug and id:", product);
+          return null;
+        }
+
+        return {
+          url: `${baseUrl}products/${productSlug}`,
+          lastModified: product.updated_at
+            ? new Date(product.updated_at)
+            : currentDate,
+          changeFrequency: "monthly" as const,
+          priority: 0.7,
+        };
+      })
+      .filter(Boolean) as MetadataRoute.Sitemap;
+
+    console.log("Generated product routes:", productRoutes);
 
     const newsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}api/news`,
+      `${process.env.NEXT_PUBLIC_API_URL}news/api/news/`,
       {
         method: "GET",
         headers: {
@@ -117,23 +155,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     );
 
-    const news = await newsResponse.json();
-    const newsData = news.results;
-    console.log("newsData", newsData);
-    console.log("news", news);
+    if (!newsResponse.ok) {
+      console.error("News API error:", await newsResponse.text());
+      throw new Error(`News API returned ${newsResponse.status}`);
+    }
 
-    const newsRoutes =
-      newsData?.map((article: any) => ({
-        url: `${baseUrl}news/${encodeURIComponent(article.slug)}`,
-        lastModified: new Date(article.updated_at),
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
-      })) || [];
+    const news = await newsResponse.json();
+    const newsData = news.results || [];
+    console.log("News API response:", {
+      status: newsResponse.status,
+      hasResults: !!newsData.length,
+      resultsCount: newsData.length,
+      firstItem: newsData[0],
+    });
+
+    const newsRoutes: MetadataRoute.Sitemap = newsData.map((article: any) => ({
+      url: `${baseUrl}news/${article.id}`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+
+    console.log("news routes", newsRoutes);
 
     dynamicRoutes = [...productRoutes, ...newsRoutes];
   } catch (error) {
     console.error("Failed to fetch dynamic routes:", error);
   }
 
-  return [...staticRoutes, ...brandRoutes, ...dynamicRoutes];
+  const allRoutes = [...staticRoutes, ...brandRoutes, ...dynamicRoutes];
+
+  console.log("Generated sitemap with routes:", {
+    staticRoutes: staticRoutes.length,
+    brandRoutes: brandRoutes.length,
+    dynamicRoutes: dynamicRoutes.length,
+    total: allRoutes.length,
+  });
+
+  console.log("First few dynamic routes:", dynamicRoutes);
+
+  return allRoutes;
 }
