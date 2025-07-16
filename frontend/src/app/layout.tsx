@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poetsen.className} h-full`}>
+    <html lang="en" className={` h-full`} suppressHydrationWarning>
       <head>
         <style
           dangerouslySetInnerHTML={{
@@ -38,7 +38,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-white">
+      <body className={`min-h-screen bg-white ${poetsen.className}`}>
         <Providers>
           <ToastProvider />
           <Suspense fallback={<Loader fullScreen />}>

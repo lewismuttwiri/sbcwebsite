@@ -190,7 +190,6 @@ export default function Home() {
             className="flex-shrink-0 w-56 sm:w-64 md:w-72 px-2 sm:px-3 md:px-4"
           >
             <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg border border-gray-100 h-full flex flex-col">
-              {/* Optimized static background */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/0 via-transparent to-blue-50/0 group-hover:from-blue-50/30 group-hover:to-purple-50/20 transition-colors duration-300" />
 
               <ProductCard

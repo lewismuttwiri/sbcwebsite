@@ -68,12 +68,12 @@ export default function HistoryPage() {
               </div>
 
               {/* Timeline Item 3 */}
-              <div className="border-l-2 border-gray-200 pl-8">
+              {/* <div className="border-l-2 border-gray-200 pl-8">
                 <div className="-ml-8 mr-12">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <div className="relative w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                        <span className="text-white font-semibold">2020</span>
+                        <span className="text-white font-semibold">2018</span>
                       </div>
                     </div>
                     <div className="ml-4">
@@ -81,13 +81,13 @@ export default function HistoryPage() {
                         Modernization
                       </h3>
                       <p className="mt-2 text-gray-600">
-                        Implementation of state-of-the-art production facilities
+                        Implementation of  production facilities
                         and sustainability initiatives.
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Timeline Item 4 */}
               <div className="border-l-2 border-gray-200 pl-8">
