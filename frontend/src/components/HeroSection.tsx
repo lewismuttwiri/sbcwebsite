@@ -95,16 +95,25 @@ export default function HeroSection() {
       aria-label="Featured Beverages"
       className={clsx(
         "relative min-h-[90vh] flex items-center overflow-hidden transition-colors duration-500 py-8 md:py-4",
-        // Add a branded background color instead of grey
         "bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900"
       )}
     >
-      {/* Loading state background - only show if current video isn't loaded */}
+      {/* Modern loading animation - only show if current video isn't loaded */}
       {!loadedVideos.has(videos[currentIndex]?.src) && (
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-750 via-blue-600 to-blue-900">
-          {/* Loading indicator */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 flex items-center justify-center">
+          <div className="relative w-24 h-24">
+            {/* Animated ring */}
+            <div className="absolute inset-0 border-4 border-transparent border-t-white border-r-white rounded-full animate-spin" />
+            {/* Pulse effect */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-3 h-3 bg-white rounded-full animate-ping" />
+            </div>
+            {/* Brand name */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-white font-semibold text-sm tracking-wider">
+                Pepsi KENYA
+              </span>
+            </div>
           </div>
         </div>
       )}
@@ -153,7 +162,6 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Video Background */}
       <Container className="relative z-20 px-4">
         <div className="flex flex-col justify-center h-full">
           <div className="text-left">
@@ -190,7 +198,6 @@ export default function HeroSection() {
         </div>
       </Container>
 
-      {/* Navigation dots */}
       <div className="hero-dots">
         {videos.map((_, index) => (
           <div
