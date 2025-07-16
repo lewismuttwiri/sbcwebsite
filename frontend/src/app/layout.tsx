@@ -14,8 +14,9 @@ const poetsen = Poetsen_One({
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
-  adjustFontFallback: false,
+  adjustFontFallback: true,
   variable: "--font-poetsen",
+  style: ["normal"],
 });
 
 export const metadata: Metadata = siteMetadata;
@@ -38,7 +39,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`min-h-screen bg-white ${poetsen.className}`}>
+      <body className="min-h-screen bg-white">
         <Providers>
           <ToastProvider />
           <Suspense fallback={<Loader fullScreen />}>
