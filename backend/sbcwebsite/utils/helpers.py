@@ -32,7 +32,7 @@ class Helper:
             return f"{base_url}{static_url}"
         except Exception as e:
             print(f"Error building static URL: {str(e)}")
-            return f"http://localhost:8000{static(static_path)}"
+            return f"http://sbckenya.com{static(static_path)}"
 
     def generateotp(self):
         # Generate a 6-digit OTP
@@ -60,7 +60,7 @@ class Helper:
             context.update({
                 'logo_white_url': self.get_full_static_url('images/sbc-logo-white.png'),
                 'logo_dark_url': self.get_full_static_url('images/sbc-logo.png'),
-                'site_url': getattr(settings, 'SITE_URL', 'http://localhost:8000'),
+                'site_url': getattr(settings, 'SITE_URL', 'http://sbckenya.com'),
                 'current_year': datetime.datetime.now().year,
                 'company_name': 'SBC Kenya',
                 'support_email': getattr(settings, 'SUPPORT_EMAIL', 'info@sbckenya.com'),
@@ -130,7 +130,7 @@ class Helper:
             }
             
             # Send notification to admin
-            admin_email = getattr(settings, 'ADMIN_EMAIL', 'mestechsln@gmail.com')
+            admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@sbckenya.com')
             notification_result = self.send_html_email(
                 template_name='emails/contact_form_notification.html',
                 context=context,
@@ -165,7 +165,7 @@ class Helper:
             }
             
             # Send notification to admin
-            admin_email = getattr(settings, 'ADMIN_EMAIL', 'mestechsln@gmail.com')
+            admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@sbckenya.com')
             notification_result = self.send_html_email(
                 template_name='emails/contact_form_notification.html',
                 context=context,
@@ -359,10 +359,12 @@ class Helper:
             return 0
     
     def send_order_notification_email(self, order):
-        """
-        Send order notification email to admin
-        """
+        """Send order notification email to admin"""
         try:
+            # At the top of the function, add:
+            admin_email = getattr(settings, 'ADMIN_NOTIFICATION_EMAIL', 'info@sbckenya.com')
+            recipient_list = [admin_email]
+            
             subject = f'New Order #{order.id} - SBC Kenya'
             
             # Calculate total items count
@@ -381,14 +383,13 @@ class Helper:
                     template_name='emails/order_notification.html',
                     context=context,
                     subject=subject,
-                    recipient_list=[settings.DEFAULT_FROM_EMAIL]  # Send to admin email
+                    recipient_list=recipient_list  # Use the configured admin email
                 )
             except Exception as html_error:
                 print(f"HTML email failed, sending plain text: {str(html_error)}")
                 
                 # Fallback to plain text email
-                message = f"""
-    New Order Alert!
+                message = f"""New Order Alert!
 
     Order ID: #{order.id}
     Customer: {order.name}
@@ -399,7 +400,6 @@ class Helper:
 
     Order Items:
     """
-                
                 for item in order.items.all():
                     message += f"- {item.product_name} x{item.quantity} @ KSh{item.price} = KSh{item.quantity * item.price}\n"
                 
@@ -413,15 +413,14 @@ class Helper:
     Admin Panel: https://sbckenya.com/admin/store/order/{order.id}/change/
 
     Best regards,
-    SBC Kenya System
-    """
+    SBC Kenya System"""
                 
                 from django.core.mail import send_mail
                 send_mail(
                     subject=subject,
                     message=message,
                     from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.DEFAULT_FROM_EMAIL],
+                    recipient_list=recipient_list,  # Use the configured admin email
                     fail_silently=False
                 )
                 result = 1
@@ -431,6 +430,8 @@ class Helper:
         except Exception as e:
             print(f"Error sending order notification email: {str(e)}")
             return 0
+
+
 
 
     
@@ -918,7 +919,7 @@ class Helper:
 
             # Set up email
             from_email = settings.DEFAULT_FROM_EMAIL
-            to_emails = ['mestechsln@gmail.com']
+            to_emails = ['info@sbckenya.com']
 
             email = EmailMessage(
                 subject,
@@ -1061,3 +1062,4 @@ class Helper:
 
 
     
+

@@ -8,7 +8,6 @@ import Container from "@/components/layout/Container";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import Cookies from "js-cookie";
 
 const LocationMap = dynamic(() => import("@/components/contact/LocationMap"), {
   ssr: false,
@@ -38,12 +37,6 @@ export default function ContactPage() {
     resolver: zodResolver(formSchema),
   });
 
-  const getCsrfToken = () => {
-    const token = Cookies.get("csrftoken");
-    console.log("Token from js-cookie:", token);
-    return token;
-  };
-
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setSubmissionSuccess(false);
@@ -56,20 +49,12 @@ export default function ContactPage() {
         throw new Error("API URL is not configured");
       }
 
-      const csrftoken = getCsrfToken();
-      console.log("Csrf Token", csrftoken);
-      if (!csrftoken) {
-        throw new Error(
-          "CSRF token not found. Please refresh the page and try again."
-        );
-      }
-
       const response = await fetch(`${apiUrl}contact/api/comments/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": csrftoken,
         },
+        credentials: "include",
         body: JSON.stringify({
           first_name: data.firstName,
           last_name: data.lastName,
@@ -289,7 +274,9 @@ export default function ContactPage() {
                   <p className="text-gray-600">
                     SBC Kenya Limited
                     <br />
-                    Baba Dogo, Ruaraka Nairobi
+                    P.O.BOX 76748-00620
+                    <br />
+                    Off Baba Dogo Road, Ruaraka Nairobi
                     <br />
                     Kenya
                   </p>
@@ -338,3 +325,4 @@ export default function ContactPage() {
     </div>
   );
 }
+
