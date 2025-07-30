@@ -41,6 +41,11 @@ export default function HeroSection() {
       name: "Evervess",
       mobileSrc: "/videos/hero_section/mobile/evervess.mp4",
     },
+    {
+      src: "/videos/hero_section/promo.mp4",
+      name: "Promo",
+      mobileSrc: "/videos/hero_section/mobile/promo.mp4",
+    },
   ];
 
   const [isMobile, setIsMobile] = useState(false);
@@ -94,21 +99,19 @@ export default function HeroSection() {
     <section
       aria-label="Featured Beverages"
       className={clsx(
-        "relative min-h-[90vh] flex items-center overflow-hidden transition-colors duration-500 py-8 md:py-4",
-        "bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900"
+        "relative min-h-[90vh] flex items-center overflow-hidden transition-colors duration-500 py-8 md:py-4"
       )}
     >
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50  via-black/0 to-transparent z-10 pointer-events-none" />
+
       {/* Modern loading animation - only show if current video isn't loaded */}
       {!loadedVideos.has(videos[currentIndex]?.src) && (
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 flex items-center justify-center">
           <div className="relative w-24 h-24">
-            {/* Animated ring */}
             <div className="absolute inset-0 border-4 border-transparent border-t-white border-r-white rounded-full animate-spin" />
-            {/* Pulse effect */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-3 h-3 bg-white rounded-full animate-ping" />
             </div>
-            {/* Brand name */}
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-white font-semibold text-sm tracking-wider">
                 Pepsi KENYA
@@ -118,9 +121,9 @@ export default function HeroSection() {
         </div>
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent m" />
-      <div className="absolute inset-0" />
-      <div className="absolute inset-0 w-full h-full">
+      {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent m" /> */}
+      {/* <div className="absolute inset-0" /> */}
+      <div className="absolute w-full h-full">
         {videos.map((video, index) => (
           <video
             key={`${video.src}-${isMobile ? "mobile" : "desktop"}`}
@@ -133,8 +136,7 @@ export default function HeroSection() {
             onError={() => handleVideoError(video.src)}
             onCanPlay={() => handleVideoLoad(video.src)}
             className={clsx(
-              "absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out hero-video",
-              // Show video if it's loaded AND it's the current video
+              "absolute  w-full h-full object-cover ease-in-out transition-colors duration-1000 hero-video",
               loadedVideos.has(video.src) && index === currentIndex
                 ? "opacity-100 translate-x-0"
                 : loadedVideos.has(video.src) &&

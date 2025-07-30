@@ -185,7 +185,7 @@ export default function DistributorPage() {
                     Minimum capital requirement
                   </span>
                 </li>
-                <li className="flex items-center">
+                {/* <li className="flex items-center">
                   <svg
                     className="w-5 h-5 text-green-600 mr-2"
                     fill="none"
@@ -202,7 +202,7 @@ export default function DistributorPage() {
                   <span className="text-gray-700">
                     Proven distribution network
                   </span>
-                </li>
+                </li> */}
                 <li className="flex items-center">
                   <svg
                     className="w-5 h-5 text-green-600 mr-2"
@@ -250,7 +250,7 @@ export default function DistributorPage() {
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                     <span className="text-blue-600 font-semibold">4</span>
                   </div>
-                  <span className="text-gray-700">Contract signing</span>
+                  <span className="text-gray-700">Onboarding</span>
                 </li>
               </ol>
             </div>
@@ -268,7 +268,7 @@ export default function DistributorPage() {
               distributor
             </p>
           </div>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto text-center">
             <Link
               href="/partner/distributor/apply"
               className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"

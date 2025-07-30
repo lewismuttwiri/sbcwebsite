@@ -388,7 +388,7 @@ export default function Home() {
       </section>
 
       {/* About Us Section */}
-      <section className="py-10 bg-white">
+      <section className="py-10 bg-gray-50">
         <Container className="px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center pb-10">
             About Us
@@ -437,6 +437,88 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Distributor Application Section */}
+      <section className="py-20  bg-white">
+        <Container className="px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-900">
+            Partner with Us
+          </h2>
+          <div className="flex flex-col lg:flex-row items-center gap-12 max-w-7xl mx-auto">
+            <div className="w-full lg:w-1/2 h-96 lg:h-auto overflow-hidden shadow-2xl flex justify-center">
+              <Image
+                src="/images/distributor/products.png"
+                alt="Become a Distributor"
+                width={400}
+                height={400}
+                className="object-contain"
+              />
+            </div>
+
+            <div className="w-full lg:w-1/2">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                Become a Distributor
+              </h2>
+              <p className="text-lg text-gray-700 mb-8">
+                Join our network of trusted distributors and bring our
+                refreshing beverages to customers across Kenya. Partner with SBC
+                Kenya to grow your business with a portfolio of leading beverage
+                brands.
+              </p>
+
+              <div className="space-y-6 mb-8">
+                {[
+                  {
+                    title: "Wide Product Range",
+                    description:
+                      "Access to a diverse portfolio of leading beverage brands",
+                    icon: "📦",
+                  },
+                  {
+                    title: "Business Support",
+                    description: "Comprehensive training and marketing support",
+                    icon: "💼",
+                  },
+                  {
+                    title: "Growth Opportunities",
+                    description: "Exclusive territories",
+                    icon: "📈",
+                  },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    {/* <div className="text-2xl mt-1">{item.icon}</div> */}
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-900">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/partner/distributor" className="w-full sm:w-auto">
+                  <Button
+                    variant="primary"
+                    className="w-full sm:w-auto px-8 py-3 text-lg font-medium"
+                  >
+                    Apply Now
+                  </Button>
+                </Link>
+                {/* <Link href="/distributors" className="w-full sm:w-auto">
+                  <Button
+                    variant="secondary"
+                    className="w-full sm:w-auto px-8 py-3 text-lg font-medium border-blue-600 text-blue-600 hover:bg-blue-50"
+                  >
+                    Learn More
+                  </Button>
+                </Link> */}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       <section className="relative py-32 overflow-hidden bg-[#0E0E96] md:bg-transparent">
         {/* Background image - only visible on medium+ screens */}
         <div
@@ -453,16 +535,17 @@ export default function Home() {
 
         {/* Content */}
         <Container className="relative z-10 px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Core Values at SBC Kenya
-            </h2>
-            <p className="text-white/90 max-w-3xl mx-auto">
-              Committed to integrity, quality, consumer focus, and people
-              empowerment.
-            </p>
+          <div className="w-full flex justify-center ">
+            <div className="text-center mb-16 bg-[#0E0E96] w-fit py-2 px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+                Core Values at SBC Kenya
+              </h2>
+              <p className="text-white/90 max-w-3xl mx-auto">
+                Committed to integrity, quality, consumer focus, and people
+                empowerment.
+              </p>
+            </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {sustainabilityItems.map((item, index) => (
               <SustainabilityCard

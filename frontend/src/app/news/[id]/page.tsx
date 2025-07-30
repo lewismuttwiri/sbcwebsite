@@ -119,6 +119,7 @@ const NewsArticlePage = () => {
               </div>
               <p className="text-gray-600">{article.description}</p>
               <div dangerouslySetInnerHTML={{ __html: article.content }} />
+              {/* <p className="text-gray-600">{article.content}</p> */}
             </div>
           </div>
         </div>
