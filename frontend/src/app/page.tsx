@@ -377,10 +377,9 @@ export default function Home() {
             <Link href="/products">
               <Button
                 variant="primary"
-                className="relative overflow-hidden group hover:scale-105 transition-transform duration-200"
+                className="relative overflow-hidden group  duration-200"
               >
                 <span className="relative z-10">View All Products</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             </Link>
           </div>

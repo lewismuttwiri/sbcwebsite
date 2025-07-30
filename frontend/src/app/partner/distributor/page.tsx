@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Container from "@/components/layout/Container";
 import Link from "next/link";
+import Button from "@/components/Button";
 
 export default function DistributorPage() {
   return (
@@ -269,12 +270,9 @@ export default function DistributorPage() {
             </p>
           </div>
           <div className="max-w-2xl mx-auto text-center">
-            <Link
-              href="/partner/distributor/apply"
-              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
+            <Button variant="primary" href="/partner/distributor/apply">
               Apply Now
-            </Link>
+            </Button>
           </div>
         </Container>
       </section>

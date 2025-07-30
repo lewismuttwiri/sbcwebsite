@@ -4,11 +4,12 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import ClientFooter from "@/components/layout/ClientFooter";
 import ToastProvider from "@/components/providers/ToastProvider";
-import NavigationLoader from "@/components/NavigationLoader";
 import { Providers } from "@/providers";
 import { Suspense } from "react";
 import Loader from "@/components/loader";
 import { metadata as siteMetadata } from "./metadata";
+import PromoPopup from "@/components/PromoPopup";
+import { Toaster } from "react-hot-toast";
 
 const poetsen = Poetsen_One({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("RootLayout rendered");
   return (
     <html lang="en" className={` h-full`} suppressHydrationWarning>
       <head>
@@ -49,6 +51,8 @@ export default function RootLayout({
             </main>
             <ClientFooter />
           </Suspense>
+          <Toaster position="bottom-right" />
+          <PromoPopup />
         </Providers>
       </body>
     </html>
