@@ -12,17 +12,10 @@ export default function PromoPopup() {
 
   useEffect(() => {
     setIsClient(true);
-    // Only show popup if it hasn't been shown before in this session
-    if (
-      typeof window !== "undefined" &&
-      !sessionStorage.getItem("popupShown")
-    ) {
-      const timer = setTimeout(() => {
-        setShowPopup(true);
-        sessionStorage.setItem("popupShown", "true");
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   if (!isClient) return null;
