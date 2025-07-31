@@ -9,7 +9,7 @@ export default function DistributorPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <Container className="px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -20,7 +20,7 @@ export default function DistributorPage() {
             </p>
           </div>
         </Container>
-      </section>
+      </section> */}
 
       {/* Benefits Section */}
       <section className="py-20 bg-gray-50">

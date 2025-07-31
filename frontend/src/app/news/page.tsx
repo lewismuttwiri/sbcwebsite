@@ -25,7 +25,11 @@ const NewsPage = () => {
   useEffect(() => {
     getAllNews()
       .then((data) => {
-        setNews(data);
+        const sortedNews = [...data].sort(
+          (a, b) => Number(b.id) - Number(a.id)
+        );
+        setNews(sortedNews);
+        console.log("sortedNews", sortedNews);
         setIsLoading(false);
       })
       .catch((error) => {

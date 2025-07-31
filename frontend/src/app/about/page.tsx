@@ -94,6 +94,9 @@ export default function AboutPage() {
       {/* Our Mission & Values */}
       <section className="py-20 bg-white">
         <Container className="px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-900">
+            Our Mission & Values
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[400px] md:h-[500px] w-full">
               <Image
@@ -105,9 +108,6 @@ export default function AboutPage() {
               />
             </div>
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-gray-900">
-                Our Mission & Values
-              </h2>
               <div className="pt-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
                   Our Core Values
@@ -184,7 +184,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Impact */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <Container className="px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Impact</h2>
@@ -263,7 +263,7 @@ export default function AboutPage() {
             </div>
           </div>
         </Container>
-      </section>
+      </section> */}
     </main>
   );
 }

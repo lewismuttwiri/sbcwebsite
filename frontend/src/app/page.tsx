@@ -55,17 +55,25 @@ export default function Home() {
             console.error("Error loading products:", error);
             return [];
           }),
-          getAllNews().catch((error) => {
-            console.error("Error loading news:", error);
-            return [];
-          }),
+          getAllNews()
+            .then((data) => {
+              const sortedNews = [...data].sort(
+                (a, b) => Number(b.id) - Number(a.id)
+              );
+              setNewsArticles(sortedNews);
+              console.log("sortedNews", sortedNews);
+              setIsLoading(false);
+            })
+            .catch((error) => {
+              // setError(error.message);
+              setIsLoading(false);
+            }),
         ]);
 
         console.log("Products loaded:", products.length);
-        console.log("News loaded:", news.length);
+        console.log("News loaded:", newsArticles.length);
 
         setFilteredProducts(products);
-        setNewsArticles(news);
       } catch (error) {
         console.error("Error loading initial data:", error);
       } finally {

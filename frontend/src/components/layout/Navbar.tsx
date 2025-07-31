@@ -172,9 +172,9 @@ const Navbar = () => {
       name: "Opportunities",
       href: "/careers",
       dropdown: [
+        { name: "Become a distributor", href: "/partner/distributor" },
         { name: "Careers", href: "/careers" },
         { name: "Tenders", href: "/tenders" },
-        { name: "Become a distributor", href: "/partner/distributor" },
       ],
     },
     { name: "Media", href: "/media" },

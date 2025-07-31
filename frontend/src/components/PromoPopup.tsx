@@ -29,12 +29,12 @@ export default function PromoPopup() {
             exit={{ opacity: 0, scale: 0.9 }}
             className="relative bg-white rounded-xl max-w-2xl w-full mx-auto p-6 shadow-2xl"
           >
-            <button
+            {/* <button
               onClick={() => setShowPopup(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >
               ✕
-            </button>
+            </button> */}
             <div className="flex flex-col md:flex-row gap-6">
               <div className="md:w-1/3">
                 <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
@@ -60,7 +60,7 @@ export default function PromoPopup() {
                 </p> */}
                 <div className="flex gap-3 mt-6">
                   <a
-                    href=""
+                    href="/news/9"
                     className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
                     Learn More
