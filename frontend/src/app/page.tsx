@@ -451,7 +451,7 @@ export default function Home() {
             Partner with Us
           </h2>
           <div className="flex flex-col lg:flex-row items-center gap-12 max-w-7xl mx-auto">
-            <div className="w-full lg:w-1/2 h-96 lg:h-auto overflow-hidden shadow-2xl flex justify-center">
+            <div className="w-full lg:w-1/2 h-96 lg:h-auto overflow-hidden flex justify-center">
               <Image
                 src="/images/distributor/products.png"
                 alt="Become a Distributor"
