@@ -102,7 +102,7 @@ export default function HeroSection() {
         "relative min-h-[90vh] flex items-center overflow-hidden transition-colors duration-500 py-8 md:py-4"
       )}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-black/50  via-black/0 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50  via-black/30 to-transparent z-10 pointer-events-none" />
 
       {/* Modern loading animation - only show if current video isn't loaded */}
       {!loadedVideos.has(videos[currentIndex]?.src) && (
