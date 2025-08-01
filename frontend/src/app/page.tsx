@@ -395,7 +395,7 @@ export default function Home() {
       </section>
 
       {/* About Us Section */}
-      <section className="py-10 bg-gray-50">
+      <section className="py-10 bg-[#ededed]">
         <Container className="px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center pb-10">
             About Us
