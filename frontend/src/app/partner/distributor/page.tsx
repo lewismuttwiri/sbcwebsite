@@ -23,7 +23,7 @@ export default function DistributorPage() {
       </section> */}
 
       {/* Benefits Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 bg-gray-50">
         <Container className="px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">

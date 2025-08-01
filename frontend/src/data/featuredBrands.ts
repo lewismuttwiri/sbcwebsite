@@ -35,6 +35,39 @@ export const featuredBrands = [
     ],
   },
   {
+    id: "Mirinda",
+    name: "MIRINDA",
+    image: [
+      "/images/featured brands/mirinda orange 500ml.webp",
+      "/images/featured brands/mirinda-pineapple-300ml.webp",
+      "/images/featured brands/mirinda orange 2l.webp",
+    ],
+    ingredients: [
+      "Carbonated water",
+      "sugar",
+      "citric acid",
+      "natural orange flavor",
+      "sodium benzoate",
+      "food colorings",
+      "sodium citrate for tangy zest.",
+    ],
+    description:
+      "Bright and bubbly, Mirinda offers a refreshing citrus blast, infusing your day with joy and a splash of color.",
+    link: "/brands/mirinda",
+    color: {
+      from: "#FF6B00",
+      to: "#FF8800",
+    },
+    sizes: [
+      "300ml glass",
+      "500ml glass",
+      "300ml Cans",
+      "330ml Plastic",
+      "500ml Plastic",
+      "2L Plastic",
+    ],
+  },
+  {
     id: "Mountain+Dew",
     name: "MOUNTAIN DEW",
     image: [
@@ -99,39 +132,7 @@ export const featuredBrands = [
       "Caffeine-free",
     ],
   },
-  {
-    id: "Mirinda",
-    name: "MIRINDA",
-    image: [
-      "/images/featured brands/mirinda orange 500ml.webp",
-      "/images/featured brands/mirinda-pineapple-300ml.webp",
-      "/images/featured brands/mirinda orange 2l.webp",
-    ],
-    ingredients: [
-      "Carbonated water",
-      "sugar",
-      "citric acid",
-      "natural orange flavor",
-      "sodium benzoate",
-      "food colorings",
-      "sodium citrate for tangy zest.",
-    ],
-    description:
-      "Bright and bubbly, Mirinda offers a refreshing citrus blast, infusing your day with joy and a splash of color.",
-    link: "/brands/mirinda",
-    color: {
-      from: "#FF6B00",
-      to: "#FF8800",
-    },
-    sizes: [
-      "300ml glass",
-      "500ml glass",
-      "300ml Cans",
-      "330ml Plastic",
-      "500ml Plastic",
-      "2L Plastic",
-    ],
-  },
+
   {
     id: "sting",
     name: "STING",
@@ -161,25 +162,7 @@ export const featuredBrands = [
     },
     sizes: ["330ml Plastic"],
   },
-  {
-    id: "Evervess",
-    name: "Evervess",
-    image: ["/images/featured brands/evervess 300ml.webp"],
-    description:
-      "Discover the crisp sophistication of Evervess tonic water, where gentle bubbles and refined flavor create the ideal mixer for your favorite drinks.",
-    ingredients: [
-      "Carbonated water",
-      "sodium bicarbonate for effervescence",
-      "potassium sulfate",
-      "quinine for a subtly bitter tonic flavor.",
-    ],
-    link: "/brands/evervess",
-    color: {
-      from: "#ffffff",
-      to: "#ffffff",
-    },
-    sizes: ["300ml glass", "330ml Plastic", "500ml Plastic"],
-  },
+
   {
     id: "Aquafina",
     name: "Aquafina",
@@ -198,5 +181,24 @@ export const featuredBrands = [
       to: "#ffffff",
     },
     sizes: ["500ml Plastic"],
+  },
+  {
+    id: "Evervess",
+    name: "Evervess",
+    image: ["/images/featured brands/evervess 300ml.webp"],
+    description:
+      "Discover the crisp sophistication of Evervess tonic water, where gentle bubbles and refined flavor create the ideal mixer for your favorite drinks.",
+    ingredients: [
+      "Carbonated water",
+      "sodium bicarbonate for effervescence",
+      "potassium sulfate",
+      "quinine for a subtly bitter tonic flavor.",
+    ],
+    link: "/brands/evervess",
+    color: {
+      from: "#ffffff",
+      to: "#ffffff",
+    },
+    sizes: ["300ml glass", "330ml Plastic", "500ml Plastic"],
   },
 ];

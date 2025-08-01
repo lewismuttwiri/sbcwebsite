@@ -32,13 +32,13 @@ const item = {
 };
 
 const brandLogos = [
-  { src: "/images/logo/7up.png", alt: "7up" },
+  { src: "/images/logo/pepsi_logo.png", alt: "Pepsi" },
   { src: "/images/logo/mir.png", alt: "Mirinda" },
   { src: "/images/logo/mtn.png", alt: "Mountain+Dew" },
-  { src: "/images/logo/pepsi_logo.png", alt: "Pepsi" },
+  { src: "/images/logo/7up.png", alt: "7up" },
+  { src: "/images/logo/sting-logo.png", alt: "Sting" },
   { src: "/images/logo/aquafina-logo.jpg", alt: "Aquafina" },
   { src: "/images/logo/evervess-logo.png", alt: "Evervess" },
-  { src: "/images/logo/sting-logo.png", alt: "Sting" },
 ];
 
 export default function BrandsPage() {
