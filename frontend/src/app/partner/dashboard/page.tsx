@@ -15,9 +15,9 @@ export default function DistributorDashboard() {
           No Activity Yet
         </h1>
         <p className="text-muted-foreground mb-8 max-w-md">
-          Your distributor dashboard is currently empty. Once you start
-          receiving orders and managing your distribution, you'll see activity
-          and statistics here.
+          Your stockist dashboard is currently empty. Once you start receiving
+          orders and managing your distribution, you'll see activity and
+          statistics here.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl mb-8">

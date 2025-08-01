@@ -139,7 +139,7 @@ const FAQAccordion = () => {
             <li>
               Use our{" "}
               <Link
-                href="/contact/distributor"
+                href="/contact/stockist"
                 className="text-blue-600 hover:underline"
               >
                 stockist locator
@@ -165,10 +165,10 @@ const FAQAccordion = () => {
             </li>
           </ul>
           <Link
-            href="/contact"
+            href="/contact/stockist"
             className="text-blue-600 hover:underline font-medium inline-flex items-center"
           >
-            Contact our sales team
+            Locate a stockist near me
             <svg
               className="w-4 h-4 ml-1"
               fill="none"

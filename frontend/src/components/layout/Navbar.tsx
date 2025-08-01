@@ -202,7 +202,7 @@ const Navbar = () => {
       name: "Opportunities",
       href: "/careers",
       dropdown: [
-        { name: "Become a Stockist", href: "/partner/distributor" },
+        { name: "Become a Stockist", href: "/partner/stockist" },
         { name: "Careers", href: "/careers" },
         { name: "Tenders", href: "/tenders" },
       ],
@@ -216,7 +216,7 @@ const Navbar = () => {
         { name: "Contact Us", href: "/contact" },
         {
           name: "Find a stockist near me",
-          href: "/contact/distributor",
+          href: "/contact/stockist",
         },
         {
           name: "Socials",

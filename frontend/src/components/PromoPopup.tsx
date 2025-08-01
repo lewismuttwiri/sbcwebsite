@@ -58,13 +58,13 @@ export default function PromoPopup() {
                 <div className="flex gap-3 mt-6">
                   <button
                     onClick={handlePromo}
-                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
                     Learn More
                   </button>
                   <button
                     onClick={() => setShowPopup(false)}
-                    className="px-6 py-2 border border-gray-300 rounded-lg"
+                    className="cursor-pointer px-6 py-2 border border-gray-300 rounded-lg"
                   >
                     Close
                   </button>

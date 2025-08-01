@@ -503,7 +503,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/partner/distributor" className="w-full sm:w-auto">
+                <Link href="/partner/stockist" className="w-full sm:w-auto">
                   <Button
                     variant="primary"
                     className="w-full sm:w-auto px-8 py-3 text-lg font-medium"

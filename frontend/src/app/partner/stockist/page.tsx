@@ -268,7 +268,7 @@ export default function DistributorPage() {
             </p>
           </div>
           <div className="max-w-2xl mx-auto text-center">
-            <Button variant="primary" href="/partner/distributor/apply">
+            <Button variant="primary" href="/partner/stockist/apply">
               Apply Now
             </Button>
           </div>

@@ -125,10 +125,10 @@ const Footer = ({
                 </li>
                 <li>
                   <Link
-                    href="/contact/distributor"
+                    href="/contact/stockist"
                     className="text-gray-300 hover:text-white transition-colors"
                   >
-                    Find a Distributor Near Me
+                    Find a Stockist Near Me
                   </Link>
                 </li>
               </ul>

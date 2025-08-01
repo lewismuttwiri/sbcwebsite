@@ -160,14 +160,14 @@ export default function DistributorApplication() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 bg-white">
         <Container className="px-4">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Distributor Application
+              Stockist Application
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Apply to become an official distributor of SBC Kenya
+              Apply to become an official stockist of SBC Kenya
             </p>
           </div>
         </Container>

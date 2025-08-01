@@ -17,8 +17,8 @@ export default function DistributorThankYou() {
           Application Received!
         </h1>
         <p className="text-gray-600 mb-8">
-          Thank you for applying to become a distributor. Our team will review
-          your application and get back to you within 2-3 business days. You'll
+          Thank you for applying to become a stockist. Our team will review your
+          application and get back to you within 2-3 business days. You'll
           receive an email with further instructions once your application is
           processed.
         </p>

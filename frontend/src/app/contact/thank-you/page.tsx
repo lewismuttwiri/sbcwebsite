@@ -33,8 +33,8 @@ export default function ThankYouPage() {
             Thank You for Your Interest!
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            We've received your request to connect with a distributor. Our team
-            will review your information and have a distributor in your area
+            We've received your request to connect with a stockist. Our team
+            will review your information and have a stockist in your area
             contact you within 1-2 business days.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
