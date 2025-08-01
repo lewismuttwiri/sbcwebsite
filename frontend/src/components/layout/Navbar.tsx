@@ -105,23 +105,53 @@ const Navbar = () => {
     setActiveDropdown(null);
   }, [pathname]);
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside or when route changes
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (
         !target.closest(".dropdown-container") &&
-        !target.closest(".nav-link")
+        !target.closest(".nav-link") &&
+        !target.closest("button[aria-label='Toggle dropdown']")
       ) {
         setActiveDropdown(null);
       }
     };
 
+    // Close dropdown when route changes
+    const handleRouteChange = () => {
+      setActiveDropdown(null);
+      setIsMenuOpen(false);
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("popstate", handleRouteChange);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("popstate", handleRouteChange);
     };
   }, []);
+
+  const handleNavLinkClick = (link: NavLink, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (link.dropdown) {
+      // If clicking the same link that's already active, close the dropdown
+      if (activeDropdown === link.name) {
+        setActiveDropdown(null);
+        return;
+      }
+      // Open the dropdown for the clicked link
+      setActiveDropdown(link.name);
+    } else {
+      // If no dropdown, navigate to the link
+      setActiveDropdown(null);
+      setIsMenuOpen(false);
+      router.push(link.href);
+    }
+  };
 
   const toggleDropdown = (name: string | null, e: React.MouseEvent) => {
     e.preventDefault();
@@ -172,7 +202,7 @@ const Navbar = () => {
       name: "Opportunities",
       href: "/careers",
       dropdown: [
-        { name: "Become a distributor", href: "/partner/distributor" },
+        { name: "Become a Stockist", href: "/partner/distributor" },
         { name: "Careers", href: "/careers" },
         { name: "Tenders", href: "/tenders" },
       ],
@@ -185,7 +215,7 @@ const Navbar = () => {
       dropdown: [
         { name: "Contact Us", href: "/contact" },
         {
-          name: "Find a distributor near me",
+          name: "Find a stockist near me",
           href: "/contact/distributor",
         },
         {
@@ -228,40 +258,32 @@ const Navbar = () => {
                       <div className="relative">
                         <div className="flex items-center">
                           {link.dropdown ? (
-                            <>
+                            <div className="flex items-center">
                               <button
-                                className={`px-3 py-2 text-sm text-white font-medium text-left ${
+                                className={`px-3 py-2 text-sm font-medium text-left ${
                                   isActive(link.href)
                                     ? "text-white font-medium"
-                                    : "hover:opacity-70"
+                                    : "text-white hover:opacity-70"
                                 }`}
-                                onClick={() => router.push(link.href)}
+                                onClick={(e) => handleNavLinkClick(link, e)}
                               >
                                 {link.name}
                               </button>
                               <button
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  setActiveDropdown(
-                                    activeDropdown === link.name
-                                      ? null
-                                      : link.name
-                                  );
-                                }}
+                                onClick={(e) => handleNavLinkClick(link, e)}
                                 className="p-1 text-white hover:opacity-80 focus:outline-none"
                                 aria-expanded={activeDropdown === link.name}
                                 aria-label="Toggle dropdown"
                               >
                                 <FaChevronDown
-                                  className={` h-4 w-4 font-bold transition-transform duration-200 ${
+                                  className={`h-4 w-4 font-bold transition-transform duration-200 ${
                                     activeDropdown === link.name
                                       ? "transform rotate-180"
                                       : ""
                                   }`}
                                 />
                               </button>
-                            </>
+                            </div>
                           ) : (
                             <Link
                               href={link.href}

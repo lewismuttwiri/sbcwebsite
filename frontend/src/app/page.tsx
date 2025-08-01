@@ -454,7 +454,7 @@ export default function Home() {
             <div className="w-full lg:w-1/2 h-96 lg:h-auto overflow-hidden flex justify-center">
               <Image
                 src="/images/distributor/products.png"
-                alt="Become a Distributor"
+                alt="Become a stockist"
                 width={400}
                 height={400}
                 className="object-contain"
@@ -463,13 +463,12 @@ export default function Home() {
 
             <div className="w-full lg:w-1/2">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-                Become a Distributor
+                Become a Stockist
               </h2>
               <p className="text-lg text-gray-700 mb-8">
-                Join our network of trusted distributors and bring our
-                refreshing beverages to customers across Kenya. Partner with SBC
-                Kenya to grow your business with a portfolio of leading beverage
-                brands.
+                Join our network of trusted stockists and bring our refreshing
+                beverages to customers across Kenya. Partner with SBC Kenya to
+                grow your business with a portfolio of leading beverage brands.
               </p>
 
               <div className="space-y-6 mb-8">
@@ -636,7 +635,7 @@ export default function Home() {
               Frequently Asked Questions
             </h2>
             <p className="text-gray-600 max-w-3xl mx-auto">
-              Find answers to common questions about becoming a distributor,
+              Find answers to common questions about becoming a stockist,
               retailer, or partner with PEPSI.
             </p>
           </div>

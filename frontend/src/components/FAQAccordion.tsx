@@ -18,27 +18,27 @@ const FAQAccordion = () => {
 
   const faqs: FAQItem[] = [
     {
-      question: "How can I become a distributor for PEPSI products?",
+      question: "How can I become a stockist for PEPSI products?",
       answer: (
         <div className="space-y-2">
           <p>
             We're always looking for passionate partners to distribute our
-            products. To become a PEPSI distributor, please follow these steps:
+            products. To become a PEPSI stockist, please follow these steps:
           </p>
           <ol className="list-decimal pl-5 space-y-2">
-            <li>Fill out our online distributor application form</li>
+            <li>Fill out our online stockist application form</li>
             <li>
-              Our team will review your application within 5-7 business days
+              Our team will review your application and get back to you as soon
+              as possible
             </li>
             <li>If approved, we'll schedule an introductory meeting</li>
-            <li>Complete the required training and certification</li>
           </ol>
           <div className="mt-4">
             <Link
-              href="/partner/distributor/apply"
+              href="/partner/stockist/apply"
               className="text-blue-600 hover:underline font-medium inline-flex items-center"
             >
-              Apply to become a distributor
+              Apply to become a stockist
               <svg
                 className="w-4 h-4 ml-1"
                 fill="none"
@@ -98,13 +98,11 @@ const FAQAccordion = () => {
       question: "How can I become a retailer for PEPSI products?",
       answer: (
         <div className="space-y-2">
-          <p>
-            To become an authorized PEPSI retailer, please follow these steps:
-          </p>
+          <p>To become a PEPSI retailer, please follow these steps:</p>
           <ol className="list-decimal pl-5 space-y-1">
-            <li>Contact our sales team or your local PEPSI distributor</li>
+            <li>Contact our sales team or your local PEPSI stockist</li>
             <li>Distribution route planning</li>
-            <li>Agree to our terms and conditions</li>
+            {/* <li>Agree to our terms and conditions</li> */}
             <li>Set up your account with our distribution network</li>
           </ol>
           <div className="mt-3">
@@ -133,10 +131,10 @@ const FAQAccordion = () => {
       ),
     },
     {
-      question: "How can I find a PEPSI distributor near me?",
+      question: "How can I find a PEPSI stockist near me?",
       answer: (
         <div className="space-y-2">
-          <p>Finding your nearest PEPSI distributor is easy:</p>
+          <p>Finding your nearest PEPSI stockist is easy:</p>
           <ul className="list-disc pl-5 space-y-1">
             <li>
               Use our{" "}
@@ -144,7 +142,7 @@ const FAQAccordion = () => {
                 href="/contact/distributor"
                 className="text-blue-600 hover:underline"
               >
-                distributor locator
+                stockist locator
               </Link>
             </li>
             <li>
@@ -166,10 +164,26 @@ const FAQAccordion = () => {
               </a>
             </li>
           </ul>
-          <p className="mt-2 text-sm text-gray-600">
-            Our team will connect you with the nearest authorized distributor
-            based on your location.
-          </p>
+          <Link
+            href="/contact"
+            className="text-blue-600 hover:underline font-medium inline-flex items-center"
+          >
+            Contact our sales team
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
         </div>
       ),
     },
@@ -188,10 +202,26 @@ const FAQAccordion = () => {
             <li>Commitment to PEPSI brand guidelines</li>
             <li>Minimum order requirements (varies by location)</li>
           </ul>
-          <p className="mt-2">
-            Specific requirements may vary by region. Contact our sales team for
-            detailed information.
-          </p>
+          <Link
+            href="/contact"
+            className="text-blue-600 hover:underline font-medium inline-flex items-center"
+          >
+            Contact our sales team
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
         </div>
       ),
     },
