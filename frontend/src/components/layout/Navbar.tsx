@@ -242,9 +242,16 @@ const Navbar = () => {
                     height={60}
                     className="mr-3"
                   />
-                  <h3 className="md:text-xl text-white  font-bold text-sm ">
+                  <Image
+                    src="/images/logo/sbc-kenya.png"
+                    alt="SBC Kenya Logo"
+                    width={100}
+                    height={100}
+                    className="mr-3"
+                  />
+                  {/* <h3 className="md:text-xl text-white  font-bold text-sm ">
                     SBC KENYA LTD
-                  </h3>
+                  </h3> */}
                 </div>
               </Link>
             </div>

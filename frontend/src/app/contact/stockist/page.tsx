@@ -113,9 +113,9 @@ export default function ContactDistributorPage() {
       const responseData = await response.json().catch(() => ({}));
       console.log("Message submitted successfully:", responseData);
       setSubmissionSuccess(true);
-      toast.success(
-        "Your request has been submitted successfully! A stockist will contact you soon."
-      );
+      // toast.success(
+      //   "Your request has been submitted successfully! A stockist will contact you soon."
+      // );
       reset(); // Reset form fields
       router.push("/contact/thank-you");
     } catch (error) {
