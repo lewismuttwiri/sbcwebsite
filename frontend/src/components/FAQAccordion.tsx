@@ -67,7 +67,7 @@ const FAQAccordion = () => {
             distribution criteria. Here's how you can get one:
           </p>
           <ul className="list-disc pl-5 space-y-1">
-            <li>Be a PEPSI retailer or distributor</li>
+            <li>Be a PEPSI retailer or stockist</li>
             <li>Maintain minimum monthly purchase requirements</li>
             <li>Have adequate space and electricity for the cooler</li>
           </ul>

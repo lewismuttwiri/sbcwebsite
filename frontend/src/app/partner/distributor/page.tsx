@@ -26,11 +26,9 @@ export default function DistributorPage() {
       <section className="py-12 bg-gray-50">
         <Container className="px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">
-              Why Become a Distributor?
-            </h2>
+            <h2 className="text-3xl font-bold mb-4">Why Become a Stockist?</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              As a distributor of SBC Kenya, you'll enjoy exclusive benefits and
+              As a stockist of SBC Kenya, you'll enjoy exclusive benefits and
               opportunities for growth
             </p>
           </div>
@@ -142,7 +140,7 @@ export default function DistributorPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Requirements</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              To become a distributor, you'll need to meet these requirements
+              To become a stockist, you'll need to meet these requirements
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -266,7 +264,7 @@ export default function DistributorPage() {
             <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Contact our distribution team to learn more about becoming a
-              distributor
+              stockist
             </p>
           </div>
           <div className="max-w-2xl mx-auto text-center">

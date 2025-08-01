@@ -114,7 +114,7 @@ export default function ContactDistributorPage() {
       console.log("Message submitted successfully:", responseData);
       setSubmissionSuccess(true);
       toast.success(
-        "Your request has been submitted successfully! A distributor will contact you soon."
+        "Your request has been submitted successfully! A stockist will contact you soon."
       );
       reset(); // Reset form fields
       router.push("/contact/thank-you");
@@ -137,11 +137,11 @@ export default function ContactDistributorPage() {
           <div className="px-6 py-8 md:px-10">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Find a Distributor Near You
+                Find a stockist Near You
               </h1>
               <p className="text-gray-600">
-                Fill out the form below and we'll connect you with a distributor
-                in your area.
+                Fill out the form below and we'll connect you with a stockist in
+                your area.
               </p>
             </div>
 
@@ -415,7 +415,7 @@ export default function ContactDistributorPage() {
                   className="w-full md:w-auto px-8 py-3 text-base font-medium"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Find a Distributor"}
+                  {isSubmitting ? "Submitting..." : "Find a Stockist"}
                 </Button>
               </div>
 
