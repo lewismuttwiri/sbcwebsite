@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
@@ -21,6 +21,25 @@ export default function AddJobForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [requirements, setRequirements] = useState<string[]>([""]);
+  const [userRole, setUserRole] = useState<number>(4);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window !== "undefined") {
+      const user = localStorage.getItem("user");
+      if (user) {
+        try {
+          const parsedUser = JSON.parse(user);
+          setUserRole(parsedUser.entity.role.id); // Fixed: use parsedUser instead of user
+          // setCsrfToken(parsedUser.entity.token);
+        } catch (error) {
+          console.error("Error parsing user data:", error);
+        }
+      }
+      setIsLoading(false);
+    }
+  }, []);
 
   const [formData, setFormData] = useState<JobFormData>({
     title: "",
@@ -74,7 +93,7 @@ export default function AddJobForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!user || user.user_role !== 4) {
+    if (![1, 5].includes(userRole)) {
       setError("You do not have permission to post jobs.");
       return;
     }
@@ -142,7 +161,7 @@ export default function AddJobForm() {
   };
 
   // Only show the form to HR users
-  if (user?.user_role !== 5) {
+  if (![1, 5].includes(userRole)) {
     return (
       <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Access Denied</h2>

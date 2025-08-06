@@ -79,19 +79,16 @@ export default function NewJobOpening() {
 
     try {
       const api_url = process.env.NEXT_PUBLIC_API_URL;
-      const response = await fetch(
-        `${api_url}careers/api/job-advertisements/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "X-CSRFToken": csrfToken || "",
-          },
-          body: JSON.stringify(jobData),
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${api_url}careers/api/job-advertisement/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "X-CSRFToken": csrfToken || "",
+        },
+        body: JSON.stringify(jobData),
+        credentials: "include",
+      });
 
       const data = await response.json();
 

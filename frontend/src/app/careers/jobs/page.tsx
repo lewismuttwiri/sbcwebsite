@@ -81,6 +81,19 @@ export default function JobsPage() {
     fetchJobs();
   }, []);
 
+  function formatDate(isoString: string | number | Date) {
+    const date = new Date(isoString);
+
+    return date.toLocaleString("en-US", {
+      timeZone: "UTC",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -134,11 +147,11 @@ export default function JobsPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  <span className="inline-flex items-center px-4 py-3 rounded-md text-sm font-medium bg-blue-100 text-blue-800">
                     <FaLocationDot className="w-4 h-4 mr-1" />
                     {job.location}
                   </span>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                  <span className="inline-flex items-center px-3 py-1 text-sm font-medium bg-white text-black">
                     {job.type}
                   </span>
                 </div>
@@ -158,7 +171,7 @@ export default function JobsPage() {
                 <div className="flex items-center justify-between mt-4">
                   <span className="text-sm text-gray-500">
                     <FaCalendarDays className="w-4 h-4 inline-block mr-1" />
-                    Posted {new Date(job.posted).toLocaleDateString()}
+                    Posted {formatDate(job.posted_date)}
                   </span>
                   <Button
                     variant="primary"
