@@ -93,7 +93,7 @@ export default function SignUpPage() {
   const getUserRole = (email: string): number => {
     const emailDomain = email.toLowerCase();
 
-    if (emailDomain === "hro@sbckenya.com") {
+    if (emailDomain === "hro@sbckenya.com" || "cynthia@sbckenya.com") {
       return 5;
     } else if (emailDomain === "procurement@sbckenya.com") {
       return 6;
