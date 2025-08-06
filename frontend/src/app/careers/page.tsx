@@ -10,6 +10,7 @@ import {
   FaHandshake,
 } from "react-icons/fa6";
 import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 
 const benefits = [
   {
@@ -57,6 +58,7 @@ const benefits = [
 ];
 
 export default function WhyJoinUsPage() {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -111,7 +113,7 @@ export default function WhyJoinUsPage() {
           <Button
             variant="primary"
             className="px-8 py-4 text-lg font-semibold"
-            onClick={() => (window.location.href = "/careers/jobs")}
+            onClick={() => router.push("/careers/jobs")}
           >
             View Open Positions
           </Button>

@@ -176,9 +176,7 @@ export default function JobsPage() {
                   <Button
                     variant="primary"
                     className="flex items-center gap-2 cursor-pointer"
-                    onClick={() =>
-                      (window.location.href = `/careers/jobs/${job.id}`)
-                    }
+                    onClick={() => router.push(`/careers/jobs/${job.id}`)}
                   >
                     Apply Now
                   </Button>
