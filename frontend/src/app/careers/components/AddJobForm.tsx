@@ -142,7 +142,7 @@ export default function AddJobForm() {
   };
 
   // Only show the form to HR users
-  if (user?.user_role !== 4) {
+  if (user?.user_role !== 5) {
     return (
       <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Access Denied</h2>

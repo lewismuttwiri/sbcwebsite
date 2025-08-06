@@ -73,6 +73,11 @@ const Navbar = () => {
             href: "/applications",
             icon: <FiPackage className="mr-2" />,
           },
+          {
+            name: "Add a Job advert",
+            href: "/careers/new-opening",
+            icon: <FiPackage className="mr-2" />,
+          },
         ]
       : []),
     ...(isProcurement

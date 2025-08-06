@@ -12,7 +12,7 @@ export default function NewJobOpening() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [csrfToken, setCsrfToken] = useState("");
-  const [userRole, setUserRole] = useState<number | null>(null);
+  const [userRole, setUserRole] = useState<number>(4);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
   const { isAuthenticated } = useAuth();
 
@@ -152,8 +152,7 @@ export default function NewJobOpening() {
     );
   }
 
-  if (userRole !== null && ![1, 2].includes(userRole)) {
-    //This should be procurement role
+  if (![1, 5].includes(userRole)) {
     return (
       <Container>
         <div className="bg-red-50 border-l-4 border-red-400 p-4 my-8">
