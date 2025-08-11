@@ -9,60 +9,6 @@ import { FaBriefcase, FaLocationDot, FaCalendarDays } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { getAllJobs } from "@/utils/careers";
 
-// const jobListings = [
-//   {
-//     id: 1,
-//     title: "Senior Software Engineer",
-//     location: "Nairobi, Kenya",
-//     type: "Full-time",
-//     department: "Engineering",
-//     posted: "2025-05-15",
-//     description:
-//       "We are looking for an experienced Senior Software Engineer to join our growing engineering team. This role involves leading technical initiatives and mentoring junior developers.",
-//     requirements: [
-//       "5+ years of professional software development experience",
-//       "Expertise in TypeScript/JavaScript",
-//       "Experience with modern web frameworks",
-//       "Strong problem-solving skills",
-//       "Excellent communication abilities",
-//     ],
-//   },
-//   {
-//     id: 2,
-//     title: "Digital Marketing Specialist",
-//     location: "Remote",
-//     type: "Full-time",
-//     department: "Marketing",
-//     posted: "2025-05-14",
-//     description:
-//       "Join our marketing team as a Digital Marketing Specialist. You will be responsible for creating and executing digital marketing campaigns across various channels.",
-//     requirements: [
-//       "3+ years of digital marketing experience",
-//       "Proficiency in SEO and SEM",
-//       "Experience with social media management",
-//       "Analytical mindset",
-//       "Creative content creation skills",
-//     ],
-//   },
-//   {
-//     id: 3,
-//     title: "Sales Executive",
-//     location: "Nairobi, Kenya",
-//     type: "Full-time",
-//     department: "Sales",
-//     posted: "2025-05-13",
-//     description:
-//       "We are looking for a motivated Sales Executive to join our sales team. This role involves building relationships with potential clients and closing deals.",
-//     requirements: [
-//       "2+ years of sales experience",
-//       "Strong communication skills",
-//       "Ability to build client relationships",
-//       "Experience in B2B sales",
-//       "Target-driven mindset",
-//     ],
-//   },
-// ];
-
 export default function JobsPage() {
   const router = useRouter();
   const [jobListings, setJobListings] = useState<any>([]);
