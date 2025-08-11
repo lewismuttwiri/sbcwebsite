@@ -26,25 +26,6 @@ export default function PartnerPage() {
       <section className="py-20 bg-gray-50">
         <Container className="px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Distributor Card */}
-            {/* <Link href="/partner/distributor" className="group">
-              <div className="p-8 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Distributor</h3>
-                <p className="text-gray-600 mb-4">
-                  Become a key partner in our distribution network and reach
-                  wider markets across Kenya
-                </p>
-                <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </Link> */}
-
             {/* Stockist Card */}
             <Link href="/partner/stockist" className="group">
               <div className="p-8 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -75,7 +56,7 @@ export default function PartnerPage() {
             </Link>
 
             {/* Retailer Card */}
-            <Link href="/partner/retailer" className="group">
+            <Link href="/contact/stockist" className="group">
               <div className="p-8 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg
