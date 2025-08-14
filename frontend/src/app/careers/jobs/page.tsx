@@ -61,7 +61,7 @@ export default function JobsPage() {
           <div className="text-center py-12 bg-white rounded-xl shadow-sm border border-gray-100">
             <div className="flex flex-col items-center justify-center space-y-4">
               <div className="p-4 bg-blue-50 rounded-full">
-                <FaBriefcase className="w-8 h-8 text-blue-500" />
+                <FaBriefcase className="w-8 h-8 text-[#0e0e96]" />
               </div>
               <h3 className="text-xl font-medium text-gray-800">
                 No Current Openings
@@ -85,7 +85,7 @@ export default function JobsPage() {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="p-3 bg-blue-50 rounded-full">
-                    <FaBriefcase className="text-blue-600 w-6 h-6" />
+                    <FaBriefcase className="text-[#0e0e96] w-6 h-6" />
                   </div>
                   <h2 className="text-xl font-semibold text-gray-900">
                     {job.title}
@@ -93,7 +93,7 @@ export default function JobsPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="inline-flex items-center px-4 py-3 rounded-md text-sm font-medium bg-blue-100 text-blue-800">
+                  <span className="inline-flex items-center px-4 py-3 rounded-md text-sm font-medium bg-blue-100 text-[##0e0e96]">
                     <FaLocationDot className="w-4 h-4 mr-1" />
                     {job.location}
                   </span>
@@ -103,7 +103,7 @@ export default function JobsPage() {
                 </div>
 
                 <div className="text-gray-600 mb-4">
-                  <p className="mb-4">{job.description}</p>
+                  {/* <p className="mb-4">{job.description}</p> */}
                   <h3 className="font-semibold mb-2">Requirements:</h3>
                   <ul className="list-disc list-inside space-y-1">
                     {job.requirements.map((req: any, index: any) => (

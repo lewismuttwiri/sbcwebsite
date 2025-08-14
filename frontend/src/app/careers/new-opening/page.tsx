@@ -35,7 +35,7 @@ export default function NewJobOpening() {
 
   const [jobData, setJobData] = useState<Omit<JobPosting, "id" | "posted">>({
     title: "",
-    // description: "",
+    description: "Job description",
     requirements: [""],
     responsibilities: "",
     location: "",
