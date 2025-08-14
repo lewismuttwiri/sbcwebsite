@@ -6,6 +6,7 @@ import { JobPosting } from "@/types/job";
 import Container from "@/components/layout/Container";
 import toast from "react-hot-toast";
 import { useAuth } from "@/context/AuthContext";
+import Button from "@/components/Button";
 
 export default function NewJobOpening() {
   const router = useRouter();
@@ -337,13 +338,13 @@ export default function NewJobOpening() {
             >
               Cancel
             </button>
-            <button
+            <Button
               type="submit"
               disabled={isSubmitting}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
             >
               {isSubmitting ? "Creating..." : "Create Job Posting"}
-            </button>
+            </Button>
           </div>
         </form>
       </Container>
