@@ -35,7 +35,7 @@ export default function NewJobOpening() {
 
   const [jobData, setJobData] = useState<Omit<JobPosting, "id" | "posted">>({
     title: "",
-    description: "",
+    // description: "",
     requirements: [""],
     responsibilities: "",
     location: "",
@@ -261,7 +261,7 @@ export default function NewJobOpening() {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Job Description*
             </label>
@@ -273,7 +273,7 @@ export default function NewJobOpening() {
               rows={4}
               className="w-full p-2 border rounded"
             />
-          </div>
+          </div> */}
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
