@@ -80,7 +80,7 @@ export default function NewJobOpening() {
 
     try {
       const api_url = process.env.NEXT_PUBLIC_API_URL;
-      const response = await fetch(`${api_url}careers/api/job-advertisement/`, {
+      const response = await fetch("/api/careers/jobs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

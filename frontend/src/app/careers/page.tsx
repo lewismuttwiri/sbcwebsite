@@ -34,27 +34,27 @@ const benefits = [
     description:
       "Join a multicultural team that values diversity and inclusion, where everyone's unique perspective is celebrated.",
   },
-  {
-    id: 4,
-    icon: FaRocket,
-    title: "Innovation",
-    description:
-      "Work on cutting-edge technologies and innovative solutions that push the boundaries of what's possible.",
-  },
-  {
-    id: 5,
-    icon: FaLightbulb,
-    title: "Creative Freedom",
-    description:
-      "We encourage creativity and fresh ideas, giving you the freedom to bring your best work to life.",
-  },
-  {
-    id: 6,
-    icon: FaHandshake,
-    title: "Work-Life Balance",
-    description:
-      "We believe in maintaining a healthy work-life balance, with flexible working arrangements and supportive policies.",
-  },
+  // {
+  //   id: 4,
+  //   icon: FaRocket,
+  //   title: "Innovation",
+  //   description:
+  //     "Work on cutting-edge technologies and innovative solutions that push the boundaries of what's possible.",
+  // },
+  // {
+  //   id: 5,
+  //   icon: FaLightbulb,
+  //   title: "Creative Freedom",
+  //   description:
+  //     "We encourage creativity and fresh ideas, giving you the freedom to bring your best work to life.",
+  // },
+  // {
+  //   id: 6,
+  //   icon: FaHandshake,
+  //   title: "Work-Life Balance",
+  //   description:
+  //     "We believe in maintaining a healthy work-life balance, with flexible working arrangements and supportive policies.",
+  // },
 ];
 
 export default function WhyJoinUsPage() {
