@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
@@ -12,16 +10,22 @@ import { getAllJobs } from "@/utils/careers";
 export default function JobsPage() {
   const router = useRouter();
   const [jobListings, setJobListings] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
+        setIsLoading(true);
         const response = await getAllJobs();
 
         setJobListings(response);
         console.log("Job listings:", jobListings);
+        setIsLoading(false);
+        return jobListings;
       } catch (error) {
         console.error("Error fetching jobs:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchJobs();
@@ -38,6 +42,14 @@ export default function JobsPage() {
       hour: "numeric",
       minute: "2-digit",
     });
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+    );
   }
 
   return (
@@ -105,26 +117,40 @@ export default function JobsPage() {
                 <div className="text-gray-600 mb-4">
                   {/* <p className="mb-4">{job.description}</p> */}
                   <h3 className="font-semibold mb-2">Requirements:</h3>
-                  <ul className="list-disc list-inside space-y-1">
+                  <ul className="list-disc list-inside space-y-1 list-style-type-none">
                     {job.requirements.map((req: any, index: any) => (
-                      <li key={index} className="text-gray-600">
+                      <li key={index} className="text-gray-600 ">
                         {req}
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="flex items-center justify-between mt-4">
+                <div className="text-gray-600 mb-4">
+                  <h3 className="font-semibold mb-2">Responsibilities:</h3>
+                  <ul className="list-disc list-inside space-y-1">
+                    {job.responsibilities
+                      .split("\n")
+                      .map((item: any, index: any) => (
+                        <li key={index} className="flex items-start">
+                          <span className="mr-2">•</span>
+                          <span>{item.trim()}</span>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+
+                <div className="flex items-center justify-between mt-4 gap-4">
                   <span className="text-sm text-gray-500">
                     <FaCalendarDays className="w-4 h-4 inline-block mr-1" />
                     Posted {formatDate(job.posted_date)}
                   </span>
                   <Button
                     variant="primary"
-                    className="flex items-center gap-2 cursor-pointer"
+                    className="cursor-pointer flex items-center justify-center"
                     onClick={() => router.push(`/careers/jobs/${job.id}`)}
                   >
-                    Apply Now
+                    View
                   </Button>
                 </div>
               </motion.div>
