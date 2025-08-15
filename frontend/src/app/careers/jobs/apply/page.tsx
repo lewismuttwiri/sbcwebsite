@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 import Input from "@/components/ui/Input";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 // Types
 interface FormData {
@@ -125,13 +126,29 @@ const useJobApplication = () => {
       formDataToSend.append("skills", JSON.stringify(formData.skills));
 
       if (formData.resume) {
-        formDataToSend.append("resume", formData.resume);
+        formDataToSend.append("resume_url", formData.resume);
       }
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
-      const response = await fetch(`${apiUrl}careers/api/job-applications/`, {
+      if (
+        !formData.applicant_name ||
+        !formData.email ||
+        !formData.phone ||
+        !formData.cover_letter ||
+        !formData.experience ||
+        !formData.skills.length
+      ) {
+        toast.error("Please fill in all required fields");
+        return;
+      }
+
+      if (formData.resume === null) {
+        formDataToSend.append("resume_url", "");
+      }
+
+      const response = await fetch(`/api/careers/apply/`, {
         method: "POST",
         body: formDataToSend,
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -159,7 +176,7 @@ const useJobApplication = () => {
       router.push(`/careers/jobs/apply/thank-you`);
     } catch (error) {
       console.error("Error submitting application:", error);
-      alert(
+      toast.error(
         error instanceof Error
           ? error.message
           : "There was an error submitting your application. Please try again."
