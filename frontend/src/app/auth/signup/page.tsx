@@ -91,13 +91,16 @@ export default function SignUpPage() {
   }, [apiError, clearError]);
 
   const getUserRole = (email: string): number => {
-    const emailDomain = email.toLowerCase();
+    const emailToCheck = email.toLowerCase();
 
-    if (emailDomain === "hro@sbckenya.com" || "cynthia@sbckenya.com") {
+    if (
+      emailToCheck === "hro@sbckenya.com" ||
+      emailToCheck === "cynthia@sbckenya.com"
+    ) {
       return 5;
-    } else if (emailDomain === "procurement@sbckenya.com") {
+    } else if (emailToCheck === "procurement@sbckenya.com") {
       return 6;
-    } else if (emailDomain === "lewis@sbckenya.com") {
+    } else if (emailToCheck === "lewis@sbckenya.com") {
       return 1;
     }
     return 4;
@@ -111,15 +114,15 @@ export default function SignUpPage() {
       const userRole = getUserRole(formData.email);
 
       // Log the form data being sent
-      console.log("📤 Form data being sent:", {
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        phone_number: formData.phoneNumber,
-        password: formData.password,
-        confirm_password: formData.confirmPassword,
-        user_role: userRole,
-      });
+      // console.log("📤 Form data being sent:", {
+      //   first_name: formData.firstName,
+      //   last_name: formData.lastName,
+      //   email: formData.email,
+      //   phone_number: formData.phoneNumber,
+      //   password: formData.password,
+      //   confirm_password: formData.confirmPassword,
+      //   user_role: userRole,
+      // });
 
       await authRegister({
         first_name: formData.firstName,
