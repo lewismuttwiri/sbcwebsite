@@ -16,9 +16,9 @@ const baseStyles =
 
 const variants: any = {
   primary:
-    "bg-[#0E0E96] hover:bg-white text-white hover:text-[#0E0E96] hover:border-gray-500 hover:border-1 focus:ring-blue-500",
+    "bg-[#0E0E96] hover:bg-white text-white hover:text-[#0E0E96] hover:border-gray-500 hover:border-1",
   secondary:
-    "bg-transparent hover:bg-[#white] text-[#0E0E96] hover:border-gray-500 border-1 border-[#0E0E96] focus:ring-blue-500",
+    "bg-transparent hover:bg-[#white] text-[#0E0E96] hover:border-gray-500 border-1 border-[#0E0E96]",
 };
 
 export default function Button(props: ButtonProps) {

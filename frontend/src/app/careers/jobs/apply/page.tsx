@@ -13,6 +13,7 @@ import {
 import Input from "@/components/ui/Input";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
+import { MdOutlineCancel } from "react-icons/md";
 
 // Types
 interface FormData {
@@ -84,13 +85,19 @@ const useJobApplication = () => {
     }
   };
 
-  const handleAddSkill = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleAddSkill = (
+    e: React.KeyboardEvent<HTMLInputElement> | { key: string }
+  ) => {
     if (e.key === "Enter" && currentSkill.trim()) {
-      e.preventDefault();
+      if ("preventDefault" in e) {
+        e.preventDefault();
+      }
+
       if (!formData.skills.includes(currentSkill.trim())) {
+        const newSkills = [...formData.skills, currentSkill.trim()];
         setFormData((prev) => ({
           ...prev,
-          skills: [...prev.skills, currentSkill.trim()],
+          skills: newSkills,
         }));
         setCurrentSkill("");
       }
@@ -118,6 +125,7 @@ const useJobApplication = () => {
       formDataToSend.append("job_advertisement", jobId);
       formDataToSend.append("applicant_name", formData.applicant_name);
       formDataToSend.append("email", formData.email);
+      formDataToSend.append("position", jobTitle);
       formDataToSend.append("phone", formData.phone);
       formDataToSend.append("cover_letter", formData.cover_letter);
       formDataToSend.append("experience", formData.experience);
@@ -144,6 +152,11 @@ const useJobApplication = () => {
       if (formData.resume === null) {
         formDataToSend.append("resume_url", "");
       }
+
+      console.log(
+        "Sending this formDataToSend to the proxy server",
+        formDataToSend
+      );
 
       const response = await fetch(`/api/careers/apply/`, {
         method: "POST",
@@ -211,37 +224,58 @@ const SkillsInput = ({
   skills: string[];
   currentSkill: string;
   onCurrentSkillChange: (value: string) => void;
-  onAddSkill: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onAddSkill: (e: React.KeyboardEvent) => void;
   onRemoveSkill: (skill: string) => void;
 }) => (
   <div>
-    <label className="block text-sm font-medium text-gray-700 mb-1">
-      Skills
-    </label>
-    <input
-      type="text"
-      value={currentSkill}
-      onChange={(e) => onCurrentSkillChange(e.target.value)}
-      onKeyDown={onAddSkill}
-      className="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
-      placeholder="Type a skill and press Enter"
-    />
+    <div className="flex items-end gap-2 w-full">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Skills
+        </label>
+        <input
+          type="text"
+          value={currentSkill}
+          onChange={(e) => onCurrentSkillChange(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              onAddSkill(e);
+            }
+          }}
+          enterKeyHint="done"
+          inputMode="text"
+          className="shadow-sm focus:border-primary block sm:text-sm border-gray-300 rounded-md p-2 border"
+          placeholder="Type a skill and press Enter"
+        />
+      </div>
+      <button
+        type="button"
+        onClick={() => {
+          if (currentSkill.trim() && !skills.includes(currentSkill.trim())) {
+            const event = { key: "Enter" } as React.KeyboardEvent;
+            onAddSkill(event);
+          }
+        }}
+        className="bg-[#3b3b51] text-white px-4 py-2 rounded-md sm:hidden"
+      >
+        Add
+      </button>
+    </div>
     <div className="mt-2 flex flex-wrap gap-2">
       {skills.map((skill) => (
         <span
           key={skill}
-          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+          className="inline-flex items-center px-3 py-1 rounded-md text-md font-medium bg-[#0E0E96] text-white"
         >
           {skill}
           <button
             type="button"
             onClick={() => onRemoveSkill(skill)}
-            className="ml-1.5 inline-flex items-center justify-center w-4 h-4 text-blue-400 hover:text-blue-600 focus:outline-none"
+            className="ml-1.5 inline-flex gap-2 items-center justify-center  text-white hover:text-blue-600 focus:outline-none"
           >
             <span className="sr-only">Remove {skill}</span>
-            <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 8 8">
-              <path d="M8 0.8L7.2 0 4 3.2 0.8 0 0 0.8 3.2 4 0 7.2 0.8 8 4 4.8 7.2 8 8 7.2 4.8 4 8 0.8z" />
-            </svg>
+            <MdOutlineCancel />
           </button>
         </span>
       ))}

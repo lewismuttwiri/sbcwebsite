@@ -19,9 +19,8 @@ export default function JobsPage() {
         const response = await getAllJobs();
 
         setJobListings(response);
-        console.log("Job listings:", jobListings);
         setIsLoading(false);
-        return jobListings;
+        return;
       } catch (error) {
         console.error("Error fetching jobs:", error);
       } finally {
@@ -47,7 +46,7 @@ export default function JobsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0e0e96]"></div>
       </div>
     );
   }
@@ -58,7 +57,7 @@ export default function JobsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -92,7 +91,7 @@ export default function JobsPage() {
                 key={job.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: job.id * 0.1 }}
+                transition={{ duration: 0.2, delay: job.id * 0.1 }}
                 className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
               >
                 <div className="flex items-center gap-4 mb-4">
