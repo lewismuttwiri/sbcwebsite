@@ -19,6 +19,10 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
+// import Link from "next/link";
+// import router from "next/router";
+import { useRouter } from "next/navigation";
+import Button from "@/components/Button";
 
 // Your existing Application type
 interface Application {
@@ -45,8 +49,8 @@ const ApplicationsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
+  const router = useRouter();
 
-  // Your existing useEffect for user role
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
@@ -55,7 +59,6 @@ const ApplicationsPage = () => {
     }
   }, []);
 
-  // Your existing useEffect for fetching applications
   useEffect(() => {
     const fetchApplications = async () => {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
@@ -83,7 +86,6 @@ const ApplicationsPage = () => {
     fetchApplications();
   }, []);
 
-  // Filter applications based on search and status
   const filteredApplications = applications.filter((app) => {
     const matchesSearch =
       app.applicant_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -312,7 +314,7 @@ const ApplicationsPage = () => {
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                          <div className="w-12 h-12 bg-[#0E0E96] rounded-full flex items-center justify-center text-white font-bold text-lg">
                             {application.applicant_name.charAt(0)}
                           </div>
                           <div>
@@ -372,13 +374,15 @@ const ApplicationsPage = () => {
                       )}
 
                       <div className="flex space-x-3">
-                        <a
-                          href={`/applications/${application.id}`}
+                        <Button
+                          onClick={() =>
+                            router.push(`/applications/${application.id}`)
+                          }
                           className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-center font-semibold transition-colors flex items-center justify-center space-x-2"
                         >
                           <Eye className="w-4 h-4" />
                           <span>View Details</span>
-                        </a>
+                        </Button>
                         {application.resume_url && (
                           <a
                             href={application.resume_url}

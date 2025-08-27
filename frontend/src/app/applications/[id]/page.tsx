@@ -224,7 +224,7 @@ const ApplicationDetailsPage = () => {
       <div className="min-h-screen bg-gray-50 p-6">
         <div className="max-w-5xl mx-auto">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push("/applications")}
             className="flex items-center text-[#0E0E96] hover:text-blue-800 mb-8 font-medium transition-colors"
           >
             <FiArrowLeft className="mr-2" /> Back to Applications
@@ -246,7 +246,7 @@ const ApplicationDetailsPage = () => {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-5xl mx-auto">
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/applications")}
           className="flex items-center text-[#0E0E96] hover:text-blue-800 mb-8 font-medium transition-colors group"
         >
           <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" />
