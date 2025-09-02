@@ -63,18 +63,22 @@ const ApplicationsPage = () => {
     const fetchApplications = async () => {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
       try {
-        const response = await fetch(`${apiUrl}careers/api/job-applications/`, {
+        const response = await fetch(`api/applications/`, {
           method: "GET",
           credentials: "include",
         });
 
+        console.log("response", response);
+
         if (!response.ok) {
-          throw new Error("Failed to fetch applications");
+          console.log("Failed to fetch applications");
+          return [];
         }
 
         const data = await response.json();
-        setApplications(data.results);
-        console.log("Applications data", data.results);
+        setApplications(data);
+        console.log("All Applications data", data);
+        return;
       } catch (err) {
         setError("Failed to load applications");
         console.error("Error fetching applications:", err);
@@ -378,10 +382,14 @@ const ApplicationsPage = () => {
                           onClick={() =>
                             router.push(`/applications/${application.id}`)
                           }
-                          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-center font-semibold transition-colors flex items-center justify-center space-x-2"
+                          className="bg-[#0E0E96] text-gray-100 py-2 px-4 rounded-lg font-semibold transition-colors space-x-2"
                         >
-                          <Eye className="w-4 h-4" />
-                          <span>View Details</span>
+                          <div className="flex items-center space-x-2">
+                            <div>
+                              <Eye className="w-4 h-4" />
+                            </div>
+                            <p>View Details</p>
+                          </div>
                         </Button>
                         {application.resume_url && (
                           <a
@@ -421,9 +429,9 @@ const ApplicationsPage = () => {
                         <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Applied Date
                         </th>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        {/* <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Status
-                        </th>
+                        </th> */}
                         <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Actions
                         </th>
@@ -469,7 +477,7 @@ const ApplicationsPage = () => {
                                 {formatDate(application.applied_date)}
                               </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
+                            {/* <td className="px-6 py-4 whitespace-nowrap">
                               <div
                                 className={`px-3 py-1 rounded-full flex items-center space-x-1 w-fit ${statusStyle.bg} ${statusStyle.text}`}
                               >
@@ -478,7 +486,7 @@ const ApplicationsPage = () => {
                                   {application.status}
                                 </span>
                               </div>
-                            </td>
+                            </td> */}
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                               <div className="flex space-x-2">
                                 <a

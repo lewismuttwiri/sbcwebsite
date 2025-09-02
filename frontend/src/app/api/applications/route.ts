@@ -1,29 +1,46 @@
 import { NextResponse } from "next/server";
-import { Application } from "../../applications/types";
 
-const api_url = process.env.NEXT_PUBLIC_URL;
-const url = `${api_url}api/applications/`;
+const api_url = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GET() {
   try {
-    const response = await fetch(url, {
-      headers: {
-        Accept: "application/json",
-        // "Content-Type": "application/json",
-      },
-      mode: "cors",
-      credentials: "include",
-    });
+    let allApplications: any[] = [];
+    let nextUrl = `${api_url}careers/api/job-applications/`;
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch applications");
+    // Fetch all pages
+    while (nextUrl) {
+      const response = await fetch(nextUrl, {
+        mode: "cors",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        console.error(
+          `Error fetching applications from ${nextUrl}:`,
+          response.statusText
+        );
+        break;
+      }
+
+      const data = await response.json();
+      allApplications = [...allApplications, ...(data.results || [])];
+
+      // Check if there's a next page
+      nextUrl = data.next;
+
+      // If we're on the first page, log some debug info
+      if (!nextUrl) {
+        console.log(`Fetched ${allApplications.length} applications in total`);
+      }
     }
-    const data = await response.json();
-    const sortedApplications = [...data].sort(
-      (a, b) =>
-        new Date(b.appliedDate).getTime() - new Date(a.appliedDate).getTime()
-    );
-    return NextResponse.json(sortedApplications);
+
+    // Sort applications by date (newest first) if needed
+    // const sortedApplications = [...allApplications].sort(
+    //   (a, b) =>
+    //     new Date(b.applied_date).getTime() - new Date(a.applied_date).getTime()
+    // );
+
+    return NextResponse.json(allApplications);
   } catch (error) {
     console.error("Error fetching applications:", error);
     return NextResponse.json(
