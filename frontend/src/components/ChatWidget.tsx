@@ -637,13 +637,14 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
               className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
                 isMinimized
                   ? "h-14 w-80"
-                  : "h-[576px] w-[26rem] lg:h-[608px] lg:w-[28rem]"
+                  : "h-[576px] w-[26rem] lg:h-[576px] lg:w-[28rem]"
               }`}
             >
-              {/* Desktop Header with higher z-index */}
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <div>
-                  <h3 className="font-semibold text-lg">Customer Support</h3>
+                  <h3 className="font-semibold text-lg">
+                    Customer Support full
+                  </h3>
                   {!isMinimized && (
                     <p className="text-blue-100 text-sm opacity-90">
                       {readyState === ReadyState.OPEN
