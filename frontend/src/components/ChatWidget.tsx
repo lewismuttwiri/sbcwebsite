@@ -3,18 +3,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import // Send,
-// Minimize2,
-// X,
-// User,
-// Mail,
-// MessageSquare,
-// ArrowRight,
-// Clock,
-// CheckCircle2,
-// Loader2,
-// RefreshCw,
-"lucide-react";
 import {
   CiUser,
   CiChat2,
@@ -26,7 +14,6 @@ import { IoIosArrowRoundForward, IoIosRefresh } from "react-icons/io";
 import { RiLoader3Line } from "react-icons/ri";
 import { AiOutlineSend } from "react-icons/ai";
 import { FiMinimize2, FiX } from "react-icons/fi";
-
 import Image from "next/image";
 
 export interface Message {
@@ -245,9 +232,6 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         noRoomId: !roomId,
       });
       return;
-    }
-
-    if (readyState === ReadyState.OPEN) {
     }
 
     try {
@@ -596,106 +580,150 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   }
 
   return (
-    <div className="fixed bottom-4 top-4 z-50 right-4 left-4 md:left-auto md:top-auto md:bottom-4 md:right-4">
+    <>
+      {/* Chat Button - only shows when closed */}
       {chatState === "closed" && (
-        <button
-          onClick={() => handleWelcomeScreen()}
-          className="fixed bottom-4 right-4 bg-gradient-to-r from-[#0E0E96] to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
-          aria-label="Open chat"
-        >
-          <CiChat2
-            className="group-hover:scale-110 transition-transform"
-            size={24}
-          />
-        </button>
+        <div className="fixed bottom-4 right-4 z-50">
+          <button
+            onClick={() => handleWelcomeScreen()}
+            className="bg-gradient-to-r from-[#0E0E96] to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
+            aria-label="Open chat"
+          >
+            <CiChat2
+              className="group-hover:scale-110 transition-transform"
+              size={24}
+            />
+          </button>
+        </div>
       )}
 
+      {/* Chat Widget - Full screen on mobile, floating on desktop */}
       {chatState !== "closed" && (
-        <div
-          className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
-            isMinimized
-              ? "h-14 w-80 fixed bottom-4 right-4"
-              : "h-full w-full md:h-[36rem] md:w-[26rem] lg:h-[40rem] lg:w-[28rem] md:fixed md:bottom-4 md:right-4"
-          }`}
-        >
-          <div className="border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center">
-            <div>
-              <h3 className="font-semibold text-lg">Customer Support</h3>
-              {!isMinimized && (
-                <p className="text-blue-100 text-sm opacity-90">
-                  {readyState === ReadyState.OPEN ? "Online" : "Connecting..."}
-                </p>
-              )}
-            </div>
-            <div className="flex space-x-2">
-              <button
-                onClick={() => setIsMinimized(!isMinimized)}
-                className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
-                aria-label="Minimize chat"
-              >
-                <FiMinimize2 className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setChatState("closed")}
-                className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
-                aria-label="Close chat"
-              >
-                <FiX className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+        <>
+          {/* Mobile Full Screen Overlay */}
+          <div className="md:hidden fixed inset-0 z-50 bg-white">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center">
+                <div>
+                  <h3 className="font-semibold text-lg">Customer Support</h3>
+                  <p className="text-blue-100 text-sm opacity-90">
+                    {readyState === ReadyState.OPEN
+                      ? "Online"
+                      : "Connecting..."}
+                  </p>
+                </div>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => setChatState("closed")}
+                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
+                    aria-label="Close chat"
+                  >
+                    <FiX className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
 
-          {!isMinimized && (
-            <>
+              {/* Content */}
               <div className="flex-1 overflow-hidden">
                 {chatState === "welcome" && renderWelcomeScreen()}
                 {chatState === "form" && renderCustomerForm()}
                 {chatState === "chat" && renderChat()}
               </div>
+            </div>
+          </div>
 
-              {/* Close Chat Confirmation Modal */}
-              {showCloseConfirmation && (
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
-                  <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                      End Chat Session?
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4">
-                      Are you sure you want to end this chat? This action cannot
-                      be undone, and you'll need to start a new chat for further
-                      assistance.
+          {/* Desktop Floating Widget */}
+          <div className="hidden md:block fixed bottom-4 right-4 z-50">
+            <div
+              className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
+                isMinimized
+                  ? "h-14 w-80"
+                  : "h-[36rem] w-[26rem] lg:h-[40rem] lg:w-[28rem]"
+              }`}
+            >
+              {/* Desktop Header */}
+              <div className="border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center">
+                <div>
+                  <h3 className="font-semibold text-lg">Customer Support</h3>
+                  {!isMinimized && (
+                    <p className="text-blue-100 text-sm opacity-90">
+                      {readyState === ReadyState.OPEN
+                        ? "Online"
+                        : "Connecting..."}
                     </p>
-                    <div className="flex space-x-3">
-                      <button
-                        onClick={() => setShowCloseConfirmation(false)}
-                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-                        disabled={isClosingChat}
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={handleCloseChat}
-                        disabled={isClosingChat}
-                        className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white rounded-lg transition-colors flex items-center justify-center"
-                      >
-                        {isClosingChat ? (
-                          <>
-                            <RiLoader3Line className="w-4 h-4 animate-spin mr-2" />
-                            Ending...
-                          </>
-                        ) : (
-                          "End Chat"
-                        )}
-                      </button>
-                    </div>
-                  </div>
+                  )}
+                </div>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => setIsMinimized(!isMinimized)}
+                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
+                    aria-label="Minimize chat"
+                  >
+                    <FiMinimize2 className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setChatState("closed")}
+                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
+                    aria-label="Close chat"
+                  >
+                    <FiX className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Desktop Content */}
+              {!isMinimized && (
+                <div className="flex-1 overflow-hidden">
+                  {chatState === "welcome" && renderWelcomeScreen()}
+                  {chatState === "form" && renderCustomerForm()}
+                  {chatState === "chat" && renderChat()}
                 </div>
               )}
-            </>
-          )}
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Close Chat Confirmation Modal */}
+      {showCloseConfirmation && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]">
+          <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full">
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              End Chat Session?
+            </h3>
+            <p className="text-gray-600 text-sm mb-4">
+              Are you sure you want to end this chat? This action cannot be
+              undone, and you'll need to start a new chat for further
+              assistance.
+            </p>
+            <div className="flex space-x-3">
+              <button
+                onClick={() => setShowCloseConfirmation(false)}
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                disabled={isClosingChat}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleCloseChat}
+                disabled={isClosingChat}
+                className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white rounded-lg transition-colors flex items-center justify-center"
+              >
+                {isClosingChat ? (
+                  <>
+                    <RiLoader3Line className="w-4 h-4 animate-spin mr-2" />
+                    Ending...
+                  </>
+                ) : (
+                  "End Chat"
+                )}
+              </button>
+            </div>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

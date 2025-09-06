@@ -58,4 +58,4 @@ export async function GET(request: Request) {
 
 export const revalidate = 300;
 
-export const dynamic = "force-cache";
+export const dynamic = "auto";
