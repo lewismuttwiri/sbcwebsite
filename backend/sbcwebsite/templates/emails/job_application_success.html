@@ -1,0 +1,17 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}Thank You for Your Application - SBC Kenya{% endblock %}
+{% block header_class %}success{% endblock %}
+{% block header_title %}Thank You!{% endblock %}
+{% block header_subtitle %}
+<p class="header-subtitle">We've received your application for {{ position }}</p>
+{% endblock %}
+
+{% block content %}
+<h2 class="greeting">Hello <span class="highlight-text">{{ applicant_name }}</span>,</h2>
+
+<p>Thank you for applying to <strong>SBC Kenya</strong>! We’ve received your application and our recruitment team will review it shortly.</p>
+
+<p>If shortlisted, we’ll contact you using the email or phone number you provided.</p>
+{% endblock %}
+

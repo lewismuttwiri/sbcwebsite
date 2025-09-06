@@ -1,0 +1,46 @@
+{% extends "emails/base_email.html" %}
+
+{% block email_title %}New Job Application - SBC Kenya{% endblock %}
+{% block header_class %}info{% endblock %}
+{% block header_title %}New Job Application{% endblock %}
+{% block header_subtitle %}
+<p>New applicant details below:</p>
+{% endblock %}
+
+{% block content %}
+<p><strong>Name:</strong> {{ applicant_name }}</p>
+<p><strong>Email:</strong> {{ email }}</p>
+
+{% if phone %}
+<p><strong>Phone:</strong> {{ phone }}</p>
+{% endif %}
+
+<p><strong>Position:</strong> {{ position }}</p>
+<p><strong>Submitted on:</strong> {{ submission_date }}</p>
+
+{% if cover_letter %}
+<h4>Cover Letter:</h4>
+<p>{{ cover_letter|linebreaks }}</p>
+{% endif %}
+
+{% if experience %}
+<h4>Experience:</h4>
+<p>{{ experience|linebreaks }}</p>
+{% endif %}
+
+{% if skills %}
+<h4>Skills:</h4>
+<ul>
+  {% for skill in skills %}
+    <li>{{ skill }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+
+{% endblock %}
+
+{% block action_section %}
+<p><a href="mailto:{{ email }}" class="button">Reply to Applicant</a></p>
+{% endblock %}
+

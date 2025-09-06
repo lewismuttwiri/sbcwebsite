@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title style="color: black">New Customer Support Ticket Created</title>
+  </head>
+  <body>
+    <h2 style="color: black">New Customer Support Ticket Created</h2>
+    <p style="color: black">
+      <strong>Customer Name:</strong> {{ customer_name }}
+    </p>
+    <p style="color: black"><strong>Email:</strong> {{ customer_email }}</p>
+    <p style="color: black"><strong>Enquiry:</strong> {{ enquiry }}</p>
+
+    <p style="color: black">
+      <strong>Receptionist:</strong> {{ receptionist }}
+    </p>
+
+    <p style="margin-top: 20px">
+      <a
+        href="{{ join_link }}"
+        style="
+          background: #0e0e96;
+          color: #fff;
+          padding: 10px 15px;
+          text-decoration: none;
+          border-radius: 5px;
+          font-weight: bold;
+          font-size: 14px;
+        "
+      >
+        Open Ticket
+      </a>
+    </p>
+  </body>
+</html>

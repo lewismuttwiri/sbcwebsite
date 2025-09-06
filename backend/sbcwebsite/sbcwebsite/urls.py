@@ -36,6 +36,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('news/', include('news.urls', namespace='news')),
     path('partner/', include('partner.urls', namespace='partner')),
+    path('chat/', include('chat.urls', namespace='chat')),
     
     
 

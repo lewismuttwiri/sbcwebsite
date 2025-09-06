@@ -12,7 +12,9 @@ from django.template.loader import render_to_string
 from django.templatetags.static import static
 from django.utils.html import strip_tags
 from django.core.mail import send_mail
+from django.core.mail import send_mail as send_html_email
 from authuser.models import OTP
+from chat.models import ChatRoom
 
 class Helper:
     def get_full_static_url(self, static_path):
@@ -362,7 +364,7 @@ class Helper:
         """Send order notification email to admin"""
         try:
             # At the top of the function, add:
-            admin_email = getattr(settings, 'ADMIN_NOTIFICATION_EMAIL', 'info@sbckenya.com')
+            admin_email = 'mt.orders@sbckenya.com'
             recipient_list = [admin_email]
             
             subject = f'New Order #{order.id} - SBC Kenya'
@@ -618,7 +620,7 @@ class Helper:
                 'admin_product_url': f"{getattr(settings, 'SITE_URL', 'http://localhost:8000')}/admin/store/product/{product.id}/change/",
             }
             
-            admin_email = getattr(settings, 'ADMIN_EMAIL', 'mt.orders@sbckenya.com')
+            admin_email = 'mt.orders@sbckenya.com'
             return self.send_html_email(
                 template_name='emails/low_stock_alert.html',
                 context=context,
@@ -882,9 +884,6 @@ class Helper:
             return 0  # Failure
 
 
-
-
-
     def send_distributor_request_email_to_admin(self, application_data):
         """
         Send email notification to admin when a new distributor partnership application is submitted,
@@ -919,7 +918,7 @@ class Helper:
 
             # Set up email
             from_email = settings.DEFAULT_FROM_EMAIL
-            to_emails = ['info@sbckenya.com']
+            to_emails = ['stockist@sbckenya.com']
 
             email = EmailMessage(
                 subject,
@@ -1058,8 +1057,104 @@ class Helper:
             import traceback
             traceback.print_exc()
             return 0  # Failure
+        
+
+    def send_application_notification_email(self, application):
+        """Send email to applicant and notify HR"""
+        try:
+            # HR Email
+            hr_email = 'info@sbckenya.com'
+            recipient_list = [hr_email]
+
+            # Context for email templates
+            context = {
+                "applicant_name": application.applicant_name,
+                "email": application.email,
+                "phone": application.phone,
+                "position": application.position,
+                "resume_url": application.resume_url.url if application.resume_url else None,
+                "cover_letter": application.cover_letter,
+                "skills": application.skills,
+                "experience": application.experience,
+                "submission_date": application.applied_date.strftime('%Y-%m-%d %H:%M'),
+            }
+
+            # --- 1. Send email to HR ---
+            subject_admin = f"New Job Application - {application.applicant_name}"
+            html_admin = render_to_string("emails/job_admin_notification.html", context)
+
+            msg_admin = EmailMultiAlternatives(
+                subject=subject_admin,
+                body=strip_tags(html_admin),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=recipient_list,
+            )
+            msg_admin.attach_alternative(html_admin, "text/html")
+
+            # ✅ Attach the resume file if it exists
+            if application.resume_url and hasattr(application.resume_url, 'path'):
+                try:
+                    msg_admin.attach_file(application.resume_url.path)
+                except Exception as e:
+                    print(f"Failed to attach resume: {e}")
+
+            msg_admin.send()
+
+            # --- 2. Send confirmation email to applicant ---
+            subject_user = "Thank you for your job application - SBC Kenya"
+            html_user = render_to_string("emails/job_application_success.html", context)
+
+            msg_user = EmailMultiAlternatives(
+                subject=subject_user,
+                body=strip_tags(html_user),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[application.email],
+            )
+            msg_user.attach_alternative(html_user, "text/html")
+            msg_user.send()
+
+            return True
+        except Exception as e:
+            print(f"Email sending failed: {e}")
+            return False
 
 
+    def send_chat_notification_email(self, room):
+        """Send email notification to receptionist when a new chat room is created"""
+        try:
+            room = ChatRoom.objects.get(id=room.id)
+            receptionist = room.receptionist
+            customer = room.customer_name
+            customer_email = room.customer_email
+            enquiry = room.enquiry
+            site_url = getattr(settings, 'SITE_URL', 'http://localhost:3000')
 
-    
+            # ✅ Generate join link for receptionist
+            join_link = f"{site_url}/chat/{room.id}"
 
+            subject = f"New Chat Room Created"
+            context = {
+                'room_id': room.id,
+                'customer_name': customer,
+                'customer_email': customer_email,
+                'enquiry': enquiry,
+                'receptionist': receptionist.email,
+                'join_link': join_link,
+            }
+
+            self.send_html_email(
+                template_name='emails/chat_notification.html',
+                context=context,
+                subject=subject,
+                recipient_list=[receptionist.email],
+                from_email=settings.DEFAULT_FROM_EMAIL
+            )
+
+            return True
+
+        except ChatRoom.DoesNotExist:
+            print("Chat room not found")
+            return False
+        except Exception as e:
+            print(f"Error sending chat notification email: {str(e)}")
+            return False

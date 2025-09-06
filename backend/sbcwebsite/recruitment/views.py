@@ -13,6 +13,7 @@ from .serializers import (
     JobApplicationUpdateSerializer
 )
 from utils.apiresponse import ApiResponse
+from utils.helpers import Helper
 
 class JobAdvertisementViewSet(viewsets.ModelViewSet):
     """Job Advertisement ViewSet"""
@@ -39,13 +40,13 @@ class JobAdvertisementViewSet(viewsets.ModelViewSet):
         
         return queryset.order_by('-posted_date')
 
+
 class JobApplicationViewSet(viewsets.ModelViewSet):
     """Job Application ViewSet"""
-    
+
     def get_permissions(self):
-        # Allow any access for all actions
         return [permissions.AllowAny()]
-    
+
     def get_serializer_class(self):
         if self.action == 'create':
             return JobApplicationCreateSerializer
@@ -54,11 +55,17 @@ class JobApplicationViewSet(viewsets.ModelViewSet):
         elif self.action == 'list':
             return JobApplicationDetailSerializer
         return JobApplicationDetailSerializer
-    
+
     def get_queryset(self):
-        # Always return all job applications - no filtering based on user role
-        queryset = JobApplication.objects.select_related('job_advertisement')
-        return queryset.order_by('-applied_date')
+        print("Fetching job applications...")
+        return JobApplication.objects.select_related('job_advertisement')
+
+    def perform_create(self, serializer):
+        # Save the object and send emails using the helper
+        application = serializer.save()
+        helper = Helper()
+        helper.send_application_notification_email(application)
     
     
+
 
