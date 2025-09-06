@@ -1,4 +1,3 @@
-// Complete Cart Management System - Single File Solution
 import React from "react";
 import {
   createContext,
@@ -10,7 +9,6 @@ import {
   useMemo,
 } from "react";
 
-// Types
 export interface CartItem {
   id: string;
   name: string;
@@ -21,7 +19,6 @@ export interface CartItem {
   brandName: string;
 }
 
-// Storage utilities
 const CART_STORAGE_KEY = "sbc_cart";
 
 const useCartStorage = () => {
