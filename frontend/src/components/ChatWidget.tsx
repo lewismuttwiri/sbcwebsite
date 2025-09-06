@@ -583,7 +583,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     <>
       {/* Chat Button - only shows when closed */}
       {chatState === "closed" && (
-        <div className="fixed bottom-4 right-4 z-50">
+        <div className="fixed bottom-4 right-4 z-[9998]">
           <button
             onClick={() => handleWelcomeScreen()}
             className="bg-gradient-to-r from-[#0E0E96] to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
@@ -601,10 +601,10 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
       {chatState !== "closed" && (
         <>
           {/* Mobile Full Screen Overlay */}
-          <div className="md:hidden fixed inset-0 z-50 bg-white">
+          <div className="md:hidden fixed inset-0 z-[9999] bg-white">
             <div className="flex flex-col h-full">
-              {/* Header */}
-              <div className="border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center">
+              {/* Header with higher z-index and proper positioning */}
+              <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <div>
                   <h3 className="font-semibold text-lg">Customer Support</h3>
                   <p className="text-blue-100 text-sm opacity-90">
@@ -616,7 +616,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setChatState("closed")}
-                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
+                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors touch-manipulation"
                     aria-label="Close chat"
                   >
                     <FiX className="w-5 h-5" />
@@ -634,7 +634,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
           </div>
 
           {/* Desktop Floating Widget */}
-          <div className="hidden md:block fixed bottom-4 right-4 z-50">
+          <div className="hidden md:block fixed bottom-4 right-4 z-[9999]">
             <div
               className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
                 isMinimized
@@ -642,8 +642,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   : "h-[36rem] w-[26rem] lg:h-[40rem] lg:w-[28rem]"
               }`}
             >
-              {/* Desktop Header */}
-              <div className="border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center">
+              {/* Desktop Header with higher z-index */}
+              <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <div>
                   <h3 className="font-semibold text-lg">Customer Support</h3>
                   {!isMinimized && (
@@ -685,10 +685,10 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         </>
       )}
 
-      {/* Close Chat Confirmation Modal */}
+      {/* Close Chat Confirmation Modal with highest z-index */}
       {showCloseConfirmation && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60]">
-          <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[10001]">
+          <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full shadow-2xl">
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               End Chat Session?
             </h3>
