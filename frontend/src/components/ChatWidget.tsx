@@ -342,7 +342,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   );
 
   const renderCustomerForm = () => (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full scroll-y overflow-y-auto ">
       <div className="p-6 border-b bg-gray-50">
         <h2 className="text-xl font-bold text-gray-800 mb-1">
           Let's get started
@@ -597,13 +597,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         </div>
       )}
 
-      {/* Chat Widget - Full screen on mobile, floating on desktop */}
       {chatState !== "closed" && (
         <>
           {/* Mobile Full Screen Overlay */}
           <div className="md:hidden fixed inset-0 z-[9999] bg-white">
-            <div className="flex flex-col h-full">
-              {/* Header with higher z-index and proper positioning */}
+            <div className="flex flex-col h-[90vh]">
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <div>
                   <h3 className="font-semibold text-lg">Customer Support</h3>
@@ -639,7 +637,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
               className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
                 isMinimized
                   ? "h-14 w-80"
-                  : "h-[36rem] w-[26rem] lg:h-[40rem] lg:w-[28rem]"
+                  : "h-[576px] w-[26rem] lg:h-[608px] lg:w-[28rem]"
               }`}
             >
               {/* Desktop Header with higher z-index */}
