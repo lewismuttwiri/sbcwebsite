@@ -102,6 +102,8 @@ export default function SignUpPage() {
       return 6;
     } else if (emailToCheck === "lewis@sbckenya.com") {
       return 1;
+    } else if (emailToCheck === "info@sbckenya.com") {
+      return 7;
     }
     return 4;
   };
@@ -110,19 +112,7 @@ export default function SignUpPage() {
     try {
       setIsSubmitting(true);
 
-      // Determine user role based on email
       const userRole = getUserRole(formData.email);
-
-      // Log the form data being sent
-      // console.log("📤 Form data being sent:", {
-      //   first_name: formData.firstName,
-      //   last_name: formData.lastName,
-      //   email: formData.email,
-      //   phone_number: formData.phoneNumber,
-      //   password: formData.password,
-      //   confirm_password: formData.confirmPassword,
-      //   user_role: userRole,
-      // });
 
       await authRegister({
         first_name: formData.firstName,

@@ -12,7 +12,6 @@ import { CartItem, useCart } from "@/hooks/useCart";
 import toast from "react-hot-toast";
 import Container from "@/components/layout/Container";
 
-// This is a client component that will be hydrated on the client
 export default function ProductDetailPage({
   params: paramsPromise,
 }: {
@@ -27,10 +26,8 @@ export default function ProductDetailPage({
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [showAddedToCart, setShowAddedToCart] = useState(false);
 
-  // Initialize cart
   const { addToCart, isInCart, getItemQuantity, isInitialized } = useCart();
 
-  // Update quantity if item is already in cart
   useEffect(() => {
     if (product && isInitialized) {
       const cartQuantity = getItemQuantity(product.slug);
@@ -40,7 +37,6 @@ export default function ProductDetailPage({
     }
   }, [product, isInitialized, getItemQuantity]);
 
-  // Quantity handlers
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === "") {
@@ -48,9 +44,9 @@ export default function ProductDetailPage({
       return;
     }
     const numValue = parseInt(value, 1000);
-    // if (!isNaN(numValue) && numValue >= 1 && numValue <= 1000) {
-    //   setQuantity(numValue);
-    // }
+    if (!isNaN(numValue) && numValue >= 1 && numValue <= 1000) {
+      setQuantity(numValue);
+    }
   };
 
   const handleQuantityBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -73,7 +69,6 @@ export default function ProductDetailPage({
     setQuantity((prev: number) => Math.max(prev - 1, 1));
   };
 
-  // Update quantity if item is already in cart
   useEffect(() => {
     if (product && isInitialized) {
       const cartQuantity = getItemQuantity(product.slug);
@@ -83,7 +78,6 @@ export default function ProductDetailPage({
     }
   }, [product, isInitialized]);
 
-  // Load product data
   useEffect(() => {
     const loadProduct = async () => {
       try {
@@ -100,7 +94,7 @@ export default function ProductDetailPage({
         const foundProduct = data.find(
           (p: Product) => p.slug.toLowerCase() === params.slug.toLowerCase()
         );
-        
+
         if (foundProduct) {
           setProduct(foundProduct);
         } else {
@@ -147,7 +141,6 @@ export default function ProductDetailPage({
     if (!product) return;
     if (isInCart(product.id)) {
       console.log("Product already in cart", product.id);
-      // toast.success(`${product.name} quantity incremented!`);
       router.push("/cart");
       return;
     }
@@ -167,7 +160,6 @@ export default function ProductDetailPage({
       addToCart(cartItem, quantity);
       setShowAddedToCart(true);
 
-      // Hide the success message after 3 seconds
       setTimeout(() => {
         setShowAddedToCart(false);
       }, 3000);
@@ -183,31 +175,32 @@ export default function ProductDetailPage({
     setCurrentImageIndex(index);
   };
 
-  // Generate structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": product.name,
-    "image": product.images?.[0]?.src || "/images/og-image.jpg",
-    "description": product.description || `Buy ${product.name} online from SBC Kenya`,
-    "brand": {
+    name: product.name,
+    image: product.images?.[0]?.src || "/images/og-image.jpg",
+    description:
+      product.description || `Buy ${product.name} online from SBC Kenya`,
+    brand: {
       "@type": "Brand",
-      "name": product.brand
+      name: product.brand,
     },
-    "offers": {
+    offers: {
       "@type": "Offer",
-      "url": `https://sbc-kenya.com/products/${product.slug}`,
-      "priceCurrency": "KES",
-      "price": product.price,
-      "priceValidUntil": new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString().split('T')[0], // 30 days from now
-      "itemCondition": "https://schema.org/NewCondition",
-      "availability": "https://schema.org/InStock"
-    }
+      url: `https://sbc-kenya.com/products/${product.slug}`,
+      priceCurrency: "KES",
+      price: product.price,
+      priceValidUntil: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
+        .toISOString()
+        .split("T")[0], // 30 days from now
+      itemCondition: "https://schema.org/NewCondition",
+      availability: "https://schema.org/InStock",
+    },
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      {/* Add structured data */}
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -223,9 +216,8 @@ export default function ProductDetailPage({
             </Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
-              {/* Product Images */}
+          <div className="rounded-lg overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="space-y-4">
                 <div className="relative w-3/4 mx-auto bg-gray-100 rounded-lg overflow-hidden">
                   {product.images && product.images.length > 0 && (
@@ -335,8 +327,8 @@ export default function ProductDetailPage({
                     disabled={isAddingToCart}
                     className={`transition-all duration-300 cursor-pointer ${
                       isInCart(product.slug)
-                        ? "bg-green-500 hover:bg-green-600"
-                        : "hover:border-2 hover:border-gray-400 hover:bg-gray-100 hover:text-gray-800"
+                        ? ""
+                        : "hover:border-gray-400 hover:bg-gray-100 hover:text-gray-800"
                     }`}
                   >
                     <div className="flex items-center justify-center space-x-2">

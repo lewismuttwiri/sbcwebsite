@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import Container from "./Container";
-import { CiShoppingCart } from "react-icons/ci";
+import { CiChat1, CiShoppingCart } from "react-icons/ci";
 import { MdAccountCircle } from "react-icons/md";
 import { FaChevronDown } from "react-icons/fa6";
 import { FiPackage, FiLogOut, FiLayout, FiMenu, FiX } from "react-icons/fi";
@@ -55,8 +55,7 @@ const Navbar = () => {
   const isHR = user?.entity?.user_role == 5;
   const isProcurement = user?.entity?.user_role == 6;
   const isAdmin = user?.entity?.user_role == 1;
-  console.log("user is Customer", user);
-  console.log("user is Hr", isHR);
+  const isReceptionist = user?.entity?.user_role == 7;
 
   // Account links for the dropdown menu
   const accountLinks = [
@@ -100,6 +99,15 @@ const Navbar = () => {
             name: "Add tenders",
             href: "/tenders/add",
             icon: <FiPackage className="mr-2" />,
+          },
+        ]
+      : []),
+    ...(isReceptionist
+      ? [
+          {
+            name: "Chat",
+            href: "/chat",
+            icon: <CiChat1 className="mr-2" />,
           },
         ]
       : []),
@@ -402,7 +410,7 @@ const Navbar = () => {
                             <Link
                               key={link.href}
                               href={link.href}
-                              className={`flex items-center px-4 py-3 text-gray-800 hover:bg-black hover:text-white transition-colors duration-300 ${
+                              className={`flex items-center px-4 py-3 text-gray-800 hover:bg-[#0E0E96] hover:text-white transition-colors duration-300 ${
                                 index > 0 ? "border-t border-gray-100" : ""
                               }`}
                               onClick={() => setActiveDropdown(null)}

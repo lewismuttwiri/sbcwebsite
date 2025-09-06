@@ -62,12 +62,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "cbc5-197-248-44-59.ngrok-free.app", //new backend link
+        hostname: "127.0.0.1",
       },
       {
         protocol: "https",
         hostname: "sbckenya.com",
-	
       },
       {
         protocol: "https",

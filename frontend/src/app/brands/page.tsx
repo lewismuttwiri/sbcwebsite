@@ -71,9 +71,7 @@ export default function BrandsPage() {
           }
         }
 
-        // Clean the hash to handle special characters and numbers at the start
         const cleanHash = hash.replace(/[^a-zA-Z0-9-_:.]/g, "");
-        // If hash starts with a number, add a prefix
         const selector = /^\d/.test(cleanHash)
           ? `#brand-${cleanHash}`
           : `#${cleanHash}`;
@@ -86,7 +84,6 @@ export default function BrandsPage() {
               block: "start",
             });
           } else {
-            // If element not found, retry after a longer delay (page might still be loading)
             setTimeout(() => {
               const retryElement = document.querySelector(selector);
               if (retryElement) {
@@ -103,14 +100,12 @@ export default function BrandsPage() {
       }
     };
 
-    // Multiple attempts to scroll, as the page might still be loading
     const timeouts = [100, 300, 500, 1000];
 
     timeouts.forEach((delay) => {
       setTimeout(scrollToSection, delay);
     });
 
-    // Listen for hash changes
     window.addEventListener("hashchange", scrollToSection);
 
     return () => {
@@ -325,12 +320,9 @@ export default function BrandsPage() {
                       {brand.description}
                     </p>
 
-                    {/* Subtle divider */}
                     <div className="w-60 h-px bg-gradient-to-r from-gray-300 to-transparent mx-auto lg:mx-0"></div>
 
-                    {/* Clean Content Layout */}
                     <div className="space-y-8">
-                      {/* Sizes Section */}
                       <div className="space-y-4">
                         <div className="flex items-center gap-3">
                           <div className="p-2 rounded-xl bg-[#0E0E96]/10">
@@ -355,127 +347,17 @@ export default function BrandsPage() {
                           ))}
                         </div>
                       </div>
-
-                      {/* {brand.ingredients && (
-                        <>
-                          <div className="relative">
-                            <div
-                              className="absolute inset-0 flex items-center"
-                              aria-hidden="true"
-                            >
-                              <div className="w-full border-t border-gray-200"></div>
-                            </div>
-                            <div className="relative flex justify-center lg:justify-start">
-                              <span className="bg-white px-3">
-                                <div className="w-2 h-2 bg-gradient-to-r from-[#0E0E96] to-blue-400 rounded-full"></div>
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="space-y-6 pt-6">
-                            <div className="flex items-center gap-4">
-                              <div className="relative">
-                                <div className="absolute inset-0 bg-[#0E0E96]/20 rounded-xl blur-sm"></div>
-                                <div className="relative p-3 rounded-xl bg-gradient-to-br from-[#0E0E96]/10 to-[#0E0E96]/5 border border-[#0E0E96]/20">
-                                  <FiInfo className="w-6 h-6 text-[#0E0E96]" />
-                                </div>
-                              </div>
-                              <div>
-                                <h3 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                                  Ingredients
-                                </h3>
-                                <p className="text-sm text-gray-500 mt-1">
-                                  What makes this special
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                              {brand.ingredients.map(
-                                (ingredient: string, idx: number) => (
-                                  <motion.div
-                                    key={idx}
-                                    className="group relative overflow-hidden"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                      delay: idx * 0.08,
-                                      duration: 0.4,
-                                    }}
-                                  >
-                                    <motion.div
-                                      className="relative px-4 py-3 rounded-lg bg-white border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
-                                      whileHover={{
-                                        scale: 1.03,
-                                        borderColor: "#0E0E96",
-                                        boxShadow:
-                                          "0 8px 25px -5px rgba(14, 14, 150, 0.1)",
-                                      }}
-                                      whileTap={{ scale: 0.98 }}
-                                    >
-                                      <div className="absolute inset-0 bg-gradient-to-r from-[#0E0E96]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-
-                                      <div className="relative flex items-center gap-2">
-                                        <div className="w-2 h-2 bg-[#0E0E96]/60 rounded-full flex-shrink-0"></div>
-                                        <span className="text-sm font-medium text-gray-700 group-hover:text-[#0E0E96] transition-colors duration-200">
-                                          {ingredient}
-                                        </span>
-                                      </div>
-                                    </motion.div>
-                                  </motion.div>
-                                )
-                              )}
-                            </div>
-
-                            <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-gray-300">
-                              <div className="flex items-start gap-3">
-                                <div className="flex-shrink-0 mt-0.5">
-                                  <svg
-                                    className="w-4 h-4 text-gray-400"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                  >
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                </div>
-                                <div>
-                                  <p className="text-sm text-gray-600 leading-relaxed">
-                                    <span className="font-medium">
-                                      Please note:
-                                    </span>{" "}
-                                    Ingredients may vary by region and
-                                    production batch. Always check the product
-                                    label for the most current and accurate
-                                    ingredient information.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      )} 
-                       */}
                     </div>
                     <div className="w-60 h-px bg-gradient-to-r from-gray-300 to-transparent mx-auto lg:mx-0"></div>
 
-                    {/* CTA Button */}
-                    <motion.div
-                      className="pt-6"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
+                    <motion.div className="pt-6">
                       <Button
                         href={`/products?brand=${brand.id}`}
                         variant="primary"
-                        className="group relative overflow-hidden inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold  bg-[#0E0E96] hover:from-blue-700  text-white rounded-2xl shadow-lg  transition-all duration-300"
+                        className="inline-flex items-center gap-2"
                       >
-                        <span className="relative z-10">Shop Now</span>
-                        <FiArrowRight className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <h2>Shop Now</h2>
+                        <FiArrowRight className="relative z-10 transition-transform duration-300 " />
                       </Button>
                     </motion.div>
                   </div>

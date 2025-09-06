@@ -90,13 +90,23 @@ export default function SlidingBrands({ brands }: SlidingBrandsProps) {
               {/* Explore button - always visible on small screens, slides up on hover for larger screens */}
               <div className="mt-4 md:absolute md:bottom-6 md:left-4 md:right-0 md:mt-0">
                 <div
-                  className="w-fit flex items-center justify-start py-2 px-4 bg-white rounded-4xl 
-                  md:transform md:translate-y-full md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 
-                  transition-all duration-500 ease-out"
+                  className="w-fit flex items-center justify-start py-3 px-6 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-white/20
+    md:transform md:translate-y-full md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 
+    transition-all duration-500 ease-out hover:shadow-xl hover:bg-white hover:scale-105"
                 >
-                  <span className="inline-flex items-center text-[#0d0d7a] font-medium group-hover:underline">
-                    Explore {brand.name}
-                    <IoIosArrowForward size={20} />
+                  <span className="relative inline-flex items-center text-[#0d0d7a] font-semibold group-hover:text-[#0a0a65] transition-all duration-300 ease-out">
+                    <span className="relative">
+                      Explore {brand.name}
+                      {/* Custom underline with offset */}
+                      <span
+                        className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-[#0d0d7a] to-[#0a0a65] 
+                       transform translate-y-1.5 group-hover:w-full transition-all duration-300 ease-out"
+                      ></span>
+                    </span>
+                    <IoIosArrowForward
+                      size={18}
+                      className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300 ease-out"
+                    />
                   </span>
                 </div>
               </div>

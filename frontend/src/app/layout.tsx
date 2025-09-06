@@ -10,6 +10,7 @@ import Loader from "@/components/loader";
 import { metadata as siteMetadata } from "./metadata";
 import PromoPopup from "@/components/PromoPopup";
 import { Toaster } from "react-hot-toast";
+import ChatWidget from "@/components/ChatWidget";
 
 const poetsen = Poetsen_One({
   subsets: ["latin"],
@@ -48,7 +49,9 @@ export default function RootLayout({
             <Navbar />
             <main className="min-h-[calc(100vh-64px)] relative">
               {children}
+              <ChatWidget />
             </main>
+
             <ClientFooter />
           </Suspense>
           <Toaster position="bottom-right" />

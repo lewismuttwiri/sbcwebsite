@@ -15,10 +15,7 @@ export async function GET() {
       });
 
       if (!response.ok) {
-        console.error(
-          `Error fetching applications from ${nextUrl}:`,
-          response.statusText
-        );
+        console.error("Failed to fetch applications");
         break;
       }
 

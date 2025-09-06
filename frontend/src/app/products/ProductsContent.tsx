@@ -10,31 +10,25 @@ export default function ProductsContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // State for products, brands, and loading
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [brands, setBrands] = useState<{ id: string; name: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Get filter from URL or use default
   const brandFromUrl = searchParams.get("brand");
-  const searchQuery = searchParams.get("q") || "";
 
-  // State for filters
   const [selectedBrand, setSelectedBrand] = useState<string | null>(
     brandFromUrl
   );
-  const [searchTerm, setSearchTerm] = useState(searchQuery);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isClient, setIsClient] = useState(false);
 
-  // Fetch products and brands on component mount and when filters change
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
 
-        // Fetch products
         const productsResponse = await fetch("/api/products");
         if (!productsResponse.ok) {
           throw new Error("Failed to fetch products");
@@ -43,7 +37,6 @@ export default function ProductsContent() {
         console.log("Products fetched:", products);
         setProducts(products);
 
-        // Fetch brands if not already loaded
         if (brands.length === 0) {
           const brandsResponse = await fetch("/api/brands");
           if (!brandsResponse.ok) {
@@ -54,7 +47,6 @@ export default function ProductsContent() {
           console.log("Brands fetched:", brandsData);
         }
 
-        // Apply search filter if search term exists
         let filteredProducts = products;
         if (searchTerm) {
           const searchTermLower = searchTerm.toLowerCase().trim();
@@ -70,7 +62,6 @@ export default function ProductsContent() {
           });
         }
 
-        // Filter by brand if selected
         if (selectedBrand) {
           filteredProducts = filteredProducts.filter(
             (product: Product) => product.brand === selectedBrand
@@ -91,34 +82,25 @@ export default function ProductsContent() {
     fetchData();
   }, [selectedBrand, searchTerm]);
 
-  // filteredProducts state is now managed by the effect
-
-  // Update URL when filters change
   useEffect(() => {
     const params = new URLSearchParams();
     if (selectedBrand) params.set("brand", selectedBrand);
-    if (searchTerm) params.set("q", searchTerm);
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [selectedBrand, searchTerm, pathname, router]);
+  }, [selectedBrand, pathname, router]);
 
-  // Set isClient to true after component mounts (to handle SSR)
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  // Handle search input change with debounce
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  // Reset all filters
   const resetFilters = () => {
     setSelectedBrand(null);
     setSearchTerm("");
   };
 
-  // Show loading state
   if (isLoading) {
     return (
       <div className="mx-auto px-4 py-8">
@@ -135,7 +117,6 @@ export default function ProductsContent() {
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <div className="container mx-auto px-4 py-8">

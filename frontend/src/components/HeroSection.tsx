@@ -74,7 +74,6 @@ export default function HeroSection() {
 
   // Handle individual video loading
   const handleVideoLoad = (videoSrc: string) => {
-    console.log("Video loaded:", videoSrc); // Debug log
     setLoadedVideos((prev) => new Set([...prev, videoSrc]));
   };
 

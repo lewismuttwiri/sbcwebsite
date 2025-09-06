@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
@@ -18,6 +18,8 @@ import { getAllNews } from "@/utils/news";
 import SlidingBrands from "@/components/SlidingBrands";
 import FAQAccordion from "@/components/FAQAccordion";
 import { useRouter } from "next/navigation";
+import { FiArrowRight } from "react-icons/fi";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 const factoryImages = [
   "/images/factory/factory-1.jpeg",
@@ -61,17 +63,13 @@ export default function Home() {
                 (a, b) => Number(b.id) - Number(a.id)
               );
               setNewsArticles(sortedNews);
-              console.log("sortedNews", sortedNews);
+
               setIsLoading(false);
             })
             .catch((error) => {
-              // setError(error.message);
               setIsLoading(false);
             }),
         ]);
-
-        console.log("Products loaded:", products.length);
-        console.log("News loaded:", newsArticles.length);
 
         setFilteredProducts(products);
       } catch (error) {
@@ -138,7 +136,7 @@ export default function Home() {
 
     // Start with a small delay to ensure everything is ready
     const startTimer = setTimeout(() => {
-      console.log("Starting optimized auto-scroll animation");
+      // console.log("Starting optimized auto-scroll animation");
       // Initialize scroll position
       scrollContainer.scrollLeft = 0;
       scrollPosition = 0;
@@ -203,9 +201,7 @@ export default function Home() {
               <ProductCard
                 id={product.id}
                 name={product.name}
-                // description={product.description}
                 images={product.images}
-                // quantity={product.quantity}
                 slug={product.slug}
                 brandName={product.brandName}
                 price={product.price}
@@ -416,26 +412,13 @@ export default function Home() {
                 maintain the highest standards of quality and innovation,
                 ensuring every bottle meets international standards.
               </p>
-              <button
+              <Button
                 onClick={() => (window.location.href = "/about")}
-                className="mt-4 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#0E0E96] hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center"
               >
                 Discover Our Story
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-5 h-5 ml-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </button>
+                <IoIosArrowRoundForward size={24} className="ml-2" />
+              </Button>
             </div>
             <div className="rounded-xl overflow-hidden shadow-2xl">
               <ImageSlider images={factoryImages} interval={4000} />
@@ -511,14 +494,6 @@ export default function Home() {
                     Apply Now
                   </Button>
                 </Link>
-                {/* <Link href="/distributors" className="w-full sm:w-auto">
-                  <Button
-                    variant="secondary"
-                    className="w-full sm:w-auto px-8 py-3 text-lg font-medium border-blue-600 text-blue-600 hover:bg-blue-50"
-                  >
-                    Learn More
-                  </Button>
-                </Link> */}
               </div>
             </div>
           </div>
@@ -526,7 +501,6 @@ export default function Home() {
       </section>
 
       <section className="relative py-32 overflow-hidden bg-[#0E0E96] md:bg-transparent">
-        {/* Background image - only visible on medium+ screens */}
         <div
           className="hidden md:block fixed inset-0 -z-10"
           style={{
@@ -535,11 +509,8 @@ export default function Home() {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
-        >
-          {/* No overlay div here - just the image */}
-        </div>
+        ></div>
 
-        {/* Content */}
         <Container className="relative z-10 px-4">
           <div className="w-full flex justify-center ">
             <div className="text-center mb-16 bg-[#0E0E96] w-fit py-2 px-4">
@@ -565,7 +536,6 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Latest News Section */}
       <section className="py-20 bg-white">
         <Container className="px-4">
           <div className="text-center mb-16">

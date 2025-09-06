@@ -12,13 +12,13 @@ type ButtonProps = (
 };
 
 const baseStyles =
-  "inline-block font-semibold py-3 px-8 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2";
+  "inline-block font-semibold py-3 px-8 rounded-full transition-colors duration-400";
 
 const variants: any = {
   primary:
-    "bg-[#0E0E96] hover:bg-white text-white hover:text-[#0E0E96] hover:border-gray-500 hover:border-1",
+    "bg-[#0E0E96] hover:bg-white text-white hover:text-[#0E0E96] hover:border-gray-500 hover:ring-2 hover:ring-gray-500 transition-all duration-400",
   secondary:
-    "bg-transparent hover:bg-[#white] text-[#0E0E96] hover:border-gray-500 border-1 border-[#0E0E96]",
+    "bg-transparent hover:bg-[#white] text-[#0E0E96] hover:border-gray-500 border-[#0E0E96] hover:ring-2 hover:ring-gray-500 transition-all duration-400",
 };
 
 export default function Button(props: ButtonProps) {
