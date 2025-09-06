@@ -51,3 +51,13 @@ backend/node_modules/
 backend/dist/
 backend/build/
 backend/.env
+backend/db.sqlite3
+backend/db.json
+backend/venv
+backend/venv/Scripts
+backend/venv/Scripts/activate
+backend/venv/Scripts/activate.ps1
+
+
+#database
+sbcwebsite.sql
