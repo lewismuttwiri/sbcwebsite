@@ -82,9 +82,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         console.log("Chat room not found or expired");
         setRoomId(null);
         setChatState("welcome");
-        const url = new URL(window.location.href);
-        url.searchParams.delete("chat_room");
-        window.history.replaceState({}, "", url.toString());
+        if (typeof window !== 'undefined') {
+          const url = new URL(window.location.href);
+          url.searchParams.delete("chat_room");
+          window.history.replaceState({}, "", url.toString());
+        }
       } else {
         console.error("Failed to load chat history:", response.status);
       }
@@ -95,17 +97,17 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     }
   };
 
-  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  const apiUrl = process.env.NEXT_PUBLIC_HOST_URL;
-  const socketUrl = React.useMemo(() => {
-    if (!roomId) return null;
-    const host =
-      process.env.NODE_ENV === "production"
-        ? window.location.host
-        : "127.0.0.1:8000";
-    const url = new URL(`${protocol}//${host}/ws/chat/${roomId}/`);
-    console.log("Constructed WebSocket URL:", url.toString());
-    return url.toString();
+  const [socketUrl, setSocketUrl] = React.useState<string>('');
+
+  // Set up WebSocket URL after component mounts
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const apiUrl = process.env.NEXT_PUBLIC_HOST_URL || window.location.host;
+      setSocketUrl(
+        `${protocol}//${apiUrl}/api/ws/chat${roomId ? `?room_id=${roomId}` : ''}`
+      );
+    }
   }, [roomId]);
 
   const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket(

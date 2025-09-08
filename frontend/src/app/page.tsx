@@ -18,7 +18,6 @@ import { getAllNews } from "@/utils/news";
 import SlidingBrands from "@/components/SlidingBrands";
 import FAQAccordion from "@/components/FAQAccordion";
 import { useRouter } from "next/navigation";
-import { FiArrowRight } from "react-icons/fi";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
 const factoryImages = [
