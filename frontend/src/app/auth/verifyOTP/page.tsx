@@ -31,12 +31,14 @@ export default function VerifyEmailPage() {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem("reset-password-email");
-    if (savedEmail) {
-      setEmail(savedEmail);
-    } else {
-      router.push("/auth/signup");
-      toast.error("No verification email fo und. Please sign up first.");
+    if (typeof window !== "undefined") {
+      const savedEmail = localStorage.getItem("reset-password-email");
+      if (savedEmail) {
+        setEmail(savedEmail);
+      } else {
+        router.push("/auth/signup");
+        toast.error("No verification email found. Please sign up first.");
+      }
     }
   }, [router]);
 
