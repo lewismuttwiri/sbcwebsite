@@ -95,9 +95,15 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     }
   };
 
+  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+  const apiUrl = process.env.NEXT_PUBLIC_HOST_URL;
   const socketUrl = React.useMemo(() => {
     if (!roomId) return null;
-    const url = new URL(`ws://127.0.0.1:8000/ws/chat/${roomId}/`);
+    const host =
+      process.env.NODE_ENV === "production"
+        ? window.location.host
+        : "127.0.0.1:8000";
+    const url = new URL(`${protocol}//${host}/ws/chat/${roomId}/`);
     console.log("Constructed WebSocket URL:", url.toString());
     return url.toString();
   }, [roomId]);

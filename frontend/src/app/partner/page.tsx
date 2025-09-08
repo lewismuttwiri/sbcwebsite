@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Container from "@/components/layout/Container";
 import Link from "next/link";
 
 export default function PartnerPage() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
       <section className="py-20 bg-white">
         <Container className="px-4">
           <div className="text-center mb-16">

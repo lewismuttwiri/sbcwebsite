@@ -8,20 +8,6 @@ import Button from "@/components/Button";
 export default function DistributorPage() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      {/* <section className="py-20 bg-white">
-        <Container className="px-4">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Become a Distributor
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Expand your business with Kenya's leading beverage company
-            </p>
-          </div>
-        </Container>
-      </section> */}
-
       {/* Benefits Section */}
       <section className="py-12 bg-gray-50">
         <Container className="px-4">
@@ -184,24 +170,7 @@ export default function DistributorPage() {
                     Minimum capital requirement
                   </span>
                 </li>
-                {/* <li className="flex items-center">
-                  <svg
-                    className="w-5 h-5 text-green-600 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span className="text-gray-700">
-                    Proven distribution network
-                  </span>
-                </li> */}
+
                 <li className="flex items-center">
                   <svg
                     className="w-5 h-5 text-green-600 mr-2"
