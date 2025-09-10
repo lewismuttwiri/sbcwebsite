@@ -99,14 +99,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
   const [socketUrl, setSocketUrl] = React.useState<string>("");
 
-  // Set up WebSocket URL after component mounts
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
       const apiUrl = process.env.NEXT_PUBLIC_HOST_URL || window.location.host;
-      setSocketUrl(
-        `${protocol}//${apiUrl}/ws/chat${roomId ? `?room_id=${roomId}` : ""}`
-      );
+      setSocketUrl(`${protocol}//${apiUrl}/ws/chat/${roomId}/`);
     }
   }, [roomId]);
 
@@ -460,9 +457,6 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
       {/* Chat Header with Refresh Button */}
       {roomId && (
         <div className="px-4 py-2 bg-gray-50 border-b flex justify-between items-center">
-          <span className="text-xs text-gray-500">
-            Room ID: {roomId.slice(-8)}
-          </span>
           <button
             onClick={handleRefreshMessages}
             disabled={isLoadingMessages}
