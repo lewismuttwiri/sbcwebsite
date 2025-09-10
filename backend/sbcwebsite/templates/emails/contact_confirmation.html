@@ -1,22 +1,18 @@
-{% extends "emails/base_email.html" %}
-
-{% block email_title %}Thank you for contacting SBC Kenya{% endblock %}
-
-{% block header_class %}success{% endblock %}
-
-{% block header_title %}Thank You! {% endblock %}
-
-{% block header_subtitle %}
-<p class="header-subtitle">We've received your message and we're excited to help!</p>
-{% endblock %}
-
-{% block content %}
+{% extends "emails/base_email.html" %} {% block email_title %}Thank you for
+contacting SBC Kenya{% endblock %} {% block header_class %}success{% endblock %}
+{% block header_title %}Thank You! {% endblock %} {% block header_subtitle %}
+<p class="header-subtitle">
+  We've received your message and we're excited to help!
+</p>
+{% endblock %} {% block content %}
 <h2 class="greeting">Hello <span class="highlight-text">{{ name }}</span>,</h2>
 
-<p>Thank you for reaching out to <strong>SBC Kenya</strong>! We're thrilled that you've chosen to connect with us. Your
-    message has been successfully received and our dedicated team is already preparing to assist you.</p>
+<p>
+  Thank you for reaching out to <strong>SBC Kenya</strong>! We're thrilled that
+  you've chosen to connect with us. Your message has been successfully received
+  and our dedicated team is already preparing to assist you.
+</p>
 
-{% endblock %}
-{% block action_section %}
+{% endblock %} {% block action_section %}
 <p><a href="https://sbckenya.com/products">Continue Shopping</a></p>
 {% endblock %}

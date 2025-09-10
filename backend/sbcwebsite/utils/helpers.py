@@ -1130,7 +1130,7 @@ class Helper:
             site_url = getattr(settings, 'SITE_URL', 'https://sbckenya.com')
 
             # ✅ Generate join link for receptionist
-            join_link = f"{site_url}/chat/{room.id}"
+            join_link = f"https://sbckenya.com/chat/{room.id}"
 
             subject = f"New Chat Room Created"
             context = {

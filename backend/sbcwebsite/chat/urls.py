@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'chat'  # This is the app's namespace
+app_name = 'chat' 
 
 urlpatterns = [
     path('api/create-room/', views.create_chat_room, name='create_chat_room'),
