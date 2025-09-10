@@ -82,7 +82,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         console.log("Chat room not found or expired");
         setRoomId(null);
         setChatState("welcome");
-        if (typeof window !== 'undefined') {
+        if (typeof window !== "undefined") {
           const url = new URL(window.location.href);
           url.searchParams.delete("chat_room");
           window.history.replaceState({}, "", url.toString());
@@ -97,15 +97,15 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     }
   };
 
-  const [socketUrl, setSocketUrl] = React.useState<string>('');
+  const [socketUrl, setSocketUrl] = React.useState<string>("");
 
   // Set up WebSocket URL after component mounts
   React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    if (typeof window !== "undefined") {
+      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
       const apiUrl = process.env.NEXT_PUBLIC_HOST_URL || window.location.host;
       setSocketUrl(
-        `${protocol}//${apiUrl}/api/ws/chat${roomId ? `?room_id=${roomId}` : ''}`
+        `${protocol}//${apiUrl}/ws/chat${roomId ? `?room_id=${roomId}` : ""}`
       );
     }
   }, [roomId]);
