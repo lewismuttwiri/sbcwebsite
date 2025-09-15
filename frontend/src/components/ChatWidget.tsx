@@ -633,9 +633,9 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
               className="bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden"
               style={{
                 width: isMinimized ? "350px" : "450px",
-                height: isMinimized ? "" : "650px",
+                height: isMinimized ? "" : "550px",
                 maxWidth: "450px",
-                maxHeight: "650px",
+                maxHeight: "550px",
                 minWidth: "350px",
                 minHeight: "56px",
               }}
