@@ -633,10 +633,10 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             </div>
           </div>
 
-          <div className="hidden md:block fixed bottom-4 right-4 z-[9999] ">
+          <div className="hidden md:block fixed bottom-6 right-4 z-[9999] ">
             <div
               className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
-                isMinimized ? "h-14 w-80" : "lg:h-[600px] lg:w-[28rem]"
+                isMinimized ? "h-14 w-80" : "lg-h-50 lg:w-90"
               }`}
             >
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">

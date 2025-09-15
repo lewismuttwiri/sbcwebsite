@@ -228,7 +228,7 @@ const FAQAccordion = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="mx-auto">
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div
@@ -254,14 +254,14 @@ const FAQAccordion = () => {
             </button>
             <div
               id={`faq-${index}`}
-              className={`px-6 pb-6 pt-0 text-gray-600 transition-all duration-300 overflow-hidden ${
+              className={`px-6 pb pt-0 text-gray-600 transition-all duration-300 overflow-hidden ${
                 openIndex === index
                   ? "max-h-96 opacity-100"
                   : "max-h-0 opacity-0"
               }`}
               aria-hidden={openIndex !== index}
             >
-              <div className="pt-2">{faq.answer}</div>
+              <div className="pt-2 pb-4">{faq.answer}</div>
             </div>
           </div>
         ))}
