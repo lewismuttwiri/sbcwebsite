@@ -57,6 +57,7 @@ backend/venv
 backend/venv/Scripts
 backend/venv/Scripts/activate
 backend/venv/Scripts/activate.ps1
+backend/sbcwebsite/logs/
 
 
 #database
@@ -68,3 +69,5 @@ cert.pem
 .crt
 .key
 .log
+backend/sbcwebsite/cert.crt
+backend/sbcwebsite/cert.key
