@@ -1,4 +1,3 @@
-// components/ChatWidget.tsx
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -15,6 +14,7 @@ import { RiLoader3Line } from "react-icons/ri";
 import { AiOutlineSend } from "react-icons/ai";
 import { FiMinimize2, FiX } from "react-icons/fi";
 import Image from "next/image";
+import Container from "./layout/Container";
 
 export interface Message {
   sender_type: "customer" | "receptionist" | "system";
@@ -582,26 +582,26 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   }
 
   return (
-    <>
-      {/* Chat Button - only shows when closed */}
+    <Container>
       {chatState === "closed" && (
-        <div className="fixed bottom-4 right-4 z-[9998]">
-          <button
-            onClick={() => handleWelcomeScreen()}
-            className="bg-gradient-to-r from-[#0E0E96] to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
-            aria-label="Open chat"
-          >
-            <CiChat2
-              className="group-hover:scale-110 transition-transform"
-              size={24}
-            />
-          </button>
+        <div className="relative">
+          <div className="fixed bottom-4 right-4 z-[9998]">
+            <button
+              onClick={() => handleWelcomeScreen()}
+              className="bg-gradient-to-r from-[#0E0E96] to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 group"
+              aria-label="Open chat"
+            >
+              <CiChat2
+                className="group-hover:scale-110 transition-transform"
+                size={24}
+              />
+            </button>
+          </div>
         </div>
       )}
 
       {chatState !== "closed" && (
         <>
-          {/* Mobile Full Screen Overlay */}
           <div className="md:hidden fixed inset-0 z-[9999] bg-white">
             <div className="flex flex-col h-[90vh]">
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
@@ -633,27 +633,15 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             </div>
           </div>
 
-          {/* Desktop Floating Widget */}
-          <div className="hidden md:block fixed bottom-4 right-4 z-[9999]">
+          <div className="hidden md:block fixed bottom-4 right-4 z-[9999] ">
             <div
               className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
-                isMinimized
-                  ? "h-14 w-80"
-                  : "h-[576px] w-[26rem] lg:h-[576px] lg:w-[28rem]"
+                isMinimized ? "h-14 w-80" : "lg:h-[600px] lg:w-[28rem]"
               }`}
             >
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <div>
-                  <h3 className="font-semibold text-lg">
-                    Customer Support full
-                  </h3>
-                  {!isMinimized && (
-                    <p className="text-blue-100 text-sm opacity-90">
-                      {readyState === ReadyState.OPEN
-                        ? "Online"
-                        : "Connecting..."}
-                    </p>
-                  )}
+                  <h3 className="font-semibold text-lg">Customer Support</h3>
                 </div>
                 <div className="flex space-x-2">
                   <button
@@ -673,7 +661,6 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 </div>
               </div>
 
-              {/* Desktop Content */}
               {!isMinimized && (
                 <div className="flex-1 overflow-hidden">
                   {chatState === "welcome" && renderWelcomeScreen()}
@@ -686,7 +673,6 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         </>
       )}
 
-      {/* Close Chat Confirmation Modal with highest z-index */}
       {showCloseConfirmation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[10001]">
           <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full shadow-2xl">
@@ -724,7 +710,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
           </div>
         </div>
       )}
-    </>
+    </Container>
   );
 };
 

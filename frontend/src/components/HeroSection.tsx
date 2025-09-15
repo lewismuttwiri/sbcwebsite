@@ -72,12 +72,10 @@ export default function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Handle individual video loading
   const handleVideoLoad = (videoSrc: string) => {
     setLoadedVideos((prev) => new Set([...prev, videoSrc]));
   };
 
-  // Handle video errors
   const handleVideoError = (videoSrc: string) => {
     console.error("Video failed to load:", videoSrc);
   };
@@ -103,7 +101,6 @@ export default function HeroSection() {
     >
       <div className="absolute inset-0 bg-gradient-to-r from-black/50  via-black/30 to-transparent z-10 pointer-events-none" />
 
-      {/* Modern loading animation - only show if current video isn't loaded */}
       {!loadedVideos.has(videos[currentIndex]?.src) && (
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 flex items-center justify-center">
           <div className="relative w-24 h-24">
@@ -120,8 +117,6 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent m" /> */}
-      {/* <div className="absolute inset-0" /> */}
       <div className="absolute w-full h-full">
         {videos.map((video, index) => (
           <video

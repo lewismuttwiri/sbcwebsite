@@ -11,6 +11,7 @@ import { metadata as siteMetadata } from "./metadata";
 import PromoPopup from "@/components/PromoPopup";
 import { Toaster } from "react-hot-toast";
 import ChatWidget from "@/components/ChatWidget";
+import Container from "@/components/layout/Container";
 
 const poetsen = Poetsen_One({
   subsets: ["latin"],
@@ -49,7 +50,9 @@ export default function RootLayout({
             <Navbar />
             <main className="min-h-[calc(100vh-64px)] relative">
               {children}
-              <ChatWidget />
+              <Container className="relative">
+                <ChatWidget />
+              </Container>
             </main>
 
             <ClientFooter />
