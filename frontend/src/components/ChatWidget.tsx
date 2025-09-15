@@ -607,11 +607,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <div>
                   <h3 className="font-semibold text-lg">Customer Support</h3>
-                  <p className="text-blue-100 text-sm opacity-90">
-                    {readyState === ReadyState.OPEN
-                      ? "Online"
-                      : "Connecting..."}
-                  </p>
+                  <p className="text-blue-100 text-sm opacity-90"></p>
                 </div>
                 <div className="flex space-x-2">
                   <button
@@ -624,7 +620,6 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 </div>
               </div>
 
-              {/* Content */}
               <div className="flex-1 overflow-hidden">
                 {chatState === "welcome" && renderWelcomeScreen()}
                 {chatState === "form" && renderCustomerForm()}
@@ -635,14 +630,18 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
           <div className="hidden md:block fixed bottom-6 right-4 z-[9999] ">
             <div
-              className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
-                isMinimized ? "" : "lg-h-50 lg:w-100"
-              }`}
+              className="bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden"
+              style={{
+                width: isMinimized ? "350px" : "450px",
+                height: isMinimized ? "" : "650px",
+                maxWidth: "450px",
+                maxHeight: "650px",
+                minWidth: "350px",
+                minHeight: "56px",
+              }}
             >
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 space-x-4  px-5 flex justify-between items-center shadow-lg">
-                {/* <div> */}
                 <h3 className="font-semibold text-lg">Customer Support</h3>
-                {/* </div> */}
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setIsMinimized(!isMinimized)}
