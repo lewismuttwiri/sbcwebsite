@@ -143,7 +143,12 @@ export default function ChatDashboard() {
       );
     }
 
-    setFilteredTickets(filtered);
+    // Sort tickets by created_at in descending order (newest first)
+    const sortedTickets = [...filtered].sort((a, b) => 
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+
+    setFilteredTickets(sortedTickets);
   }, [searchQuery, activeTab, tickets]);
 
   const getStatusDisplay = (isActive: boolean) => {
@@ -333,35 +338,37 @@ export default function ChatDashboard() {
               className="w-full"
             >
               <div className="border-b bg-gradient-to-r from-slate-50/50 to-white/50">
-                <TabsList className="w-full justify-start h-14 bg-transparent p-1">
-                  <TabsTrigger
-                    value="all"
-                    className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-6 py-3 font-medium"
-                  >
-                    All Conversations
-                    <Badge variant="secondary" className="ml-2 bg-slate-100">
-                      {tickets.length}
-                    </Badge>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="active"
-                    className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-6 py-3 font-medium"
-                  >
-                    Active
-                    <Badge className="ml-2 bg-emerald-100 text-emerald-800 hover:bg-emerald-200">
-                      {activeTickets.length}
-                    </Badge>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="closed"
-                    className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-6 py-3 font-medium"
-                  >
-                    Closed
-                    <Badge variant="outline" className="ml-2 bg-slate-100">
-                      {closedTickets.length}
-                    </Badge>
-                  </TabsTrigger>
-                </TabsList>
+                <div className="overflow-x-auto pb-1">
+                  <TabsList className="w-full justify-start h-auto min-h-[56px] bg-transparent p-1 flex-nowrap">
+                    <TabsTrigger
+                      value="all"
+                      className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-3 sm:px-4 py-2 text-sm sm:text-base font-medium whitespace-nowrap"
+                    >
+                      All
+                      <Badge variant="secondary" className="ml-2 bg-slate-100 text-xs sm:text-sm">
+                        {tickets.length}
+                      </Badge>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="active"
+                      className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-3 sm:px-4 py-2 text-sm sm:text-base font-medium whitespace-nowrap"
+                    >
+                      Active
+                      <Badge className="ml-2 bg-emerald-100 text-emerald-800 hover:bg-emerald-200 text-xs sm:text-sm">
+                        {activeTickets.length}
+                      </Badge>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="closed"
+                      className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-3 sm:px-4 py-2 text-sm sm:text-base font-medium whitespace-nowrap"
+                    >
+                      Closed
+                      <Badge variant="outline" className="ml-2 bg-slate-100 text-xs sm:text-sm">
+                        {closedTickets.length}
+                      </Badge>
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
               </div>
 
               <TabsContent value={activeTab} className="p-0 mt-0">
@@ -393,18 +400,28 @@ export default function ChatDashboard() {
                               <User className="h-6 w-6 text-slate-600" />
                             </div>
                             <div className="flex-1 min-w-0 space-y-3">
-                              <div className="flex items-center gap-3 flex-wrap">
-                                <h3 className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors text-lg">
-                                  {ticket.customer_name}
-                                </h3>
+                              <div className="flex items-center justify-between w-full">
+                              <h3 className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors text-lg">
+                                {ticket.customer_name}
+                              </h3>
+                              <div className="flex items-center gap-2">
                                 {getStatusDisplay(ticket.is_active)}
-                                {ticket.unreadCount &&
-                                  ticket.unreadCount > 0 && (
-                                    <Badge className="bg-red-50 text-red-700 border-red-200 hover:bg-red-100 font-medium">
-                                      {ticket.unreadCount} new
-                                    </Badge>
-                                  )}
+                                {ticket.unreadCount && ticket.unreadCount > 0 && (
+                                  <Badge className="bg-red-50 text-red-700 border-red-200 hover:bg-red-100 font-medium">
+                                    {ticket.unreadCount} new
+                                  </Badge>
+                                )}
                               </div>
+                            </div>
+                            <div className="flex items-center text-[10px] font-medium text-slate-500">
+                              <Clock className="h-2.5 w-2.5 mr-1 flex-shrink-0" />
+                              <span>
+                                {format(
+                                  new Date(ticket.created_at),
+                                  "MMM d, h:mma"
+                                ).toLowerCase()}
+                              </span>
+                            </div>
                               <div className="flex items-center gap-2">
                                 <Mail className="h-4 w-4 text-slate-400" />
                                 <span className="text-sm text-slate-600">
@@ -417,13 +434,6 @@ export default function ChatDashboard() {
                             </div>
                           </div>
                           <div className="flex flex-col items-end space-y-3 flex-shrink-0 ml-6">
-                            <div className="flex items-center text-xs font-medium text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full">
-                              <Clock className="h-3 w-3 mr-1.5" />
-                              {format(
-                                new Date(ticket.created_at),
-                                "MMM d, h:mm a"
-                              )}
-                            </div>
                             <div className="flex items-center gap-2">
                               <Button
                                 variant="ghost"
