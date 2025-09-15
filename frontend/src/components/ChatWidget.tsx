@@ -304,7 +304,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   };
 
   const renderWelcomeScreen = () => (
-    <div className="flex flex-col items-center justify-center h-full p-6 text-center">
+    <div className="flex flex-col items-center justify-center p-6 text-center relative">
       <div className="mb-6">
         <div className="w-16 h-16 bg-[#0E0E96] rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
           <Image
@@ -582,7 +582,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   }
 
   return (
-    <Container>
+    <div>
       {chatState === "closed" && (
         <div className="relative">
           <div className="fixed bottom-4 right-4 z-[9998]">
@@ -628,7 +628,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             </div>
           </div>
 
-          <div className="hidden md:block fixed bottom-6 right-4 z-[9999] ">
+          <div className="hidden md:block fixed bottom-4 right-4 z-[9999] ">
             <div
               className="bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden"
               style={{
@@ -640,7 +640,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 minHeight: "56px",
               }}
             >
-              <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 space-x-4  px-5 flex justify-between items-center shadow-lg">
+              <div className="relative bg-[#0E0E96] text-white py-4 space-x-4  px-5 flex justify-between items-center shadow-lg">
                 <h3 className="font-semibold text-lg">Customer Support</h3>
                 <div className="flex space-x-2">
                   <button
@@ -659,9 +659,14 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   </button>
                 </div>
               </div>
-
               {!isMinimized && (
-                <div className="flex-1 overflow-hidden">
+                <div
+                  className="overflow-hidden bg-white"
+                  style={{
+                    height: "calc(100% - 72px)",
+                    position: "relative",
+                  }}
+                >
                   {chatState === "welcome" && renderWelcomeScreen()}
                   {chatState === "form" && renderCustomerForm()}
                   {chatState === "chat" && renderChat()}
@@ -709,7 +714,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
           </div>
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 
