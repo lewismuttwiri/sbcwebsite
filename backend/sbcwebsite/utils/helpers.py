@@ -359,6 +359,7 @@ class Helper:
         except Exception as e:
             print(f"Error sending order confirmation email: {str(e)}")
             return 0
+
     
     def send_order_notification_email(self, order):
         """Send order notification email to admin"""
