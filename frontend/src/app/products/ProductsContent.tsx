@@ -34,7 +34,6 @@ export default function ProductsContent() {
           throw new Error("Failed to fetch products");
         }
         const products = await productsResponse.json();
-        console.log("Products fetched:", products);
         setProducts(products);
 
         if (brands.length === 0) {
@@ -44,13 +43,11 @@ export default function ProductsContent() {
           }
           const brandsData = await brandsResponse.json();
           setBrands(brandsData);
-          console.log("Brands fetched:", brandsData);
         }
 
         let filteredProducts = products;
         if (searchTerm) {
           const searchTermLower = searchTerm.toLowerCase().trim();
-          console.log("Search term:", searchTermLower);
           filteredProducts = products.filter((product: Product) => {
             const nameMatch = product.name
               .toLowerCase()
@@ -68,11 +65,9 @@ export default function ProductsContent() {
           );
         }
 
-        console.log("Products after all filters:", filteredProducts);
         setFilteredProducts(filteredProducts);
         setError(null);
       } catch (err) {
-        console.error("Error fetching data:", err);
         setError("Failed to load products. Please try again later.");
       } finally {
         setIsLoading(false);

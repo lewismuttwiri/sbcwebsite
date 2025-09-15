@@ -61,3 +61,7 @@ backend/venv/Scripts/activate.ps1
 
 #database
 sbcwebsite.sql
+
+#cert
+*.pem
+cert.pem

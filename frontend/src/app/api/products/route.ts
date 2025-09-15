@@ -20,7 +20,6 @@ export async function GET(request: Request) {
     }
 
     const data = await response.json();
-    console.log("data", data);
 
     const nextResponse = NextResponse.json(data);
 
@@ -40,8 +39,6 @@ export async function GET(request: Request) {
 
     return nextResponse;
   } catch (error) {
-    console.error("Error fetching products:", error);
-
     const errorResponse = NextResponse.json(
       { error: "Failed to fetch products" },
       { status: 500 }

@@ -20,11 +20,9 @@ export async function GET() {
       throw new Error("Failed to fetch news");
     }
     const data = await response.json();
-    console.log("data", data.results);
 
     return NextResponse.json(data.results as NewsArticle[]);
   } catch (error) {
-    console.error("Error fetching news:", error);
     return NextResponse.json(
       { error: "Failed to fetch news" },
       { status: 500 }
