@@ -20,7 +20,7 @@ const FAQAccordion = () => {
     {
       question: "How can I become a stockist for PEPSI products?",
       answer: (
-        <div className="space-y-2">
+        <div className="space-y-">
           <p>
             We're always looking for passionate partners to distribute our
             products. To become a PEPSI stockist, please follow these steps:

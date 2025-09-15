@@ -105,7 +105,6 @@ const ChatFlowManager: React.FC<ChatFlowManagerProps> = ({
       const updatedMessages = [...messages];
       updatedMessages[updatedMessages.length - 1] = {
         ...lastMessage,
-        buttons,
       };
       setMessages(updatedMessages);
     }
@@ -137,7 +136,6 @@ const ChatFlowManager: React.FC<ChatFlowManagerProps> = ({
                   {msg.sender_name}
                 </div>
                 <div className="text-sm">{msg.content}</div>
-                {msg.buttons}
                 <div className="text-xs text-gray-500 mt-1">
                   {new Date(msg.timestamp).toLocaleTimeString([], {
                     hour: "2-digit",
