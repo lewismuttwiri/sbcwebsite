@@ -57,6 +57,10 @@ backend/venv
 backend/venv/Scripts
 backend/venv/Scripts/activate
 backend/venv/Scripts/activate.ps1
+backend/.venv
+backend/.venv/Scripts
+backend/.venv/Scripts/activate
+backend/.venv/Scripts/activate.ps1
 backend/sbcwebsite/logs/
 
 
@@ -71,3 +75,9 @@ cert.pem
 .log
 backend/sbcwebsite/cert.crt
 backend/sbcwebsite/cert.key
+
+
+# Python cache
+__pycache__/
+*.pyc
+
