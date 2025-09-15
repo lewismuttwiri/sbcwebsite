@@ -636,13 +636,13 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
           <div className="hidden md:block fixed bottom-6 right-4 z-[9999] ">
             <div
               className={`bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden ${
-                isMinimized ? "h-14 w-80" : "lg-h-50 lg:w-100"
+                isMinimized ? "" : "lg-h-50 lg:w-100"
               }`}
             >
-              <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
-                <div>
-                  <h3 className="font-semibold text-lg">Customer Support</h3>
-                </div>
+              <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 space-x-4  px-5 flex justify-between items-center shadow-lg">
+                {/* <div> */}
+                <h3 className="font-semibold text-lg">Customer Support</h3>
+                {/* </div> */}
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setIsMinimized(!isMinimized)}
