@@ -67,6 +67,11 @@ const Navbar = () => {
             href: "/orders",
             icon: <FiPackage className="mr-2" />,
           },
+          {
+            name: "Dashboard",
+            href: "/dashboard",
+            icon: <CiChat1 className="mr-2" />,
+          },
         ]
       : []),
     ...(isHR
