@@ -56,15 +56,19 @@ const Navbar = () => {
   const isProcurement = user?.entity?.user_role == 6;
   const isAdmin = user?.entity?.user_role == 1;
   const isReceptionist = user?.entity?.user_role == 7;
+  const isCustomer = user?.entity?.user_role == 4;
 
   // Account links for the dropdown menu
   const accountLinks = [
-    { name: "Orders", href: "/orders", icon: <FiPackage className="mr-2" /> },
-    {
-      name: "Dashboard",
-      href: "/dashboard",
-      icon: <FiLayout className="mr-2" />,
-    },
+    ...(isCustomer
+      ? [
+          {
+            name: "Orders",
+            href: "/orders",
+            icon: <FiPackage className="mr-2" />,
+          },
+        ]
+      : []),
     ...(isHR
       ? [
           {
