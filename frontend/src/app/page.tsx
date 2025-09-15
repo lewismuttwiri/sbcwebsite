@@ -17,6 +17,7 @@ import { getFeaturedProducts } from "@/utils/productUtils";
 import { getAllNews } from "@/utils/news";
 import SlidingBrands from "@/components/SlidingBrands";
 import FAQAccordion from "@/components/FAQAccordion";
+import WhatsAppModal from "@/components/WhatsAppModal";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
@@ -33,6 +34,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [newsArticles, setNewsArticles] = useState<any[]>([]);
   const [isPaused, setIsPaused] = useState(false);
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false);
 
   // Refs for auto-scroll functionality
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -584,6 +586,7 @@ export default function Home() {
               >
                 Contact Us
               </Button>
+
               <Button
                 href="/careers/jobs"
                 variant="secondary"
@@ -613,12 +616,29 @@ export default function Home() {
             <p className="text-gray-600 mb-4">
               Didn't find what you're looking for?
             </p>
-            <Link href="/contact">
-              <Button variant="primary">Contact Us</Button>
-            </Link>
+
+            <div className="flex space-x-4 justify-center items-center ">
+              <Link href="/contact">
+                <Button variant="primary">Contact Us</Button>
+              </Link>
+              <button
+                onClick={() => {
+                  setIsWhatsAppModalOpen(true);
+                }}
+                className="border border-gray-600 rounded-3xl bg-white text-black hover:transition-all hover:duration-300 hover:ease-in-out py-3 px-5 cursor-pointer"
+              >
+                Enquire on WhatsApp
+              </button>
+            </div>
           </div>
         </Container>
       </section>
+
+      {/* WhatsApp Modal */}
+      <WhatsAppModal
+        isOpen={isWhatsAppModalOpen}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+      />
     </main>
   );
 }

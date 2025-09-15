@@ -12,9 +12,10 @@ import {
 import { IoIosArrowRoundForward, IoIosRefresh } from "react-icons/io";
 import { RiLoader3Line } from "react-icons/ri";
 import { AiOutlineSend } from "react-icons/ai";
-import { FiMinimize2, FiX } from "react-icons/fi";
+import { FiMinimize2, FiMaximize2, FiX, FiMessageSquare, FiPower } from "react-icons/fi";
 import Image from "next/image";
-import Container from "./layout/Container";
+import { CiMenuKebab } from "react-icons/ci";
+
 
 export interface Message {
   sender_type: "customer" | "receptionist" | "system";
@@ -43,6 +44,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
   const [isClosingChat, setIsClosingChat] = useState(false);
   const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [customerInfo, setCustomerInfo] = useState({
     name: customerName,
     email: customerEmail,
@@ -50,56 +53,49 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const loadChatHistory = async (roomId: string) => {
-    setIsLoadingMessages(true);
+  const loadChatHistory = async (roomId: string): Promise<void> => {
     try {
-      const response = await fetch(`/api/chat/${roomId}`);
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Chat history loaded:", data.messages);
-
-        if (data.messages && Array.isArray(data.messages)) {
-          setMessages(
-            data.messages.map((message: any) => ({
-              sender_type: message.sender_type,
-              sender_name: message.sender_name,
-              content: message.message,
-              timestamp: message.timestamp,
-            }))
-          );
-        }
-
-        if (data.messages) {
-          setCustomerInfo((prev) => ({
-            ...prev,
-            name: data.messages.customer_name || prev.name,
-            email: data.messages.customer_email || prev.email,
-            enquiry: data.messages.enquiry || prev.enquiry,
-          }));
-        }
-      } else if (response.status === 404) {
-        console.log("Chat room not found or expired");
-        setRoomId(null);
-        setChatState("welcome");
-        if (typeof window !== "undefined") {
-          const url = new URL(window.location.href);
-          url.searchParams.delete("chat_room");
-          window.history.replaceState({}, "", url.toString());
-        }
-      } else {
-        console.error("Failed to load chat history:", response.status);
-      }
+      setIsLoadingMessages(true);
+      const response = await fetch(`/api/chat/history?roomId=${roomId}`);
+      if (!response.ok) throw new Error('Failed to load chat history');
+      const data = await response.json();
+      setMessages(data.messages || []);
     } catch (error) {
-      console.error("Error loading chat history:", error);
+      console.error('Error loading chat history:', error);
+      setMessages([]);
     } finally {
       setIsLoadingMessages(false);
     }
   };
 
   const [socketUrl, setSocketUrl] = React.useState<string>("");
+  const ws = useWebSocket(socketUrl, {
+    onOpen: () => {
+      console.log("WebSocket connection established");
+      if (roomId) {
+        loadChatHistory(roomId);
+      }
+    },
+    onMessage: (event: MessageEvent) => {
+      const data = JSON.parse(event.data);
+      if (data.type === 'message') {
+        setMessages(prev => [...prev, data.message]);
+      }
+    },
+    onError: (event: Event) => {
+      console.error("WebSocket error:", event);
+    },
+    onClose: (event: CloseEvent) => {
+      console.log("WebSocket connection closed:", event);
+    },
+    shouldReconnect: (closeEvent: CloseEvent) => {
+      return closeEvent.code !== 1000; // Don't reconnect if closed normally
+    },
+    reconnectAttempts: 5,
+    reconnectInterval: 3000,
+  });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
       const apiUrl = process.env.NEXT_PUBLIC_HOST_URL || window.location.host;
@@ -117,14 +113,14 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
       reconnectAttempts: 5,
       reconnectInterval: 3000,
       onOpen: (event: Event) => {
-        console.log("✅ WebSocket connection opened", {
+        console.log("WebSocket connection opened", {
           url: socketUrl,
           readyState: ReadyState.OPEN,
           timestamp: new Date().toISOString(),
         });
       },
       onError: (event: Event) => {
-        console.error("❌ WebSocket error:", {
+        console.error("WebSocket error:", {
           type: event.type,
           url: socketUrl,
           readyState: readyState,
@@ -132,7 +128,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         });
       },
       onClose: (event: CloseEvent) => {
-        console.log("🔌 WebSocket connection closed:", {
+        console.log("WebSocket connection closed:", {
           wasClean: event.wasClean,
           code: event.code,
           reason: event.reason,
@@ -147,7 +143,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
     try {
       const data = JSON.parse(lastMessage.data);
-      console.log("📨 WebSocket message received in chat widget:", data);
+      console.log("WebSocket message received in chat widget:", data);
 
       if (data.type === "chat_message" && data.message) {
         const newMessage: Message = {
@@ -295,6 +291,39 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
       loadChatHistory(roomId);
     }
   };
+
+  const handleMinimize = (): void => {
+    setIsMinimized((prev) => !prev);
+    setShowMenu(false);
+  };
+
+  const handleEndChat = (): void => {
+    setShowCloseConfirmation(true);
+    setShowMenu(false);
+  };
+
+  // const handleCloseChat = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  //   event.preventDefault();
+  //   setChatState("closed");
+  //   setShowMenu(false);
+  //   setShowCloseConfirmation(false);
+  //   setMessages([]);
+  //   setRoomId(null);
+  // };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const formatTime = (timestamp: string) => {
     return new Date(timestamp).toLocaleTimeString([], {
@@ -454,23 +483,23 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
   const renderChat = () => (
     <div className="flex flex-col h-full">
-      {/* Chat Header with Refresh Button */}
-      {roomId && (
-        <div className="px-4 py-2 bg-gray-50 border-b flex justify-between items-center">
-          <button
-            onClick={handleRefreshMessages}
-            disabled={isLoadingMessages}
-            className="text-xs text-blue-600 hover:text-blue-800 disabled:text-gray-400 flex items-center transition-colors"
-          >
-            <IoIosRefresh
-              className={`w-3 h-3 mr-1 ${
-                isLoadingMessages ? "animate-spin" : ""
-              }`}
-            />
-            {isLoadingMessages ? "Loading..." : "Refresh"}
-          </button>
-        </div>
-      )}
+      {/* Chat Header with Menu */}
+      <div className="px-4 py-2 bg-gray-50 border-b flex justify-between items-center">
+        <button
+          onClick={handleRefreshMessages}
+          disabled={isLoadingMessages}
+          className="text-xs text-blue-600 hover:text-blue-800 disabled:text-gray-400 flex items-center transition-colors"
+        >
+          <IoIosRefresh
+            className={`w-3 h-3 mr-1 ${
+              isLoadingMessages ? "animate-spin" : ""
+            }`}
+          />
+          {isLoadingMessages ? "Loading..." : "Refresh"}
+        </button>
+        
+        
+      </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
         {isLoadingMessages && messages.length === 0 && (
@@ -642,23 +671,53 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             >
               <div className="relative bg-[#0E0E96] text-white py-4 space-x-4  px-5 flex justify-between items-center shadow-lg">
                 <h3 className="font-semibold text-lg">Customer Support</h3>
-                <div className="flex space-x-2">
+                <div className="flex items-center space-x-2">
                   <button
                     onClick={() => setIsMinimized(!isMinimized)}
-                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
-                    aria-label="Minimize chat"
+                    className="hover:bg-blue-500/20 p-1.5 rounded-lg transition-colors"
+                    aria-label={isMinimized ? "Maximize chat" : "Minimize chat"}
                   >
-                    <FiMinimize2 className="w-5 h-5" />
+                    {isMinimized ? (
+                      <FiMaximize2 className="w-5 h-5 text-white" />
+                    ) : (
+                      <FiMinimize2 className="w-5 h-5 text-white" />
+                    )}
                   </button>
-                  <button
-                    onClick={() => setChatState("closed")}
-                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors"
-                    aria-label="Close chat"
-                  >
-                    <FiX className="w-5 h-5" />
-                  </button>
+                  <div className="relative" ref={menuRef}>
+                    <button
+                      onClick={() => setShowMenu(!showMenu)}
+                      className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors"
+                      aria-label="Chat options"
+                    >
+                      <CiMenuKebab size={20} color="white"/>
+                    </button>
+                    {showMenu && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                        <button
+                          onClick={handleMinimize}
+                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <FiMinimize2 className="w-4 h-4 mr-2" />
+                          Minimize
+                        </button>
+                        <button
+                          onClick={handleEndChat}
+                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <FiMessageSquare className="w-4 h-4 mr-2" />
+                          End Chat
+                        </button>
+                        <button
+                          onClick={handleCloseChat}
+                          className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                        >
+                          <FiPower className="w-4 h-4 mr-2" />
+                          Close Chat Widget
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
               {!isMinimized && (
                 <div
                   className="overflow-hidden bg-white"
@@ -672,6 +731,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   {chatState === "chat" && renderChat()}
                 </div>
               )}
+              </div>
             </div>
           </div>
         </>
