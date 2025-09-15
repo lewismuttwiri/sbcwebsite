@@ -43,54 +43,51 @@ export default function ContactPage() {
     setError("");
 
     try {
-      // Validate the API URL
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-      if (!apiUrl) {
-        throw new Error("API URL is not configured");
-      }
-
-      const response = await fetch(`${apiUrl}contact/api/comments/`, {
+      const body = {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        message: data.message,
+        subject: data.subject,
+      };
+      const response = await fetch(`/api/contact/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
-        body: JSON.stringify({
-          first_name: data.firstName,
-          last_name: data.lastName,
-          email: data.email,
-          message: data.message,
-          subject: data.subject,
-        }),
+        body: JSON.stringify(body),
       });
 
-      // Handle non-2xx responses
       if (!response.ok) {
-        let errorData;
-        try {
-          errorData = await response.json();
-        } catch (e) {
-          throw new Error(
-            `Request failed with status ${response.status}: ${response.statusText}`
-          );
-        }
-
-        if (response.status === 400 && errorData) {
-          const errorMessages = Object.entries(errorData)
-            .map(
-              ([field, errors]) =>
-                `${field}: ${
-                  Array.isArray(errors) ? errors.join(", ") : errors
-                }`
-            )
-            .join("\n");
-          throw new Error(errorMessages || "Validation failed");
-        }
-
-        throw new Error(
-          errorData.detail || errorData.message || "An error occurred"
-        );
+        return console.error("Failed to send message");
       }
+
+      // if (!response.ok) {
+      //   let errorData;
+      //   try {
+      //     errorData = await response.json();
+      //   } catch (e) {
+      //     throw new Error(
+      //       `Request failed with status ${response.status}: ${response.statusText}`
+      //     );
+      //   }
+
+      //   if (response.status === 400 && errorData) {
+      //     const errorMessages = Object.entries(errorData)
+      //       .map(
+      //         ([field, errors]) =>
+      //           `${field}: ${
+      //             Array.isArray(errors) ? errors.join(", ") : errors
+      //           }`
+      //       )
+      //       .join("\n");
+      //     throw new Error(errorMessages || "Validation failed");
+      //   }
+
+      //   throw new Error(
+      //     errorData.detail || errorData.message || "An error occurred"
+      //   );
+      // }
 
       // Handle successful response
       const responseData = await response.json().catch(() => ({}));
@@ -325,4 +322,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

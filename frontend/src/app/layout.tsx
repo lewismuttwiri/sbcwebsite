@@ -56,7 +56,6 @@ export default function RootLayout({
 
             <ClientFooter />
           </Suspense>
-          <Toaster position="bottom-right" />
           <PromoPopup />
         </Providers>
       </body>

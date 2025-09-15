@@ -3,7 +3,6 @@ import Image from "next/image";
 import Container from "./Container";
 import { CiFacebook, CiLocationOn, CiMail, CiPhone } from "react-icons/ci";
 import {
-  AiOutlineFacebook,
   AiOutlineInstagram,
   AiOutlineTikTok,
 } from "react-icons/ai";
