@@ -65,3 +65,6 @@ sbcwebsite.sql
 #cert
 *.pem
 cert.pem
+.crt
+.key
+.log

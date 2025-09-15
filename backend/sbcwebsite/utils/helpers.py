@@ -393,15 +393,15 @@ class Helper:
                 # Fallback to plain text email
                 message = f"""New Order Alert!
 
-    Order ID: #{order.id}
-    Customer: {order.name}
-    Email: {order.email}
-    Phone: {order.phone_number}
-    Total: KSh{order.total_price}
-    Items: {total_items}
+                Order ID: #{order.id}
+                Customer: {order.name}
+                Email: {order.email}
+                Phone: {order.phone_number}
+                Total: KSh{order.total_price}
+                Items: {total_items}
 
-    Order Items:
-    """
+                Order Items:
+                """
                 for item in order.items.all():
                     message += f"- {item.product_name} x{item.quantity} @ KSh{item.price} = KSh{item.quantity * item.price}\n"
                 
@@ -412,11 +412,11 @@ class Helper:
                 
                 message += f"""
 
-    Admin Panel: https://sbckenya.com/admin/store/order/{order.id}/change/
+                Admin Panel: https://sbckenya.com/admin/store/order/{order.id}/change/
 
-    Best regards,
-    SBC Kenya System"""
-                
+                Best regards,
+                SBC Kenya System"""
+                            
                 from django.core.mail import send_mail
                 send_mail(
                     subject=subject,
@@ -428,15 +428,12 @@ class Helper:
                 result = 1
             
             return result
-            
+                        
         except Exception as e:
             print(f"Error sending order notification email: {str(e)}")
             return 0
 
 
-
-
-    
     def send_order_status_update_email(self, order, old_status, new_status):
         """
         Send order status update email to customer
