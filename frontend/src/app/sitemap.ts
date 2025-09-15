@@ -89,9 +89,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let dynamicRoutes: MetadataRoute.Sitemap = [];
 
-  console.log("Starting to generate sitemap...");
-  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
-
   try {
     // Use the full URL for server-side fetching
     const productsResponse = await fetch(`${baseUrl}api/products`, {
@@ -107,12 +104,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     const products = await productsResponse.json();
-    console.log("Products API response:", {
-      status: productsResponse.status,
-      hasResults: !!products,
-      resultsCount: Array.isArray(products) ? products.length : 0,
-      firstItem: Array.isArray(products) ? products[0] : undefined,
-    });
 
     // Handle both array and object with results property
     const productsList = Array.isArray(products)
@@ -139,8 +130,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
       .filter(Boolean) as MetadataRoute.Sitemap;
 
-    console.log("Generated product routes:", productRoutes);
-
     const newsResponse = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}news/api/news/`,
       {
@@ -162,12 +151,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const news = await newsResponse.json();
     const newsData = news.results || [];
-    console.log("News API response:", {
-      status: newsResponse.status,
-      hasResults: !!newsData.length,
-      resultsCount: newsData.length,
-      firstItem: newsData[0],
-    });
 
     const newsRoutes: MetadataRoute.Sitemap = newsData.map((article: any) => ({
       url: `${baseUrl}news/${article.id}`,
@@ -176,23 +159,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-    console.log("news routes", newsRoutes);
-
     dynamicRoutes = [...productRoutes, ...newsRoutes];
   } catch (error) {
     console.error("Failed to fetch dynamic routes:", error);
   }
 
   const allRoutes = [...staticRoutes, ...brandRoutes, ...dynamicRoutes];
-
-  console.log("Generated sitemap with routes:", {
-    staticRoutes: staticRoutes.length,
-    brandRoutes: brandRoutes.length,
-    dynamicRoutes: dynamicRoutes.length,
-    total: allRoutes.length,
-  });
-
-  console.log("First few dynamic routes:", dynamicRoutes);
 
   return allRoutes;
 }
