@@ -56,7 +56,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   const loadChatHistory = async (roomId: string): Promise<void> => {
     try {
       setIsLoadingMessages(true);
-      const response = await fetch(`/api/chat/history?roomId=${roomId}`);
+      const response = await fetch(`/api/chat/messages/${roomId}`);
       if (!response.ok) throw new Error('Failed to load chat history');
       const data = await response.json();
       setMessages(data.messages || []);
@@ -482,9 +482,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   );
 
   const renderChat = () => (
-    <div className="flex flex-col h-full">
-      {/* Chat Header with Menu */}
-      <div className="px-4 py-2 bg-gray-50 border-b flex justify-between items-center">
+    <div className="flex flex-col h-[80vh]">
+      <div className="px-4 py-2 bg-gray-50 border-b flex justify-between items-center flex-shrink-0">
         <button
           onClick={handleRefreshMessages}
           disabled={isLoadingMessages}
@@ -501,7 +500,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+      <div className="flex-1  overflow-y-auto p-4 space-y-4 bg-gray-50 min-h-0">
         {isLoadingMessages && messages.length === 0 && (
           <div className="flex justify-center items-center py-8">
             <div className="flex items-center text-gray-500">
@@ -545,7 +544,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 bg-white border-t">
+      <div className="p-4 bg-white border-t flex-shrink-0">
         <div className="flex space-x-3">
           <input
             type="text"
@@ -638,14 +637,42 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   <h3 className="font-semibold text-lg">Customer Enquiries</h3>
                   <p className="text-blue-100 text-sm opacity-90"></p>
                 </div>
-                <div className="flex space-x-2">
+                <div className="relative" ref={menuRef}>
                   <button
-                    onClick={() => setChatState("closed")}
-                    className="hover:bg-blue-500/20 p-2 rounded-lg transition-colors touch-manipulation"
-                    aria-label="Close chat"
+                    onClick={() => setShowMenu(!showMenu)}
+                    className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors"
+                    aria-label="Chat options"
                   >
-                    <FiX className="w-5 h-5" />
+                    <CiMenuKebab size={20} color="white" />
                   </button>
+                  {showMenu && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                      <button
+                        onClick={handleMinimize}
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        <FiMinimize2 className="w-4 h-4 mr-2" />
+                        Minimize
+                      </button>
+                      <button
+                        onClick={handleCloseChat}
+                        className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                      >
+                        <FiMessageSquare className="w-4 h-4 mr-2" />
+                        Close Chat Widget
+                      </button>
+
+                      {readyState === ReadyState.OPEN && "Connected" && (
+                        <button
+                          onClick={handleEndChat}
+                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <FiPower className="w-4 h-4 mr-2" />
+                          End Chat
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -669,8 +696,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 minHeight: "56px",
               }}
             >
-              {/* Header Section */}
-              <div className="relative bg-[#0E0E96] text-white py-4 space-x-4 px-5 flex justify-between items-center shadow-lg">
+              <div className="relative bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <h3 className="font-semibold text-lg">Customer Enquiries</h3>
                 <div className="flex items-center space-x-2">
                   <button
@@ -681,47 +707,52 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                     {isMinimized ? (
                       <FiMaximize2 className="w-5 h-5 text-white" />
                     ) : (
-                      <FiMinimize2 className="w-5 h-5 text-white" />
+                      ""
                     )}
                   </button>
-                  <div className="relative" ref={menuRef}>
-                    <button
-                      onClick={() => setShowMenu(!showMenu)}
-                      className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors"
-                      aria-label="Chat options"
-                    >
-                      <CiMenuKebab size={20} color="white" />
-                    </button>
-                    {showMenu && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
-                        <button
-                          onClick={handleMinimize}
-                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          <FiMinimize2 className="w-4 h-4 mr-2" />
-                          Minimize
-                        </button>
-                        <button
-                          onClick={handleEndChat}
-                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          <FiMessageSquare className="w-4 h-4 mr-2" />
-                          End Chat
-                        </button>
-                        <button
-                          onClick={handleCloseChat}
-                          className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                        >
-                          <FiPower className="w-4 h-4 mr-2" />
-                          Close Chat Widget
-                        </button>
-                      </div>
-                    )}
-                  </div>
+
+                  {!isMinimized && (
+                    <div className="relative" ref={menuRef}>
+                      <button
+                        onClick={() => setShowMenu(!showMenu)}
+                        className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors"
+                        aria-label="Chat options"
+                      >
+                        <CiMenuKebab size={20} color="white" />
+                      </button>
+                      {showMenu && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                          <button
+                            onClick={handleMinimize}
+                            className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            <FiMinimize2 className="w-4 h-4 mr-2" />
+                            Minimize
+                          </button>
+
+                          <button
+                            onClick={handleCloseChat}
+                            className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            <FiMessageSquare className="w-4 h-4 mr-2" />
+                            Close Chat
+                          </button>
+                          {readyState === ReadyState.OPEN && "Connected" && (
+                            <button
+                              onClick={handleEndChat}
+                              className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                            >
+                              <FiPower className="w-4 h-4 mr-2" />
+                              End Chat
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* Content Section - Different Screens */}
               {!isMinimized && (
                 <div
                   className="overflow-hidden bg-white"
