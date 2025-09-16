@@ -54,36 +54,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const loadChatHistory = async (roomId: string): Promise<void> => {
-    if (!roomId) {
-      console.error('No roomId provided to loadChatHistory');
-      return;
-    }
-    
     try {
-      console.log('Loading chat history for room:', roomId);
       setIsLoadingMessages(true);
-      const response = await fetch(`/api/chat/messages/${roomId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include' // Include cookies for authentication
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to load chat history: ${response.status} ${response.statusText}`);
-      }
-      
+      const response = await fetch(`/api/chat/messages/${roomId}`);
+      if (!response.ok) throw new Error('Failed to load chat history');
       const data = await response.json();
-      console.log('Chat history loaded:', data);
-      
-      // Ensure messages are properly formatted
-      const formattedMessages = (data.messages || []).map((msg: any) => ({
-        ...msg,
-        timestamp: msg.timestamp || new Date().toISOString(),
-        sender_type: msg.sender_type || 'system'
-      }));
-      
-      setMessages(formattedMessages);
+      setMessages(data.messages || []);
     } catch (error) {
       console.error('Error loading chat history:', error);
       setMessages([]);
@@ -92,93 +68,100 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     }
   };
 
-  // WebSocket URL state
-  const [socketUrl, setSocketUrl] = useState<string>("");
-  const [isConnecting, setIsConnecting] = useState(false);
-  
-  // Set up WebSocket connection when roomId or chatState changes
-  useEffect(() => {
-    if (roomId && chatState === 'chat' && !isConnecting) {
-      setIsConnecting(true);
-      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-      const apiUrl = process.env.NEXT_PUBLIC_HOST_URL || window.location.host;
-      const newSocketUrl = `${protocol}//${apiUrl}/ws/chat/${roomId}/`;
-      console.log('Setting WebSocket URL:', newSocketUrl);
-      setSocketUrl(newSocketUrl);
-    }
-    return () => {
-      // Clean up WebSocket connection when component unmounts or dependencies change
-      console.log('Cleaning up WebSocket connection');
-      setSocketUrl("");
-    };
-  }, [roomId, chatState, isConnecting]);
-
-  // Handle WebSocket connection and messages
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
+  const [socketUrl, setSocketUrl] = React.useState<string>("");
+  const ws = useWebSocket(socketUrl, {
     onOpen: () => {
       console.log("WebSocket connection established");
-      setIsConnecting(false);
       if (roomId) {
-        console.log('Loading chat history for room:', roomId);
         loadChatHistory(roomId);
       }
     },
     onMessage: (event: MessageEvent) => {
-      try {
-        const data = JSON.parse(event.data);
-        console.log('WebSocket message received:', data);
-        
-        // Handle different message types
-        if (data.type === 'message' && data.message) {
-          const newMessage: Message = {
-            ...data.message,
-            timestamp: data.message.timestamp || new Date().toISOString(),
-            sender_type: data.message.sender_type || 'system',
-            sender_name: data.message.sender_name || 'System',
-            content: data.message.content || ''
-          };
-          setMessages((prev: Message[]) => [...prev, newMessage]);
-        } else if (data.type === 'chat_message' && data.message) {
-          const newMessage: Message = {
-            sender_type: data.sender_type || 'system',
-            sender_name: data.sender_name || 'Unknown',
-            content: data.message,
-            timestamp: data.timestamp || new Date().toISOString()
-          };
-          setMessages((prev: Message[]) => [...prev, newMessage]);
-        } else if (data.type === 'test') {
-          console.log('Test message received:', data.message);
-        }
-        
-        // Scroll to bottom when new message arrives
-        setTimeout(() => {
-          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      } catch (error) {
-        console.error('Error processing WebSocket message:', error);
-        console.log('Raw message data:', event.data);
+      const data = JSON.parse(event.data);
+      if (data.type === 'message') {
+        setMessages(prev => [...prev, data.message]);
       }
     },
+    onError: (event: Event) => {
+      console.error("WebSocket error:", event);
+    },
+    onClose: (event: CloseEvent) => {
+      console.log("WebSocket connection closed:", event);
+    },
     shouldReconnect: (closeEvent: CloseEvent) => {
-      console.log("WebSocket reconnecting...", closeEvent);
       return closeEvent.code !== 1000; // Don't reconnect if closed normally
     },
     reconnectAttempts: 5,
     reconnectInterval: 3000,
-    onError: (event: Event) => {
-      console.error("WebSocket error:", event);
-      setIsConnecting(false);
-    },
-    onClose: (event: CloseEvent) => {
-      console.log("WebSocket connection closed:", {
-        wasClean: event.wasClean,
-        code: event.code,
-        reason: event.reason,
-        timestamp: new Date().toISOString(),
-      });
-      setIsConnecting(false);
-    }
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+      const apiUrl = process.env.NEXT_PUBLIC_HOST_URL || window.location.host;
+      setSocketUrl(`${protocol}//${apiUrl}/ws/chat/${roomId}/`);
+    }
+  }, [roomId]);
+
+  const { sendMessage, lastMessage, readyState, getWebSocket } = useWebSocket(
+    socketUrl,
+    {
+      shouldReconnect: (closeEvent) => {
+        console.log("WebSocket reconnecting...", closeEvent);
+        return true;
+      },
+      reconnectAttempts: 5,
+      reconnectInterval: 3000,
+      onOpen: (event: Event) => {
+        console.log("WebSocket connection opened", {
+          url: socketUrl,
+          readyState: ReadyState.OPEN,
+          timestamp: new Date().toISOString(),
+        });
+      },
+      onError: (event: Event) => {
+        console.error("WebSocket error:", {
+          type: event.type,
+          url: socketUrl,
+          readyState: readyState,
+          timestamp: new Date().toISOString(),
+        });
+      },
+      onClose: (event: CloseEvent) => {
+        console.log("WebSocket connection closed:", {
+          wasClean: event.wasClean,
+          code: event.code,
+          reason: event.reason,
+          timestamp: new Date().toISOString(),
+        });
+      },
+    }
+  );
+
+  useEffect(() => {
+    if (!lastMessage?.data) return;
+
+    try {
+      const data = JSON.parse(lastMessage.data);
+      console.log("WebSocket message received in chat widget:", data);
+
+      if (data.type === "chat_message" && data.message) {
+        const newMessage: Message = {
+          sender_type: data.sender_type || "system",
+          sender_name: data.sender_name || "Unknown",
+          content: data.message,
+          timestamp: data.timestamp || new Date().toISOString(),
+        };
+
+        setMessages((prev) => [...prev, newMessage]);
+      } else if (data.type === "test") {
+        console.log("Test message received:", data.message);
+      }
+    } catch (error) {
+      console.error("Error parsing WebSocket message:", error);
+      console.log("Raw message data:", lastMessage.data);
+    }
+  }, [lastMessage]);
 
   useEffect(() => {
     if (roomId && chatState === "chat") {
@@ -593,9 +576,14 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         sender_name: "System",
         timestamp: new Date().toISOString(),
         closed_by: "customer",
-        action: "close_connection" // Add action to indicate connection should be closed
       };
       sendMessage(JSON.stringify(closeMessage));
+
+      // Close the WebSocket connection
+      const ws = getWebSocket();
+      if (ws) {
+        ws.close(1000, "Chat closed by user");
+      }
     }
 
     // Update UI state
