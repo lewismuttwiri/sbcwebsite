@@ -617,7 +617,7 @@ export default function Home() {
               Didn't find what you're looking for?
             </p>
 
-            <div className="flex space-x-4 justify-center items-center ">
+            <div className="flex flex-col sm:flex-row space-x-4 space-y-4 justify-center items-center ">
               <Link href="/contact">
                 <Button variant="primary">Contact Us</Button>
               </Link>

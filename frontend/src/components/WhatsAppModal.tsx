@@ -129,23 +129,23 @@ export default function WhatsAppModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-gra  bg-opacity-20 transition-all duration-300 backdrop-blur-lg"
+      className="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 transition-all duration-300 backdrop-blur-lg"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      <div className="flex items-center justify-center min-h-screen p-4">
+      <div className="flex items-center justify-center max-h-screen overflow-y-auto">
         <div
           ref={modalRef}
-          className="relative bg-white rounded-2xl shadow-2xl transform transition-all duration-300 scale-100 w-full max-w-md mx-auto"
+          className="relative bg-white rounded-2xl shadow-2xl transform transition-all duration-300 ease-in-out w-full max-w-sm mx-auto scale-80"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
             type="button"
-            className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors duration-200 focus:outline-none   focus:ring-offset-2"
+            className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
             onClick={onClose}
             aria-label="Close dialog"
           >
@@ -203,7 +203,7 @@ export default function WhatsAppModal({
                   className={`w-full px-4 py-3 border-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-0 ${
                     errors.name
                       ? "border-red-300 focus:border-red-500"
-                      : "border-gray-200 "
+                      : "border-gray-200 focus:border-blue-500"
                   }`}
                   placeholder="Enter your full name"
                   disabled={isSubmitting}
@@ -241,7 +241,7 @@ export default function WhatsAppModal({
                   className={`w-full px-4 py-3 border-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-0 ${
                     errors.email
                       ? "border-red-300 focus:border-red-500"
-                      : "border-gray-200"
+                      : "border-gray-200 focus:border-blue-500"
                   }`}
                   placeholder="your.email@example.com"
                   disabled={isSubmitting}
@@ -279,10 +279,10 @@ export default function WhatsAppModal({
                   className={`w-full px-4 py-3 border-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-0 resize-none ${
                     errors.message
                       ? "border-red-300 focus:border-red-500"
-                      : "border-gray-200"
+                      : "border-gray-200 focus:border-blue-500"
                   }`}
                   placeholder="How can we help you today?"
-                  defaultValue={""}
+                  defaultValue=""
                   disabled={isSubmitting}
                 />
                 {errors.message && (
@@ -307,7 +307,7 @@ export default function WhatsAppModal({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#0E0E96] text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
+                className="w-full bg-[#0E0E96] hover:bg-[#0A0A7A] text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0E0E96] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

@@ -180,12 +180,13 @@ export default function ChatDashboard() {
     fetchTickets(true);
   };
 
-  // Calculate stats
   const activeTickets = tickets.filter((t) => t.is_active === true);
   const closedTickets = tickets.filter((t) => t.is_active === false);
   const todayTickets = tickets.filter(
     (t) => new Date(t.created_at).toDateString() === new Date().toDateString()
   );
+
+  
 
   if (userRole !== 7 || userRole == null) {
     return (

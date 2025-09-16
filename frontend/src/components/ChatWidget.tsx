@@ -361,7 +361,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         </div>
         <div className="flex items-center text-sm text-gray-500 justify-center">
           <CiClock1 className="w-4 h-4 text-blue-500 mr-2" />
-          Average response time: 2 minutes
+          Average response time: 4 minutes
         </div>
       </div>
 
@@ -635,7 +635,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             <div className="flex flex-col h-[90vh]">
               <div className="relative z-[10000] border-b border-gray-200 bg-[#0E0E96] text-white py-4 px-5 flex justify-between items-center shadow-lg">
                 <div>
-                  <h3 className="font-semibold text-lg">Customer Support</h3>
+                  <h3 className="font-semibold text-lg">Customer Enquiries</h3>
                   <p className="text-blue-100 text-sm opacity-90"></p>
                 </div>
                 <div className="flex space-x-2">
@@ -649,7 +649,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 </div>
               </div>
 
-              <div className="flex-1 overflow-hidden">
+              <div className=" overflow-hidden">
                 {chatState === "welcome" && renderWelcomeScreen()}
                 {chatState === "form" && renderCustomerForm()}
                 {chatState === "chat" && renderChat()}
@@ -657,7 +657,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             </div>
           </div>
 
-          <div className="hidden md:block fixed bottom-4 right-4 z-[9999] ">
+          <div className="hidden md:block fixed bottom-4 right-4 z-[9999]">
             <div
               className="bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden"
               style={{
@@ -669,8 +669,9 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 minHeight: "56px",
               }}
             >
-              <div className="relative bg-[#0E0E96] text-white py-4 space-x-4  px-5 flex justify-between items-center shadow-lg">
-                <h3 className="font-semibold text-lg">Customer Support</h3>
+              {/* Header Section */}
+              <div className="relative bg-[#0E0E96] text-white py-4 space-x-4 px-5 flex justify-between items-center shadow-lg">
+                <h3 className="font-semibold text-lg">Customer Enquiries</h3>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => setIsMinimized(!isMinimized)}
@@ -689,7 +690,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                       className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors"
                       aria-label="Chat options"
                     >
-                      <CiMenuKebab size={20} color="white"/>
+                      <CiMenuKebab size={20} color="white" />
                     </button>
                     {showMenu && (
                       <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
@@ -718,6 +719,9 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                     )}
                   </div>
                 </div>
+              </div>
+
+              {/* Content Section - Different Screens */}
               {!isMinimized && (
                 <div
                   className="overflow-hidden bg-white"
@@ -731,7 +735,6 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   {chatState === "chat" && renderChat()}
                 </div>
               )}
-              </div>
             </div>
           </div>
         </>
