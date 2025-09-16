@@ -482,7 +482,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   );
 
   const renderChat = () => (
-    <div className="flex flex-col h-[80vh]">
+    <div className="flex flex-col h-[80vh] md:h-full">
       <div className="px-4 py-2 bg-gray-50 border-b flex justify-between items-center flex-shrink-0">
         <button
           onClick={handleRefreshMessages}
@@ -686,11 +686,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
           <div className="hidden md:block fixed bottom-4 right-4 z-[9999]">
             <div
-              className="bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden"
+              className="bg-white rounded-xl shadow-2xl border transition-all duration-400 flex flex-col overflow-hidden"
               style={{
-                width: isMinimized ? "350px" : "400px",
+                width: isMinimized ? "350px" : "350px",
                 height: isMinimized ? "" : "500px",
-                maxWidth: "400px",
+                maxWidth: "350px",
                 maxHeight: "500px",
                 minWidth: "350px",
                 minHeight: "56px",

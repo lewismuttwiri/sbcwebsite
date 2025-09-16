@@ -143,7 +143,6 @@ export default function ChatDashboard() {
       );
     }
 
-    // Sort tickets by created_at in descending order (newest first)
     const sortedTickets = [...filtered].sort((a, b) => 
       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
@@ -257,7 +256,6 @@ export default function ChatDashboard() {
             </Button>
             <Button
               variant="outline"
-              size="sm"
               onClick={() => setDate(new Date())}
               className="flex items-center gap-2 hover:shadow-md transition-all duration-200"
             >
@@ -267,7 +265,6 @@ export default function ChatDashboard() {
           </div>
         </div>
 
-        {/* Enhanced Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat) => (
             <Card
@@ -298,7 +295,6 @@ export default function ChatDashboard() {
           ))}
         </div>
 
-        {/* Enhanced Chat List */}
         <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
           <CardHeader className="pb-6 border-b bg-gradient-to-r from-slate-50 to-white">
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
@@ -343,7 +339,7 @@ export default function ChatDashboard() {
                   <TabsList className="w-full justify-start h-auto min-h-[56px] bg-transparent p-1 flex-nowrap">
                     <TabsTrigger
                       value="all"
-                      className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-3 sm:px-4 py-2 text-sm sm:text-base font-medium whitespace-nowrap"
+                      className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-3 sm:px-4 py-2 font-medium whitespace-nowrap"
                     >
                       All
                       <Badge variant="secondary" className="ml-2 bg-slate-100 text-xs sm:text-sm">
@@ -414,8 +410,7 @@ export default function ChatDashboard() {
                                 )}
                               </div>
                             </div>
-                            <div className="flex items-center text-[10px] font-medium text-slate-500">
-                              <Clock className="h-2.5 w-2.5 mr-1 flex-shrink-0" />
+                            <div className="flex items-center text-[14px] font-medium text-slate-500">
                               <span>
                                 {format(
                                   new Date(ticket.created_at),
