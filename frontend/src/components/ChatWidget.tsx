@@ -59,7 +59,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
       const response = await fetch(`/api/chat/${roomId}`);
       if (!response.ok) throw new Error('Failed to load chat history');
       const data = await response.json();
-      setMessages(data.messages || []);
+      setMessages(data.messages.map((message: any) => ({
+        sender_type: message.sender_type,
+        sender_name: message.sender_name,
+        content: message.message,
+        timestamp: message.timestamp,
+      })) || []);
     } catch (error) {
       console.error('Error loading chat history:', error);
       setMessages([]);
@@ -302,12 +307,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   const handleEndChat = (e: React.MouseEvent): void => {
     e.stopPropagation();
     e.preventDefault();
-    setShowCloseConfirmation(true);
     setShowMenu(false);
-    setChatState("closed");
+    setShowCloseConfirmation(true);
   };
 
   const handleCloseChatWidget = (e: React.MouseEvent): void => {
+    console.log("Closing chat widget");
     e.stopPropagation();
     e.preventDefault();
     setShowMenu(false);
@@ -317,16 +322,21 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      console.log('Document clicked');
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        console.log('Click outside menu - closing');
         setShowMenu(false);
       }
     };
 
+    // Add event listener
     document.addEventListener('mousedown', handleClickOutside);
+    
+    // Clean up
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [menuRef]);
 
   const formatTime = (timestamp: string) => {
     return new Date(timestamp).toLocaleTimeString([], {
@@ -578,7 +588,6 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   function handleCloseChat(event: React.MouseEvent<HTMLButtonElement>): void {
     event.preventDefault();
 
-    // Send a chat_closed message before closing
     if (readyState === ReadyState.OPEN && roomId) {
       const closeMessage = {
         type: "chat_closed",
@@ -591,14 +600,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
       };
       sendMessage(JSON.stringify(closeMessage));
 
-      // Close the WebSocket connection
       const ws = getWebSocket();
       if (ws) {
         ws.close(1000, "Chat closed by user");
       }
     }
 
-    // Update UI state
     setIsClosingChat(true);
     setShowCloseConfirmation(false);
     setMessages([]);
@@ -610,6 +617,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     localStorage.removeItem("chat_room");
     setRoomId(null);
     setChatState("closed");
+    setIsClosingChat(false);
   }
 
   return (
@@ -652,13 +660,18 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   >
                     <CiMenuKebab size={20} color="white" />
                   </button>
+                  {/* Menu Dropdown */}
                   {showMenu && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                    <div 
+                      className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-[1000] border border-gray-200"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <button
                         onClick={(e) => {
+                          console.log("Close button clicked!");
                           e.stopPropagation();
-                          e.preventDefault();
-                          handleCloseChatWidget(e);
+                          setShowMenu(false);
+                          setChatState("closed");
                         }}
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
@@ -666,12 +679,13 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                         Close Chat Widget
                       </button>
 
-                      {readyState === ReadyState.OPEN && "Connected" && (
+                      {readyState === ReadyState.OPEN && roomId && (
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
-                            handleEndChat(e);
+                            setShowMenu(false);
+                            setShowCloseConfirmation(true);
                           }}
                           className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                         >
@@ -683,10 +697,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   )}
                 </div>
               </div>
-
-              <div className="overflow-hidden bg-white"></div>
-
-              <div className=" overflow-hidden h-full">
+              <div className="overflow-hidden h-full">
                 {chatState === "welcome" && renderWelcomeScreen()}
                 {chatState === "form" && renderCustomerForm()}
                 {chatState === "chat" && renderChat()}
@@ -778,11 +789,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
               )}
             </div>
           </div>
+
         </>
       )}
 
       {showCloseConfirmation && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[10001]">
+        <div className="fixed inset-0 flex items-center justify-center z-[10001] bg-black/50 opacity-50">
           <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full shadow-2xl">
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               End Chat Session?
