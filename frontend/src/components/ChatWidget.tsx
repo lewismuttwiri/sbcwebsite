@@ -648,53 +648,37 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   <h3 className="font-semibold text-lg">Customer Enquiries</h3>
                   <p className="text-blue-100 text-sm opacity-90"></p>
                 </div>
-                <div className="relative" ref={menuRef}>
+                <div className="relative">
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      setShowMenu(!showMenu);
-                    }}
-                    className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors"
+                    className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors flex items-center"
                     aria-label="Chat options"
                   >
-                    <CiMenuKebab size={20} color="white" />
-                  </button>
-                  {/* Menu Dropdown */}
-                  {showMenu && (
-                    <div 
-                      className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-[1000] border border-gray-200"
-                      onClick={(e) => e.stopPropagation()}
+                    <button
+                      onClick={(e) => {
+                        console.log("Close button clicked!");
+                        e.stopPropagation();
+                        setShowMenu(false);
+                        setChatState("closed");
+                      }}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
+                      <FiMinimize2 size={20} color="white" />
+                    </button>
+
+                    {readyState === ReadyState.OPEN && roomId && (
                       <button
                         onClick={(e) => {
-                          console.log("Close button clicked!");
                           e.stopPropagation();
+                          e.preventDefault();
                           setShowMenu(false);
-                          setChatState("closed");
+                          setShowCloseConfirmation(true);
                         }}
-                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                       >
-                        <FiMessageSquare className="w-4 h-4 mr-2" />
-                        Close Chat Widget
+                        <FiPower size={20} color="white" />
                       </button>
-
-                      {readyState === ReadyState.OPEN && roomId && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            setShowMenu(false);
-                            setShowCloseConfirmation(true);
-                          }}
-                          className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                        >
-                          <FiPower className="w-4 h-4 mr-2" />
-                          End Chat
-                        </button>
-                      )}
-                    </div>
-                  )}
+                    )}
+                  </button>
                 </div>
               </div>
               <div className="overflow-hidden h-full">
@@ -751,14 +735,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                             Minimize
                           </button>
 
-                          <button
-                            onClick={handleCloseChat}
-                            className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            <FiMessageSquare className="w-4 h-4 mr-2" />
-                            Close Chat
-                          </button>
-                          {readyState === ReadyState.OPEN && "Connected" && (
+                          {readyState === ReadyState.OPEN && roomId && (
                             <button
                               onClick={handleEndChat}
                               className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
@@ -789,13 +766,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
               )}
             </div>
           </div>
-
         </>
       )}
 
       {showCloseConfirmation && (
-        <div className="fixed inset-0 flex items-center justify-center z-[10001] bg-black/50 opacity-50">
-          <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full shadow-2xl">
+        <div className="fixed inset-0 flex items-center justify-center z-[99999] bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-lg p-6 m-4 max-w-sm w-full shadow-2xl z-[100000]">
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               End Chat Session?
             </h3>
