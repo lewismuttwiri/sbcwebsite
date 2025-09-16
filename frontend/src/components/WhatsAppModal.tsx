@@ -129,7 +129,7 @@ export default function WhatsAppModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 transition-all duration-300 backdrop-blur-lg"
+      className="fixed inset-0 z-50 overflow-y-auto bg-opacity-10 transition-all duration-300 backdrop-blur-sm"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
