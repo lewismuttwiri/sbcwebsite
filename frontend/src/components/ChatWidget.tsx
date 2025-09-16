@@ -56,7 +56,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   const loadChatHistory = async (roomId: string): Promise<void> => {
     try {
       setIsLoadingMessages(true);
-      const response = await fetch(`/api/chat/messages/${roomId}`);
+      const response = await fetch(`/api/chat/${roomId}`);
       if (!response.ok) throw new Error('Failed to load chat history');
       const data = await response.json();
       setMessages(data.messages || []);
@@ -292,14 +292,26 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     }
   };
 
-  const handleMinimize = (): void => {
-    setIsMinimized((prev) => !prev);
+  const handleMinimize = (e: React.MouseEvent): void => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsMinimized(prev => !prev);
     setShowMenu(false);
   };
 
-  const handleEndChat = (): void => {
+  const handleEndChat = (e: React.MouseEvent): void => {
+    e.stopPropagation();
+    e.preventDefault();
     setShowCloseConfirmation(true);
     setShowMenu(false);
+    setChatState("closed");
+  };
+
+  const handleCloseChatWidget = (e: React.MouseEvent): void => {
+    e.stopPropagation();
+    e.preventDefault();
+    setShowMenu(false);
+    setChatState('closed');
   };
 
 
@@ -347,18 +359,18 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
       <div className="w-full space-y-3">
         <div className="flex items-center text-sm text-gray-500 justify-center">
-          <CiCircleCheck className="w-4 h-4 text-green-500 mr-2" />
+          <CiCircleCheck className="w-4 h-4 text-[#0E0E96] mr-2" />
           Live chat support
         </div>
         <div className="flex items-center text-sm text-gray-500 justify-center">
-          <CiClock1 className="w-4 h-4 text-blue-500 mr-2" />
+          <CiClock1 className="w-4 h-4 text-[#0E0E96] mr-2" />
           Average response time: 4 minutes
         </div>
       </div>
 
       <button
         onClick={handleStartChat}
-        className="w-full bg-[#0E0E96] hover:bg-blue-800 text-white rounded-lg py-4 px-6 mt-8 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center group"
+        className="w-full bg-[#0E0E96] hover:bg-[#0E0E96] text-white rounded-lg py-4 px-6 mt-8 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center group"
       >
         <span className="font-semibold">Start New Chat</span>
         <IoIosArrowRoundForward className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -473,8 +485,8 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
   );
 
   const renderChat = () => (
-    <div className="flex flex-col h-[80vh] md:h-full">
-      <div className="px-4 py-2 bg-gray-50 border-b flex justify-between items-center flex-shrink-0">
+    <div className="flex flex-col h-[80vh] md:h-full px-3">
+      <div className="py-2 bg-gray-50 border-b flex justify-between items-center flex-shrink-0">
         <button
           onClick={handleRefreshMessages}
           disabled={isLoadingMessages}
@@ -491,7 +503,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         
       </div>
 
-      <div className="flex-1  overflow-y-auto p-4 space-y-4 bg-gray-50 min-h-0">
+      <div className="flex-1  overflow-y-auto  space-y-4 bg-gray-50 min-h-0">
         {isLoadingMessages && messages.length === 0 && (
           <div className="flex justify-center items-center py-8">
             <div className="flex items-center text-gray-500">
@@ -535,7 +547,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 bg-white border-t flex-shrink-0">
+      <div className=" bg-white border-t flex-shrink-0">
         <div className="flex space-x-3">
           <input
             type="text"
@@ -630,7 +642,11 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 </div>
                 <div className="relative" ref={menuRef}>
                   <button
-                    onClick={() => setShowMenu(!showMenu)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      setShowMenu(!showMenu);
+                    }}
                     className="p-1.5 hover:bg-blue-500/20 rounded-lg transition-colors"
                     aria-label="Chat options"
                   >
@@ -639,15 +655,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                   {showMenu && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                       <button
-                        onClick={handleMinimize}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          handleCloseChatWidget(e);
+                        }}
                         className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        <FiMinimize2 className="w-4 h-4 mr-2" />
-                        Minimize
-                      </button>
-                      <button
-                        onClick={handleCloseChat}
-                        className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                       >
                         <FiMessageSquare className="w-4 h-4 mr-2" />
                         Close Chat Widget
@@ -655,8 +668,12 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
                       {readyState === ReadyState.OPEN && "Connected" && (
                         <button
-                          onClick={handleEndChat}
-                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            handleEndChat(e);
+                          }}
+                          className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                         >
                           <FiPower className="w-4 h-4 mr-2" />
                           End Chat
@@ -667,7 +684,9 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 </div>
               </div>
 
-              <div className=" overflow-hidden">
+              <div className="overflow-hidden bg-white"></div>
+
+              <div className=" overflow-hidden h-full">
                 {chatState === "welcome" && renderWelcomeScreen()}
                 {chatState === "form" && renderCustomerForm()}
                 {chatState === "chat" && renderChat()}
@@ -679,10 +698,10 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
             <div
               className="bg-white rounded-xl shadow-2xl border transition-all duration-300 flex flex-col overflow-hidden"
               style={{
-                width: isMinimized ? "350px" : "350px",
-                height: isMinimized ? "" : "500px",
+                width: "350px",
+                height: isMinimized ? "60px" : "500px",
                 maxWidth: "350px",
-                maxHeight: "500px",
+                maxHeight: isMinimized ? "60px" : "500px",
                 minWidth: "350px",
                 minHeight: "56px",
               }}
@@ -691,7 +710,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 <h3 className="font-semibold text-lg">Customer Enquiries</h3>
                 <div className="flex items-center space-x-2">
                   <button
-                    onClick={() => setIsMinimized(!isMinimized)}
+                    onClick={(e) => handleMinimize(e)}
                     className="hover:bg-blue-500/20 p-1.5 rounded-lg transition-colors"
                     aria-label={isMinimized ? "Maximize chat" : "Minimize chat"}
                   >
