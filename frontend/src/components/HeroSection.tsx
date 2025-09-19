@@ -3,6 +3,7 @@
 import Container from "./layout/Container";
 import { useState, useEffect } from "react";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
   const desktopVideos = [
@@ -41,16 +42,13 @@ export default function HeroSection() {
       name: "Evervess",
       mobileSrc: "/videos/hero_section/mobile/evervess.mp4",
     },
-    {
-      src: "/videos/hero_section/promo.mp4",
-      name: "Promo",
-      mobileSrc: "/videos/hero_section/mobile/promo.mp4",
-    },
+
   ];
 
   const [isMobile, setIsMobile] = useState(false);
   const [videos, setVideos] = useState(desktopVideos);
   const [loadedVideos, setLoadedVideos] = useState(new Set());
+  const router = useRouter();
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -177,13 +175,13 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start max-w-xs md:max-w-none md:mx-0">
               <button
                 className="bg-white text-black px-3 md:px-6 py-3 md:py-3 rounded-lg text-sm md:text-base font-semibold hover:bg-opacity-90 transition-all tracking-wide"
-                onClick={() => (window.location.href = "/brands")}
+                onClick={() => (router.push("/brands"))}
               >
                 Explore Our brands
               </button>
               <button
                 className="border-2 border-white text-white hover:border-white hover:text-black px-3 md:px-6 py-3 md:py-3 rounded-lg text-sm md:text-base font-semibold hover:bg-white hover:bg-opacity-10 transition-all tracking-wide"
-                onClick={() => (window.location.href = "/about")}
+                onClick={() => (router.push("/about"))}
               >
                 About Us
               </button>

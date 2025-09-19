@@ -104,13 +104,13 @@ export function generateMetadata({
       },
     },
     verification: {
-      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+      ///
     },
   };
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0046BE", // Pepsi blue
+  themeColor: "#0046BE", 
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,

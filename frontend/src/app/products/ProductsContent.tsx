@@ -143,7 +143,7 @@ export default function ProductsContent() {
     <div className="px-4 py-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <h1 className="text-3xl font-bold">Our Products</h1>
-        <div className="w-full md:w-96">
+        {/* <div className="w-full md:w-96">
           <input
             type="search"
             placeholder="Search products..."
@@ -151,7 +151,7 @@ export default function ProductsContent() {
             onChange={handleSearchChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Brand Filter */}

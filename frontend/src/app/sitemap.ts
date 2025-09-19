@@ -1,19 +1,9 @@
-// app/sitemap.ts
 import type { MetadataRoute } from "next";
-
-// Helper function to safely create a date
-function getValidDate(dateString?: string | Date | null): Date {
-  if (!dateString) return new Date();
-
-  const date = new Date(dateString);
-  return isNaN(date.getTime()) ? new Date() : date;
-}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://sbckenya.com/";
   const currentDate = new Date();
 
-  // Static routes (what you know exists)
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -90,7 +80,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let dynamicRoutes: MetadataRoute.Sitemap = [];
 
   try {
-    // Use the full URL for server-side fetching
     const productsResponse = await fetch(`${baseUrl}api/products`, {
       headers: {
         Accept: "application/json",
@@ -105,14 +94,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const products = await productsResponse.json();
 
-    // Handle both array and object with results property
     const productsList = Array.isArray(products)
       ? products
       : products?.results || [];
 
     const productRoutes: MetadataRoute.Sitemap = productsList
       .map((product: any) => {
-        // Ensure we have a valid slug or id for the URL
         const productSlug = product.slug || product.id;
         if (!productSlug) {
           console.warn("Product missing slug and id:", product);

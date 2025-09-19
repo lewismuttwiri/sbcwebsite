@@ -6,9 +6,12 @@ import {
   AiOutlineInstagram,
   AiOutlineTikTok,
 } from "react-icons/ai";
+import WhatsAppModal from "../WhatsAppModal";
 interface FooterProps {
   currentYear?: string;
 }
+import { ImWhatsapp } from "react-icons/im";
+
 
 const Footer = ({
   currentYear = new Date().getFullYear().toString(),
@@ -61,26 +64,15 @@ const Footer = ({
                   <span className="sr-only">Instagram</span>
                   <AiOutlineInstagram size={24} />
                 </a>
-                {/* <a
-                  href="/"
-                  // target="_blank"
+                <a
+                  href="https://wa.me/254730301021"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white"
                 >
-                  <span className="sr-only">YouTube</span>
-                  <svg
-                    className="h-6 w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </a> */}
+                  <span className="sr-only">WhatsApp</span>
+                  <ImWhatsapp size={20} />
+                </a>
               </div>
             </div>
 
