@@ -298,7 +298,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center space-x-4">
                   <a
-                    href="tel:+254707021821"
+                    href="tel:+0800230055"
                     className="flex items-center hover:text-blue-200 transition-colors"
                     target="_blank"
                   >
@@ -376,7 +376,7 @@ const Navbar = () => {
                   </span>
                 </a>
                 <a
-                  href="tel:+254707021821"
+                  href="tel:+0800230055"
                   target="_blank"
                   className="flex items-center text-xs hover:text-blue-200 transition-colors space-x-2"
                 >

@@ -87,7 +87,6 @@ export default function SlidingBrands({ brands }: SlidingBrandsProps) {
                   </p>
                 </div>
               </div>
-              {/* Explore button - always visible on small screens, slides up on hover for larger screens */}
               <div className="mt-4 md:absolute md:bottom-6 md:left-4 md:right-0 md:mt-0">
                 <div
                   className="w-fit flex items-center justify-start py-3 px-6 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-white/20
