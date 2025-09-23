@@ -13,7 +13,7 @@ const Footer = ({
   currentYear = new Date().getFullYear().toString(),
 }: FooterProps) => {
   return (
-    <footer className="bg-[#0E0E96] text-white">
+    <footer className="bg-[#0E0E96] text-white text-xs">
       <div className="py-12">
         <Container className="px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

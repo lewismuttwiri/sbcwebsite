@@ -94,10 +94,9 @@ export default function SlidingBrands({ brands }: SlidingBrandsProps) {
     md:transform md:translate-y-full md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 
     transition-all duration-500 ease-out hover:shadow-xl hover:bg-white hover:scale-105"
                 >
-                  <span className="relative inline-flex items-center text-[#0d0d7a] font-semibold group-hover:text-[#0a0a65] transition-all duration-300 ease-out">
+                  <span className="relative inline-flex items-center text-[#0d0d7a] font-semibold group-hover:text-[#0a0a65] transition-all duration-300 ease-out cursor-pointer text-xs">
                     <span className="relative">
                       Explore {brand.name}
-                      {/* Custom underline with offset */}
                       <span
                         className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-[#0d0d7a] to-[#0a0a65] 
                        transform translate-y-1.5 group-hover:w-full transition-all duration-300 ease-out"

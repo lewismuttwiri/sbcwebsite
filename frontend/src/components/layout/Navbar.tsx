@@ -250,10 +250,10 @@ const Navbar = () => {
   return (
     <ClientOnly>
       <div className="w-full sticky top-0 left-0 right-0 z-50">
-        <div className="bg-[#0E0E96] text-white text-sm py-3">
-          <Container className="w-full">
-            <div className="w-full">
-              <div className="hidden lg:flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+        <div className="bg-[#0E0E96] text-white text-sm py-3 sticky top-0 z-50">
+          <Container>
+            <div>
+              <div className="hidden lg:flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0 text-xs">
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center">
                     <svg
@@ -344,20 +344,20 @@ const Navbar = () => {
                       href="https://www.instagram.com/pepsikenya_/"
                       target="_blank"
                     >
-                      <CiInstagram size={24} />
+                      <CiInstagram size={20} />
                     </Link>
                     <Link
                       href="https://www.facebook.com/profile.php?id=61565704941051"
                       target="_blank"
                     >
-                      <CiFacebook size={24} />
+                      <CiFacebook size={20} />
                     </Link>
 
                     <Link
                       href="https://www.tiktok.com/@pepsikenya_"
                       target="_blank"
                     >
-                      <PiTiktokLogoThin size={24} />
+                      <PiTiktokLogoThin size={20} />
                     </Link>
                   </div>
                 </div>
@@ -389,9 +389,8 @@ const Navbar = () => {
         </div>
 
         <nav className="bg-gray-100 shadow-md sticky top-0 z-50">
-          <Container className="px-4">
+          <Container>
             <div className="flex justify-between items-center h-20">
-              {/* Logo */}
               <div className="flex-shrink-0 justify-start">
                 <Link href="/" className="flex items-center">
                   <div className="flex items-center">
@@ -413,7 +412,6 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              {/* Desktop Navigation - Centered */}
               <div className="hidden lg:flex items-center justify-center mx-auto">
                 <div className="flex items-center space-x-6">
                   {navLinks.map((link) => (
@@ -486,12 +484,10 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Cart, Account Icons, and Mobile Menu Button */}
-              <div className="flex items-center space-x-4 justify-end">
-                {/* Cart Icon */}
+              <div className="flex items-center space-x- justify-end">
                 <Link
                   href="/cart"
-                  className="relative text-gray-700 hover:text-white transition-colors duration-300"
+                  className="relative text-gray-700 hover:text-white transition-colors duration-300 space-x-4"
                 >
                   <CiShoppingCart size={22} color="black" />
                   <span
@@ -504,7 +500,6 @@ const Navbar = () => {
                   </span>
                 </Link>
 
-                {/* Account Dropdown - Desktop */}
                 <div className="relative hidden md:block">
                   <div
                     className="flex items-center space-x-2 text-gray-800 hover:text-blue-600 font-medium transition-colors duration-300 border-1 border-black rounded-full p-2 cursor-pointer nav-link"
