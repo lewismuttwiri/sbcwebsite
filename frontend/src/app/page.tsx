@@ -256,7 +256,6 @@ export default function Home() {
               every taste and occasion.
             </p>
           </div>
-          {/* Replace the existing brand logos div with this animated version */}
           <div className="flex justify-between gap-8 md:gap-12 lg:gap-16 mb-12 flex-wrap">
             {[
               { src: "/images/logo/pepsi_logo.png", alt: "Pepsi" },
@@ -501,43 +500,7 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="relative py-32 overflow-hidden bg-[#0E0E96] md:bg-transparent">
-        <div
-          className="hidden md:block fixed inset-0 -z-10"
-          style={{
-            backgroundImage: "url('/images/logo/pepsi-home.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        ></div>
-
-        <Container className="relative z-10 px-4">
-          <div className="w-full flex justify-center ">
-            <div className="text-center mb-16 bg-[#0E0E96] w-fit py-2 px-4">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-                Core Values at SBC Kenya
-              </h2>
-              <p className="text-white/90 max-w-3xl mx-auto">
-                Committed to integrity, quality, consumer focus, and people
-                empowerment.
-              </p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {sustainabilityItems.map((item, index) => (
-              <SustainabilityCard
-                key={index}
-                Icon={item.icon}
-                heading={item.heading}
-                description={item.description}
-              />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-200">
         <Container className="px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Latest News</h2>
@@ -634,7 +597,6 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* WhatsApp Modal */}
       <WhatsAppModal
         isOpen={isWhatsAppModalOpen}
         onClose={() => setIsWhatsAppModalOpen(false)}

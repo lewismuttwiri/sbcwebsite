@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Poetsen_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import ClientFooter from "@/components/layout/ClientFooter";
@@ -9,16 +8,16 @@ import { Suspense } from "react";
 import Loader from "@/components/loader";
 import { metadata as siteMetadata } from "./metadata";
 import PromoPopup from "@/components/PromoPopup";
-import { Toaster } from "react-hot-toast";
 import ChatWidget from "@/components/ChatWidget";
 import Container from "@/components/layout/Container";
+import { Montserrat } from "next/font/google";
 
-const poetsen = Poetsen_One({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600", "700"], // Added missing weights
   display: "swap",
   adjustFontFallback: true,
-  variable: "--font-poetsen",
+  variable: "--font-montserrat",
   style: ["normal"],
 });
 
@@ -30,19 +29,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={` h-full`} suppressHydrationWarning>
-      <head>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-            :root {
-              --font-poetsen: ${poetsen.style.fontFamily};
-            }
-          `,
-          }}
-        />
-      </head>
-      <body className="min-h-screen bg-white">
+    <html
+      lang="en"
+      className={`${montserrat.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen bg-white font-sans">
         <Providers>
           <ToastProvider />
           <Suspense fallback={<Loader fullScreen />}>

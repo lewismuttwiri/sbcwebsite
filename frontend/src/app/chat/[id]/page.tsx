@@ -712,7 +712,6 @@ export default function ChatPage() {
         </div>
       </Card>
 
-      {/* Close Chat Confirmation Modal */}
       {showCloseConfirmation && (
         <div className="fixed inset-0 bg-opacity-10 flex items-center justify-center z-50">
           <div className="bg-gray-200 rounded-lg p-6 m-4 max-w-md w-full">

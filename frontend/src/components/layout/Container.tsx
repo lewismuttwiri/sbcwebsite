@@ -14,7 +14,7 @@ export default function Container({
   return (
     <Component
       className={`
-        w-[95%] max-w-[1400px] mx-auto
+        w-[95%] max-w-[1500px] mx-auto
         px-4 sm:px-6 lg:px-8
         ${className}
       `}

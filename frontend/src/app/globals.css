@@ -3,52 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Font styles */
+/* Root CSS Variables */
 :root {
-  --font-poetsen: "Poetsen One", system-ui, -apple-system, sans-serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
-
-/* Reset font styles */
-body {
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* Apply Poetsen One only to headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-poetsen);
-  font-weight: 400;
-  font-style: normal;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-poetsen);
-  font-weight: 400;
-}
-
-:root {
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  --font-heading: var(--font-poetsen), -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.87);
+
+  /* Color system */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --radius: 0.625rem;
@@ -85,11 +49,25 @@ h6 {
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Typography */
 body {
   font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
 }
 
-/* Hero section animations */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -151,6 +129,7 @@ body {
   transform: scale(1.2);
 }
 
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
@@ -159,8 +138,7 @@ html {
   scroll-margin-top: 8rem;
 }
 
-/* Add these styles to prevent shaking and improve performance */
-
+/* Scrollbar utilities */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -170,7 +148,7 @@ html {
   display: none;
 }
 
-/* Smooth scrolling for product container */
+/* Product scroll animations */
 .products-scroll-container {
   scroll-behavior: smooth;
   will-change: scroll-position;
@@ -178,20 +156,17 @@ html {
   perspective: 1000px;
 }
 
-/* Optimize transforms for better performance */
 .product-card {
   transform-style: preserve-3d;
   backface-visibility: hidden;
   will-change: transform;
 }
 
-/* Prevent layout shifts during animations */
 .product-card:hover {
   transform: translateY(-5px) translateZ(0);
   transition: transform 0.2s ease-out;
 }
 
-/* Alternative CSS-only scrolling animation */
 @keyframes scroll-products {
   0% {
     transform: translateX(0);
@@ -209,7 +184,7 @@ html {
   animation-play-state: paused;
 }
 
-/* Reduce motion for users who prefer it */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .css-scroll {
     animation: none;
@@ -220,53 +195,7 @@ html {
   }
 }
 
-/* Apply display font to all headings */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-.animate-fade-in-delay {
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-.animate-fade-in-delay-2 {
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.4s;
-}
-
-.animate-fade-in-delay-3 {
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.6s;
-}
-
-.animate-fade-in-delay-4 {
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.8s;
-}
-
-/* Apply display font to all headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 400;
-}
-
+/* Theme variables for Tailwind */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -305,6 +234,7 @@ h6 {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Dark mode */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

@@ -2,16 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import Container from "./Container";
 import { CiFacebook, CiLocationOn, CiMail, CiPhone } from "react-icons/ci";
-import {
-  AiOutlineInstagram,
-  AiOutlineTikTok,
-} from "react-icons/ai";
+import { AiOutlineInstagram, AiOutlineTikTok } from "react-icons/ai";
 import WhatsAppModal from "../WhatsAppModal";
 interface FooterProps {
   currentYear?: string;
 }
 import { ImWhatsapp } from "react-icons/im";
-
 
 const Footer = ({
   currentYear = new Date().getFullYear().toString(),

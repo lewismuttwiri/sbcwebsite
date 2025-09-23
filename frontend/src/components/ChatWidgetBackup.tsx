@@ -106,12 +106,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
     if (typeof window !== "undefined") {
       const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
       const apiUrl = process.env.NEXT_PUBLIC_HOST_URL || window.location.host;
-
-      if (roomId) {
-        setSocketUrl(`${protocol}//${apiUrl}/ws/chat/${roomId}/`);
-      } else {
-        setSocketUrl("");
-      }
+      setSocketUrl(`${protocol}//${apiUrl}/ws/chat/${roomId}/`);
     }
   }, [roomId]);
 

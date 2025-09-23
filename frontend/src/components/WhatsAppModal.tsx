@@ -104,9 +104,7 @@ export default function WhatsAppModal({
         name.trim()
       )}%0AEmail: ${encodeURIComponent(
         email.trim()
-      )}%0A%0AMessage:%0A${encodeURIComponent(
-        message.trim()
-      )}`;
+      )}%0A%0AMessage:%0A${encodeURIComponent(message.trim())}`;
 
       await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -129,20 +127,19 @@ export default function WhatsAppModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-opacity-10 transition-all duration-300 backdrop-blur-sm"
+      className="fixed inset-0 bg-opacity-10 flex items-center justify-center z-50 "
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      <div className="flex items-center justify-center max-h-screen overflow-y-auto">
+      <div className=" rounded-lg p-6 m-4 max-w-md w-full">
         <div
           ref={modalRef}
-          className="relative bg-white rounded-2xl shadow-2xl transform transition-all duration-300 ease-in-out w-full max-w-sm mx-auto scale-80"
+          className="relative bg-white rounded-2xl shadow-2xl transform transition-all duration-300 ease-in-out w-[80vw] max-w-sm mx-auto scale-80"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Close button */}
           <button
             type="button"
             className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -165,7 +162,6 @@ export default function WhatsAppModal({
           </button>
 
           <div className="p-8">
-            {/* Header */}
             <div className="text-center mb-8">
               <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-[#0E0E96] mb-4">
                 <FaWhatsapp size={24} color="white" />
@@ -174,7 +170,7 @@ export default function WhatsAppModal({
                 id="modal-title"
                 className="text-2xl font-bold text-gray-900 mb-2"
               >
-                Connect via WhatsApp
+                Enquire via WhatsApp
               </h2>
               <p
                 id="modal-description"
@@ -185,7 +181,6 @@ export default function WhatsAppModal({
               </p>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div>
                 <label

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
   content: [
@@ -10,13 +11,13 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#004B93", // Pepsi Blue
+          DEFAULT: "#0E0E96",
           light: "#1a5da9",
           dark: "#003366",
         },
       },
       fontFamily: {
-        poetsen: ["var(--font-poetsen)", "sans-serif"],
+        sans: ["var(--font-montserrat)", ...defaultTheme.fontFamily.sans],
       },
     },
   },
