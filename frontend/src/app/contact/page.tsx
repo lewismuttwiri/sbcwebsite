@@ -36,7 +36,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState<'email' | 'whatsapp'>('email');
+  const [activeTab, setActiveTab] = useState<"email" | "whatsapp">("email");
 
   const {
     register,
@@ -105,40 +105,55 @@ export default function ContactPage() {
 
     try {
       const whatsappNumber = "254730301021";
-      const { whatsappName: name, whatsappEmail: email, whatsappMessage: message } = data;
+      const {
+        whatsappName: name,
+        whatsappEmail: email,
+        whatsappMessage: message,
+      } = data;
 
       const formattedMessage = `Hello,%0A%0AName: ${encodeURIComponent(
         name.trim()
       )}%0AEmail: ${encodeURIComponent(
         email.trim()
-      )}%0A%0AMessage:%0A${encodeURIComponent(
-        message.trim()
-      )}`;
+      )}%0A%0AMessage:%0A${encodeURIComponent(message.trim())}`;
 
       // Add a small delay for better UX
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Open WhatsApp with the pre-filled message
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${formattedMessage}`;
-      const newWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      
-      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-        throw new Error('Failed to open WhatsApp. Please ensure pop-ups are allowed for this site.');
+      const newWindow = window.open(
+        whatsappUrl,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      if (
+        !newWindow ||
+        newWindow.closed ||
+        typeof newWindow.closed === "undefined"
+      ) {
+        throw new Error(
+          "Failed to open WhatsApp. Please ensure pop-ups are allowed for this site."
+        );
       }
-      
+
       // Show success message and reset form
       setSubmissionSuccess(true);
       toast.success("WhatsApp is opening with your message");
       resetWhatsApp();
     } catch (error) {
       console.error("Error with WhatsApp submission:", error);
-      const errorMessage = error instanceof Error ? error.message : "Failed to open WhatsApp. Please try again.";
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to open WhatsApp. Please try again.";
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
- };
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -162,14 +177,22 @@ export default function ContactPage() {
                 <div className="border-b border-gray-200">
                   <nav className="flex -mb-px">
                     <button
-                      onClick={() => setActiveTab('email')}
-                      className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${activeTab === 'email' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
+                      onClick={() => setActiveTab("email")}
+                      className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${
+                        activeTab === "email"
+                          ? "border-blue-500 text-blue-600"
+                          : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      }`}
                     >
                       Email Us
                     </button>
                     <button
-                      onClick={() => setActiveTab('whatsapp')}
-                      className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${activeTab === 'whatsapp' ? 'border-green-500 text-green-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}
+                      onClick={() => setActiveTab("whatsapp")}
+                      className={`py-4 px-6 text-center border-b-2 font-medium text-sm ${
+                        activeTab === "whatsapp"
+                          ? "border-green-500 text-green-600"
+                          : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                      }`}
                     >
                       Chat on WhatsApp
                     </button>
@@ -178,8 +201,11 @@ export default function ContactPage() {
 
                 <div className="md:flex">
                   <div className="p-8 w-full">
-                    {activeTab === 'email' ? (
-                      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    {activeTab === "email" ? (
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="space-y-6"
+                      >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
                             <label
@@ -193,7 +219,9 @@ export default function ContactPage() {
                               id="firstName"
                               {...register("firstName")}
                               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                                errors.firstName ? "border-red-500" : "border-gray-300"
+                                errors.firstName
+                                  ? "border-red-500"
+                                  : "border-gray-300"
                               }`}
                               placeholder="Enter your first name"
                             />
@@ -216,7 +244,9 @@ export default function ContactPage() {
                               id="lastName"
                               {...register("lastName")}
                               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                                errors.lastName ? "border-red-500" : "border-gray-300"
+                                errors.lastName
+                                  ? "border-red-500"
+                                  : "border-gray-300"
                               }`}
                               placeholder="Enter your last name"
                             />
@@ -240,7 +270,9 @@ export default function ContactPage() {
                             id="email"
                             {...register("email")}
                             className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                              errors.email ? "border-red-500" : "border-gray-300"
+                              errors.email
+                                ? "border-red-500"
+                                : "border-gray-300"
                             }`}
                             placeholder="Enter your email address"
                           />
@@ -263,7 +295,9 @@ export default function ContactPage() {
                               id="subject"
                               {...register("subject")}
                               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                                errors.subject ? "border-red-500" : "border-gray-300"
+                                errors.subject
+                                  ? "border-red-500"
+                                  : "border-gray-300"
                               }`}
                               placeholder="Enter the subject"
                             />
@@ -284,7 +318,9 @@ export default function ContactPage() {
                               id="message"
                               {...register("message")}
                               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                                errors.message ? "border-red-500" : "border-gray-300"
+                                errors.message
+                                  ? "border-red-500"
+                                  : "border-gray-300"
                               }`}
                               rows={4}
                               placeholder="Enter your message"
@@ -314,13 +350,23 @@ export default function ContactPage() {
                     ) : (
                       <div className="space-y-6">
                         <div className="text-center mb-8">
-                          <h2 className="text-2xl font-bold text-gray-800 mb-2">Chat with Us on WhatsApp</h2>
-                          <p className="text-gray-600">Get instant responses from our team</p>
+                          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                            Chat with Us on WhatsApp
+                          </h2>
+                          <p className="text-gray-600">
+                            Get instant responses from our team
+                          </p>
                         </div>
 
-                        <form onSubmit={handleWhatsAppSubmit(onWhatsAppSubmit)} className="space-y-6">
+                        <form
+                          onSubmit={handleWhatsAppSubmit(onWhatsAppSubmit)}
+                          className="space-y-6"
+                        >
                           <div>
-                            <label htmlFor="whatsappName" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label
+                              htmlFor="whatsappName"
+                              className="block text-sm font-medium text-gray-700 mb-1"
+                            >
                               Your Name *
                             </label>
                             <input
@@ -328,7 +374,9 @@ export default function ContactPage() {
                               id="whatsappName"
                               {...registerWhatsApp("whatsappName")}
                               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                                whatsappErrors.whatsappName ? "border-red-500" : "border-gray-300"
+                                whatsappErrors.whatsappName
+                                  ? "border-red-500"
+                                  : "border-gray-300"
                               }`}
                               placeholder="Enter your name"
                             />
@@ -340,7 +388,10 @@ export default function ContactPage() {
                           </div>
 
                           <div>
-                            <label htmlFor="whatsappEmail" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label
+                              htmlFor="whatsappEmail"
+                              className="block text-sm font-medium text-gray-700 mb-1"
+                            >
                               Email Address *
                             </label>
                             <input
@@ -348,7 +399,9 @@ export default function ContactPage() {
                               id="whatsappEmail"
                               {...registerWhatsApp("whatsappEmail")}
                               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                                whatsappErrors.whatsappEmail ? "border-red-500" : "border-gray-300"
+                                whatsappErrors.whatsappEmail
+                                  ? "border-red-500"
+                                  : "border-gray-300"
                               }`}
                               placeholder="your.email@example.com"
                             />
@@ -360,7 +413,10 @@ export default function ContactPage() {
                           </div>
 
                           <div>
-                            <label htmlFor="whatsappMessage" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label
+                              htmlFor="whatsappMessage"
+                              className="block text-sm font-medium text-gray-700 mb-1"
+                            >
                               Your Message *
                             </label>
                             <textarea
@@ -368,7 +424,9 @@ export default function ContactPage() {
                               rows={4}
                               {...registerWhatsApp("whatsappMessage")}
                               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                                whatsappErrors.whatsappMessage ? "border-red-500" : "border-gray-300"
+                                whatsappErrors.whatsappMessage
+                                  ? "border-red-500"
+                                  : "border-gray-300"
                               }`}
                               placeholder="How can we help you?"
                             ></textarea>
@@ -384,7 +442,11 @@ export default function ContactPage() {
                               type="submit"
                               className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#0E0E96] focus:outline-none focus:ring-2 focus:ring-offset-2  w-full"
                             >
-                              <FaWhatsapp size={20} color="white" className="mr-2" />
+                              <FaWhatsapp
+                                size={20}
+                                color="white"
+                                className="mr-2"
+                              />
                               Open WhatsApp Chat
                             </button>
                           </div>

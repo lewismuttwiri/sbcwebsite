@@ -7,7 +7,6 @@ export const GET = async (
   { params }: { params: Promise<{ id: string }> }
 ) => {
   const { id } = await params;
-  console.log("Fetching chat data for chatId:", id);
 
   const response = await fetch(`${API_URL}chat/api/rooms/${id}/messages/`, {
     method: "GET",
@@ -15,7 +14,6 @@ export const GET = async (
   });
 
   if (!response.ok) {
-    console.log("Failed to fetch chat details");
     return NextResponse.json(
       { error: "Failed to fetch chat details" },
       { status: response.status }
@@ -23,7 +21,6 @@ export const GET = async (
   }
 
   const data = await response.json();
-  console.log("Chat data:", data);
   return NextResponse.json(data);
 };
 

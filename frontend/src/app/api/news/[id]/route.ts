@@ -8,7 +8,6 @@ export async function GET(
   const { id } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const url = `${baseUrl}news/api/news/${id}/`;
-  console.log("Fetching news from", url);
   try {
     const response = await fetch(url, {
       headers: {
@@ -32,7 +31,6 @@ export async function GET(
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error fetching news article:", error);
     return new NextResponse(
       JSON.stringify({ error: "Failed to fetch news article" }),
       { status: 500, headers: { "Content-Type": "application/json" } }

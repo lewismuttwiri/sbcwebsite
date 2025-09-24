@@ -19,18 +19,6 @@ let tenders = [
   },
 ];
 
-// export async function GET() {
-//   try {
-//     return NextResponse.json({ success: true, data: tenders });
-//   } catch (error) {
-//     console.error("Error fetching tenders:", error);
-//     return NextResponse.json(
-//       { success: false, error: "Failed to fetch tenders" },
-//       { status: 500 }
-//     );
-//   }
-// }
-
 export async function GET() {
   const api_url = process.env.NEXT_PUBLIC_API_URL;
   try {
@@ -47,51 +35,12 @@ export async function GET() {
     const data = await response.json();
     return NextResponse.json(data.entity);
   } catch (error) {
-    console.error("Error fetching tenders:", error);
     return NextResponse.json(
       { success: false, error: "Failed to fetch tenders" },
       { status: 500 }
     );
   }
 }
-
-// export async function POST(request: Request) {
-//   try {
-//     const data = await request.json();
-
-//     // Basic validation
-//     if (!data.tenderNumber || !data.description || !data.closingDate) {
-//       return NextResponse.json(
-//         { success: false, error: "Missing required fields" },
-//         { status: 400 }
-//       );
-//     }
-
-//     // Create new tender
-//     const newTender = {
-//       id: tenders.length > 0 ? Math.max(...tenders.map((t) => t.id)) + 1 : 1,
-//       tenderNumber: data.tenderNumber,
-//       description: data.description,
-//       document: data.document || "",
-//       additionalInfo: data.additionalInfo || "",
-//       closingDate: data.closingDate,
-//     };
-
-//     // In a real app, save to database here
-//     tenders.push(newTender);
-
-//     return NextResponse.json(
-//       { success: true, data: newTender },
-//       { status: 201 }
-//     );
-//   } catch (error) {
-//     console.error("Error creating tender:", error);
-//     return NextResponse.json(
-//       { success: false, error: "Failed to create tender" },
-//       { status: 500 }
-//     );
-//   }
-// }
 
 export async function POST(request: Request) {
   const api_url = process.env.NEXT_PUBLIC_API_URL;
@@ -106,7 +55,6 @@ export async function POST(request: Request) {
           ? { name: value.name, size: value.size, type: value.type }
           : value;
     }
-    console.log("Form data received:", formDataObj);
 
     // Forward the request to the backend
     const response = await fetch(`${api_url}tenders/api/tenders/`, {
@@ -119,16 +67,13 @@ export async function POST(request: Request) {
     try {
       errorData = await response.json();
     } catch (e) {
-      console.error("Failed to parse error response:", e);
+      return NextResponse.json(
+        { success: false, error: "Failed to create tender" },
+        { status: 500 }
+      );
     }
 
     if (!response.ok) {
-      console.error("Backend error response:", {
-        status: response.status,
-        statusText: response.statusText,
-        errorData,
-        headers: Object.fromEntries(response.headers.entries()),
-      });
       throw new Error(
         errorData?.message ||
           errorData?.error ||
@@ -138,11 +83,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json(errorData || { success: true });
   } catch (error) {
-    console.error("Error in tender creation:", {
-      error,
-      message: error instanceof Error ? error.message : "Unknown error",
-      stack: error instanceof Error ? error.stack : undefined,
-    });
     return NextResponse.json(
       {
         success: false,
@@ -190,7 +130,6 @@ export async function DELETE(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting tender:", error);
     return NextResponse.json(
       { success: false, error: "Failed to delete tender" },
       { status: 500 }

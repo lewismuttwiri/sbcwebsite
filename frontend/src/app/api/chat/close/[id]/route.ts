@@ -17,7 +17,6 @@ export async function POST(
   });
 
   if (!response.ok) {
-    console.error("Failed to close chat room", response);
     return NextResponse.json(
       { error: "Failed to close chat room" },
       { status: response.status }

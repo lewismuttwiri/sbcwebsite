@@ -4,7 +4,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const POST = async (req: Request) => {
   const body = await req.json();
-  console.log("Chat request:", body);
   const response = await fetch(`${API_URL}chat/api/create-room/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -16,7 +15,6 @@ export const POST = async (req: Request) => {
   });
 
   if (!response.ok) {
-    console.error("Failed to create chat room", response);
     return NextResponse.json(
       { error: "Failed to create chat room" },
       { status: 500 }
@@ -24,14 +22,12 @@ export const POST = async (req: Request) => {
   }
 
   const data = await response.json();
-  console.log("Chat room created:", data);
 
   return NextResponse.json(data);
 };
 
 export const GET = async () => {
   const response = await fetch(`${API_URL}chat/api/rooms/`);
-  console.log("Chat rooms response:", response);
   const data = await response.json();
 
   return NextResponse.json(data);

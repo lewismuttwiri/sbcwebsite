@@ -25,10 +25,8 @@ export async function GET(
       throw new Error("Failed to fetch jobs");
     }
     const data = await response.json();
-    console.log("data", data);
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error fetching jobs:", error);
     return NextResponse.json(
       { error: "Failed to fetch jobs" },
       { status: 500 }
@@ -43,7 +41,6 @@ export async function POST(
   const { id } = await params;
 
   const body = await req.json();
-  console.log("Job application body", body);
   const api_url = process.env.NEXT_API_PUBLIC_URL;
   const url = `${api_url}/careers/api/jobs-advertisements/${id}`;
 
@@ -62,10 +59,8 @@ export async function POST(
       throw new Error("Failed to apply for job");
     }
     const data = await response.json();
-    console.log("data", data);
     return data;
   } catch (error) {
-    console.error("Error applying for job:", error);
     return NextResponse.json(
       { error: "Failed to apply for job" },
       { status: 500 }

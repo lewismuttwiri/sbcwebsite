@@ -67,20 +67,15 @@ const ApplicationsPage = () => {
           credentials: "include",
         });
 
-        console.log("response", response);
-
         if (!response.ok) {
-          console.log("Failed to fetch applications");
           return [];
         }
 
         const data = await response.json();
         setApplications(data);
-        console.log("All Applications data", data);
         return;
       } catch (err) {
         setError("Failed to load applications");
-        console.error("Error fetching applications:", err);
       } finally {
         setLoading(false);
       }

@@ -13,7 +13,6 @@ export async function GET(
 
   const resolvedParams = await context.params;
   const { id } = resolvedParams;
-  console.log("id", id);
 
   if (!id) {
     return NextResponse.json(
@@ -26,8 +25,6 @@ export async function GET(
 
   const token = req.headers.get("Authorization");
 
-  console.log("token", token);
-
   try {
     const response = await fetch(url, {
       headers: {
@@ -35,10 +32,8 @@ export async function GET(
       },
     });
     const data = await response.json();
-    console.log("Orders data", data);
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error fetching orders:", error);
     return NextResponse.json(
       { error: "Failed to fetch orders" },
       { status: 500 }

@@ -13,7 +13,6 @@ export const GET = async (
   });
 
   if (!response.ok) {
-    console.log("Failed to fetch chat details");
     return NextResponse.json(
       { error: "Failed to fetch chat details" },
       { status: response.status }
@@ -21,8 +20,6 @@ export const GET = async (
   }
 
   const data = await response.json();
-
-  console.log("Chat rooms response:", data.messages);
 
   return NextResponse.json(data.messages);
 };

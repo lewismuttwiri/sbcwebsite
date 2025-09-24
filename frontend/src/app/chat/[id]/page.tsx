@@ -108,7 +108,6 @@ export default function ChatPage() {
     setIsLoadingMessages(true);
     try {
       setError(null);
-      console.log("Fetching chat data for chatId:", chatId);
 
       const [chatDataResponse, chatDetailsResponse] = await Promise.all([
         fetch(`/api/chat/${chatId}/`),
@@ -129,18 +128,13 @@ export default function ChatPage() {
 
       const chatData = await chatDataResponse.json();
       const chatDetails: ChatDetails[] = await chatDetailsResponse.json();
-      console.log("Chat data received:", chatData);
-      console.log("Chat details received:", chatDetails);
 
       setChatDetails(chatDetails[0]);
-      console.log("Chat details set:", chatDetails);
 
       if (chatData.messages && Array.isArray(chatData.messages)) {
         setMessages(chatData.messages);
-        console.log("Messages loaded:", chatData.messages.length);
       } else {
         setMessages([]);
-        console.log("No messages found in chat data");
       }
 
       if (
@@ -231,10 +225,7 @@ export default function ChatPage() {
           is_active: false,
         });
       }
-
-      console.log("Chat closed successfully");
     } catch (error) {
-      console.error("Error closing chat:", error);
       setError("An error occurred while closing the chat. Please try again.");
 
       if (chatDetails?.is_active) {
@@ -256,7 +247,6 @@ export default function ChatPage() {
         : "127.0.0.1:8000";
 
     const url = `${protocol}//${host}/ws/chat/${chatId}/`;
-    console.log("Constructed WebSocket URL:", url);
     return url;
   }, [chatId]);
 
@@ -264,18 +254,11 @@ export default function ChatPage() {
     socketUrl && !isLoading && shouldConnect ? socketUrl : null,
     {
       shouldReconnect: (closeEvent) => {
-        console.log("WebSocket reconnecting...", closeEvent);
         return shouldConnect && chatDetails?.is_active === true;
       },
       reconnectAttempts: 5,
       reconnectInterval: 3000,
-      onOpen: (event: Event) => {
-        console.log("✅ WebSocket connection opened", {
-          url: socketUrl,
-          readyState: ReadyState.OPEN,
-          timestamp: new Date().toISOString(),
-        });
-      },
+      onOpen: (event: Event) => {},
       onError: (event: Event) => {
         console.error("❌ WebSocket error:", {
           type: event.type,
@@ -284,14 +267,7 @@ export default function ChatPage() {
           timestamp: new Date().toISOString(),
         });
       },
-      onClose: (event: CloseEvent) => {
-        console.log("🔌 WebSocket connection closed:", {
-          wasClean: event.wasClean,
-          code: event.code,
-          reason: event.reason,
-          timestamp: new Date().toISOString(),
-        });
-      },
+      onClose: (event: CloseEvent) => {},
     }
   );
 
@@ -300,7 +276,6 @@ export default function ChatPage() {
 
     try {
       const data: ChatSocketMessage = JSON.parse(lastMessage.data);
-      console.log("📨 WebSocket message received in chat page:", data);
 
       switch (data.type) {
         case "chat_message":
@@ -314,7 +289,6 @@ export default function ChatPage() {
               room_id: data.room_id,
             };
 
-            console.log("Adding new message:", newMessage);
             setMessages((prev) => [...prev, newMessage]);
           }
           break;
@@ -346,27 +320,22 @@ export default function ChatPage() {
 
         // ... rest of your cases remain the same
         case "info":
-          console.log("Info message:", data.message);
           break;
 
         case "test":
-          console.log("Test message received:", data.message);
           break;
 
         case "user_joined":
-          console.log("User joined:", data.message);
           break;
 
         case "user_left":
-          console.log("User left:", data.message);
           break;
 
         default:
-          console.log("Unknown message type:", data.type, data);
+          break;
       }
     } catch (error) {
       console.error("Error parsing WebSocket message:", error);
-      console.log("Raw message data:", lastMessage.data);
     }
   }, [lastMessage, chatDetails]);
 
@@ -385,12 +354,6 @@ export default function ChatPage() {
       !chatId ||
       chatDetails?.is_active !== true
     ) {
-      console.log("Cannot send message:", {
-        inputEmpty: !inputValue.trim(),
-        notConnected: readyState !== ReadyState.OPEN,
-        noChatId: !chatId,
-        chatInactive: chatDetails?.is_active !== true,
-      });
       return;
     }
 
@@ -405,8 +368,6 @@ export default function ChatPage() {
 
       sendMessage(JSON.stringify(messageData));
       setInputValue("");
-
-      console.log("Message sent:", messageData);
     } catch (error) {
       console.error("Error sending message:", error);
     }
