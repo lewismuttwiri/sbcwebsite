@@ -145,36 +145,31 @@ export default function WhatsAppModal({
     }
   };
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
     <div
-      className={`fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300 ease-in-out ${
-        isVisible ? 'bg-opacity-50' : 'bg-opacity-0 pointer-events-none'
+      className={`fixed inset-0 bg-black/80 bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300 ease-in-out ${
+        isVisible ? "bg-opacity-50" : "bg-opacity-0 pointer-events-none"
       }`}
-      onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       style={{
         opacity: isVisible ? 1 : 0,
-        transition: 'background-color 300ms ease-in-out, opacity 300ms ease-in-out'
+        transition:
+          "background-color 300ms ease-in-out, opacity 300ms ease-in-out",
       }}
     >
-      <div className="rounded-lg p-6 m-4 max-w-md w-full">
+      <div className="rounded-lg p-6 m-4 max-w-[420px] w-full">
         <div
           ref={modalRef}
           className={`relative bg-white rounded-2xl shadow-2xl transform transition-all duration-300 ease-in-out w-full max-w-lg mx-auto ${
-            isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+            isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}
           style={{
-            transition: 'transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease-in-out',
-            transformOrigin: 'center bottom',
-            willChange: 'transform, opacity'
+            transition:
+              "transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease-in-out",
+            transformOrigin: "center bottom",
+            willChange: "transform, opacity",
           }}
         >
           <button
@@ -328,7 +323,7 @@ export default function WhatsAppModal({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-[#0E0E96] text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
