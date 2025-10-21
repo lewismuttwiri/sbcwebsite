@@ -638,7 +638,7 @@ const Navbar = () => {
                 {/* Mobile menu button */}
                 <button
                   onClick={toggleMenu}
-                  className=" lg:hidden text-black hover:text-gray-500 focus:outline-none transition-colors duration-300"
+                  className=" lg:hidden text-black hover:text-gray-500 focus:outline-none transition-colors duration-300 pl-3"
                   aria-label="Toggle menu"
                 >
                   {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
