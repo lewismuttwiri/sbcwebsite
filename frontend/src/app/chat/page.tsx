@@ -143,8 +143,9 @@ export default function ChatDashboard() {
       );
     }
 
-    const sortedTickets = [...filtered].sort((a, b) => 
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    const sortedTickets = [...filtered].sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
 
     setFilteredTickets(sortedTickets);
@@ -184,8 +185,6 @@ export default function ChatDashboard() {
   const todayTickets = tickets.filter(
     (t) => new Date(t.created_at).toDateString() === new Date().toDateString()
   );
-
-  
 
   if (userRole !== 7 || userRole == null) {
     return (
@@ -230,8 +229,7 @@ export default function ChatDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
-      <div className="container mx-auto p-4 lg:p-8 space-y-8">
-        {/* Enhanced Header */}
+      <div className="container mx-auto space-y-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div className="space-y-2">
             <h1 className="text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
@@ -342,7 +340,10 @@ export default function ChatDashboard() {
                       className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-3 sm:px-4 py-2 font-medium whitespace-nowrap"
                     >
                       All
-                      <Badge variant="secondary" className="ml-2 bg-slate-100 text-xs sm:text-sm">
+                      <Badge
+                        variant="secondary"
+                        className="ml-2 bg-slate-100 text-xs sm:text-sm"
+                      >
                         {tickets.length}
                       </Badge>
                     </TabsTrigger>
@@ -360,7 +361,10 @@ export default function ChatDashboard() {
                       className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-3 sm:px-4 py-2 text-sm sm:text-base font-medium whitespace-nowrap"
                     >
                       Closed
-                      <Badge variant="outline" className="ml-2 bg-slate-100 text-xs sm:text-sm">
+                      <Badge
+                        variant="outline"
+                        className="ml-2 bg-slate-100 text-xs sm:text-sm"
+                      >
                         {closedTickets.length}
                       </Badge>
                     </TabsTrigger>
@@ -398,26 +402,27 @@ export default function ChatDashboard() {
                             </div>
                             <div className="flex-1 min-w-0 space-y-3">
                               <div className="flex items-center justify-between w-full">
-                              <h3 className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors text-lg">
-                                {ticket.customer_name}
-                              </h3>
-                              <div className="flex items-center gap-2">
-                                {getStatusDisplay(ticket.is_active)}
-                                {ticket.unreadCount && ticket.unreadCount > 0 && (
-                                  <Badge className="bg-red-50 text-red-700 border-red-200 hover:bg-red-100 font-medium">
-                                    {ticket.unreadCount} new
-                                  </Badge>
-                                )}
+                                <h3 className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors text-lg">
+                                  {ticket.customer_name}
+                                </h3>
+                                <div className="flex items-center gap-2">
+                                  {getStatusDisplay(ticket.is_active)}
+                                  {ticket.unreadCount &&
+                                    ticket.unreadCount > 0 && (
+                                      <Badge className="bg-red-50 text-red-700 border-red-200 hover:bg-red-100 font-medium">
+                                        {ticket.unreadCount} new
+                                      </Badge>
+                                    )}
+                                </div>
                               </div>
-                            </div>
-                            <div className="flex items-center text-[14px] font-medium text-slate-500">
-                              <span>
-                                {format(
-                                  new Date(ticket.created_at),
-                                  "MMM d, h:mma"
-                                ).toLowerCase()}
-                              </span>
-                            </div>
+                              <div className="flex items-center text-[14px] font-medium text-slate-500">
+                                <span>
+                                  {format(
+                                    new Date(ticket.created_at),
+                                    "MMM d, h:mma"
+                                  ).toLowerCase()}
+                                </span>
+                              </div>
                               <div className="flex items-center gap-2">
                                 <Mail className="h-4 w-4 text-slate-400" />
                                 <span className="text-sm text-slate-600">

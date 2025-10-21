@@ -117,15 +117,6 @@ const Navbar = () => {
           },
         ]
       : []),
-    ...(isReceptionist
-      ? [
-          {
-            name: "Chat",
-            href: "/chat",
-            icon: <CiChat1 className="mr-2" />,
-          },
-        ]
-      : []),
   ];
 
   useEffect(() => {
