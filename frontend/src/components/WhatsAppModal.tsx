@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FaWhatsapp } from "react-icons/fa6";
 
 interface WhatsAppModalProps {
   isOpen: boolean;
@@ -19,7 +18,6 @@ interface FormErrors {
 export default function WhatsAppModal({
   isOpen,
   onClose,
-  companyName = "SBC Kenya",
   whatsappNumber = "254730301021",
 }: WhatsAppModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,7 +49,30 @@ export default function WhatsAppModal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  // Animation state
+  const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Handle mount/unmount animations
+  useEffect(() => {
+    if (isOpen) {
+      setIsMounted(true);
+      // Small delay to allow the modal to be added to the DOM before starting the animation
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 10);
+      return () => clearTimeout(timer);
+    } else {
+      setIsVisible(false);
+      const timer = setTimeout(() => {
+        setIsMounted(false);
+      }, 300); // Match this with the transition duration
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  // Don't render anything if not mounted and not visible
+  if (!isMounted && !isOpen) return null;
 
   const validateForm = (formData: FormData): FormErrors => {
     const newErrors: FormErrors = {};
@@ -100,16 +121,21 @@ export default function WhatsAppModal({
       const email = formData.get("email") as string;
       const message = formData.get("message") as string;
 
-      const whatsappMessage = `Hello ,%0A%0AName: ${encodeURIComponent(
-        name.trim()
-      )}%0AEmail: ${encodeURIComponent(
-        email.trim()
-      )}%0A%0AMessage:%0A${encodeURIComponent(message.trim())}`;
+      const messageText = `Hello,\n\nName: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`;
+
+      const encodedMessage = encodeURIComponent(messageText);
 
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      const whatsappDesktop = `whatsapp://send?phone=${whatsappNumber}&text=${encodedMessage}`;
+      const whatsappWeb = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      console.log("Trying desktop app first...");
+      window.location.href = whatsappDesktop;
+
+      setTimeout(() => {
+        window.open(whatsappWeb, "_blank", "noopener,noreferrer");
+      }, 2000);
 
       onClose();
     } catch (error) {
@@ -127,18 +153,29 @@ export default function WhatsAppModal({
 
   return (
     <div
-      className="fixed inset-0 bg-opacity-10 flex items-center justify-center z-50 "
+      className={`fixed inset-0 bg-black bg-opacity-0 flex items-center justify-center z-50 transition-all duration-300 ease-in-out ${
+        isVisible ? 'bg-opacity-50' : 'bg-opacity-0 pointer-events-none'
+      }`}
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transition: 'background-color 300ms ease-in-out, opacity 300ms ease-in-out'
+      }}
     >
-      <div className=" rounded-lg p-6 m-4 max-w-md w-full">
+      <div className="rounded-lg p-6 m-4 max-w-md w-full">
         <div
           ref={modalRef}
-          className="relative bg-white rounded-2xl shadow-2xl transform transition-all duration-300 ease-in-out w-[80vw] max-w-sm mx-auto scale-80"
+          className={`relative bg-white rounded-2xl shadow-2xl transform transition-all duration-300 ease-in-out w-full max-w-lg mx-auto ${
+            isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+          }`}
           onClick={(e) => e.stopPropagation()}
+          style={{
+            transition: 'transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease-in-out',
+            transformOrigin: 'center bottom',
+            willChange: 'transform, opacity'
+          }}
         >
           <button
             type="button"
@@ -163,22 +200,12 @@ export default function WhatsAppModal({
 
           <div className="p-8">
             <div className="text-center mb-8">
-              <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-[#0E0E96] mb-4">
-                <FaWhatsapp size={24} color="white" />
-              </div>
               <h2
                 id="modal-title"
                 className="text-2xl font-bold text-gray-900 mb-2"
               >
                 Enquire via WhatsApp
               </h2>
-              <p
-                id="modal-description"
-                className="text-gray-600 leading-relaxed"
-              >
-                Share your details and we'll start a WhatsApp conversation with
-                your message ready to send.
-              </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
@@ -298,11 +325,10 @@ export default function WhatsAppModal({
                 )}
               </div>
 
-              {/* Submit button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#0E0E96] hover:bg-[#0A0A7A] text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0E0E96] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
@@ -340,11 +366,6 @@ export default function WhatsAppModal({
                   </>
                 )}
               </button>
-
-              <p className="text-xs text-gray-500 text-center">
-                By continuing, you'll be redirected to WhatsApp with your
-                message pre-filled. You can review and edit before sending.
-              </p>
             </form>
           </div>
         </div>

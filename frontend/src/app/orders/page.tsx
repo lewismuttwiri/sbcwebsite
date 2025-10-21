@@ -27,10 +27,7 @@ import {
 } from "react-icons/fi";
 import { OrderDetails } from "@/types/orderDetails";
 import Loader from "@/components/loader";
-// import OrderLoading from "./[orderId]/loading";
-// Client-side function to fetch orders from your API route
 
-// Status icon component
 const StatusIcon = ({ status }: { status: string }) => {
   const normalizedStatus = status.toLowerCase();
 
@@ -51,7 +48,6 @@ const StatusIcon = ({ status }: { status: string }) => {
   }
 };
 
-// Status badge component
 const StatusBadge = ({ status }: { status: string }) => {
   const normalizedStatus = status.toLowerCase();
 
@@ -79,7 +75,6 @@ const StatusBadge = ({ status }: { status: string }) => {
   );
 };
 
-// Order card component
 const OrderCard = ({ order }: { order: any }) => {
   const router = useRouter();
 
@@ -212,7 +207,6 @@ const OrderCard = ({ order }: { order: any }) => {
   );
 };
 
-// Main orders page component
 export default function OrdersPage() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const router = useRouter();

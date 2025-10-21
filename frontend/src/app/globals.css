@@ -5,7 +5,7 @@
 
 /* Root CSS Variables */
 :root {
-  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), montserrat, sans-serif;
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: 16px;

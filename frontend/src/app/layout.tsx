@@ -8,13 +8,12 @@ import { Suspense } from "react";
 import Loader from "@/components/loader";
 import { metadata as siteMetadata } from "./metadata";
 import PromoPopup from "@/components/PromoPopup";
-import ChatWidget from "@/components/ChatWidget";
-import Container from "@/components/layout/Container";
 import { Montserrat } from "next/font/google";
+import MainContent from "@/components/layout/MainContent";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Added missing weights
+  weight: ["400", "500", "600", "700"],
   display: "swap",
   adjustFontFallback: true,
   variable: "--font-montserrat",
@@ -39,12 +38,7 @@ export default function RootLayout({
           <ToastProvider />
           <Suspense fallback={<Loader fullScreen />}>
             <Navbar />
-            <main className="min-h-[calc(100vh-64px)] relative">
-              {children}
-              <Container className="relative">
-                <ChatWidget />
-              </Container>
-            </main>
+            <MainContent>{children}</MainContent>
 
             <ClientFooter />
           </Suspense>
